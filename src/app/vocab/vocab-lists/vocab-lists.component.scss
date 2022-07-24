@@ -1,0 +1,16 @@
+section, .vocab-list {
+  display: flex;
+}
+
+section {
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 5px;
+}
+
+.vocab-list {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  align-content: center;
+}

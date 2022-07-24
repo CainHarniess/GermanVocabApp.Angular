@@ -1,0 +1,31 @@
+header, footer {
+  background-color: #6200ee;
+  color: #ffffff;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  max-width: 70%;
+  margin: auto;
+}
+
+@media screen and (max-width: 1400px) {
+  main {
+    max-width: 90%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  main {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  main {
+    max-width: 100%;
+  }
+}

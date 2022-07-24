@@ -5,7 +5,30 @@
   "projects": {
     "GermanVocabApp.Angular": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:module": {
+          "routing": true,
+          "routingScope": "Child"
+        },
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true,
+          "changeDetection": "OnPush"
+        },
+        "@schematics/angular:interface": {
+          "type": "interface"
+        },
+        "@schematics/angular:class": {
+          "skipTests": true,
+          "type": "class"
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:enum": {
+          "type": "enum"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -23,8 +46,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/variables"]
+            },
             "scripts": []
           },
           "configurations": {
@@ -70,7 +96,11 @@
               "browserTarget": "GermanVocabApp.Angular:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "browserTarget": "GermanVocabApp.Angular:build",
+            "proxyConfig": "src/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -97,5 +127,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b6fe00a7-6e88-4c99-b853-1375cba3f365"
   }
 }
