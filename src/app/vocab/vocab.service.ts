@@ -12,7 +12,13 @@ export class VocabService {
 
   constructor(private http: HttpClient) { }
 
+  private readonly url: string = "/api/vocab-lists";
+
   public get(): Observable<VocabList[]> {
-    return this.http.get<VocabList[]>("/api/vocab-lists");
+    return this.http.get<VocabList[]>(this.url);
+  }
+
+  public add(vocabList: VocabList): Observable<string> {
+    return this.http.post<string>(this.url, vocabList);
   }
 }

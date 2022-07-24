@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, tap, pipe } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { VocabList } from './models/vocab-list.interface';
 import { VocabService } from './vocab.service';
 
@@ -11,7 +12,11 @@ import { VocabService } from './vocab.service';
 })
 export class VocabComponent {
 
-  constructor(private vocabListService: VocabService) { }
+  constructor(private vocabListService: VocabService, private router: Router) { }
 
   public readonly vocabLists$: Observable<VocabList[]> = this.vocabListService.get();
+
+  public addVocabList(): void {
+    this.router.navigate(["vocab-lists/vocab-list-form"]);
+  }
 }

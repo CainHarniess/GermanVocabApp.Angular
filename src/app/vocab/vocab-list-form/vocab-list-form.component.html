@@ -1,0 +1,21 @@
+<section>
+  <div class="header">
+    <h1>New Vocab List</h1>
+  </div>
+  <form [formGroup]="vocabListForm" (ngSubmit)="onFormSubmit()" novalidate>
+    <div class="form-group">
+      <div class="form-control">
+        <label for="name">List title</label>
+        <input id="name" formControlName="name" type="text"/>
+      </div>
+      <div class="form-control">
+        <label for="description">List description</label>
+        <input id="description" formControlName="description" type="text" />
+      </div>
+    </div>
+    <div class="submission-panel">
+      <button type="submit" [disabled]="!vocabListForm.valid">Add</button>
+      <button type="reset">Cancel</button>
+    </div>
+  </form>
+</section>
