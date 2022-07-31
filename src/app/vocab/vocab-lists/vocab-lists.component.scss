@@ -1,7 +1,12 @@
 .vocab-list {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
   justify-content: center;
-  align-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

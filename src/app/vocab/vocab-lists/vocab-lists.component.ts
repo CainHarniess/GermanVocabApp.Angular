@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { VocabList } from '../models/vocab-list.interface';
-
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { VocabList } from '.././models/vocab-list.interface';
+import { VocabListService } from '.././services/vocab-list.service';
 @Component({
   selector: 'vocab-lists',
   templateUrl: './vocab-lists.component.html',
@@ -9,4 +11,12 @@ import { VocabList } from '../models/vocab-list.interface';
 })
 export class VocabListsComponent {
   @Input() public vocabLists?: VocabList[];
+
+  constructor(private vocabListService: VocabListService, private router: Router) { }
+
+  public readonly vocabLists$: Observable<VocabList[]> = this.vocabListService.get();
+
+  public addVocabList(): void {
+    this.router.navigate(["/vocab", "vocab-list-form"]);
+  }
 }

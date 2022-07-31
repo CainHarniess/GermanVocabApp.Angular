@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { VocabList } from '../models/vocab-list.interface';
 
-export abstract class VocabService {
+export abstract class VocabListService {
 
   public abstract get(): Observable<VocabList[]>;
 

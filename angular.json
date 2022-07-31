@@ -46,7 +46,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/variables"]
@@ -120,7 +120,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/styles.scss"
             ],
             "scripts": []
           }

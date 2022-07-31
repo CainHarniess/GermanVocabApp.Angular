@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { VocabComponent } from './vocab.component';
+import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
 import { VocabListFormComponent } from './vocab-list-form/vocab-list-form.component';
+import { VocabComponent } from './vocab.component';
 
 const routes: Routes = [
   {
-    path: "vocab-lists",
-    component: VocabComponent
-  },
-  {
-    path: "vocab-lists/vocab-list-form",
-    component: VocabListFormComponent
+    path: "vocab", component: VocabComponent,
+    children: [
+      { path: "vocab-lists", component: VocabListsComponent },
+      { path: "", redirectTo: "vocab-lists", pathMatch: "full" },
+      { path: "vocab-list-form", component: VocabListFormComponent }
+    ]
   }
 ];
 

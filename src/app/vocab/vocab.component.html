@@ -1,9 +1,6 @@
-<section>
+<article>
   <div class="header">
-    <h1>Vocab Lists</h1>
-    <button type="button" (click)="addVocabList()">Add</button>
+    <h1>Vocab</h1>
   </div>
-  <ng-container *ngIf="(vocabLists$ | async) as vocabLists">
-    <vocab-lists [vocabLists]="vocabLists"></vocab-lists>
-  </ng-container>
-</section>
+  <router-outlet></router-outlet>
+</article>

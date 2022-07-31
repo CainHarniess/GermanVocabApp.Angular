@@ -1,0 +1,22 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: .025rem;
+  border-color: grey;
+  border-radius: var(--border-radius-tlbr) var(--border-radius-trbl);
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset) var(--box-shadow-blur) rgba(0,0,0, var(--box-shadow-opacity));
+}
+
+.card-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: center;
+}
+
+.card > header {
+  display: flex;
+  padding: 5px;
+  background-color: #bb86fc;
+}

@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { VocabList } from '../models/vocab-list.interface';
-import { VocabService } from './vocab.service';
+import { VocabListService } from './vocab-list.service';
 
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpVocabService extends VocabService {
+export class HttpVocabListService extends VocabListService {
 
   constructor(private http: HttpClient) {
     super();

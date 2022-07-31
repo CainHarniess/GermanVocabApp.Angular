@@ -3,15 +3,14 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-import { HttpVocabService } from './services/http-vocab.service';
-import { VocabService } from './services/vocab.service';
+import { HttpVocabListService } from './services/http-vocab-list.service';
+import { VocabListService } from './services/vocab-list.service';
 import { VocabListCardComponent } from './vocab-list-card/vocab-list-card.component';
 import { VocabListFormComponent } from './vocab-list-form/vocab-list-form.component';
 import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
 import { VocabRoutingModule } from './vocab-routing.module';
 import { VocabComponent } from './vocab.component';
 import { InMemoryVocabListDataService } from './services/in-memory-vocab-list-data.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,7 +21,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     VocabListFormComponent,
   ],
   providers: [
-    { provide: VocabService, useClass: HttpVocabService }
+    { provide: VocabListService, useClass: HttpVocabListService }
   ],
   imports: [
     CommonModule,

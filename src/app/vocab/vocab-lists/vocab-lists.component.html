@@ -1,4 +1,17 @@
-<div class="vocab-list">
-  <vocab-list-card *ngFor="let vocabList of vocabLists"
-                   [vocabList]="vocabList"></vocab-list-card>
-</div>
+<section>
+  <div class="card">
+    <header class="centered">
+      <h2>Your vocab lists</h2>
+      <button class="secondary vsmall" type="button" (click)="addVocabList()">Add</button>
+    </header>
+    <div class="card-body centered">
+      <div *ngIf="(vocabLists$ | async) as vocabLists" class="vocab-list">
+
+        <div class="vocab-list">
+          <vocab-list-card *ngFor="let vocabList of vocabLists"
+                           [vocabList]="vocabList"></vocab-list-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

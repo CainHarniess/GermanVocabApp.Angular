@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { VocabList } from '../models/vocab-list.interface';
-import { HttpVocabService } from '../services/http-vocab.service';
+import { HttpVocabListService } from '../services/http-vocab-list.service';
 
 @Component({
   selector: 'app-vocab-list-form',
@@ -15,7 +15,7 @@ export class VocabListFormComponent implements OnInit {
 
   @Output() onFormSubmitted = new EventEmitter<VocabList>()
 
-  constructor(private fb: FormBuilder, private vocabService: HttpVocabService,
+  constructor(private fb: FormBuilder, private vocabService: HttpVocabListService,
     private router: Router) { }
 
   public vocabListForm!: FormGroup;
@@ -32,7 +32,7 @@ export class VocabListFormComponent implements OnInit {
     const addVocabList: Subscription = this.vocabService.add(vocabList)
       .subscribe(newListId => {
         addVocabList.unsubscribe();
-        this.router.navigate(["vocab-lists"]);
+        this.router.navigate(["vocab", "vocab-lists"]);
       });
   }
 }

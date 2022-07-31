@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { VocabList } from './models/vocab-list.interface';
-import { VocabService } from './services/vocab.service';
+import { VocabListService } from './services/vocab-list.service';
 
 @Component({
   selector: 'app-vocab',
@@ -12,7 +12,7 @@ import { VocabService } from './services/vocab.service';
 })
 export class VocabComponent {
 
-  constructor(private vocabListService: VocabService, private router: Router) { }
+  constructor(private vocabListService: VocabListService, private router: Router) { }
 
   public readonly vocabLists$: Observable<VocabList[]> = this.vocabListService.get();
 

@@ -3,13 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { VocabComponent } from './vocab/vocab.component';
 
 const routes: Routes = [
-  {
-    path: "",
-    component: VocabComponent
-  }, {
-    path: "vocab-lists",
-    component: VocabComponent
-  },
+  { path: "vocab", component: VocabComponent },
+  { path: "", redirectTo: "vocab", pathMatch: "full" },
 ];
 
 @NgModule({

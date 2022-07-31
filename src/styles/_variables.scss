@@ -1,0 +1,23 @@
+:root {
+
+  --primary: #6200ee;
+  --primary-variant-dark: #3700b3;
+  --primary-variant-light: #bb86fc;
+  --secondary: #03dac6;
+  --secondary-variant-dark: #018786;
+  /*--secondary-variant-light: #018786;*/
+  --background: #ffffff;
+  --surface: #ffffff;
+  --error: #b00020;
+
+  --foreground-dark: black;
+  --foreground-light: #ffffff;
+
+  --box-shadow-h-offset: 0;
+  --box-shadow-v-offset: 2px;
+  --box-shadow-blur: 4px;
+  --box-shadow-opacity: 0.2;
+
+  --border-radius-tlbr: .3rem;
+  --border-radius-trbl: .4rem;
+}

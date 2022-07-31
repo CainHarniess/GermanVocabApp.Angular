@@ -16,11 +16,11 @@ import { VocabModule } from './vocab/vocab.module';
     FooterComponent,
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
     RouterModule,
     HttpClientModule,
     VocabModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
