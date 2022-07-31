@@ -44,17 +44,9 @@ export class VocabListFormComponent implements OnInit {
     });
   }
 
-  public removeListItemControl(index: number): void {
-    if (index < 0) {
-      console.error("Index may not be negative.")
-      return;
-    } else if (index >= this.listItemsControl.length) {
-      console.error("Index exceeds the size of the list items form control array.")
-      return;
-    }
-    console.info(`Removing form control at index ${{ index }}.`);
-
-    this.listItemsControl.controls.splice(index, 1);
+  public getListItemsControl(index: number): FormGroup {
+    this.listItemsControl.controls
+    return <FormGroup>this.listItemsControl.get(`${index}`);
   }
 
   public onFormSubmit(): void {

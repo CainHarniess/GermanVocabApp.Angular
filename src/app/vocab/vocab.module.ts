@@ -12,6 +12,8 @@ import { VocabRoutingModule } from './vocab-routing.module';
 import { VocabComponent } from './vocab.component';
 import { InMemoryVocabListDataService } from './services/in-memory-vocab-list-data.service';
 import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-lists-presenter.component';
+import { VocabListItemFormComponent } from './vocab-list-item-form/vocab-list-item-form.component';
+import { VocabAppFormsModule } from '../forms/vocab-app-forms.module';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-list
     VocabComponent,
     VocabListFormComponent,
     VocabListsPresenterComponent,
+    VocabListItemFormComponent,
   ],
   providers: [
     { provide: VocabListService, useClass: HttpVocabListService }
@@ -30,6 +33,7 @@ import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-list
     ReactiveFormsModule,
     VocabRoutingModule,
     HttpClientInMemoryWebApiModule.forFeature(InMemoryVocabListDataService),
+    VocabAppFormsModule
   ],
   exports: [
     VocabListsComponent
