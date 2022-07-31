@@ -1,12 +1,12 @@
-.vocab-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
 header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+vocab-lists-presenter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
 }

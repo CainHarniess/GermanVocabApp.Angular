@@ -1,16 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { VocabList } from '.././models/vocab-list.interface';
 import { VocabListService } from '.././services/vocab-list.service';
 @Component({
-  selector: 'vocab-lists',
+  selector: 'app-vocab-lists',
   templateUrl: './vocab-lists.component.html',
   styleUrls: ['./vocab-lists.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsComponent {
-  @Input() public vocabLists?: VocabList[];
 
   constructor(private vocabListService: VocabListService, private router: Router) { }
 

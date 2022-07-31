@@ -11,6 +11,7 @@ import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
 import { VocabRoutingModule } from './vocab-routing.module';
 import { VocabComponent } from './vocab.component';
 import { InMemoryVocabListDataService } from './services/in-memory-vocab-list-data.service';
+import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-lists-presenter.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { InMemoryVocabListDataService } from './services/in-memory-vocab-list-da
     VocabListCardComponent,
     VocabComponent,
     VocabListFormComponent,
+    VocabListsPresenterComponent,
   ],
   providers: [
     { provide: VocabListService, useClass: HttpVocabListService }

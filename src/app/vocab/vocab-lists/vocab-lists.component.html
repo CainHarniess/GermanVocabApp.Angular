@@ -5,12 +5,8 @@
       <button class="secondary vsmall" type="button" (click)="addVocabList()">Add</button>
     </header>
     <div class="card-body centered">
-      <div *ngIf="(vocabLists$ | async) as vocabLists" class="vocab-list">
-
-        <div class="vocab-list">
-          <vocab-list-card *ngFor="let vocabList of vocabLists"
-                           [vocabList]="vocabList"></vocab-list-card>
-        </div>
+      <div class="vocab-list">
+        <vocab-lists-presenter [vocabLists]="(vocabLists$ | async)!"></vocab-lists-presenter>
       </div>
     </div>
   </div>
