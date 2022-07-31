@@ -7,6 +7,7 @@ button {
   border-style: none;
   border-radius: var(--border-radius-tlbr) var(--border-radius-trbl);
   box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset) var(--box-shadow-blur) rgba(0,0,0, var(--box-shadow-opacity));
+  font-weight: bold;
 }
 
 .primary {
@@ -17,6 +18,25 @@ button {
 .secondary {
   color: var(--foreground-secondary);
   background-color: var(--secondary);
+}
+
+.danger {
+  color: var(--foreground-danger);
+  background-color: var(--danger);
+}
+
+.danger.outline {
+  border-style: solid;
+  border-width: .05rem;
+  border-radius: var(--border-radius-tlbr) var(--border-radius-trbl);
+  border-color: var(--danger);
+  color: var(--danger);
+  background-color: var(--danger-outline-fill);
+}
+
+button.danger:hover:enabled {
+  color: var(--foreground-primary);
+  background-color: var(--danger-variant-dark);
 }
 
 button.vsmall {
@@ -40,7 +60,7 @@ button.large {
 }
 
 button:hover:enabled {
-  color: var(--foreground-secondary);
+  color: var(--foreground-primary);
   background-color: var(--secondary-variant-dark);
 }
 

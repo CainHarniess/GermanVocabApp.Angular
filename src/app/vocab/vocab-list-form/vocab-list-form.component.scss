@@ -34,28 +34,64 @@ form {
   margin: auto;
 }
 
-.form-control {
-    margin: 5px 0;
+.form-group.list-item-form {
+  display: flex;
+  flex: 1;
+  border-style: solid;
+  border-width: .025rem;
+  border-color: grey;
+  border-radius: var(--border-radius-tlbr) var(--border-radius-trbl);
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset) var(--box-shadow-blur) rgba(0,0,0, var(--box-shadow-opacity));
+  padding: 5px;
+}
 
-  label, input {
+.list-item-form.submission-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.card-body.list-item-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+}
+
+.form-control {
+  margin: 5px 0;
+
+  label, input, select {
     width: 50%;
   }
 }
 
-.submission-panel {
-    display: flex;
-    justify-content: center;
+.list-items-container {
+  width: 60%;
+  margin: auto;
+
+  header {
+    justify-content: space-between;
     align-items: center;
+  }
+}
+
+.submission-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .submission-panel > button {
-    margin: 5px;
+  margin: 5px;
 }
 
 @media screen and (max-width: 992px) {
   section {
     width: 80%;
   }
+
   .form-group {
     width: 70%;
   }
