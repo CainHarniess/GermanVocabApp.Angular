@@ -1,6 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
   border-style: solid;
   border-width: .025rem;
@@ -36,4 +37,16 @@
 .card > header.secondary, .card > footer.secondary {
   color: var(--foreground-secondary);
   background-color: var(--secondary);
+}
+
+.card.selectable:hover {
+  header.primary, footer.primary {
+    color: var(--foreground-primary);
+    background-color: var(--primary-variant-dark);
+  }
+
+  header.secondary, footer.secondary {
+    color: var(--foreground-primary);
+    background-color: var(--secondary-variant-dark);
+  }
 }
