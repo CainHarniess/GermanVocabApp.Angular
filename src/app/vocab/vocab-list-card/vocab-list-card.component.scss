@@ -1,27 +1,9 @@
 .vocab-list-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background-color: #ffffff;
-  border: solid;
-  border-color: black;
-  border-width: .1rem;
-  border-radius: .3rem .4rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,.3);
   width: 15rem;
   height: 10rem;
-
   margin: 5px;
 
-  .title, .footer {
-    flex-basis: 20%;
-    color: black;
-    background-color: #03dac6;
-    padding: 5px 0 5px 5px;
-    width: 110%;
-  }
-
-  .body {
+.body {
     flex-basis: 60%;
   }
 }
