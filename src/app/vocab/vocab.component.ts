@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { VocabList } from './models/vocab-list.interface';
-import { VocabService } from './vocab.service';
+import { VocabService } from './services/vocab.service';
 
 @Component({
   selector: 'app-vocab',

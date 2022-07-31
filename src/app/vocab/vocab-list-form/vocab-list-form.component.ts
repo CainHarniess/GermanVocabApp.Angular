@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { VocabList } from '../models/vocab-list.interface';
-import { VocabService } from '../vocab.service';
+import { HttpVocabService } from '../services/http-vocab.service';
 
 @Component({
   selector: 'app-vocab-list-form',
@@ -15,7 +15,7 @@ export class VocabListFormComponent implements OnInit {
 
   @Output() onFormSubmitted = new EventEmitter<VocabList>()
 
-  constructor(private fb: FormBuilder, private vocabService: VocabService,
+  constructor(private fb: FormBuilder, private vocabService: HttpVocabService,
     private router: Router) { }
 
   public vocabListForm!: FormGroup;

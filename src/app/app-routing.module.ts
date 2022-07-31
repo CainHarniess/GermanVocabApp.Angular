@@ -4,13 +4,12 @@ import { VocabComponent } from './vocab/vocab.component';
 
 const routes: Routes = [
   {
+    path: "",
+    component: VocabComponent
+  }, {
     path: "vocab-lists",
     component: VocabComponent
   },
-  {
-    path: "",
-    component: VocabComponent
-  }
 ];
 
 @NgModule({

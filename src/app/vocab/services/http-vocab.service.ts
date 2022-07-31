@@ -1,24 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { VocabList } from './models/vocab-list.interface';
+import { VocabList } from '../models/vocab-list.interface';
+import { VocabService } from './vocab.service';
 
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VocabService {
+export class HttpVocabService extends VocabService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   private readonly url: string = "/api/vocab-lists";
 
-  public get(): Observable<VocabList[]> {
+  public override get(): Observable<VocabList[]> {
     return this.http.get<VocabList[]>(this.url);
   }
 
-  public add(vocabList: VocabList): Observable<string> {
+  public override add(vocabList: VocabList): Observable<string> {
     return this.http.post<string>(this.url, vocabList);
   }
 }

@@ -3,7 +3,7 @@
     <h1>Vocab Lists</h1>
     <button type="button" (click)="addVocabList()">Add</button>
   </div>
-  <ng-container *ngIf="vocabLists$ | async as vocabLists">
+  <ng-container *ngIf="(vocabLists$ | async) as vocabLists">
     <vocab-lists [vocabLists]="vocabLists"></vocab-lists>
   </ng-container>
 </section>
