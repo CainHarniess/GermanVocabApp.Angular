@@ -8,6 +8,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { VocabModule } from './vocab/vocab.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { VocabModule } from './vocab/vocab.module';
     BrowserModule,
     RouterModule,
     HttpClientModule,
+    HomeModule,
     VocabModule,
     AppRoutingModule,
   ],

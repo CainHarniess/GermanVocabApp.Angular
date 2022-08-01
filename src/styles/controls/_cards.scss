@@ -12,6 +12,7 @@
 
 .card-body {
   display: flex;
+  flex: 1 0 0;
   flex-wrap: wrap;
   align-items: flex-start;
   align-content: center;
@@ -24,30 +25,64 @@
 }
 
 .card > footer {
+  display: flex;
   flex-basis: 20%;
-  color: black;
   padding: 5px 0 5px 5px;
   width: 100%;
 }
 
-.card > header.primary, .card > footer.primary {
-  color: var(--foreground-primary);
-  background-color: var(--primary);
+.card.primary {
+  header, footer {
+    color: var(--foreground-primary);
+    background-color: var(--primary);
+  }
+
+  .card-body {
+    background-color: var(--surface);
+  }
 }
 
-.card > header.secondary, .card > footer.secondary {
-  color: var(--foreground-secondary);
-  background-color: var(--secondary);
-}
-
-.card.selectable:hover {
-  header.primary, footer.primary {
+.card.selectable.primary:hover {
+  header, footer {
     color: var(--foreground-primary);
     background-color: var(--primary-variant-dark);
   }
 
-  header.secondary, footer.secondary {
+  .card-body {
+    background-color: var(--surface);
+  }
+}
+
+.card.primary.disabled {
+  header, footer {
     color: var(--foreground-primary);
+    background-color: var(--primary-variant-dark);
+    opacity: 0.3;
+  }
+
+  .card-body {
+    background-color: var(--surface-disabled);
+  }
+}
+
+.card.secondary {
+  header, footer {
+    color: var(--foreground-secondary);
+    background-color: var(--secondary);
+  }
+
+  .card-body {
+    background-color: var(--surface);
+  }
+}
+
+.card.selectable.secondary:hover {
+  header, footer {
+    color: var(--foreground-secondary);
     background-color: var(--secondary-variant-dark);
+  }
+
+  .card-body {
+    background-color: var(--surface);
   }
 }
