@@ -7,15 +7,11 @@ import { VocabListService } from './vocab-list.service';
 @Injectable({
   providedIn: 'root'
 })
-export class VocabListResolver implements Resolve<VocabList> {
+export class VocabListsResolver implements Resolve<VocabList[]> {
 
   constructor(private vocabListService: VocabListService) { }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VocabList> {
-      const vocabListId: string = route.paramMap.get("id")!;
-
-      const vocabListItems$ = this.vocabListService.getListItems(vocabListId);
-
-      return this.vocabListService.getWithId(vocabListId);
-    }
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VocabList[]> {
+    return this.vocabListService.get();
+  }
 }

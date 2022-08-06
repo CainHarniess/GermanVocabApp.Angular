@@ -5,5 +5,6 @@ export interface VocabList extends Entity {
   id?: string,
   name: string,
   description?: string,
-  listItems: Noun[]
+  listItems: Noun[],
+  authorName: string,
 }

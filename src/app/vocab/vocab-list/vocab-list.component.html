@@ -1,0 +1,21 @@
+<div class="vocab-list-view" *ngrxLet="vocabList$ as vocabList">
+  <aside class="bordered">
+    <h2>{{ vocabList.name }}</h2>
+    <p>{{ vocabList.description }}</p>
+  </aside>
+  <article *ngIf="vocabList.listItems.length > 0" class="bordered">
+    <div *ngFor="let listItem of vocabList.listItems" class="tile vocab-list-item">
+      <div class="german">
+        {{ listItem.gender }}
+        {{ listItem.german }}
+      </div>
+      <div class="h-separator"></div>
+      <div class="english">
+        {{ listItem.english }}
+      </div>
+    </div>
+  </article>
+  <article *ngIf="vocabList.listItems.length == 0" class="bordered">
+    <p>No list items yet.</p>
+  </article>
+</div>

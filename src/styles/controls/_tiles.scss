@@ -1,0 +1,25 @@
+.tile {
+  display: flex;
+  border-style: solid;
+  border-width: .025rem;
+  border-color: grey;
+  box-shadow: var(--box-shadow-h-offset) var(--box-shadow-v-offset) var(--box-shadow-blur) rgba(0,0,0, var(--box-shadow-opacity));
+  height: 100px;
+}
+
+.tile > .h-separator {
+  display: flex;
+  border-style: solid;
+  border-width: .025rem;
+  border-color: grey;
+  width: 0;
+  height: 75%;
+}
+
+.tile.hsmall {
+  height: 75px;
+}
+
+.tile.hlarge {
+  height: 150px;
+}

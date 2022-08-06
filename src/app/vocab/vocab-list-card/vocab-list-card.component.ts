@@ -9,6 +9,5 @@ import { VocabList } from '../models/vocab-list.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListCardComponent {
-
-  @Input() vocabList?: VocabList;
+  @Input() vocabList!: VocabList;
 }

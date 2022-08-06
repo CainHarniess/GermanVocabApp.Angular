@@ -1,24 +1,23 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
-import { VocabList } from '.././models/vocab-list.interface';
-
 import { map, Observable } from 'rxjs';
 import { ResolvedData } from '../models/data/resolved-data.enum';
+import { VocabList } from '../models/vocab-list.interface';
 
 @Component({
-  selector: 'app-vocab-lists',
-  templateUrl: './vocab-lists.component.html',
-  styleUrls: ['./vocab-lists.component.scss'],
+  selector: 'app-vocab-list',
+  templateUrl: './vocab-list.component.html',
+  styleUrls: ['./vocab-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VocabListsComponent {
+export class VocabListComponent {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
 
   }
 
-  public readonly vocabLists$: Observable<VocabList[]> = this.activatedRoute.data
+  public readonly vocabList$: Observable<VocabList> = this.activatedRoute.data
     .pipe(
-      map((data: Data) => data[ResolvedData.ResolvedLists]),
-    );
+      map((data: Data) => data[ResolvedData.ResolvedList]),
+  );
 }

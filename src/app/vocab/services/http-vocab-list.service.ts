@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 import { VocabList } from '../models/vocab-list.interface';
 import { VocabListService } from './vocab-list.service';
 
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
+import { Noun } from '../models/noun.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,14 @@ export class HttpVocabListService extends VocabListService {
 
   public override get(): Observable<VocabList[]> {
     return this.http.get<VocabList[]>(this.url);
+  }
+
+  public override getWithId(vocabListId: string): Observable<VocabList> {
+    return this.http.get<VocabList>(this.url + `/${ vocabListId }`);
+  }
+
+  public override getListItems(vocabListId: string): Observable<Noun[]> {
+    return this.http.get<Noun[]>("/api/nouns" + `/${vocabListId}`)
   }
 
   public override add(vocabList: VocabList): Observable<string> {

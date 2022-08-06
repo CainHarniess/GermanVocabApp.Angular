@@ -1,7 +1,8 @@
-<div class="card secondary vocab-list-card selectable">
-  <header>{{ vocabList?.name }}</header>
+<div class="card secondary vocab-list-card selectable"
+     [routerLink]="['/vocab', 'vocab-lists', vocabList.id]">
+  <header>{{ vocabList.name }}</header>
   <div class="card-body">
 
   </div>
-  <footer>{{ vocabList?.description }}</footer>
+  <footer>{{ vocabList.description }}</footer>
 </div>
