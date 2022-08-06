@@ -15,8 +15,11 @@ import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-list
 import { VocabListItemFormComponent } from './vocab-list-item-form/vocab-list-item-form.component';
 import { VocabAppFormsModule } from '../forms/vocab-app-forms.module';
 import { VocabListComponent } from './vocab-list/vocab-list.component';
-import { ReactiveComponentModule } from '@ngrx/component';
 
+import { DefiniteArticlePipe } from './pipes/definite-article.pipe';
+import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
+
+import { ReactiveComponentModule } from '@ngrx/component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { ReactiveComponentModule } from '@ngrx/component';
     VocabListsPresenterComponent,
     VocabListItemFormComponent,
     VocabListComponent,
+    DefiniteArticlePipe,
+    IndefiniteArticlePipe,
   ],
   providers: [
     { provide: VocabListService, useClass: HttpVocabListService }
