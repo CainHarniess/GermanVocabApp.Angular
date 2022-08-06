@@ -3,7 +3,8 @@ import { ActivatedRoute, Data, Router } from '@angular/router';
 import { VocabList } from '.././models/vocab-list.interface';
 import { VocabListService } from '.././services/vocab-list.service';
 
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
+
 @Component({
   selector: 'app-vocab-lists',
   templateUrl: './vocab-lists.component.html',
@@ -19,8 +20,4 @@ export class VocabListsComponent {
     .pipe(
       map((data: Data) => data["resolvedVocabLists"]),
     );
-
-  public addVocabList(): void {
-    this.router.navigate(["/vocab", "vocab-list-form"]);
-  }
 }

@@ -2,7 +2,10 @@
   <div class="card">
     <header class="primary centered">
       <h2>Your vocab lists</h2>
-      <button class="secondary vsmall" type="button" (click)="addVocabList()">Add</button>
+      <button class="secondary vsmall" type="button"
+              [routerLink]="['/vocab', 'vocab-list-form']">
+      Add
+      </button>
     </header>
     <div class="card-body centered">
       <div class="vocab-list">
