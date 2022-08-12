@@ -1,17 +1,24 @@
 <div class="card-body list-item-form" [formGroup]="parentForm">
   <div class="form-group list-item-form">
     <div class="form-control" [formGroup]="form">
-      <label attr.for="{{ 'gender_' + index }}">Gender</label>
-      <select id="{{ 'gender_' + index }}" name="{{ 'gender_' + index }}" formControlName="gender">
-        <option [value]="Gender.Masculine">Der</option>
-        <option [value]="Gender.Feminine">Die</option>
-        <option [value]="Gender.Neuter">Das</option>
+      <label attr.for="wordType_{{ index }}">Word type:</label>
+      <select id="wordType_{{ index }}" name="wordType_{{ index }}" formControlName="wordType">
+        <option [value]="WordType.Noun">Noun</option>
+        <option [value]="WordType.Verb">Verb</option>
+        <option [value]="WordType.Adjective">Adjective</option>
+        <option [value]="WordType.Adverb">Adverb</option>
       </select>
     </div>
-    <form-text-box-control [form]="form" controlName="german"
+    <!--<form-text-box-control [form]="form" controlName="german"
                            controlId="{{ 'german_' + index }}" label="German"></form-text-box-control>
     <form-text-box-control [form]="form" controlName="english"
-                           controlId="{{ 'english_' + index }}" label="English"></form-text-box-control>
+                           controlId="{{ 'english_' + index }}" label="English"></form-text-box-control>-->
+  <div [ngSwitch]="wordType$ | async">
+    <noun-form *ngSwitchCase="WordType.Noun"></noun-form>
+    <verb-form *ngSwitchCase="WordType.Verb"></verb-form>
+    <adjective-form *ngSwitchCase="WordType.Adjective"></adjective-form>
+    <adverb-form *ngSwitchCase="WordType.Adverb"></adverb-form>
+  </div>
   </div>
   <div class="list-item-form submission-panel">
     <button class="danger outline vsmall" type="button"

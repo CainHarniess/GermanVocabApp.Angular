@@ -36,7 +36,7 @@ export class VocabListFormComponent implements OnInit {
 
   private generateListItemControl(): FormGroup {
     return this.fb.group({
-      gender: ['', Validators.required],
+      wordType: ['', Validators.required],
       english: ['', Validators.required],
       german: ['', Validators.required],
     });
