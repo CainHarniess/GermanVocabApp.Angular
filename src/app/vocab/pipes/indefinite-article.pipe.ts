@@ -16,8 +16,10 @@ export class IndefiniteArticlePipe implements PipeTransform {
   private getIndefiniteArticle(nounGender: NounGender): string {
     if (nounGender === NounGender.Feminine) {
       return "Eine";
+    } else if (nounGender === NounGender.Masculine || nounGender === NounGender.Neuter) {
+      return "Ein";
     }
-    return "Ein";
+    throw new TypeError(`Invalid noun gender value ${nounGender} provided`);
   }
 
 }

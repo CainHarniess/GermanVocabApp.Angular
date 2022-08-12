@@ -10,7 +10,7 @@ import { VocabListFormComponent } from './vocab-list-form/vocab-list-form.compon
 import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
 import { VocabRoutingModule } from './vocab-routing.module';
 import { VocabComponent } from './vocab.component';
-import { InMemoryVocabListDataService } from './services/in-memory-vocab-list-data.service';
+//import { InMemoryVocabListDataService } from './services/in-memory-vocab-list-data.service';
 import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-lists-presenter.component';
 import { VocabListItemFormComponent } from './vocab-list-item-form/vocab-list-item-form.component';
 import { VocabAppFormsModule } from '../forms/vocab-app-forms.module';
@@ -40,7 +40,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
     CommonModule,
     ReactiveFormsModule,
     VocabRoutingModule,
-    HttpClientInMemoryWebApiModule.forFeature(InMemoryVocabListDataService),
+    //HttpClientInMemoryWebApiModule.forFeature(InMemoryVocabListDataService),
     VocabAppFormsModule,
     ReactiveComponentModule,
   ],

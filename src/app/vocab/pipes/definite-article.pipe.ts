@@ -7,21 +7,20 @@ import { NounGender } from '../models/data/noun-gender.enum';
 })
 export class DefiniteArticlePipe implements PipeTransform {
 
-  transform(nounGender: NounGender, capitalise: boolean = true): string {
+  transform(nounGender: NounGender | string, capitalise: boolean = true): string {
     const article: string = this.getDefiniteArticle(nounGender);
 
     return (capitalise) ? article : article.toLowerCase();
   }
 
-  private getDefiniteArticle(nounGender: NounGender): string {
-    switch (nounGender) {
-      case NounGender.Masculine: {
-        return "Der";
-      } case NounGender.Feminine: {
-        return "Die";
-      } case NounGender.Neuter: {
-        return "Das";
-      }
+  private getDefiniteArticle(nounGender: NounGender | string): string {
+    if (nounGender == NounGender.Masculine) {
+      return "Der";
+    } else if (nounGender == NounGender.Feminine) {
+      return "Die";
+    } else if (nounGender == NounGender.Neuter) {
+      return "Das";
     }
+    throw new TypeError(`Invalid noun gender value ${ nounGender } provided`);
   }
 }
