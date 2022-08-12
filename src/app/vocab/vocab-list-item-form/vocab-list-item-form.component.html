@@ -13,9 +13,9 @@
         <label attr.for="{{ 'nounGender_' + i }}">Gender</label>
         <select id="{{ 'nounGender_' + i }}" name="{{ 'nounGender_' + i }}"
                 formControlName="article">
-          <option [value]="NounGender.Masculine">Der</option>
-          <option [value]="NounGender.Feminine">Die</option>
-          <option [value]="NounGender.Neuter">Das</option>
+          <option [value]="Gender.Masculine">Der</option>
+          <option [value]="Gender.Feminine">Die</option>
+          <option [value]="Gender.Neuter">Das</option>
         </select>
       </div>
       <form-text-box-control [form]="listItem" controlName="german"

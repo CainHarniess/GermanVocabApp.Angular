@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NounGender } from '../models/data/noun-gender.enum';
+
+import { Gender } from '../models/data/gender.enum';
 
 @Component({
   selector: 'app-vocab-list-item-form',
@@ -9,7 +10,7 @@ import { NounGender } from '../models/data/noun-gender.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListItemFormComponent {
-  public readonly NounGender: typeof NounGender = NounGender;
+  public readonly Gender: typeof Gender = Gender;
 
 
   @Input() public parentForm!: FormGroup;

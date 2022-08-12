@@ -1,25 +1,25 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { NounGender } from '../models/data/noun-gender.enum';
+import { Gender } from '../models/data/gender.enum';
 
 @Pipe({
   name: 'indefiniteArticle'
 })
 export class IndefiniteArticlePipe implements PipeTransform {
 
-  transform(nounGender: NounGender, capitalise: boolean = true): string {
-    const article: string = this.getIndefiniteArticle(nounGender);
+  transform(gender: Gender, capitalise: boolean = true): string {
+    const article: string = this.getIndefiniteArticle(gender);
 
     return (capitalise) ? article : article.toLowerCase();
   }
 
-  private getIndefiniteArticle(nounGender: NounGender): string {
-    if (nounGender === NounGender.Feminine) {
+  private getIndefiniteArticle(gender: Gender): string {
+    if (gender === Gender.Feminine) {
       return "Eine";
-    } else if (nounGender === NounGender.Masculine || nounGender === NounGender.Neuter) {
+    } else if (gender === Gender.Masculine || gender === Gender.Neuter) {
       return "Ein";
     }
-    throw new TypeError(`Invalid noun gender value ${nounGender} provided`);
+    throw new TypeError(`Invalid noun gender value ${gender} provided`);
   }
 
 }
