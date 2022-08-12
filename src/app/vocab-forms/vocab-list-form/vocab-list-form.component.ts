@@ -37,8 +37,22 @@ export class VocabListFormComponent implements OnInit {
   private generateListItemControl(): FormGroup {
     return this.fb.group({
       wordType: ['', Validators.required],
-      english: ['', Validators.required],
+      isWeakMasculineNoun: [''],
+      reflexiveCase: [''],
+      isSeparable: [''],
+      isTransitive: [''],
+      thirdPersonPresent: [''],
+      thirdPersonImperfect: [''],
+      auxiliaryVerb: [''],
+      perfect: [''],
+      gender: [''],
       german: ['', Validators.required],
+      plural: [''],
+      preposition: [''],
+      prepositionCase: [''],
+      comparative: [''],
+      superlative: [''],
+      english: ['', Validators.required],
     });
   }
 

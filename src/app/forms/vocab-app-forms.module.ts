@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TextBoxComponent } from './text-box/text-box.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
+import { CheckBoxComponent } from './check-box/check-box.component';
+import { TextBoxComponent } from './text-box/text-box.component';
 
 @NgModule({
   declarations: [
-    TextBoxComponent
+    TextBoxComponent,
+    CheckBoxComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
   exports: [
-    TextBoxComponent
+    CheckBoxComponent,
+    TextBoxComponent,
   ]
 })
 export class VocabAppFormsModule { }

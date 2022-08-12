@@ -1,7 +1,7 @@
 <div class="card-body list-item-form" [formGroup]="parentForm">
   <div class="form-group list-item-form">
     <div class="form-control" [formGroup]="form">
-      <label attr.for="wordType_{{ index }}">Word type:</label>
+      <label attr.for="wordType_{{ index }}">Word type</label>
       <select id="wordType_{{ index }}" name="wordType_{{ index }}" formControlName="wordType">
         <option [value]="WordType.Noun">Noun</option>
         <option [value]="WordType.Verb">Verb</option>
@@ -9,15 +9,11 @@
         <option [value]="WordType.Adverb">Adverb</option>
       </select>
     </div>
-    <!--<form-text-box-control [form]="form" controlName="german"
-                           controlId="{{ 'german_' + index }}" label="German"></form-text-box-control>
-    <form-text-box-control [form]="form" controlName="english"
-                           controlId="{{ 'english_' + index }}" label="English"></form-text-box-control>-->
   <div [ngSwitch]="wordType$ | async">
-    <noun-form *ngSwitchCase="WordType.Noun"></noun-form>
-    <verb-form *ngSwitchCase="WordType.Verb"></verb-form>
-    <adjective-form *ngSwitchCase="WordType.Adjective"></adjective-form>
-    <adverb-form *ngSwitchCase="WordType.Adverb"></adverb-form>
+    <noun-form *ngSwitchCase="WordType.Noun" [form]="form" [index]="index"></noun-form>
+    <verb-form *ngSwitchCase="WordType.Verb" [form]="form" [index]="index"></verb-form>
+    <adjective-form *ngSwitchCase="WordType.Adjective" [form]="form" [index]="index"></adjective-form>
+    <adverb-form *ngSwitchCase="WordType.Adverb" [form]="form" [index]="index"></adverb-form>
   </div>
   </div>
   <div class="list-item-form submission-panel">

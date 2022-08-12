@@ -1,0 +1,18 @@
+<div [formGroup]="form">
+  <div class="form-control">
+    <label attr.for="gender_{{ index }}">Gender</label>
+    <select id="gender_{{ index }}" name="gender_{{ index }}" formControlName="gender">
+      <option [value]="Gender.Masculine">Masculine</option>
+      <option [value]="Gender.Feminine">Feminine</option>
+      <option [value]="Gender.Neuter">Neuter</option>
+    </select>
+  </div>
+  <form-text-box-control [form]="form" controlName="german"
+                         controlId="german_{{ index }}" label="German"></form-text-box-control>
+  <form-text-box-control [form]="form" controlName="plural"
+                         controlId="plural_{{ index }}" label="Plural"></form-text-box-control>
+  <form-text-box-control [form]="form" controlName="english"
+                         controlId="english_{{ index }}" label="English"></form-text-box-control>
+  <form-check-box-control [form]="form" controlName="isWeakMasculineNoun"
+                         controlId="isWeakMasculineNoun_{{ index }}" label="Weak masculine noun"></form-check-box-control>
+</div>
