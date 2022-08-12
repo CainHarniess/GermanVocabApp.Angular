@@ -14,12 +14,10 @@ import { VocabListService } from '../../vocab/services/vocab-list.service';
 export class VocabListFormComponent implements OnInit {
   private addVocabList?: Subscription;
 
-  @Output() public onFormSubmitted = new EventEmitter<VocabList>()
-
   constructor(private fb: FormBuilder, private vocabService: VocabListService,
     private router: Router) { }
 
-  public get listItemsControl(): FormArray { return <FormArray>this.vocabListForm.get("listItems")!; }
+  public get listItemsControl(): FormArray { return <FormArray<FormGroup>>this.vocabListForm.get("listItems")!; }
 
   public vocabListForm!: FormGroup;
 
@@ -33,11 +31,12 @@ export class VocabListFormComponent implements OnInit {
 
   public addListItemControl(): void {
     this.listItemsControl.push(this.generateListItemControl());
+    console.log(this.vocabListForm);
   }
 
   private generateListItemControl(): FormGroup {
     return this.fb.group({
-      article: ['', Validators.required],
+      gender: ['', Validators.required],
       english: ['', Validators.required],
       german: ['', Validators.required],
     });
@@ -46,6 +45,19 @@ export class VocabListFormComponent implements OnInit {
   public getListItemsControl(index: number): FormGroup {
     this.listItemsControl.controls
     return <FormGroup>this.listItemsControl.get(`${index}`);
+  }
+
+  public removeListItemControl(index: number): void {
+    if (index < 0) {
+      console.error("Index may not be negative.")
+      return;
+    } else if (index >= this.listItemsControl.length) {
+      console.error("Index exceeds the size of the list items form control array.")
+      return;
+    }
+    console.info(`Removing form control at index ${ '' + index }.`);
+
+    this.listItemsControl.controls.splice(index, 1);
   }
 
   public onFormSubmit(): void {

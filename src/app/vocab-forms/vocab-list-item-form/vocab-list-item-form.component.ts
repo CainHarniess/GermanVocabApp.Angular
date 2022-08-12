@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Gender } from '../../vocab/models/data/gender.enum';
 
@@ -12,36 +12,15 @@ import { Gender } from '../../vocab/models/data/gender.enum';
 export class VocabListItemFormComponent {
   public readonly Gender: typeof Gender = Gender;
 
-
   @Input() public parentForm!: FormGroup;
+  @Input() public form!: FormGroup;
+  @Input() public index!: number;
 
-  constructor(private fb: FormBuilder) { }
+  @Output() public removeListItem = new EventEmitter<number>();
 
-  public get listItemsControl(): FormArray<FormGroup> { return <FormArray>this.parentForm.get("listItems")!; }
-
-  public addListItemControl(): void {
-    this.listItemsControl.push(this.generateListItemControl());
-  }
-
-  private generateListItemControl(): FormGroup {
-    return this.fb.group({
-      article: ['', Validators.required],
-      english: ['', Validators.required],
-      german: ['', Validators.required],
-    });
-  }
+  public get listItemsControl(): FormArray<FormGroup> { return <FormArray<FormGroup>>this.parentForm.get("listItems")!; }
 
   public removeListItemControl(index: number): void {
-    if (index < 0) {
-      console.error("Index may not be negative.")
-      return;
-    } else if (index >= this.listItemsControl.length) {
-      console.error("Index exceeds the size of the list items form control array.")
-      return;
-    }
-    console.info(`Removing form control at index ${{ index }}.`);
-
-    this.listItemsControl.controls.splice(index, 1);
+    this.removeListItem.emit(index);
   }
-
 }

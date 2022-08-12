@@ -1,33 +1,22 @@
-<div class="card list-items-container" [formGroup]="parentForm">
-  <header class="primary">
-    <h3>List Items</h3>
-    <button class="secondary vsmall" type="button"
-            (click)="addListItemControl()">
-      Add
+<div class="card-body list-item-form" [formGroup]="parentForm">
+  <div class="form-group list-item-form">
+    <div class="form-control" [formGroup]="form">
+      <label attr.for="{{ 'gender_' + index }}">Gender</label>
+      <select id="{{ 'gender_' + index }}" name="{{ 'gender_' + index }}" formControlName="gender">
+        <option [value]="Gender.Masculine">Der</option>
+        <option [value]="Gender.Feminine">Die</option>
+        <option [value]="Gender.Neuter">Das</option>
+      </select>
+    </div>
+    <form-text-box-control [form]="form" controlName="german"
+                           controlId="{{ 'german_' + index }}" label="German"></form-text-box-control>
+    <form-text-box-control [form]="form" controlName="english"
+                           controlId="{{ 'english_' + index }}" label="English"></form-text-box-control>
+  </div>
+  <div class="list-item-form submission-panel">
+    <button class="danger outline vsmall" type="button"
+            (click)="removeListItemControl(index)">
+      Remove
     </button>
-  </header>
-  <div class="card-body list-item-form" formArrayName="listItems"
-       *ngFor="let listItem of listItemsControl.controls; let i=index">
-    <div class="form-group list-item-form" [formGroupName]="i">
-      <div class="form-control">
-        <label attr.for="{{ 'nounGender_' + i }}">Gender</label>
-        <select id="{{ 'nounGender_' + i }}" name="{{ 'nounGender_' + i }}"
-                formControlName="article">
-          <option [value]="Gender.Masculine">Der</option>
-          <option [value]="Gender.Feminine">Die</option>
-          <option [value]="Gender.Neuter">Das</option>
-        </select>
-      </div>
-      <form-text-box-control [form]="listItem" controlName="german"
-                             controlId="{{ 'german_' + i }}" label="German"></form-text-box-control>
-      <form-text-box-control [form]="listItem" controlName="english"
-                             controlId="{{ 'english_' + i }}" label="English"></form-text-box-control>
-    </div>
-    <div class="list-item-form submission-panel">
-      <button class="danger outline vsmall" type="button"
-              (click)="removeListItemControl(i)">
-        Remove
-      </button>
-    </div>
   </div>
 </div>
