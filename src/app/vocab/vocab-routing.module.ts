@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
-import { VocabListFormComponent } from './vocab-list-form/vocab-list-form.component';
+import { VocabListFormComponent } from '../vocab-forms/vocab-list-form/vocab-list-form.component';
 import { VocabComponent } from './vocab.component';
 import { VocabListsResolver } from './services/vocab-lists.resolver';
 import { VocabListComponent } from './vocab-list/vocab-list.component';

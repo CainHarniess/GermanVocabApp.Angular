@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { VocabList } from '../models/vocab-list.interface';
-import { VocabListService } from '../services/vocab-list.service';
+import { VocabList } from '../../vocab/models/vocab-list.interface';
+import { VocabListService } from '../../vocab/services/vocab-list.service';
 
 @Component({
   selector: 'app-vocab-list-form',

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Gender } from '../models/data/gender.enum';
+import { Gender } from '../../vocab/models/data/gender.enum';
 
 @Component({
   selector: 'app-vocab-list-item-form',
