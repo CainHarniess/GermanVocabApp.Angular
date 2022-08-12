@@ -13,9 +13,6 @@ export class VocabListResolver implements Resolve<VocabList> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VocabList> {
       const vocabListId: string = route.paramMap.get("id")!;
-
-      const vocabListItems$ = this.vocabListService.getListItems(vocabListId);
-
       return this.vocabListService.getWithId(vocabListId);
     }
 }

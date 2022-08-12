@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { NounGender } from '../models/data/noun-gender.enum';
 import { VocabList } from '../models/vocab-list.interface';
-import { HttpVocabListService } from '../services/http-vocab-list.service';
+import { VocabListService } from '../services/vocab-list.service';
 
 @Component({
   selector: 'app-vocab-list-form',
@@ -13,11 +12,11 @@ import { HttpVocabListService } from '../services/http-vocab-list.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListFormComponent implements OnInit {
-  public readonly NounGender: typeof NounGender = NounGender;
+  private addVocabList?: Subscription;
 
   @Output() public onFormSubmitted = new EventEmitter<VocabList>()
 
-  constructor(private fb: FormBuilder, private vocabService: HttpVocabListService,
+  constructor(private fb: FormBuilder, private vocabService: VocabListService,
     private router: Router) { }
 
   public get listItemsControl(): FormArray { return <FormArray>this.vocabListForm.get("listItems")!; }
@@ -51,10 +50,13 @@ export class VocabListFormComponent implements OnInit {
 
   public onFormSubmit(): void {
     const vocabList: VocabList = this.vocabListForm.value as VocabList;
-    const addVocabList: Subscription = this.vocabService.add(vocabList)
+    this.addVocabList = this.vocabService.add(vocabList)
       .subscribe(newListId => {
-        addVocabList.unsubscribe();
         this.router.navigate(["vocab", "vocab-lists"]);
       });
+  }
+
+  public ngOnDestroy(): void {
+    this.addVocabList?.unsubscribe();
   }
 }
