@@ -56,7 +56,7 @@ export class VocabListFormComponent implements OnInit {
     });
   }
 
-  public getListItemsControl(index: number): FormGroup {
+  public getListItemControl(index: number): FormGroup {
     this.listItemsControl.controls
     return <FormGroup>this.listItemsControl.get(`${index}`);
   }

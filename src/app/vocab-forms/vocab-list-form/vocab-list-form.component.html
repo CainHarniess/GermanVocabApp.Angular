@@ -25,7 +25,7 @@
             <div class="form-group list-item-form" [formGroupName]="i">
 
               <app-vocab-list-item-form [parentForm]="vocabListForm"
-                                        [form]="getListItemsControl(i)" [index]="i"
+                                        [form]="getListItemControl(i)" [index]="i"
                                         (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
             </div>
           </div>

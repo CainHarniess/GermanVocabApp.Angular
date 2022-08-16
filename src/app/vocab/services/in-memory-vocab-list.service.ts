@@ -4,11 +4,13 @@ import { AuxiliaryVerb } from '../models/data/auxiliary-verb.enum';
 import { Gender } from '../models/data/gender.enum';
 import { WordType } from '../models/data/word-type.enum';
 import { VocabList } from '../models/vocab-list.interface';
+import { FixedPlurality } from '../models/data/fixed-plurality.enum';
+
+import { GuidGeneratorService } from '../../shared/services/guid-generator.service';
 import { VocabListService } from './vocab-list.service';
 
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { GuidGeneratorService } from '../../shared/services/guid-generator.service';
 
 @Injectable()
 export class InMemoryVocabListService extends VocabListService {
@@ -41,6 +43,7 @@ export class InMemoryVocabListService extends VocabListService {
         superlative: undefined,
         english: 'kettle',
         vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
+        fixedPlurality : FixedPlurality.None,
       },
       {
         wordType: WordType.Verb,
@@ -61,6 +64,7 @@ export class InMemoryVocabListService extends VocabListService {
         superlative: undefined,
         english: 'to cook',
         vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
+        fixedPlurality : undefined,
       },
       {
         wordType: WordType.Adjective,
@@ -81,6 +85,7 @@ export class InMemoryVocabListService extends VocabListService {
         superlative: 'beste',
         english: 'good',
         vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
+        fixedPlurality : undefined,
       },
       {
         wordType: WordType.Adverb,
@@ -101,6 +106,7 @@ export class InMemoryVocabListService extends VocabListService {
         superlative: 'schnellste',
         english: 'quickly',
         vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
+        fixedPlurality : undefined,
       }
     ],
     authorName: "Cain Harniess",

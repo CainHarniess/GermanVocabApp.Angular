@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SingleSelectOption } from '../../../forms/single-select/single-select-option.interface';
-import { Case } from '../../../vocab/models/data/case.enum';
+
 import { FixedPlurality } from '../../../vocab/models/data/fixed-plurality.enum';
 import { Gender } from '../../../vocab/models/data/gender.enum';
 import { WordTypeForm } from '../word-type-form';
+
+import { SingleSelectOption } from '../../../forms/single-select/single-select-option.interface';
 
 @Component({
   selector: 'noun-form',
@@ -32,19 +33,5 @@ export class NounFormComponent extends WordTypeForm {
   }, {
     value: FixedPlurality.None,
     label: "None",
-  }];
-
-  public readonly caseOptions: SingleSelectOption<Case>[] = [{
-    value: Case.Nominative,
-    label: "Nominative",
-  }, {
-    value: Case.Accusative,
-    label: "Accusative",
-  }, {
-    value: Case.Dative,
-    label: "Dative",
-  }, {
-    value: Case.Genetive,
-    label: "Genetive",
   }];
 }

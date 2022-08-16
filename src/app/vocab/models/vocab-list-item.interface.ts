@@ -1,5 +1,6 @@
 import { AuxiliaryVerb } from "./data/auxiliary-verb.enum";
 import { Case } from "./data/case.enum";
+import { FixedPlurality } from "./data/fixed-plurality.enum";
 import { Gender } from "./data/gender.enum";
 import { WordType } from "./data/word-type.enum";
 
@@ -24,4 +25,5 @@ export interface VocabListItem extends Entity {
   superlative?: string;
   english: string;
   vocabListId?: string;
+  fixedPlurality?: FixedPlurality
 }
