@@ -31,7 +31,6 @@ export class VocabListFormComponent implements OnInit {
 
   public addListItemControl(): void {
     this.listItemsControl.push(this.generateListItemControl());
-    console.log(this.vocabListForm);
   }
 
   private generateListItemControl(): FormGroup {
@@ -53,6 +52,7 @@ export class VocabListFormComponent implements OnInit {
       comparative: [''],
       superlative: [''],
       english: ['', Validators.required],
+      fixedPlurality: [''],
     });
   }
 

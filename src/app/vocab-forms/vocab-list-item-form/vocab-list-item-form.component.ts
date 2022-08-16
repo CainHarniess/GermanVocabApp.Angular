@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { map, tap, Observable } from 'rxjs';
+
+import { map, Observable } from 'rxjs';
 
 import { WordType } from '../../vocab/models/data/word-type.enum';
 
@@ -24,9 +25,7 @@ export class VocabListItemFormComponent implements OnInit {
   public ngOnInit(): void {
     this.wordType$ = this.form.get("wordType")!.valueChanges
       .pipe(
-        tap((val: any) => console.log(val)),
         map((val: any) => val as WordType),
-        tap((val: WordType) => console.log(val)),
       );
   }
 
