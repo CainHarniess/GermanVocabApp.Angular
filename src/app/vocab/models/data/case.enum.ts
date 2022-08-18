@@ -4,3 +4,8 @@ export enum Case {
   Dative,
   Genetive,
 }
+
+export enum ReflexiveCase {
+  Accusative = Case.Accusative,
+  Dative = Case.Dative,
+}

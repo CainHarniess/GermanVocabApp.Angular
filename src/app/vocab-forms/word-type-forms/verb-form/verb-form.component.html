@@ -1,1 +1,27 @@
-<p>verb-form works!</p>
+<div [formGroup]="form">
+  <form-drop-down-control [form]="form" controlName="reflexiveCase"
+                          controlId="reflexiveCase_{{ index }}" label="Reflexive case"
+                          [options]="reflexiveCaseOptions"></form-drop-down-control>
+  <form-text-box-control [form]="form" controlName="german"
+                         controlId="german_{{ index }}" label="German"></form-text-box-control>
+  <form-text-box-control [form]="form" controlName="thirdPersonPresent"
+                         controlId="thirdPersonPresent_{{ index }}" label="Third-person present"></form-text-box-control>
+  <form-text-box-control [form]="form" controlName="thirdPersonImperfect"
+                         controlId="thirdPersonImperfect_{{ index }}" label="Third-person imperfect"></form-text-box-control>
+  <form-drop-down-control [form]="form" controlName="auxiliaryVerb"
+                          controlId="auxiliaryVerb_{{ index }}" label="Auxiliary verb"
+                          [options]="auxiliaryVerbOptions"></form-drop-down-control>
+  <form-text-box-control [form]="form" controlName="perfect"
+                         controlId="perfect_{{ index }}" label="Perfect"></form-text-box-control>
+  <form-text-box-control [form]="form" controlName="preposition"
+                         controlId="preposition_{{ index }}" label="Preposition"></form-text-box-control>
+  <form-drop-down-control [form]="form" controlName="prepositionCase"
+                          controlId="prepositionCase_{{ index }}" label="Preposition case"
+                          [options]="caseOptions"></form-drop-down-control>
+  <form-text-box-control [form]="form" controlName="english"
+                         controlId="english_{{ index }}" label="English"></form-text-box-control>
+  <form-check-box-control [form]="form" controlName="isSeparable"
+                          controlId="isSeparable_{{ index }}" label="Separable"></form-check-box-control>
+  <form-check-box-control [form]="form" controlName="isTransitive"
+                          controlId="isTransitive_{{ index }}" label="Transitive"></form-check-box-control>
+</div>

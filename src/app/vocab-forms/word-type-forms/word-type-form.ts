@@ -1,15 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { Case } from '../../vocab/models/data/case.enum';
+import { Case, ReflexiveCase } from '../../vocab/models/data/case.enum';
 import { Gender } from '../../vocab/models/data/gender.enum';
 
 import { SingleSelectOption } from '../../forms/single-select/single-select-option.interface';
+import { AuxiliaryVerb } from '../../vocab/models/data/auxiliary-verb.enum';
 
-@Component({template: ''})
+@Component({ template: '' })
 export abstract class WordTypeForm {
-  public readonly Gender: typeof Gender = Gender;
-
   public readonly caseOptions: SingleSelectOption<Case>[] = [{
     value: Case.Nominative,
     label: "Nominative",
@@ -22,6 +21,22 @@ export abstract class WordTypeForm {
   }, {
     value: Case.Genetive,
     label: "Genetive",
+  }];
+
+  public readonly reflexiveCaseOptions: SingleSelectOption<ReflexiveCase>[] = [{
+    value: ReflexiveCase.Accusative,
+    label: "Accusative",
+  }, {
+    value: ReflexiveCase.Dative,
+    label: "Dative",
+  }];
+
+  public readonly auxiliaryVerbOptions: SingleSelectOption<AuxiliaryVerb>[] = [{
+    value: AuxiliaryVerb.Haben,
+    label: "Haben",
+  }, {
+    value: AuxiliaryVerb.Sein,
+    label: "Sein",
   }];
 
   @Input() public form!: FormGroup;
