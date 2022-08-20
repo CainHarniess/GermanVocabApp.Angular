@@ -1,7 +1,7 @@
 import { FormBuilder } from "@angular/forms";
 
-export class ModelFormBuilder {
-  constructor(protected formBuilder: FormBuilder) {
+export abstract class ModelFormBuilder {
+  protected constructor(protected formBuilder: FormBuilder) {
 
   }
 }

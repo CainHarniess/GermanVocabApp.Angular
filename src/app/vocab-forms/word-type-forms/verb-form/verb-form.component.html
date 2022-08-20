@@ -1,7 +1,7 @@
 <div [formGroup]="form">
   <form-drop-down-control [form]="form" controlName="reflexiveCase"
                           controlId="reflexiveCase_{{ index }}" label="Reflexive case"
-                          [options]="reflexiveCaseOptions"></form-drop-down-control>
+                          [options]="dropDownOptions.reflexiveCaseOptions"></form-drop-down-control>
   <form-text-box-control [form]="form" controlName="german"
                          controlId="german_{{ index }}" label="German"></form-text-box-control>
   <form-text-box-control [form]="form" controlName="thirdPersonPresent"
@@ -10,14 +10,14 @@
                          controlId="thirdPersonImperfect_{{ index }}" label="Third-person imperfect"></form-text-box-control>
   <form-drop-down-control [form]="form" controlName="auxiliaryVerb"
                           controlId="auxiliaryVerb_{{ index }}" label="Auxiliary verb"
-                          [options]="auxiliaryVerbOptions"></form-drop-down-control>
+                          [options]="dropDownOptions.auxiliaryVerbOptions"></form-drop-down-control>
   <form-text-box-control [form]="form" controlName="perfect"
                          controlId="perfect_{{ index }}" label="Perfect"></form-text-box-control>
   <form-text-box-control [form]="form" controlName="preposition"
                          controlId="preposition_{{ index }}" label="Preposition"></form-text-box-control>
   <form-drop-down-control [form]="form" controlName="prepositionCase"
                           controlId="prepositionCase_{{ index }}" label="Preposition case"
-                          [options]="caseOptions"></form-drop-down-control>
+                          [options]="dropDownOptions.caseOptions"></form-drop-down-control>
   <form-text-box-control [form]="form" controlName="english"
                          controlId="english_{{ index }}" label="English"></form-text-box-control>
   <form-check-box-control [form]="form" controlName="isSeparable"

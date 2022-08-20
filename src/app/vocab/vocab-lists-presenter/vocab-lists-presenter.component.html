@@ -1,2 +1,10 @@
-<vocab-list-card *ngFor="let vocabList of vocabLists"
-                 [vocabList]="vocabList"></vocab-list-card>
+<div *ngIf="vocabLists.length > 0; else noLists">
+  <vocab-list-card *ngFor="let vocabList of vocabLists"
+                   [vocabList]="vocabList"></vocab-list-card>
+</div>
+<ng-template #noLists>
+  <div class="no-lists">
+    <p>You don't have any lists</p>
+    <p>Why not add one?</p>
+  </div>
+</ng-template>

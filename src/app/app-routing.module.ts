@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { VocabComponent } from './vocab/vocab.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
-  { path: "vocab", component: VocabComponent },
+  {
+    path: "vocab",
+    loadChildren: () => import('./vocab/vocab.module').then(m => m.VocabModule)
+  },
   { path: "", redirectTo: "home", pathMatch: "full" },
 ];
 

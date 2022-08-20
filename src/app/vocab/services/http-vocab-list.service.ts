@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { VocabList } from '../models/vocab-list.interface';
 import { VocabListService } from './vocab-list.service';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class HttpVocabListService extends VocabListService {
 
   constructor(private http: HttpClient) {

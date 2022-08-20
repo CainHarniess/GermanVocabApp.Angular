@@ -13,7 +13,7 @@ import { ResolvedData } from '../models/data/resolved-data.enum';
 })
 export class VocabListsComponent {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute) {
 
   }
 
