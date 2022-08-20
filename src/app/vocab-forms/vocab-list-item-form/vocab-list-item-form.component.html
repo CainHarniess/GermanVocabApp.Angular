@@ -2,7 +2,7 @@
   <div class="form-group list-item-form">
     <form-drop-down-control [form]="form" controlName="wordType"
                             controlId="wordType_{{ index }}" label="Word type"
-                            [options]="wordTypeOptions"></form-drop-down-control>
+                            [options]="dropDownOptions.wordTypeOptions"></form-drop-down-control>
     <div [ngSwitch]="wordType$ | async">
       <noun-form *ngSwitchCase="WordType.Noun" [form]="form" [index]="index"></noun-form>
       <verb-form *ngSwitchCase="WordType.Verb" [form]="form" [index]="index"></verb-form>

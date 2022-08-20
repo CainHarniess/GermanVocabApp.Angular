@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { map, Observable } from 'rxjs';
-import { SingleSelectOption } from '../../forms/single-select/single-select-option.interface';
 
 import { WordType } from '../../vocab/models/data/word-type.enum';
+import { DropDownOptions } from './drop-down-options.class';
 
 @Component({
   selector: 'app-vocab-list-item-form',
@@ -14,19 +14,7 @@ import { WordType } from '../../vocab/models/data/word-type.enum';
 })
 export class VocabListItemFormComponent implements OnInit {
   public readonly WordType: typeof WordType = WordType;
-  public readonly wordTypeOptions: SingleSelectOption<WordType>[] = [{
-    value: WordType.Noun,
-    label: "Noun",
-  }, {
-    value: WordType.Verb,
-    label: "Verb",
-  }, {
-    value: WordType.Adjective,
-    label: "Adjective",
-  }, {
-    value: WordType.Adverb,
-    label: "Adverb",
-  }];
+  public readonly dropDownOptions: typeof DropDownOptions = DropDownOptions;
 
   public wordType$!: Observable<WordType>;
 
