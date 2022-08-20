@@ -1,8 +1,8 @@
 export enum Case {
-  Nominative,
-  Accusative,
-  Dative,
-  Genetive,
+  Nominative = "Nominative",
+  Accusative = "Accusative",
+  Dative = "Dative",
+  Genetive = "Genetive",
 }
 
 export enum ReflexiveCase {

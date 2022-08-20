@@ -1,4 +1,4 @@
 export enum NounDeterminer {
-  Definite,
-  Indefinite,
+  Definite = "Definite",
+  Indefinite = "Indefinite",
 }

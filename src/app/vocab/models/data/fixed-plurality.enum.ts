@@ -1,5 +1,5 @@
 export enum FixedPlurality {
-  None,
-  Singular,
-  Plural,
+  None = "None",
+  Singular = "Singular",
+  Plural = "Plural",
 }
