@@ -32,7 +32,8 @@ import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
     IndefiniteArticlePipe,
   ],
   providers: [
-    { provide: VocabListService, useClass: InMemoryVocabListService }
+    { provide: VocabListService, useClass: HttpVocabListService }
+    //{ provide: VocabListService, useClass: InMemoryVocabListService }
   ],
   imports: [
     CommonModule,

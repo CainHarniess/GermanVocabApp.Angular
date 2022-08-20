@@ -1,9 +1,15 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Case, ReflexiveCase } from '../../vocab/models/data/case.enum';
+import { FixedPlurality } from '../../vocab/models/data/fixed-plurality.enum';
+import { Gender } from '../../vocab/models/data/gender.enum';
+import { WordType } from '../../vocab/models/data/word-type.enum';
 import { VocabList } from '../../vocab/models/vocab-list.interface';
 import { VocabListService } from '../../vocab/services/vocab-list.service';
+import { VocabListForm } from '../models/vocab-list-form.interface';
+import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 
 @Component({
   selector: 'app-vocab-list-form',
@@ -19,13 +25,13 @@ export class VocabListFormComponent implements OnInit {
 
   public get listItemsControl(): FormArray { return <FormArray<FormGroup>>this.vocabListForm.get("listItems")!; }
 
-  public vocabListForm!: FormGroup;
+  public vocabListForm!: FormGroup<VocabListForm>;
 
   ngOnInit(): void {
-    this.vocabListForm = this.fb.group({
-      name: ['', Validators.required],
-      description: [''],
-      listItems: this.fb.array([])
+    this.vocabListForm = this.fb.group<VocabListForm>({
+      name: this.fb.control<string | null>(null, Validators.required),
+      description: this.fb.control<string | null>(null, Validators.required),
+      listItems: this.fb.array<FormGroup<VocabListItemForm>>([]),
     });
   }
 
@@ -34,25 +40,25 @@ export class VocabListFormComponent implements OnInit {
   }
 
   private generateListItemControl(): FormGroup {
-    return this.fb.group({
-      wordType: ['', Validators.required],
-      isWeakMasculineNoun: [''],
-      reflexiveCase: [''],
-      isSeparable: [''],
-      isTransitive: [''],
-      thirdPersonPresent: [''],
-      thirdPersonImperfect: [''],
-      auxiliaryVerb: [''],
-      perfect: [''],
-      gender: [''],
-      german: ['', Validators.required],
-      plural: [''],
-      preposition: [''],
-      prepositionCase: [''],
-      comparative: [''],
-      superlative: [''],
-      english: ['', Validators.required],
-      fixedPlurality: [''],
+    return this.fb.group<VocabListItemForm>({
+      wordType: this.fb.control<WordType | null>(null),
+      isWeakMasculineNoun: this.fb.control<boolean | null>(null),
+      reflexiveCase: this.fb.control<ReflexiveCase | null>(null),
+      isSeparable: this.fb.control<boolean | null>(null),
+      isTransitive: this.fb.control<boolean | null>(null),
+      thirdPersonPresent: this.fb.control<string | null>(null),
+      thirdPersonImperfect: this.fb.control<string | null>(null),
+      auxiliaryVerb: this.fb.control(null),
+      perfect: this.fb.control<string | null>(null),
+      gender: this.fb.control<Gender | null>(null),
+      german: new FormControl<string | null>(null),
+      plural: this.fb.control<string | null>(null),
+      preposition: this.fb.control<string | null>(null),
+      prepositionCase: this.fb.control<Case | null>(null),
+      comparative: this.fb.control<string | null>(null),
+      superlative: this.fb.control<string | null>(null),
+      english: this.fb.control<string | null>(null),
+      fixedPlurality: this.fb.control<FixedPlurality | null>(null),
     });
   }
 
