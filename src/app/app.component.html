@@ -1,7 +1,45 @@
-<header>
-  <app-navigation></app-navigation>
-</header>
-<main>
-  <router-outlet></router-outlet>
-</main>
-<app-footer></app-footer>
+<mat-toolbar class="tool-bar header">
+  <button mat-icon-button type="button" aria-label="Menu" (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>German Vocab App</span>
+</mat-toolbar>
+<mat-sidenav-container class="main-container">
+  <mat-sidenav #sidenav class="side-nav left" opened mode="side"
+               [fixedInViewport]="true" [fixedTopGap]="64" [fixedBottomGap]="64">
+    <div class="nav-container">
+      <div class="nav-group">
+        <a mat-button class="nav-item" [routerLink]="['/vocab', 'vocab-lists']">
+          <mat-icon aria-hidden="false" aria-label="Vocab" fontIcon="translate"></mat-icon>
+          Vocab
+        </a>
+        <a mat-button class="nav-item">
+          <mat-icon aria-hidden="false" aria-label="Tests" fontIcon="quiz"></mat-icon>
+          Tests
+        </a>
+      </div>
+      <div class="nav-group">
+        <mat-divider></mat-divider>
+        <a mat-button class="nav-item">
+          <mat-icon aria-hidden="false" aria-label="Account" fontIcon="person"></mat-icon>
+          Account
+        </a>
+        <a mat-button class="nav-item">
+          <mat-icon aria-hidden="false" aria-label="Settings" fontIcon="settings"></mat-icon>
+          Settings
+        </a>
+        <a mat-button class="nav-item">
+          <mat-icon aria-hidden="false" aria-label="Log in" fontIcon="login"></mat-icon>
+          <mat-icon aria-hidden="false" aria-label="Log out" fontIcon="logout"></mat-icon>
+          Log in/out
+        </a>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-toolbar class="tool-bar footer">
+  <span>Content courtesy of Cain Harniess</span>
+</mat-toolbar>

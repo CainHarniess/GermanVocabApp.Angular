@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { VerbFormComponent } from './word-type-forms/verb-form/verb-form.component';
 import { AdjectiveFormComponent } from './word-type-forms/adjective-form/adjective-form.component';
 import { AdverbFormComponent } from './word-type-forms/adverb-form/adverb-form.component';
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AdverbFormComponent } from './word-type-forms/adverb-form/adverb-form.c
   imports: [
     CommonModule,
     SharedModule,
+    AngularMaterialModule,
     VocabAppFormsModule,
     ReactiveFormsModule,
   ]

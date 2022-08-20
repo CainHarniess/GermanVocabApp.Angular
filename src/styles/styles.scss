@@ -1,3 +1,4 @@
+@import '@angular/material/prebuilt-themes/purple-green.css';
 @import '_variables';
 @import 'controls/buttons';
 @import 'controls/cards';
@@ -28,6 +29,13 @@ html, body {
 body {
   margin: 0;
   width: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: black;
+}
+
+main {
+    background-color: black;
 }
 
 article, section {
@@ -45,7 +53,7 @@ article, section {
   flex-direction: column;
 }
 
-h1, h2, h3 {
+/*h1, h2, h3 {
     margin: 0;
     padding: 0;
 }
@@ -60,7 +68,7 @@ h2 {
 
 h3 {
   font-size: 20px;
-}
+}*/
 
 .bordered {
   border-style: solid;
@@ -79,4 +87,3 @@ h3 {
   justify-content: center;
   align-items: center;
 }
-

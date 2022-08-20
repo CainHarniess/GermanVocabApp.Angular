@@ -1,4 +1,13 @@
-<section>
+<mat-form-field appearance="fill">
+  <mat-label>Name</mat-label>
+  <input formControlName="name" matInput>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Description</mat-label>
+  <input formControlName="description" matInput>
+</mat-form-field>
+
+<!--<section>
   <div class="card">
     <header class="primary">
       <h1>New Vocab List</h1>
@@ -6,10 +15,14 @@
     <div class="card-body">
       <form [formGroup]="vocabListForm" (ngSubmit)="onFormSubmit()" novalidate>
         <div class="form-group">
-          <form-text-box-control [form]="vocabListForm" controlName="name" controlId="name"
-                                 label="List title"></form-text-box-control>
-          <form-text-box-control [form]="vocabListForm" controlName="description" controlId="description"
-                                 label="List description"></form-text-box-control>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input formControlName="description" matInput>
+          </mat-form-field>
         </div>
         <div class="card list-items-container">
           <header class="primary">
@@ -38,4 +51,4 @@
       </form>
     </div>
   </div>
-</section>
+</section>-->
