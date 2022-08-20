@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
@@ -18,7 +17,6 @@ import { InMemoryVocabListService } from './vocab/services/in-memory-vocab-list.
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
     FooterComponent,
   ],
   imports: [

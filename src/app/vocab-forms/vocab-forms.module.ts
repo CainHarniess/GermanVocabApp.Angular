@@ -27,6 +27,9 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
     AngularMaterialModule,
     VocabAppFormsModule,
     ReactiveFormsModule,
+  ],
+  exports: [
+    VocabListFormComponent,
   ]
 })
 export class VocabFormsModule { }

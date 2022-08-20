@@ -1,7 +1,21 @@
-<div *ngIf="vocabLists.length > 0; else noLists">
-  <vocab-list-card *ngFor="let vocabList of vocabLists"
-                   [vocabList]="vocabList"></vocab-list-card>
-</div>
+  <mat-nav-list *ngIf="vocabLists.length > 0; else noLists">
+    <mat-list-item *ngFor="let vocabList of vocabLists">
+      <div class="list-item-container">
+        <a [routerLink]="[vocabList.id]">
+          <h2 matLine>{{ vocabList.name }}</h2>
+          <p matLine>{{ vocabList.description }}</p>
+        </a>
+        <div class="list-item-actions">
+          <button mat-icon-button>
+            <mat-icon aria-hidden="false" aria-label="Edit vocab list" fontIcon="edit"></mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon aria-hidden="false" aria-label="Archive vocab list" fontIcon="archive"></mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-nav-list>
 <ng-template #noLists>
   <div class="no-lists">
     <p>You don't have any lists</p>

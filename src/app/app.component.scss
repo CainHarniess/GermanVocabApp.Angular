@@ -61,6 +61,10 @@ mat-icon {
   margin: 0 20px 0 0;
 }
 
+.tool-bar.header mat-icon {
+  margin: 0;
+}
+
 .nav-item-title-content {
   display: flex;
   justify-content: space-between;
