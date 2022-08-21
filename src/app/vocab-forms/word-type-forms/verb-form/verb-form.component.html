@@ -7,7 +7,7 @@
                            controlId="german_{{ index }}" label="German"></form-text-box-control>
     <form-text-box-control [form]="form" controlName="preposition"
                            controlId="preposition_{{ index }}" label="Preposition"></form-text-box-control>
-    <form-drop-down-control [form]="form" controlName="prepositionCase"
+    <form-drop-down-control *ngIf="hasPreposition$ | async" [form]="form" controlName="prepositionCase"
                             controlId="prepositionCase_{{ index }}" label="Preposition case"
                             [options]="dropDownOptions.caseOptions"></form-drop-down-control>
     <form-text-box-control [form]="form" controlName="english"
