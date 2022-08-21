@@ -20,6 +20,7 @@
         <app-vocab-list-item-form [parentForm]="vocabListForm"
                                   [form]="getListItemControl(i)" [index]="i"
                                   (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
+        <mat-divider *ngIf="i !== listItemsControl.controls.length - 1"></mat-divider>
       </div>
     </mat-card-content>
   </mat-card>

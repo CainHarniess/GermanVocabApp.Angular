@@ -1,12 +1,14 @@
 <div [formGroup]="parentForm">
   <div [formGroup]="form" class="list-item-form container">
     <div class="list-item-form action-panel">
-      <button mat-icon-button color="warn" type="button"
+      <button mat-icon-button color="accent" matTooltip="Duplicate" matTooltipPosition="left"
+              type="button">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" matTooltip="Archive" matTooltipPosition="left"
+              type="button"
               (click)="removeListItemControl(index)">
         <mat-icon>delete</mat-icon>
-      </button>
-      <button mat-icon-button color="primary" type="button">
-        <mat-icon>info</mat-icon>
       </button>
     </div>
     <form-drop-down-control [form]="form" controlName="wordType"
