@@ -3,6 +3,17 @@ app-vocab-list-item-form  {
   margin: auto;
 }
 
-section {
-    width: 80%;
+.list-items-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submission-controls {
+    display: flex;
+    margin: 16px;
+}
+
+.submission-controls > button {
+
+    margin: 0 8px;
 }

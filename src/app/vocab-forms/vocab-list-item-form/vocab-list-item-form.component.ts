@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 import { WordType } from '../../vocab/models/data/word-type.enum';
+import { VocabListForm } from '../models/vocab-list-form.interface';
+import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 import { DropDownOptions } from './drop-down-options.class';
 
 @Component({
@@ -18,16 +20,17 @@ export class VocabListItemFormComponent implements OnInit {
 
   public wordType$!: Observable<WordType>;
 
-  @Input() public parentForm!: FormGroup;
-  @Input() public form!: FormGroup;
+  @Input() public parentForm!: FormGroup<VocabListForm>;
+  @Input() public form!: FormGroup<VocabListItemForm>;
   @Input() public index!: number;
 
   @Output() public removeListItem = new EventEmitter<number>();
 
   public ngOnInit(): void {
-    this.wordType$ = this.form.get("wordType")!.valueChanges
+    this.wordType$ = this.form.controls.wordType.valueChanges
       .pipe(
         map((val: any) => val as WordType),
+        tap((val: WordType) => console.log(val)),
       );
   }
 

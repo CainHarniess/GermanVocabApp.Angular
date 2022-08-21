@@ -9,9 +9,9 @@
     <mat-hint align="end">{{vocabListForm.controls.description.value?.length}} / 1000</mat-hint>
   </mat-form-field>
   <mat-card>
-    <mat-card-title>
+    <mat-card-title class="list-items-header">
       <h4>List Items</h4>
-      <button mat-button type="button" 
+      <button mat-raised-button color="primary" type="button" 
               (click)="addListItemControl()">Add</button>
     </mat-card-title>
     <mat-card-content>
@@ -22,9 +22,9 @@
                                   (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
       </div>
     </mat-card-content>
-    <mat-card-actions>
-        <button mat-button type="submit" [disabled]="!vocabListForm.valid">Save</button>
-        <button mat-button type="reset">Cancel</button>
-    </mat-card-actions>
   </mat-card>
+  <div class="submission-controls">
+    <button mat-button color="primary" type="submit" [disabled]="!vocabListForm.valid">Save</button>
+    <button mat-stroked-button type="reset">Cancel</button>
+  </div>
 </form>

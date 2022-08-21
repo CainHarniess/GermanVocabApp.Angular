@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+
+import { SharedModule } from '../shared/shared.module';
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
 import { CheckBoxComponent } from './check-box/check-box.component';
 import { DropDownComponent } from './drop-down/drop-down.component';
@@ -15,8 +16,8 @@ import { TextBoxComponent } from './text-box/text-box.component';
     DropDownComponent,
   ],
   imports: [
-    CommonModule,
-    ReactiveFormsModule
+    SharedModule,
+    AngularMaterialModule,
   ],
   exports: [
     CheckBoxComponent,

@@ -1,19 +1,22 @@
-<div class="card-body list-item-form" [formGroup]="parentForm">
-  <div class="form-group list-item-form">
+<div [formGroup]="parentForm">
+  <div [formGroup]="form">
     <form-drop-down-control [form]="form" controlName="wordType"
                             controlId="wordType_{{ index }}" label="Word type"
                             [options]="dropDownOptions.wordTypeOptions"></form-drop-down-control>
-    <div [ngSwitch]="wordType$ | async">
-      <noun-form *ngSwitchCase="WordType.Noun" [form]="form" [index]="index"></noun-form>
-      <verb-form *ngSwitchCase="WordType.Verb" [form]="form" [index]="index"></verb-form>
-      <adjective-form *ngSwitchCase="WordType.Adjective" [form]="form" [index]="index"></adjective-form>
-      <adverb-form *ngSwitchCase="WordType.Adverb" [form]="form" [index]="index"></adverb-form>
+
+    <div *ngrxLet="wordType$ as wordType">
+      <div [ngSwitch]="wordType">
+        <noun-form *ngSwitchCase="WordType.Noun" [form]="form" [index]="index"></noun-form>
+        <verb-form *ngSwitchCase="WordType.Verb" [form]="form" [index]="index"></verb-form>
+        <adjective-form *ngSwitchCase="WordType.Adjective" [form]="form" [index]="index"></adjective-form>
+        <adverb-form *ngSwitchCase="WordType.Adverb" [form]="form" [index]="index"></adverb-form>
+      </div>
     </div>
-  </div>
-  <div class="list-item-form submission-panel">
-    <button class="danger outline vsmall" type="button"
-            (click)="removeListItemControl(index)">
-      Remove
-    </button>
+    <div class="list-item-form submission-panel">
+      <button mat-icon-button color="warn" type="button"
+              (click)="removeListItemControl(index)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

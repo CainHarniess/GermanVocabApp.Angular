@@ -8,5 +8,7 @@ import { SingleSelectComponent } from '../single-select/single-select.component'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropDownComponent extends SingleSelectComponent<any>{
-
+  public ngOnInit(): void {
+    console.log(this.options);
+  }
 }

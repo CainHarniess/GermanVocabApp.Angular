@@ -1,6 +1,6 @@
-<div class="form-control" [formGroup]="formGroup">
-  <label attr.for="{{ controlId }}">{{ label }}</label>
-  <select id="{{ controlId }}" formControlName="{{ controlName }}">
+<mat-form-field [formGroup]="formGroup">
+  <mat-label>{{ label }}</mat-label>
+  <select matNativeControl id="{{ controlId }}" formControlName="{{ controlName }}">
     <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
   </select>
-</div>
+</mat-form-field>

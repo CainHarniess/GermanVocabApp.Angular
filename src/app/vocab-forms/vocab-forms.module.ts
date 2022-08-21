@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { NounFormComponent } from './word-type-forms/noun-form/noun-form.component';
 import { VocabAppFormsModule } from '../forms/vocab-app-forms.module';
@@ -22,11 +20,9 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
     AdverbFormComponent,
   ],
   imports: [
-    CommonModule,
     SharedModule,
     AngularMaterialModule,
     VocabAppFormsModule,
-    ReactiveFormsModule,
   ],
   exports: [
     VocabListFormComponent,

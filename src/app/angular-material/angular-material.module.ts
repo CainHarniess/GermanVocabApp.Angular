@@ -11,6 +11,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -24,7 +27,10 @@ import { MatCardModule } from '@angular/material/card';
     MatDividerModule,
     MatListModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule,
   ],
   exports: [
     MatSidenavModule,
@@ -37,6 +43,9 @@ import { MatCardModule } from '@angular/material/card';
     MatListModule,
     MatTabsModule,
     MatCardModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule,
   ]
 })           
 export class AngularMaterialModule { }
