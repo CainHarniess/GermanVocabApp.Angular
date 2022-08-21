@@ -1,10 +1,12 @@
 <div [formGroup]="form">
-  <form-text-box-control [form]="form" controlName="german"
-                         controlId="german_{{ index }}" label="German"></form-text-box-control>
-  <form-text-box-control [form]="form" controlName="comparative"
-                         controlId="comparative_{{ index }}" label="Comparative"></form-text-box-control>
-  <form-text-box-control [form]="form" controlName="superlative"
-                         controlId="superlative_{{ index }}" label="Superlative"></form-text-box-control>
-  <form-text-box-control [form]="form" controlName="english"
-                         controlId="english_{{ index }}" label="English"></form-text-box-control>
+  <div class="form-row">
+    <form-text-box-control [form]="form" controlName="german"
+                           controlId="german_{{ index }}" label="German"></form-text-box-control>
+    <form-text-box-control [form]="form" controlName="comparative"
+                           controlId="comparative_{{ index }}" label="Comparative"></form-text-box-control>
+    <form-text-box-control [form]="form" controlName="superlative"
+                           controlId="superlative_{{ index }}" label="Superlative"></form-text-box-control>
+    <form-text-box-control [form]="form" controlName="english"
+                           controlId="english_{{ index }}" label="English"></form-text-box-control>
+  </div>
 </div>

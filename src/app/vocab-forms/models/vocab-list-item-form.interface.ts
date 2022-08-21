@@ -1,4 +1,4 @@
-import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { FormControl } from "@angular/forms";
 import { AuxiliaryVerb } from "../../vocab/models/data/auxiliary-verb.enum";
 import { Case, ReflexiveCase } from "../../vocab/models/data/case.enum";
 import { FixedPlurality } from "../../vocab/models/data/fixed-plurality.enum";
@@ -25,4 +25,5 @@ export interface VocabListItemForm {
   english: FormControl<string | null>;
   vocabListId?: FormControl<string | null>;
   fixedPlurality?: FormControl<FixedPlurality | null>
+  isIrregular?: FormControl<boolean | null>;
 }

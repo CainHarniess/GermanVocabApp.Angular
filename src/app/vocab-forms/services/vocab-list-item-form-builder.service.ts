@@ -34,6 +34,7 @@ export class VocabListItemFormBuilder extends ModelFormBuilder {
       superlative: this.formBuilder.control<string | null>(null),
       english: this.formBuilder.control<string | null>(null, Validators.required),
       fixedPlurality: this.formBuilder.control<FixedPlurality | null>(null),
+      isIrregular: this.formBuilder.control<boolean | null>(null),
     });
   }
 }
