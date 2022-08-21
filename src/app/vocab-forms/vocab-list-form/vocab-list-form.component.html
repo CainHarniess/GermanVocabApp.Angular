@@ -15,7 +15,7 @@
               (click)="addListItemControl()">Add</button>
     </mat-card-title>
     <mat-card-content>
-      <div class="card-body list-item-form" formArrayName="listItems"
+      <div formArrayName="listItems"
            *ngFor="let listItem of listItemsControl.controls; let i=index">
         <app-vocab-list-item-form [parentForm]="vocabListForm"
                                   [form]="getListItemControl(i)" [index]="i"

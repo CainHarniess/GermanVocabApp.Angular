@@ -1,8 +1,8 @@
-<ng-container [formGroup]="formGroup">
-  <mat-label attr.for="{{ controlId }}">
+<ng-container [formGroup]="formGroup" class="radio-control column container">
+  <mat-label attr.for="{{ controlId }}" class="radio-control label">
     {{ label }}
   </mat-label>
-  <mat-radio-group formControlName="{{ controlName }}">
+  <mat-radio-group formControlName="{{ controlName }}" class="radio-control small column options">
     <mat-radio-button *ngFor="let option of options" value="{{ option.value }}">
       {{ option.label }}
     </mat-radio-button>

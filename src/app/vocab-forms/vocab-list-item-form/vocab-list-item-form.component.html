@@ -1,5 +1,14 @@
 <div [formGroup]="parentForm">
-  <div [formGroup]="form">
+  <div [formGroup]="form" class="list-item-form container">
+    <div class="list-item-form action-panel">
+      <button mat-icon-button color="warn" type="button"
+              (click)="removeListItemControl(index)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" type="button">
+        <mat-icon>info</mat-icon>
+      </button>
+    </div>
     <form-drop-down-control [form]="form" controlName="wordType"
                             controlId="wordType_{{ index }}" label="Word type"
                             [options]="dropDownOptions.wordTypeOptions"></form-drop-down-control>
@@ -11,12 +20,6 @@
         <adjective-form *ngSwitchCase="WordType.Adjective" [form]="form" [index]="index"></adjective-form>
         <adverb-form *ngSwitchCase="WordType.Adverb" [form]="form" [index]="index"></adverb-form>
       </div>
-    </div>
-    <div class="list-item-form submission-panel">
-      <button mat-icon-button color="warn" type="button"
-              (click)="removeListItemControl(index)">
-        <mat-icon>delete</mat-icon>
-      </button>
     </div>
   </div>
 </div>

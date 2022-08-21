@@ -1,18 +1,37 @@
-.radio-button-label {
-  display: flex;
-  width: 50%;
+form-radio-button-control {
+  min-width: 250px;
 }
 
-.radio-button-options {
+
+.radio-control.column.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-control.label {
+  display: flex;
+}
+
+.radio-control.options {
+  display: flex;
+}
+
+.radio-control.column.options {
   display: flex;
   flex-direction: column;
+  margin: 0 0 0 48px;
 }
 
-.radio-button-option {
-  display: flex;
-  justify-content: space-between;
+.radio-control.small.options .mat-radio-container,
+.radio-control.small.options .mat-radio-outer-circle,
+.radio-control.small.options .mat-radio-inner-circle {
+  height: 12px;
+  width: 12px;
+}
 
-  label, input, select {
-    display: flex;
-  }
+.radio-control.small.options .mat-radio-button .mat-radio-ripple {
+  height: 20px;
+  width: 20px;
+  left: calc(50% - 12px);
+  top: calc(50% - 12px);
 }
