@@ -23,7 +23,6 @@ export interface VocabListItemForm {
   comparative?: FormControl<string | null>;
   superlative?: FormControl<string | null>;
   english: FormControl<string | null>;
-  vocabListId?: FormControl<string | null>;
   fixedPlurality?: FormControl<FixedPlurality | null>
   isIrregular?: FormControl<boolean | null>;
 }
