@@ -21,3 +21,28 @@ mat-divider {
 
     margin: 0 8px;
 }
+
+.placeholder.list-item-form.container {
+  display: flex;
+  align-items: center;
+}
+
+.placeholder.list-item-form.action-panel,
+.placeholder.list-item-form.content {
+  margin: 8px 0 0 0;
+}
+
+.placeholder.list-item-form.action-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 3.33rem;
+  margin-right: 16px;
+}
+
+.placeholder.list-item-form.content {
+    margin-left: 16px;
+}
+
+

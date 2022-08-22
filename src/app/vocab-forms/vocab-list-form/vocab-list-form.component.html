@@ -11,8 +11,6 @@
   <mat-card>
     <mat-card-title class="list-items-header">
       <h4>List Items</h4>
-      <button mat-raised-button color="primary" type="button" 
-              (click)="addListItemControl()">Add</button>
     </mat-card-title>
     <mat-card-content>
       <div formArrayName="listItems"
@@ -20,7 +18,18 @@
         <app-vocab-list-item-form [parentForm]="vocabListForm"
                                   [form]="getListItemControl(i)" [index]="i"
                                   (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
-        <mat-divider *ngIf="i !== listItemsControl.controls.length - 1"></mat-divider>
+      </div>
+      <mat-divider *ngIf="listItemsControl.controls.length > 0"></mat-divider>
+      <div class="placeholder list-item-form container">
+        <div class="placeholder list-item-form action-panel">
+          <button mat-icon-button color="accent" matTooltip="Duplicate" matTooltipPosition="left"
+                  type="button" (click)="addListItemControl()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="placeholder list-item-form content">
+          Why not add something, sugar?
+        </div>
       </div>
     </mat-card-content>
   </mat-card>
