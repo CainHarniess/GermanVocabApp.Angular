@@ -1,8 +1,10 @@
+@import '@angular/material/prebuilt-themes/purple-green.css';
 @import '_variables';
 @import 'controls/buttons';
 @import 'controls/cards';
 @import 'controls/tiles';
 @import 'forms/layout';
+@import 'forms/_controls.scss';
 @import 'variables/font-sizes';
 
 html {
@@ -28,6 +30,13 @@ html, body {
 body {
   margin: 0;
   width: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: black;
+}
+
+main {
+    background-color: black;
 }
 
 article, section {
@@ -45,22 +54,6 @@ article, section {
   flex-direction: column;
 }
 
-h1, h2, h3 {
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-  font-size: 36px;
-}
-
-h2 {
-  font-size: 24px;
-}
-
-h3 {
-  font-size: 20px;
-}
 
 .bordered {
   border-style: solid;
@@ -80,3 +73,6 @@ h3 {
   align-items: center;
 }
 
+.hidden {
+    display: none;
+}

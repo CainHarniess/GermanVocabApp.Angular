@@ -1,4 +1,5 @@
-<div class="form-control" [formGroup]="formGroup">
-  <label attr.for="{{ controlId }}">{{ label }}</label>
-  <input id="{{ controlId }}" name="{{ controlId }}" formControlName="{{ controlName }}" type="checkbox" />
-</div>
+<ng-container [formGroup]="formGroup" class="checkbox-control container">
+  <mat-checkbox id="{{ controlId }}" name="{{ controlId }}" formControlName="{{ controlName }}">
+    {{ label }}
+  </mat-checkbox>
+</ng-container>

@@ -1,8 +1,48 @@
 app-vocab-list-item-form  {
-  width: 80%;
-  margin: auto;
+  width: 100%;
+  margin: 8px 0;
 }
 
-section {
-    width: 80%;
+mat-divider {
+    margin: 8px 0;
 }
+
+.list-items-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submission-controls {
+    display: flex;
+    margin: 16px;
+}
+
+.submission-controls > button {
+
+    margin: 0 8px;
+}
+
+.placeholder.list-item-form.container {
+  display: flex;
+  align-items: center;
+}
+
+.placeholder.list-item-form.action-panel,
+.placeholder.list-item-form.content {
+  margin: 8px 0 0 0;
+}
+
+.placeholder.list-item-form.action-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 3.33rem;
+  margin-right: 16px;
+}
+
+.placeholder.list-item-form.content {
+    margin-left: 16px;
+}
+
+

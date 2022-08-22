@@ -1,10 +1,10 @@
-<div class="form-control" [formGroup]="formGroup">
-  <div class="radio-button-label">{{ label }}</div>
-  <div class="radio-button-options">
-    <div *ngFor="let option of options" class="radio-button-option">
-      <input id="{{ controlId }}_{{ option.value }}" formControlName="{{ controlName }}"
-             value="{{ option.value }}" type="radio" />
-      <label attr.for="{{ controlId }}_{{ option.value }}">{{ option.label }}</label>
-    </div>
-  </div>
-</div>
+<ng-container [formGroup]="formGroup" class="radio-control column container">
+  <mat-label attr.for="{{ controlId }}" class="radio-control label">
+    {{ label }}
+  </mat-label>
+  <mat-radio-group formControlName="{{ controlName }}" class="radio-control small column options">
+    <mat-radio-button *ngFor="let option of options" value="{{ option.value }}">
+      {{ option.label }}
+    </mat-radio-button>
+  </mat-radio-group>
+</ng-container>

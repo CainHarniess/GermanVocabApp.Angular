@@ -1,16 +1,14 @@
-<section>
-  <div class="card">
-    <header class="primary centered">
-      <h2>Your vocab lists</h2>
-      <button class="secondary vsmall" type="button"
-              [routerLink]="['/vocab', 'vocab-list-form']">
-      Add
-      </button>
-    </header>
-    <div class="card-body centered">
-      <div class="vocab-list">
+<div class="vocab-tab-container">
+  <mat-tab-group mat-align-tabs="start" selectedIndex="1">
+    <mat-tab label="Vocab Lists">
+      <div class="vocab-tab-content">
         <vocab-lists-presenter [vocabLists]="(vocabLists$ | async)!"></vocab-lists-presenter>
       </div>
-    </div>
-  </div>
-</section>
+    </mat-tab>
+    <mat-tab label="New Vocab List">
+      <div class="vocab-tab-content">
+        <app-vocab-list-form></app-vocab-list-form>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

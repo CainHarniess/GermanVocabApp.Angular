@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { NounFormComponent } from './word-type-forms/noun-form/noun-form.component';
 import { VocabAppFormsModule } from '../forms/vocab-app-forms.module';
@@ -10,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { VerbFormComponent } from './word-type-forms/verb-form/verb-form.component';
 import { AdjectiveFormComponent } from './word-type-forms/adjective-form/adjective-form.component';
 import { AdverbFormComponent } from './word-type-forms/adverb-form/adverb-form.component';
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -21,10 +20,12 @@ import { AdverbFormComponent } from './word-type-forms/adverb-form/adverb-form.c
     AdverbFormComponent,
   ],
   imports: [
-    CommonModule,
     SharedModule,
+    AngularMaterialModule,
     VocabAppFormsModule,
-    ReactiveFormsModule,
+  ],
+  exports: [
+    VocabListFormComponent,
   ]
 })
 export class VocabFormsModule { }

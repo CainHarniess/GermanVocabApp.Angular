@@ -1,21 +1,25 @@
-<div [formGroup]="form">
-  <form-drop-down-control [form]="form" controlName="gender"
-                          controlId="german_{{ index }}" label="Gender"
-                          [options]="dropDownOptions.genderOptions"></form-drop-down-control>
-  <form-text-box-control [form]="form" controlName="german"
-                         controlId="german_{{ index }}" label="German"></form-text-box-control>
-  <form-text-box-control [form]="form" controlName="preposition"
-                         controlId="preposition_{{ index }}" label="Preposition"></form-text-box-control>
-  <form-drop-down-control [form]="form" controlName="prepositionCase"
-                          controlId="prepositionCase_{{ index }}" label="Preposition case"
-                          [options]="dropDownOptions.caseOptions"></form-drop-down-control>
-  <form-text-box-control [form]="form" controlName="english"
-                         controlId="english_{{ index }}" label="English"></form-text-box-control>
-  <form-check-box-control [form]="form" controlName="isWeakMasculineNoun"
-                          controlId="isWeakMasculineNoun_{{ index }}" label="Weak masculine noun"></form-check-box-control>
-  <form-radio-button-control [form]="form" controlName="fixedPlurality"
-                             controlId="fixedPlurality_{{ index }}"
-                             label="Fixed plurality" [options]="dropDownOptions.fixedPluralityOptions"></form-radio-button-control>
-  <form-text-box-control [form]="form" controlName="plural"
-                         controlId="plural_{{ index }}" label="Plural"></form-text-box-control>
+<div [formGroup]="form" class="vocab-list-item column form-container">
+  <div class="form-row">
+    <form-drop-down-control [form]="form" controlName="gender"
+                            controlId="german_{{ index }}" label="Gender"
+                            [options]="dropDownOptions.genderOptions"></form-drop-down-control>
+    <form-text-box-control [form]="form" controlName="german"
+                           controlId="german_{{ index }}" label="German"></form-text-box-control>
+    <form-text-box-control [form]="form" controlName="preposition"
+                           controlId="preposition_{{ index }}" label="Preposition"></form-text-box-control>
+    <form-drop-down-control *ngIf="hasPreposition$ | async" [form]="form" controlName="prepositionCase"
+                            controlId="prepositionCase_{{ index }}" label="Preposition case"
+                            [options]="dropDownOptions.caseOptions"></form-drop-down-control>
+    <form-text-box-control [form]="form" controlName="english"
+                           controlId="english_{{ index }}" label="English"></form-text-box-control>
+    <form-text-box-control *ngIf="!(hasFixedPlural$ | async)" [form]="form" controlName="plural"
+                           controlId="plural_{{ index }}" label="Plural"></form-text-box-control>
+  </div>
+  </div>
+  <div class="form-row">
+    <form-check-box-control [form]="form" controlName="isWeakMasculineNoun"
+                            controlId="isWeakMasculineNoun_{{ index }}" label="Weak masculine noun"></form-check-box-control>
+    <form-radio-button-control [form]="form" controlName="fixedPlurality"
+                               controlId="fixedPlurality_{{ index }}"
+                               label="Fixed plurality" [options]="dropDownOptions.fixedPluralityOptions"></form-radio-button-control>
 </div>

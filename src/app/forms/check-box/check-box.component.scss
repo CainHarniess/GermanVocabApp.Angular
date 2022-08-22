@@ -1,6 +1,5 @@
-input {
+:host {
     display: flex;
-    width: min-content;
-    margin-left: 3px;
-    justify-content: flex-start;
+    align-items: center;
+    min-width: 180px;
 }

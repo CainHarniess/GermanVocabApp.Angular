@@ -15,7 +15,7 @@ export class VocabListFormBuilder extends ModelFormBuilder {
   public build(): FormGroup<VocabListForm> {
     return this.formBuilder.group<VocabListForm>({
       name: this.formBuilder.control<string | null>(null, Validators.required),
-      description: this.formBuilder.control<string | null>(null, Validators.required),
+      description: this.formBuilder.control<string | null>(null),
       listItems: this.formBuilder.array<FormGroup<VocabListItemForm>>([]),
     });
   }

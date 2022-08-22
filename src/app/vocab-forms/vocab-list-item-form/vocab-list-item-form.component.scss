@@ -1,6 +1,5 @@
-header {
-  justify-content: space-between;
-  align-items: center;
+.list-item-form.container {
+  display: flex;
 }
 
 .form-group.list-item-form {
@@ -14,16 +13,19 @@ header {
   padding: 5px;
 }
 
-.list-item-form.submission-panel {
+.list-item-form.action-panel {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: center;
+  margin: 8px 16px 0 0;
 }
 
-.card-body.list-item-form {
+vocab-list-item.column.form-container {
   display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: center;
+  flex-direction: column;
+}
+
+.form-row {
+    display: flex;
 }

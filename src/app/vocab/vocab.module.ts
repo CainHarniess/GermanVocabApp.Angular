@@ -7,7 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 import { VocabFormsModule } from '../vocab-forms/vocab-forms.module';
 import { VocabRoutingModule } from './vocab-routing.module';
 
-import { VocabComponent } from './vocab.component';
 import { VocabListCardComponent } from './vocab-list-card/vocab-list-card.component';
 import { VocabListComponent } from './vocab-list/vocab-list.component';
 import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
@@ -15,13 +14,13 @@ import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-list
 
 import { DefiniteArticlePipe } from './pipes/definite-article.pipe';
 import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
 
 @NgModule({
   declarations: [
     VocabListsComponent,
     VocabListCardComponent,
-    VocabComponent,
     VocabListsPresenterComponent,
     VocabListComponent,
     DefiniteArticlePipe,
@@ -34,8 +33,9 @@ import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
     CommonModule,
     SharedModule,
     ReactiveComponentModule,
-    VocabRoutingModule,
+    AngularMaterialModule,
     VocabFormsModule,
+    VocabRoutingModule,
   ],
   exports: [
     VocabListsComponent
