@@ -8,7 +8,7 @@ import { VocabListForm } from '../models/vocab-list-form.interface';
 import { VocabListFormBuilder } from '../services/vocab-list-form-builder.service';
 import { VocabListItemFormBuilder } from '../services/vocab-list-item-form-builder.service';
 
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vocab-list-form',
@@ -18,7 +18,31 @@ import { Subscription } from 'rxjs';
   providers: [VocabListFormBuilder, VocabListItemFormBuilder]
 })
 export class VocabListFormComponent implements OnInit {
+  private readonly listItemControlCount = new BehaviorSubject<number>(0);
+  private readonly wordingDict: { [key: number]: string } = {
+    0: "Why not add something, sugar?",
+    1: "Ooh yeah. You like that?",
+    2: "Give me some more, baby.",
+    3: "I see someone's thirsty...",
+    4: "Thirsty for vocab",
+    5: "Okay now, let's maybe calm down a bit.",
+    6: "You've had enough.",
+    7: "You're scaring me.",
+    8: "I can't watch you do this to yourself.",
+    9: "I'm leaving.",
+    10: "You're on you're own now.",
+    11: "",
+  }
+
   private addVocabList?: Subscription;
+
+  public readonly listItemControlCount$: Observable<number> = this.listItemControlCount.asObservable();
+  public readonly placeholderWording$: Observable<string> = this.listItemControlCount$
+    .pipe(
+      filter((val: number) => val <= 11),
+      map((count: number) => this.wordingDict[count]),
+    );
+
 
   constructor(private vocabService: VocabListService, private router: Router,
     private listFormBuilder: VocabListFormBuilder,
@@ -34,6 +58,7 @@ export class VocabListFormComponent implements OnInit {
 
   public addListItemControl(): void {
     this.listItemsControl.push(this.generateListItemControl());
+    this.listItemControlCount.next(this.listItemsControl.length);
   }
 
   private generateListItemControl(): FormGroup {
@@ -53,9 +78,10 @@ export class VocabListFormComponent implements OnInit {
       console.error("Index exceeds the size of the list items form control array.")
       return;
     }
-    console.info(`Removing form control at index ${ '' + index }.`);
+    console.info(`Removing form control at index ${'' + index}.`);
 
     this.listItemsControl.controls.splice(index, 1);
+    this.listItemControlCount.next(this.listItemsControl.length);
   }
 
   public onFormSubmit(): void {
