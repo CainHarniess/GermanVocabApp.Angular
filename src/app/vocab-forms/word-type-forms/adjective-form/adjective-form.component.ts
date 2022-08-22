@@ -8,5 +8,5 @@ import { WordTypeForm } from '../word-type-form';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdjectiveFormComponent extends WordTypeForm {
-
+  // TODO: Configure comparative and superlative controls to be required if isIrregular is checked
 }

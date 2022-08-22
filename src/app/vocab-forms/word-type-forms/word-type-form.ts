@@ -9,6 +9,7 @@ import { DropDownOptions } from './drop-down-options.class';
 export abstract class WordTypeForm implements OnInit {
   public readonly dropDownOptions: typeof DropDownOptions = DropDownOptions;
 
+  public isIrregular$!: Observable<boolean>;
   public hasPreposition$!: Observable<boolean>;
 
   @Input() public form!: FormGroup<VocabListItemForm>;
@@ -17,6 +18,11 @@ export abstract class WordTypeForm implements OnInit {
   public get formRoot(): FormGroup { return this.form.root as FormGroup; }
 
   public ngOnInit(): void {
+    this.isIrregular$ = this.form.controls.isIrregular!.valueChanges
+      .pipe(
+        map(val => val ?? false),
+      );
+
     this.hasPreposition$ = this.form.controls.preposition!.valueChanges
       .pipe(
         debounceTime(100),

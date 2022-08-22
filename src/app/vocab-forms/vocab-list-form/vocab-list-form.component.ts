@@ -43,7 +43,6 @@ export class VocabListFormComponent implements OnInit {
       map((count: number) => this.wordingDict[count]),
     );
 
-
   constructor(private vocabService: VocabListService, private router: Router,
     private listFormBuilder: VocabListFormBuilder,
     private listItemFormBuilder: VocabListItemFormBuilder) { }

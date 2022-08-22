@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { debounceTime, filter, map, Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { WordTypeForm } from '../word-type-form';
 
 @Component({
@@ -8,16 +8,9 @@ import { WordTypeForm } from '../word-type-form';
   styleUrls: ['../../vocab-list-item-form/vocab-list-item-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerbFormComponent extends WordTypeForm implements OnInit {
-  public isIrregular$!: Observable<boolean>;
-
-  public override ngOnInit(): void {
-    super.ngOnInit();
-    this.isIrregular$ = this.form.controls.isIrregular!.valueChanges
-      .pipe(
-        map(val => val ?? false),
-    );
-  }
+export class VerbFormComponent extends WordTypeForm {
+  // TODO: Configure third-person and perfect controls to be required if isIrregular is checked
+  // TODO: Configure preposition case to be required if hasPreposition is true
 }
 
 
