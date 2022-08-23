@@ -1,10 +1,14 @@
 import { FormControl, Validators } from "@angular/forms";
 import { FixedPlurality } from "../../vocab/models/data/fixed-plurality.enum";
 import { Gender } from "../../vocab/models/data/gender.enum";
+import { WordType } from "../../vocab/models/data/word-type.enum";
 
 import { WordTypeFormManager } from "./word-type-form-manager";
 
 export class NounFormManager extends WordTypeFormManager {
+  public get wordType(): WordType { return WordType.Noun;  }
+
+
     public override configureForm(): void {
       const genderControl: FormControl<Gender | null> = this.controls.gender;
       genderControl.addValidators([Validators.required]);

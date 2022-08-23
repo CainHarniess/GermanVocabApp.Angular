@@ -1,10 +1,13 @@
 import { FormControl, Validators } from "@angular/forms";
 import { AuxiliaryVerb } from "../../vocab/models/data/auxiliary-verb.enum";
 import { ReflexiveCase } from "../../vocab/models/data/case.enum";
+import { WordType } from "../../vocab/models/data/word-type.enum";
 import { WordTypeFormManager } from "./word-type-form-manager";
 
 
 export class VerbFormManager extends WordTypeFormManager {
+  public get wordType(): WordType { return WordType.Verb; }
+
   public override configureForm(): void {
     const auxiliaryVerbControl: FormControl<AuxiliaryVerb | null> = this.controls.auxiliaryVerb!;
     auxiliaryVerbControl.addValidators([Validators.required]);
