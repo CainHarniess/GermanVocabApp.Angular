@@ -7,13 +7,13 @@ import { Gender } from '../models/data/gender.enum';
 })
 export class IndefiniteArticlePipe implements PipeTransform {
 
-  transform(gender: Gender, capitalise: boolean = true): string {
+  transform(gender: Gender | string, capitalise: boolean = true): string {
     const article: string = this.getIndefiniteArticle(gender);
 
     return (capitalise) ? article : article.toLowerCase();
   }
 
-  private getIndefiniteArticle(gender: Gender): string {
+  private getIndefiniteArticle(gender: Gender | string): string {
     if (gender === Gender.Feminine) {
       return "Eine";
     } else if (gender === Gender.Masculine || gender === Gender.Neuter) {
