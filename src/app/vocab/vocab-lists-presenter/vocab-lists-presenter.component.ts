@@ -8,7 +8,5 @@ import { VocabList } from '../models/vocab-list.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsPresenterComponent {
-
   @Input() public vocabLists!: VocabList[];
-
 }

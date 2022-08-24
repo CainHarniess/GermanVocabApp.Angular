@@ -15,7 +15,6 @@ import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-list
 import { DefiniteArticlePipe } from './pipes/definite-article.pipe';
 import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
-import { TestPipe } from './pipes/test.pipe';
 
 
 @NgModule({
