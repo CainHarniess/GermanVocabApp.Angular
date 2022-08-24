@@ -38,23 +38,25 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    // Can we test this?
     this.wordType$ = this.form.controls.wordType.valueChanges
       .pipe(
         map((val: any) => val as WordType),
     );
 
     this.validationChanges$ = this.wordType$;
+    // Check subsribe is called?
     this.validationChanges = this.validationChanges$.subscribe(wordType => this.updateNounValidation(wordType));
   }
 
   private updateNounValidation(wordType: WordType): void {
-    console.log("Update nound changes triggered.");
-    console.log(wordType);
-
     if (this.currentFormManager) {
+      //Check this is called?
       this.currentFormManager.removeConfiguration();
     }
+    // and this?
     this.currentFormManager = this.formManagerFactory.create(wordType, this.form);
+    // and this?
     this.currentFormManager.configureForm();
   }
 
@@ -63,10 +65,12 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
   }
 
   public removeListItemControl(index: number): void {
+    //Check emit is called
     this.removeListItem.emit(index);
   }
 
   public ngOnDestroy(): void {
+    // Check unsubscribe is called.
     this.validationChanges.unsubscribe();
   }
 }

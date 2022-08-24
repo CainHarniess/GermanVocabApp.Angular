@@ -52,46 +52,69 @@ export class VocabListFormComponent implements OnInit {
   public vocabListForm!: FormGroup<VocabListForm>;
 
   ngOnInit(): void {
+    // Check function is called
+    // Check vocabListForm property has expected value
     this.vocabListForm = this.listFormBuilder.build();
   }
 
   public addListItemControl(): void {
+    // Check expected control is in the list?? nah, that requires testing FormArray
     this.listItemsControl.push(this.generateListItemControl());
+    // Test that the count has increase (via the observable rather than the private field).
     this.listItemControlCount.next(this.listItemsControl.length);
   }
 
   private generateListItemControl(): FormGroup {
+    //Check that the the expected function is called.
     return this.listItemFormBuilder.build();
   }
 
   public getListItemControl(index: number): FormGroup {
-    this.listItemsControl.controls
+    // Mayeb can't test this one.
     return <FormGroup>this.listItemsControl.get(`${index}`);
   }
 
   public removeListItemControl(index: number): void {
     if (index < 0) {
+    // Check an exception is thrown.
+      //Update to throw exception.
       console.error("Index may not be negative.")
       return;
     } else if (index >= this.listItemsControl.length) {
+    // Check an exception is thrown.
+      //Update to throw exception.
       console.error("Index exceeds the size of the list items form control array.")
       return;
     }
-    console.info(`Removing form control at index ${'' + index}.`);
-
+    // Check control count has decreased.
+    // Check expected control has been removed.
     this.listItemsControl.controls.splice(index, 1);
     this.listItemControlCount.next(this.listItemsControl.length);
   }
 
   public onFormSubmit(): void {
     const vocabList: VocabList = this.vocabListForm.value as VocabList;
+    // Check vocab list service method is called with correct ID.
+
+
     this.addVocabList = this.vocabService.add(vocabList)
       .subscribe(newListId => {
+        // Check router navigation is done correctly?
         this.router.navigate(["vocab", "vocab-lists"]);
       });
+
+    // Can we not unsubscribe using the below??
+    //const addVocabListSubsc = this.vocabService.add(vocabList)
+    //  .subscribe(newListId => {
+    //  // Check router navigation is done correctly?
+    //    addVocabListSubsc.unsubscribe();
+    //  this.router.navigate(["vocab", "vocab-lists"]);
+    //});
   }
 
   public ngOnDestroy(): void {
+    // Check that the subscription is removed
+    // Ensure the mock builder has done it's shit.
     this.addVocabList?.unsubscribe();
   }
 }
