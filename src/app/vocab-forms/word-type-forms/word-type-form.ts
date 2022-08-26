@@ -1,7 +1,7 @@
 import { Directive, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { debounceTime, filter, map, mergeMap, Observable, partition, Subject, switchMap, tap } from 'rxjs';
+import { debounceTime, filter, map, Observable, Subject, tap } from 'rxjs';
 import { ControlAvailabilityService } from '../../shared/services/control-availability.service';
 
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
@@ -34,9 +34,8 @@ export abstract class WordTypeForm implements OnInit {
   public ngOnInit(): void {
     this.isIrregular$ = this.form.controls.isIrregular!.valueChanges
       .pipe(
-        map(val => val ?? false),
-        tap(val => console.log(this.form)),
-    );
+        map(val => val ?? false)
+      );
 
     this.hasPreposition$ = this.form.controls.preposition!.valueChanges
       .pipe(
