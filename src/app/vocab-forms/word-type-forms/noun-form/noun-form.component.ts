@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { filter, map, Observable } from 'rxjs';
+import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
+import { Case } from '../../../vocab/models/data/case.enum';
 import { FixedPlurality } from '../../../vocab/models/data/fixed-plurality.enum';
 
 import { WordTypeForm } from '../word-type-form';
@@ -13,7 +16,9 @@ import { WordTypeForm } from '../word-type-form';
 export class NounFormComponent extends WordTypeForm implements OnInit {
   public hasFixedPlural$!: Observable<boolean>;
 
-  // TODO: Configure preposition case to be required if hasPreposition is 
+  constructor(private controlAvailabilityService: ControlAvailabilityService) {
+    super();
+  }
 
   public override ngOnInit(): void {
     super.ngOnInit();
@@ -21,7 +26,12 @@ export class NounFormComponent extends WordTypeForm implements OnInit {
       .pipe(
         filter((val: FixedPlurality | null)  => val !== null),
         map(val => val !== FixedPlurality.None),
-      );
+    );
+
+    this.hasPreposition$.subscribe((result: boolean) => {
+      const prepositionCaseControl: FormControl<Case | null> = this.form.controls.prepositionCase!
+      this.controlAvailabilityService.configure(prepositionCaseControl, result);
+    });
   }
 }
 
