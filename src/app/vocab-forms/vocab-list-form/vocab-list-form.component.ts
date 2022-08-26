@@ -95,7 +95,8 @@ export class VocabListFormComponent implements OnInit {
   public onFormSubmit(): void {
     const vocabList: VocabList = this.vocabListForm.value as VocabList;
     // Check vocab list service method is called with correct ID.
-
+    //console.log(vocabList);
+    //return;
 
     this.addVocabList = this.vocabService.add(vocabList)
       .subscribe(newListId => {

@@ -16,11 +16,10 @@
           "changeDetection": "OnPush"
         },
         "@schematics/angular:interface": {
-          "type": "interface"
+          
         },
         "@schematics/angular:class": {
-          "skipTests": true,
-          "type": "class"
+          "skipTests": true
         },
         "@schematics/angular:service": {
           "skipTests": true

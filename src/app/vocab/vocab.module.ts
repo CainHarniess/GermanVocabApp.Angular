@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { ReactiveComponentModule } from '@ngrx/component';
 
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { SharedModule } from '../shared/shared.module';
 import { VocabFormsModule } from '../vocab-forms/vocab-forms.module';
 import { VocabRoutingModule } from './vocab-routing.module';
@@ -14,7 +15,6 @@ import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-list
 
 import { DefiniteArticlePipe } from './pipes/definite-article.pipe';
 import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
-import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
 
 @NgModule({
@@ -25,7 +25,6 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
     VocabListComponent,
     DefiniteArticlePipe,
     IndefiniteArticlePipe,
-    TestPipe,
   ],
   providers: [
 
