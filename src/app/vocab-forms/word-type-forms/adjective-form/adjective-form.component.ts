@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { WordTypeForm } from '../word-type-form';
+import { ModifierWordTypeForm } from '../modifier-word-type-form';
 
 @Component({
   selector: 'adjective-form',
@@ -7,6 +7,6 @@ import { WordTypeForm } from '../word-type-form';
   styleUrls: ['../../vocab-list-item-form/vocab-list-item-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdjectiveFormComponent extends WordTypeForm {
-  // TODO: Configure comparative and superlative controls to be required if isIrregular is checked
+export class AdjectiveFormComponent extends ModifierWordTypeForm {
+
 }

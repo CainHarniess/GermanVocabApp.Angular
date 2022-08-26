@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { Case } from '../../../vocab/models/data/case.enum';
 
@@ -12,11 +12,8 @@ import { WordTypeForm } from '../word-type-form';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerbFormComponent extends WordTypeForm {
-  private irregularControls!: FormControl<string | null>[];
-  // TODO: Configure third-person and perfect controls to be required if isIrregular is checked
-
-  constructor(private controlAvailabilityService: ControlAvailabilityService) {
-    super();
+  constructor(controlAvailabilityService: ControlAvailabilityService) {
+    super(controlAvailabilityService);
   }
 
   public override ngOnInit(): void {

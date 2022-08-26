@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { filter, map, Observable } from 'rxjs';
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { Case } from '../../../vocab/models/data/case.enum';
@@ -16,8 +16,8 @@ import { WordTypeForm } from '../word-type-form';
 export class NounFormComponent extends WordTypeForm implements OnInit {
   public hasFixedPlural$!: Observable<boolean>;
 
-  constructor(private controlAvailabilityService: ControlAvailabilityService) {
-    super();
+  constructor(controlAvailabilityService: ControlAvailabilityService) {
+    super(controlAvailabilityService);
   }
 
   public override ngOnInit(): void {
