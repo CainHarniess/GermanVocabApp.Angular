@@ -1,0 +1,21 @@
+<div class="vocab-list-item-outer-container">
+  <div class="word-type-container">
+    <p>{{ item.wordType }}</p>
+  </div>
+  <div class="vocab-list-item-container">
+    <div class="german">
+      <div class="modifier-container">
+        <div>
+          <h1>{{ item.german }}</h1>
+        </div>
+        <div *ngIf="item.comparative || item.superlative" class="irregular-parts">
+          <p>{{ item.comparative }}, {{ item.superlative }}</p>
+        </div>
+      </div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="english">
+      <h1>{{ item.english }}</h1>
+    </div>
+  </div>
+</div>

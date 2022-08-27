@@ -1,0 +1,16 @@
+<ng-container [ngSwitch]="item.wordType">
+  <modifier-vocab-list-item *ngSwitchCase="WordType.Adjective" [item]="item"></modifier-vocab-list-item>
+  <modifier-vocab-list-item *ngSwitchCase="WordType.Adverb" [item]="item"></modifier-vocab-list-item>
+  <ng-container *ngSwitchDefault>
+    <div class="tile vocab-list-item">
+      <div class="german">
+          <!--{{ item.gender | definiteArticle }}-->
+          {{ item.german }}
+      </div>
+      <mat-divider [vertical]="true"></mat-divider>
+      <div class="english">
+        {{ item.english }}
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

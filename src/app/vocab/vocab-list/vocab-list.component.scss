@@ -1,32 +1,9 @@
-div.vocab-list-view {
-  display: flex;
+.vocab-list-container {
+    width: 900px;
 }
 
-div.vocab-list-view > aside {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-}
-
-div.vocab-list-view > article {
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 70%;
-}
-
-.tile.vocab-list-item {
-  margin: 5px;
-  align-items: center;
-
-  .german, .english {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 0 0 10px;
-    font-size: var(--font-m);
-  }
-
-  .german {
-    width: 60%;
+@media screen and (max-width: 992px) {
+  .vocab-list-container {
+    width: 100%;
   }
 }

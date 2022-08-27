@@ -1,0 +1,99 @@
+.tile.vocab-list-item {
+  margin: 5px;
+  align-items: center;
+
+  .german, .english {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 0 0 10px;
+    font-size: var(--font-m);
+  }
+
+  .german {
+    width: 60%;
+  }
+}
+
+
+
+.vocab-list-item {
+  display: flex;
+}
+
+.vocab-list-item-outer-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100px;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 8px;
+  border-style: solid;
+  border-width: .025rem;
+  border-color: grey;
+}
+
+.word-type-container {
+    margin: 8px 0 0 8px;
+}
+
+.word-type p {
+  font-style: italic;
+  margin: 0;
+}
+
+.vocab-list-item-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.german, english {
+  display: flex;
+}
+
+.german {
+    flex-direction: column;
+    flex: 1 0 70%;
+    padding: 8px;
+}
+
+.english {
+  flex: 0 0 30%;
+}
+
+.german > .modifier-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.modifier-container h1{
+  margin: 0;
+}
+
+.modifier-container > .irregular-parts {
+    margin: 0 0 0 16px;
+}
+
+.irregular-parts p {
+    font-style: italic;
+}
+
+.tile.vocab-list-item {
+  margin: 8px;
+  align-items: center;
+
+  .german, .english {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 0 0 10px;
+    font-size: var(--font-m);
+  }
+
+  .german {
+    width: 60%;
+  }
+}
