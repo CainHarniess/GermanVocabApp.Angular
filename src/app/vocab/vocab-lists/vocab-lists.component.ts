@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
 import { VocabList } from '.././models/vocab-list.interface';
 
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { ResolvedData } from '../models/data/resolved-data.enum';
 
 @Component({
@@ -16,8 +16,22 @@ export class VocabListsComponent {
 
   }
 
+  public readonly showJson$ = new BehaviorSubject<boolean>(false);
+  public readonly jsonButtonLabel$ = this.showJson$
+    .pipe(
+      map((val: boolean) => val ? "Hide JSON" : "Show JSON"),
+  );
+
+  public readonly json$ = new BehaviorSubject<VocabList[]>([]);
+
   public readonly vocabLists$: Observable<VocabList[]> = this.activatedRoute.data
     .pipe(
       map((data: Data) => data[ResolvedData.ResolvedLists]),
+      tap((data: VocabList[]) => this.json$.next(data)),
     );
+
+
+  public exportToJson(): void {
+    this.showJson$.next(!this.showJson$.value);
+  }
 }

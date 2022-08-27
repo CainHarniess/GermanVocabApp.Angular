@@ -7,10 +7,13 @@ main > .vocab-lists-container {
   width: 900px;
 }
 
-.vocab-lists-header > a {
-    display: flex;
-    align-items: center;
-    margin: 0 0 16px;
+.vocab-lists-controls {
+  display: flex;
+  align-items: center;
+}
+
+.vocab-lists-controls > a, .vocab-lists-controls > button {
+  margin: 0 8px 16px;
 }
 
 .vocab-lists-header {
@@ -25,6 +28,14 @@ vocab-lists-presenter {
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
+}
+
+mat-divider {
+  margin: 16px 0;
+}
+
+pre {
+    flex-flow: row wrap
 }
 
 @media screen and (max-width: 992px) {
