@@ -1,0 +1,37 @@
+<div class="vocab-list-item-outer-container">
+  <div class="word-type-container">
+    <p>{{ item.wordType }}</p>
+  </div>
+  <div class="vocab-list-item-container">
+    <div class="german">
+      <div class="noun-container">
+        <h1>{{ item.gender! | definiteArticle }} {{ item.german }}</h1>
+        <ng-container *ngIf="item.preposition">
+          <div class="small-spacer"></div>
+          <h3>
+            ({{ item.preposition! }} + {{ item.prepositionCase! | germanShortCase: false }})
+          </h3>
+        </ng-container>
+      </div>
+      <div class="additional-info-container">
+        <p *ngIf="item.fixedPlurality && item.fixedPlurality !== FixedPlurality.None; else plural">
+          {{ item.fixedPlurality! | fixedPluralDisplay }}
+        </p>
+        <ng-template #plural>
+          <p *ngIf="item.plural">Die {{ item.plural }}</p>
+        </ng-template>
+
+        <ng-container *ngIf="item.isWeakMasculineNoun === true">
+          <div class="spacer"></div>
+          <p>
+            Weak Masculine Noun
+          </p>
+        </ng-container>
+      </div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="english">
+      <h1>{{ item.english }}</h1>
+    </div>
+  </div>
+</div>

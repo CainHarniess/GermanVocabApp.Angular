@@ -4,12 +4,11 @@
   </div>
   <div class="vocab-list-item-container">
     <div class="german">
-
       <div class="modifier-container">
         <div>
           <h1>{{ item.german }}</h1>
         </div>
-        <div *ngIf="item.comparative || item.superlative" class="additional-info-container">
+        <div *ngIf="item.comparative || item.superlative" class="irregular-parts">
           <p>{{ item.comparative }}, {{ item.superlative }}</p>
         </div>
       </div>

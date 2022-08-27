@@ -1,22 +1,3 @@
-.tile.vocab-list-item {
-  margin: 5px;
-  align-items: center;
-
-  .german, .english {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 0 0 10px;
-    font-size: var(--font-m);
-  }
-
-  .german {
-    width: 60%;
-  }
-}
-
-
-
 .vocab-list-item {
   display: flex;
 }
@@ -34,12 +15,23 @@
 }
 
 .word-type-container {
-    margin: 8px 0 0 8px;
+  display: flex;
+  justify-content: flex-start;
+  margin: 8px 0 0 8px;
 }
 
-.word-type p {
-  font-style: italic;
+.german .word-type-container {
+  margin: 0 0 8px;
+}
+
+.word-type-container p {
+  width: 50%;
   margin: 0;
+  font-style: italic;
+}
+
+.word-type-container mat-divider {
+  height: 12px;
 }
 
 .vocab-list-item-container {
@@ -55,45 +47,60 @@
 }
 
 .german {
-    flex-direction: column;
-    flex: 1 0 70%;
-    padding: 8px;
+  flex-direction: column;
+  flex: 1 0 50%;
+  padding: 8px;
 }
 
-.english {
-  flex: 0 0 30%;
+.noun-container {
+  display: flex;
 }
 
-.german > .modifier-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.modifier-container h1{
+.noun-container h1 {
+  display: flex;
   margin: 0;
 }
 
-.modifier-container > .irregular-parts {
-    margin: 0 0 0 16px;
+.noun-container h3 {
+  display: flex;
+  align-items: flex-end;
+  margin: 0;
+  font-style: italic;
 }
 
-.irregular-parts p {
-    font-style: italic;
+.german > .modifier-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.tile.vocab-list-item {
-  margin: 8px;
-  align-items: center;
+.modifier-container h1 {
+  margin: 0;
+}
 
-  .german, .english {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 0 0 10px;
-    font-size: var(--font-m);
-  }
+.additional-info-container {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-end;
+  margin: 0 0 0 16px;
+}
 
-  .german {
-    width: 60%;
-  }
+.additional-info-container {
+  font-style: italic;
+}
+
+.small-spacer {
+  width: 24px;
+}
+
+.spacer {
+  width: 48px;
+}
+
+.vocab-list-item-container mat-divider {
+  height: 100px;
+}
+
+.english {
+  flex: 0 0 50%;
+  margin: 0 0 0 8px;
 }

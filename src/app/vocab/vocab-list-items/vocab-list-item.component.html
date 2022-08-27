@@ -1,16 +1,6 @@
 <ng-container [ngSwitch]="item.wordType">
+  <noun-vocab-list-item *ngSwitchCase="WordType.Noun" [item]="item"></noun-vocab-list-item>
+  <verb-vocab-list-item *ngSwitchCase="WordType.Verb" [item]="item"></verb-vocab-list-item>
   <modifier-vocab-list-item *ngSwitchCase="WordType.Adjective" [item]="item"></modifier-vocab-list-item>
   <modifier-vocab-list-item *ngSwitchCase="WordType.Adverb" [item]="item"></modifier-vocab-list-item>
-  <ng-container *ngSwitchDefault>
-    <div class="tile vocab-list-item">
-      <div class="german">
-          <!--{{ item.gender | definiteArticle }}-->
-          {{ item.german }}
-      </div>
-      <mat-divider [vertical]="true"></mat-divider>
-      <div class="english">
-        {{ item.english }}
-      </div>
-    </div>
-  </ng-container>
 </ng-container>

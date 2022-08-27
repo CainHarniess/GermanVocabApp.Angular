@@ -13,9 +13,13 @@ import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
 import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-lists-presenter.component';
 import { VocabListItemComponent } from './vocab-list-items/vocab-list-item.component';
 import { ModifierVocabListItemComponent } from './vocab-list-items/modifier-vocab-list-item/modifier-vocab-list-item.component';
+import { NounVocabListItemComponent } from './vocab-list-items/noun-vocab-list-item/noun-vocab-list-item.component';
+import { VerbVocabListItemComponent } from './vocab-list-items/verb-vocab-list-item/verb-vocab-list-item.component';
 
 import { DefiniteArticlePipe } from './pipes/definite-article.pipe';
 import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
+import { GermanShortCasePipe } from './pipes/german-short-case.pipe';
+import { FixedPluralDisplayPipe } from './pipes/fixed-plural-display.pipe';
 
 
 @NgModule({
@@ -27,6 +31,10 @@ import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
     IndefiniteArticlePipe,
     VocabListItemComponent,
     ModifierVocabListItemComponent,
+    NounVocabListItemComponent,
+    VerbVocabListItemComponent,
+    GermanShortCasePipe,
+    FixedPluralDisplayPipe,
   ],
   providers: [
 

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FixedPlurality } from '../models/data/fixed-plurality.enum';
 import { WordType } from '../models/data/word-type.enum';
 import { VocabListItem } from '../models/vocab-list-item.interface';
 
@@ -10,5 +11,6 @@ import { VocabListItem } from '../models/vocab-list-item.interface';
 })
 export class VocabListItemComponent {
   public readonly WordType: typeof WordType = WordType;
+  public readonly FixedPlurality: typeof FixedPlurality = FixedPlurality;
   @Input() public item!: VocabListItem;
 }
