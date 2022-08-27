@@ -3,24 +3,20 @@
   flex: 1 1 100%;
 }
 
-header {
+main > .vocab-lists-container {
+  width: 900px;
+}
+
+.vocab-lists-header > a {
+    display: flex;
+    align-items: center;
+    margin: 0 0 16px;
+}
+
+.vocab-lists-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.vocab-tab-container {
-  margin: 16px;
-  flex: 1 1 100%;
-}
-
-mat-tab-group {
-  height: 100%;
-  flex: 1 1 100%;
-}
-
-.vocab-tab-content {
-  height: 100%;
 }
 
 vocab-lists-presenter {
@@ -29,4 +25,10 @@ vocab-lists-presenter {
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
+}
+
+@media screen and (max-width: 992px) {
+  main > .vocab-lists-container {
+    width: 100%;
+  }
 }

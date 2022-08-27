@@ -11,8 +11,6 @@ describe("VocabListFormBuilder", () => {
   });
 
   describe("build()", () => {
-
-
     it("Should call FormBuilder.group.", () => {
       builder.build();
       expect(mockFormBuilder.group).toHaveBeenCalled();
@@ -20,6 +18,7 @@ describe("VocabListFormBuilder", () => {
 
     it("Should call FormBuilder.control with correct values.", () => {
       builder.build();
+      expect(mockFormBuilder.control).toHaveBeenCalledTimes(2);
       expect(mockFormBuilder.control).toHaveBeenCalledWith(null, Validators.required);
       expect(mockFormBuilder.control).toHaveBeenCalledWith(null);
     });

@@ -4,21 +4,33 @@ import { ControlAvailabilityService } from "./control-availability.service";
 describe("ControlAvailabilityService", () => {
   let controlAvailabilityService: ControlAvailabilityService;
   let mockControl: any;
+  const mockControlFunctionList: string[] = [
+    "addValidators",
+    "removeValidators",
+    "setValue",
+    "updateValueAndValidity",
+    "markAsUntouched",
+  ];
 
   describe("configureControl | singular", () => {
     beforeEach(() => {
       controlAvailabilityService = new ControlAvailabilityService();
-      mockControl = jasmine.createSpyObj("mockControl", ["addValidators", "removeValidators", "setValue", "updateValueAndValidity"]);
+      mockControl = jasmine.createSpyObj("mockControl", mockControlFunctionList);
+    });
+
+    it("Should call control markAsUntouched with correct argument method when result is true.", () => {
+      controlAvailabilityService.configure(mockControl, true);
+      expect(mockControl.markAsUntouched).toHaveBeenCalled();
     });
 
     it("Should call control addValidators with correct argument method when result is true.", () => {
       controlAvailabilityService.configure(mockControl, true);
-      expect(mockControl.addValidators).toHaveBeenCalledWith([Validators.required]);
+      expect(mockControl.addValidators).toHaveBeenCalledOnceWith([Validators.required]);
     });
 
     it("Should call control removeValidators method when result is false.", () => {
       controlAvailabilityService.configure(mockControl, false);
-      expect(mockControl.removeValidators).toHaveBeenCalledWith([Validators.required]);
+      expect(mockControl.removeValidators).toHaveBeenCalledOnceWith([Validators.required]);
     });
 
     it("Should not call control set value when result is true.", () => {
@@ -26,9 +38,14 @@ describe("ControlAvailabilityService", () => {
       expect(mockControl.setValue).not.toHaveBeenCalled();
     });
 
+    it("Should not call control markAsUntouched with correct argument method when result is false.", () => {
+      controlAvailabilityService.configure(mockControl, false);
+      expect(mockControl.markAsUntouched).not.toHaveBeenCalled();
+    });
+
     it("Should call control set value with null argument when result is false.", () => {
       controlAvailabilityService.configure(mockControl, false);
-      expect(mockControl.setValue).toHaveBeenCalledWith(null);
+      expect(mockControl.setValue).toHaveBeenCalledOnceWith(null);
     });
 
     const tests = [true, false];
@@ -49,7 +66,7 @@ describe("ControlAvailabilityService", () => {
       controlAvailabilityService = new ControlAvailabilityService();
       mockControls = [];
       for (let i: number = 0; i < mockControlCount; i++) {
-        mockControls.push(jasmine.createSpyObj("mockControl", ["addValidators", "removeValidators", "setValue", "updateValueAndValidity"]));
+        mockControls.push(jasmine.createSpyObj("mockControl", mockControlFunctionList));
       }
     });
 

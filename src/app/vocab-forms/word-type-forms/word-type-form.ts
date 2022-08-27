@@ -44,6 +44,6 @@ export abstract class WordTypeForm implements OnInit {
         map((val: NullableString) => val as string),
         map((val: string) => val.length > 0),
         tap((result: boolean) => this.displayPrepositionCase.next(result)),
-    );
+      );
   }
 }

@@ -8,5 +8,5 @@ import { SingleSelectComponent } from '../single-select/single-select.component'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropDownComponent extends SingleSelectComponent<any>{
-
+  // TODO: Add nullable answers when field is not mandatory.
 }

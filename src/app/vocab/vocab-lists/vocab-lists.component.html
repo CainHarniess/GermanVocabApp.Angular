@@ -1,14 +1,14 @@
-<div class="vocab-tab-container">
-  <mat-tab-group mat-align-tabs="start" selectedIndex="1">
-    <mat-tab label="Vocab Lists">
-      <div class="vocab-tab-content">
-        <vocab-lists-presenter [vocabLists]="(vocabLists$ | async)!"></vocab-lists-presenter>
+<main>
+  <div class="vocab-lists-container">
+    <header>
+      <div class="vocab-lists-header">
+        <h1>Your vocab lists</h1>
+        <a mat-raised-button color="primary" [routerLink]="['/vocab', 'vocab-list-form']">
+          Add new list
+        </a>
       </div>
-    </mat-tab>
-    <mat-tab label="New Vocab List">
-      <div class="vocab-tab-content">
-        <app-vocab-list-form></app-vocab-list-form>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+    </header>
+    <mat-divider></mat-divider>
+    <vocab-lists-presenter [vocabLists]="(vocabLists$ | async)!"></vocab-lists-presenter>
+  </div>
+</main>

@@ -6,6 +6,7 @@
 @import 'forms/layout';
 @import 'forms/_controls.scss';
 @import 'variables/font-sizes';
+@import '_breakpoints';
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -36,7 +37,17 @@ body {
 }
 
 main {
-    background-color: black;
+    margin: 16px;
+}
+
+main > .main-content-container {
+  width: 900px;
+}
+
+main .main-content-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 article, section {
@@ -75,4 +86,10 @@ article, section {
 
 .hidden {
     display: none;
+}
+
+@media screen and (max-width: 992px) {
+  main > .main-content-container {
+    width: 100%;
+  }
 }

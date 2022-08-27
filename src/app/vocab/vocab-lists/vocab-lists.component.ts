@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, Data, Router } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { VocabList } from '.././models/vocab-list.interface';
 
 import { map, Observable } from 'rxjs';
@@ -12,7 +12,6 @@ import { ResolvedData } from '../models/data/resolved-data.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsComponent {
-
   constructor(private activatedRoute: ActivatedRoute) {
 
   }

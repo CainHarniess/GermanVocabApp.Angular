@@ -1,40 +1,53 @@
-<form [formGroup]="vocabListForm" (ngSubmit)="onFormSubmit()" novalidate>
-  <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
-    <input formControlName="name" matInput>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Description</mat-label>
-    <input formControlName="description" matInput>
-    <mat-hint align="end">{{vocabListForm.controls.description.value?.length}} / 1000</mat-hint>
-  </mat-form-field>
-  <mat-card>
-    <mat-card-title class="list-items-header">
-      <h4>List Items</h4>
-    </mat-card-title>
-    <mat-card-content>
-      <div formArrayName="listItems"
-           *ngFor="let listItem of listItemsControl.controls; let i=index">
-        <app-vocab-list-item-form [parentForm]="vocabListForm"
-                                  [form]="getListItemControl(i)" [index]="i"
-                                  (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
+<main>
+  <div>
+    <header>
+      <div class="main-content-header">
+        <h1>{{ vocabListTitle$ | async }}</h1>
       </div>
-      <mat-divider *ngIf="listItemsControl.controls.length > 0"></mat-divider>
-      <div class="placeholder list-item-form container">
-        <div class="placeholder list-item-form action-panel">
-          <button mat-icon-button color="accent" matTooltip="Duplicate" matTooltipPosition="left"
-                  type="button" (click)="addListItemControl()">
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
-        <div class="placeholder list-item-form content">
-          {{ placeholderWording$ | async }}
-        </div>
+    </header>
+    <mat-divider></mat-divider>
+    <form [formGroup]="vocabListForm" (ngSubmit)="onFormSubmit()" novalidate>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input formControlName="description" matInput>
+          <mat-hint *ngrxLet="descriptionLength$ as descriptionLength"
+                    [ngClass]="{'hidden': descriptionLength <= 150}" align="end">
+            {{descriptionLength}} / 250
+          </mat-hint>
+      </mat-form-field>
+      <mat-card>
+        <mat-card-title class="list-items-header">
+          <h4>List Items</h4>
+        </mat-card-title>
+        <mat-card-content>
+          <div formArrayName="listItems"
+               *ngFor="let listItem of listItemsControl.controls; let i=index">
+            <app-vocab-list-item-form [parentForm]="vocabListForm"
+                                      [form]="getListItemControl(i)" [index]="i"
+                                      (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
+          </div>
+          <mat-divider *ngIf="listItemsControl.controls.length > 0"></mat-divider>
+          <div class="placeholder list-item-form container">
+            <div class="placeholder list-item-form action-panel">
+              <button mat-icon-button color="accent" matTooltip="Duplicate" matTooltipPosition="left"
+                      type="button" (click)="addListItemControl()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <div class="placeholder list-item-form content">
+              {{ placeholderWording$ | async }}
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <div class="submission-controls">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!vocabListForm.valid">Save</button>
+        <button mat-stroked-button type="reset">Cancel</button>
       </div>
-    </mat-card-content>
-  </mat-card>
-  <div class="submission-controls">
-    <button mat-button color="primary" type="submit" [disabled]="!vocabListForm.valid">Save</button>
-    <button mat-stroked-button type="reset">Cancel</button>
+    </form>
   </div>
-</form>
+</main>

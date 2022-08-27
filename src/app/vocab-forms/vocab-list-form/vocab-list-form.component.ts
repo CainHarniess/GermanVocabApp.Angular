@@ -8,7 +8,7 @@ import { VocabListForm } from '../models/vocab-list-form.interface';
 import { VocabListFormBuilder } from '../services/vocab-list-form-builder.service';
 import { VocabListItemFormBuilder } from '../services/vocab-list-item-form-builder.service';
 
-import { BehaviorSubject, filter, map, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, debounceTime, filter, map, Observable, startWith, tap } from 'rxjs';
 
 @Component({
   selector: 'app-vocab-list-form',
@@ -34,8 +34,6 @@ export class VocabListFormComponent implements OnInit {
     11: "",
   }
 
-  private addVocabList?: Subscription;
-
   public readonly listItemControlCount$: Observable<number> = this.listItemControlCount.asObservable();
   public readonly placeholderWording$: Observable<string> = this.listItemControlCount$
     .pipe(
@@ -50,11 +48,24 @@ export class VocabListFormComponent implements OnInit {
   public get listItemsControl(): FormArray { return <FormArray<FormGroup>>this.vocabListForm.get("listItems")!; }
 
   public vocabListForm!: FormGroup<VocabListForm>;
+  public vocabListTitle$!: Observable<string>;
+  public descriptionLength$!: Observable<number>;
 
   ngOnInit(): void {
     // Check function is called
     // Check vocabListForm property has expected value
     this.vocabListForm = this.listFormBuilder.build();
+    this.vocabListTitle$ = this.vocabListForm.controls.name.valueChanges
+      .pipe(
+        startWith("New vocab list"),
+        debounceTime(300),
+        map((val: string | null) => (!val || val === "") ? "New vocab list" : val),
+    );
+    this.descriptionLength$ = this.vocabListForm.controls.description.valueChanges
+      .pipe(
+        map((val: string | null) => val ? val.length : 0),
+        filter((result: number) => result > 150),
+    )
   }
 
   public addListItemControl(): void {
@@ -76,12 +87,12 @@ export class VocabListFormComponent implements OnInit {
 
   public removeListItemControl(index: number): void {
     if (index < 0) {
-    // Check an exception is thrown.
+      // Check an exception is thrown.
       //Update to throw exception.
       console.error("Index may not be negative.")
       return;
     } else if (index >= this.listItemsControl.length) {
-    // Check an exception is thrown.
+      // Check an exception is thrown.
       //Update to throw exception.
       console.error("Index exceeds the size of the list items form control array.")
       return;
@@ -95,27 +106,12 @@ export class VocabListFormComponent implements OnInit {
   public onFormSubmit(): void {
     const vocabList: VocabList = this.vocabListForm.value as VocabList;
     // Check vocab list service method is called with correct ID.
-    //console.log(vocabList);
-    //return;
 
-    this.addVocabList = this.vocabService.add(vocabList)
+    const addVocabListSubsc = this.vocabService.add(vocabList)
       .subscribe(newListId => {
         // Check router navigation is done correctly?
-        this.router.navigate(["vocab", "vocab-lists"]);
+        this.router.navigate(["/vocab", "vocab-lists"]);
+        addVocabListSubsc.unsubscribe();
       });
-
-    // Can we not unsubscribe using the below??
-    //const addVocabListSubsc = this.vocabService.add(vocabList)
-    //  .subscribe(newListId => {
-    //  // Check router navigation is done correctly?
-    //    addVocabListSubsc.unsubscribe();
-    //  this.router.navigate(["vocab", "vocab-lists"]);
-    //});
-  }
-
-  public ngOnDestroy(): void {
-    // Check that the subscription is removed
-    // Ensure the mock builder has done it's shit.
-    this.addVocabList?.unsubscribe();
   }
 }
