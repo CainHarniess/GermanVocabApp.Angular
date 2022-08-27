@@ -21,6 +21,7 @@ mat-nav-list {
 .list-item-container a {
     display: flex;
     flex-direction: column;
+    flex: 1 0 100%;
 }
 
 .list-item-container a, .list-item-container button {
