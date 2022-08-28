@@ -17,9 +17,15 @@
         <p *ngIf="isIrregular">
           {{ item.thirdPersonPresent }}, {{ item.thirdPersonImperfect }}, {{ item.auxiliaryVerb | thirdPersonAuxiliary }} {{ item.perfect }}
         </p>
-        <p>
-          {{ item.transitivity | transitiveDisplay }}, {{ item.isSeparable | separableDisplay: false }}
-        </p>
+        <div class="row">
+          <p>
+            {{ item.transitivity | transitiveDisplay }}
+          </p>
+          <div class="spacer"></div>
+          <p>
+            {{ item.separability! | separableDisplay }}
+          </p>
+        </div>
       </div>
     </div>
     <mat-divider [vertical]="true"></mat-divider>

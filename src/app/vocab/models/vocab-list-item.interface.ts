@@ -1,12 +1,12 @@
 import { Entity } from "../../shared/models/entity.interface";
 import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, Transitivity, WordType } from "./data";
+import { Separability } from "./data/separability.enum";
 
 export interface VocabListItem extends Entity {
   wordType: WordType;
   isWeakMasculineNoun?: boolean;
   reflexiveCase?: ReflexiveCase;
-  //TODO: Convert to Separability enum with a None value.
-  isSeparable?: boolean;
+  separability?: Separability;
   transitivity?: Transitivity;
   thirdPersonPresent?: string;
   thirdPersonImperfect?: string;

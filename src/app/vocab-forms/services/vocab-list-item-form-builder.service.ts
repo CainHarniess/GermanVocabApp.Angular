@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ModelFormBuilder } from '../../shared/services/model-form-builder.class';
-import { Case, FixedPlurality, Gender, ReflexiveCase, WordType } from '../../vocab/models/data';
+import { Case, FixedPlurality, Gender, ReflexiveCase, Separability, WordType } from '../../vocab/models/data';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
+import { Null } from "../../../core/types";
 
 @Injectable()
 export class VocabListItemFormBuilder extends ModelFormBuilder {
@@ -14,24 +15,28 @@ export class VocabListItemFormBuilder extends ModelFormBuilder {
   public build(): FormGroup<VocabListItemForm> {
     return this.formBuilder.group<VocabListItemForm>({
       wordType: this.formBuilder.control<WordType | null>(null, Validators.required),
-      isWeakMasculineNoun: this.formBuilder.control<boolean | null>(null),
-      reflexiveCase: this.formBuilder.control<ReflexiveCase | null>(null),
-      isSeparable: this.formBuilder.control<boolean | null>(null),
-      isTransitive: this.formBuilder.control<boolean | null>(null),
-      thirdPersonPresent: this.formBuilder.control<string | null>(null),
-      thirdPersonImperfect: this.formBuilder.control<string | null>(null),
+      isWeakMasculineNoun: this.formBuilder.control<Null<boolean>>(null),
+      reflexiveCase: this.formBuilder.control<Null<ReflexiveCase>>(null),
+      separability: this.formBuilder.control<Null<Separability>>(null),
+      isTransitive: this.formBuilder.control<Null<boolean>>(null),
+      thirdPersonPresent: this.formBuilder.control<Null<string>>(null),
+      thirdPersonImperfect: this.formBuilder.control<Null<string>>(null),
       auxiliaryVerb: this.formBuilder.control(null),
-      perfect: this.formBuilder.control<string | null>(null),
+      perfect: this.formBuilder.control<Null<string>>(null),
       gender: this.formBuilder.control<Gender | null>(null),
-      german: this.formBuilder.control<string | null>(null, Validators.required),
-      plural: this.formBuilder.control<string | null>(null),
-      preposition: this.formBuilder.control<string | null>(null),
-      prepositionCase: this.formBuilder.control<Case | null>(null),
-      comparative: this.formBuilder.control<string | null>(null),
-      superlative: this.formBuilder.control<string | null>(null),
-      english: this.formBuilder.control<string | null>(null, Validators.required),
+      german: this.formBuilder.control<Null<string>>(null, Validators.required),
+      plural: this.formBuilder.control<Null<string>>(null),
+      preposition: this.formBuilder.control<Null<string>>(null),
+      prepositionCase: this.formBuilder.control<Null<Case>>(null),
+      comparative: this.formBuilder.control<Null<string>>(null),
+      superlative: this.formBuilder.control<Null<string>>(null),
+      english: this.formBuilder.control<Null<string>>(null, Validators.required),
       fixedPlurality: this.formBuilder.control<FixedPlurality | null>(null),
-      isIrregular: this.formBuilder.control<boolean | null>(null),
+      isIrregular: this.formBuilder.control<Null<boolean>>(null),
     });
   }
+}
+
+function Null<T>(arg0: null) {
+    throw new Error('Function not implemented.');
 }

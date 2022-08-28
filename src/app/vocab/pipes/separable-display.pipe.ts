@@ -1,20 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Undefined, Vague } from '../../../core/types';
 import { isNullOrUndefined } from '../../../utilities';
+import { Separability } from '../models/data/separability.enum';
 
 @Pipe({
   name: 'separableDisplay'
 })
 export class SeparableDisplayPipe implements PipeTransform {
-  //TODO: Consume Separability enum rather than boolean.
-  transform(isSeparable: Vague<boolean>, capitalise: boolean = true): Undefined<string> {
-    if (isNullOrUndefined(isSeparable)) {
+  transform(separability: Vague<Separability>, capitalise: boolean = true): Undefined<string> {
+    if (isNullOrUndefined(separability)) {
       return undefined;
     }
 
-  //TODO: Return undefined for None.
+    if (separability === Separability.None) {
+      return undefined;
+    }
 
-    const output: string = isSeparable! ? "Separable" : "Inseparable";
+    const output: string = separability === Separability.Separable ? "Separable" : "Inseparable";
     return capitalise ? output : output.toLowerCase();
   }
 }

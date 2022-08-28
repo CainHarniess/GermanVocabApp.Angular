@@ -5,7 +5,7 @@ import { VocabListService } from './vocab-list.service';
 
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, Transitivity, WordType } from '../models/data';
+import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, Separability, Transitivity, WordType } from '../models/data';
 import { VocabList } from '../models/vocab-list.interface';
 
 @Injectable()
@@ -15,7 +15,6 @@ export class InMemoryVocabListService extends VocabListService {
     super();
   }
 
-  //TODO: User Separability throughout and re-name property.
   // Stryker disable all
   public readonly seedData: VocabList[] = [{
     id: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
@@ -27,7 +26,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Verb,
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
-        isSeparable: false,
+        separability: Separability.None,
         transitivity: Transitivity.Both,
         thirdPersonPresent: "isst",
         thirdPersonImperfect: "aß",
@@ -49,7 +48,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Verb,
         isWeakMasculineNoun: undefined,
         reflexiveCase: ReflexiveCase.Accusative,
-        isSeparable: false,
+        separability: Separability.None,
         transitivity: Transitivity.Transitive,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
@@ -71,10 +70,10 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Verb,
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
-        isSeparable: true,
+        separability: Separability.Separable,
         transitivity: Transitivity.Intransitive,
-        thirdPersonPresent: "kommt",
-        thirdPersonImperfect: "kam",
+        thirdPersonPresent: "ankommt",
+        thirdPersonImperfect: "ankam",
         auxiliaryVerb: AuxiliaryVerb.Sein,
         perfect: "angekommen",
         gender: undefined,
@@ -93,7 +92,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Verb,
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
-        isSeparable: false,
+        separability: Separability.None,
         transitivity: Transitivity.Intransitive,
         thirdPersonPresent: "ist",
         thirdPersonImperfect: "war",
@@ -115,7 +114,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Noun,
         isWeakMasculineNoun: false,
         reflexiveCase: undefined,
-        isSeparable: undefined,
+        separability: undefined,
         transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
@@ -137,7 +136,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Noun,
         isWeakMasculineNoun: false,
         reflexiveCase: undefined,
-        isSeparable: undefined,
+        separability: undefined,
         transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
@@ -159,7 +158,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Noun,
         isWeakMasculineNoun: false,
         reflexiveCase: undefined,
-        isSeparable: undefined,
+        separability: undefined,
         transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
@@ -181,7 +180,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Noun,
         isWeakMasculineNoun: true,
         reflexiveCase: undefined,
-        isSeparable: undefined,
+        separability: undefined,
         transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
@@ -203,7 +202,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Verb,
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
-        isSeparable: false,
+        separability: Separability.None,
         transitivity: Transitivity.Both,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
@@ -225,7 +224,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Verb,
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
-        isSeparable: false,
+        separability: Separability.None,
         transitivity: Transitivity.Both,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
@@ -247,7 +246,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Adjective,
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
-        isSeparable: undefined,
+        separability: undefined,
         transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
@@ -269,7 +268,7 @@ export class InMemoryVocabListService extends VocabListService {
         wordType: WordType.Adverb,
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
-        isSeparable: undefined,
+        separability: undefined,
         transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
