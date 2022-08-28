@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { isNullOrUndefined } from '../../../utilities';
-import { FixedPlurality } from '../models/data/fixed-plurality.enum';
-import { WordType } from '../models/data/word-type.enum';
+import { FixedPlurality, WordType } from '../models/data';
 import { VocabListItem } from '../models/vocab-list-item.interface';
 
 @Component({

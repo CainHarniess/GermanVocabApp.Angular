@@ -15,14 +15,7 @@ import { VocabListItemComponent } from './vocab-list-items/vocab-list-item.compo
 import { ModifierVocabListItemComponent } from './vocab-list-items/modifier-vocab-list-item/modifier-vocab-list-item.component';
 import { NounVocabListItemComponent } from './vocab-list-items/noun-vocab-list-item/noun-vocab-list-item.component';
 import { VerbVocabListItemComponent } from './vocab-list-items/verb-vocab-list-item/verb-vocab-list-item.component';
-
-import { DefiniteArticlePipe } from './pipes/definite-article.pipe';
-import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
-import { GermanShortCasePipe } from './pipes/german-short-case.pipe';
-import { FixedPluralDisplayPipe } from './pipes/fixed-plural-display.pipe';
-import { ThirdPersonAuxiliaryPipe } from './pipes/third-person-auxiliary.pipe';
-import { TransitiveDisplayPipe } from './pipes/transitive-display.pipe';
-
+import { DefiniteArticlePipe, FixedPluralDisplayPipe, GermanShortCasePipe, IndefiniteArticlePipe, SeparableDisplayPipe, ThirdPersonAuxiliaryPipe, TransitiveDisplayPipe } from './pipes';
 
 @NgModule({
   declarations: [
@@ -39,6 +32,7 @@ import { TransitiveDisplayPipe } from './pipes/transitive-display.pipe';
     FixedPluralDisplayPipe,
     ThirdPersonAuxiliaryPipe,
     TransitiveDisplayPipe,
+    SeparableDisplayPipe,
   ],
   providers: [
 

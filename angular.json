@@ -28,7 +28,7 @@
           "type": "enum"
         },
         "@schematics/angular:pipe": {
-          "skipTests": true
+          "skipTests": false
         }
       },
       "root": "",
