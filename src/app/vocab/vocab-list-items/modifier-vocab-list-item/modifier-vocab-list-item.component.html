@@ -9,7 +9,7 @@
         <div>
           <h1>{{ item.german }}</h1>
         </div>
-        <div *ngIf="item.comparative || item.superlative" class="additional-info-container">
+        <div *ngIf="isIrregular" class="additional-info-container">
           <p>{{ item.comparative }}, {{ item.superlative }}</p>
         </div>
       </div>

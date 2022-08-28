@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { isNullOrUndefined } from '../../../../utilities';
 import { VocabListItemComponent } from '../vocab-list-item.component';
 
 @Component({
@@ -9,7 +8,5 @@ import { VocabListItemComponent } from '../vocab-list-item.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerbVocabListItemComponent extends VocabListItemComponent {
-  public get isIrregular(): boolean {
-    return !isNullOrUndefined(this.item.thirdPersonPresent);
-  }
+  
 }
