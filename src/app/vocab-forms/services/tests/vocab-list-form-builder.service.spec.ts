@@ -1,5 +1,5 @@
 import { Validators } from "@angular/forms";
-import { VocabListFormBuilder } from "./vocab-list-form-builder.service";
+import { VocabListFormBuilder } from "../vocab-list-form-builder.service";
 
 describe("VocabListFormBuilder", () => {
   let mockFormBuilder: any;

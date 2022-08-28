@@ -1,5 +1,5 @@
-import { Case } from '../models/data/case.enum';
-import { GermanShortCasePipe } from './german-short-case.pipe';
+import { Case } from '../../models/data/case.enum';
+import { GermanShortCasePipe } from '../german-short-case.pipe';
 
 describe('GermanShortCasePipe', () => {
   let pipe: GermanShortCasePipe;

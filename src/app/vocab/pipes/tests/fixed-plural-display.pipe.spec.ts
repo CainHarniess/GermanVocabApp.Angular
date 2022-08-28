@@ -1,5 +1,5 @@
-import { FixedPlurality } from '../models/data/fixed-plurality.enum';
-import { FixedPluralDisplayPipe } from './fixed-plural-display.pipe';
+import { FixedPlurality } from '../../models/data/fixed-plurality.enum';
+import { FixedPluralDisplayPipe } from '../fixed-plural-display.pipe';
 
 describe('FixedPluralDisplayPipe', () => {
   let pipe: FixedPluralDisplayPipe;

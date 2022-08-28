@@ -1,5 +1,5 @@
-import { AuxiliaryVerb } from '../models/data';
-import { ThirdPersonAuxiliaryPipe } from './third-person-auxiliary.pipe';
+import { AuxiliaryVerb } from '../../models/data';
+import { ThirdPersonAuxiliaryPipe } from '../third-person-auxiliary.pipe';
 
 describe('ThirdPersonAuxiliaryPipe', () => {
   let pipe: ThirdPersonAuxiliaryPipe;

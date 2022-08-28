@@ -1,5 +1,5 @@
-import { Transitivity } from '../models/data';
-import { TransitiveDisplayPipe } from './transitive-display.pipe';
+import { Transitivity } from '../../models/data';
+import { TransitiveDisplayPipe } from '../transitive-display.pipe';
 
 describe('TransitiveDisplayPipe', () => {
   let pipe: TransitiveDisplayPipe;

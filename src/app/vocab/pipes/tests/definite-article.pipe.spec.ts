@@ -1,5 +1,5 @@
-import { Gender } from "../models/data/gender.enum";
-import { DefiniteArticlePipe } from "./definite-article.pipe";
+import { Gender } from "../../models/data/gender.enum";
+import { DefiniteArticlePipe } from "../definite-article.pipe";
 
 const capitalisedTestCases = [
   { input: Gender.Masculine, expectedDefinite: "Der" },

@@ -1,7 +1,7 @@
 import { FormGroup } from "@angular/forms";
-import { WordType } from "../../vocab/models/data/word-type.enum";
-import { VocabListItemForm } from "../models/vocab-list-item-form.interface";
-import { WordTypeFormManagerFactory } from "./form-manager-factory";
+import { WordType } from "../../../vocab/models/data/word-type.enum";
+import { VocabListItemForm } from "../../models/vocab-list-item-form.interface";
+import { WordTypeFormManagerFactory } from "../form-manager-factory";
 
 describe("WordTypeFormManagerFactory", () => {
   let formManagerFactory: WordTypeFormManagerFactory;
