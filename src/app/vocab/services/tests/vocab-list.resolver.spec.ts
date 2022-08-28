@@ -1,5 +1,5 @@
 import { EMPTY } from "rxjs";
-import { VocabListResolver } from "./vocab-list.resolver";
+import { VocabListResolver } from "../vocab-list.resolver";
 
 describe("VocabListResolver", () => {
   let resolver: VocabListResolver;

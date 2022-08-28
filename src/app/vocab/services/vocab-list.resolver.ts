@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { VocabListService } from '.';
 import { VocabList } from '../models/vocab-list.interface';
-import { VocabListService } from './vocab-list.service';
 
 @Injectable({
   providedIn: 'root'

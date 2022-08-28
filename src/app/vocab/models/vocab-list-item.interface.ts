@@ -5,6 +5,7 @@ export interface VocabListItem extends Entity {
   wordType: WordType;
   isWeakMasculineNoun?: boolean;
   reflexiveCase?: ReflexiveCase;
+  //TODO: Convert to Separability enum with a None value.
   isSeparable?: boolean;
   transitivity?: Transitivity;
   thirdPersonPresent?: string;

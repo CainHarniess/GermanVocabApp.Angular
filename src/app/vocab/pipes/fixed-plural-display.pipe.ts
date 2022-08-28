@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Undefined } from '../../../core/types';
 import { FixedPlurality } from '../models/data/fixed-plurality.enum';
 
 @Pipe({
@@ -6,7 +7,7 @@ import { FixedPlurality } from '../models/data/fixed-plurality.enum';
 })
 export class FixedPluralDisplayPipe implements PipeTransform {
 
-  transform(value: FixedPlurality): string | undefined {
+  transform(value: FixedPlurality): Undefined<string> {
     switch (value) {
       case FixedPlurality.None:
         return undefined;
@@ -14,8 +15,6 @@ export class FixedPluralDisplayPipe implements PipeTransform {
         return "Always plural";
       case FixedPlurality.Singular:
         return "Always singular";
-      default:
-        throw new Error("Invalid FixedPlurality given to FixedPluralDisplayPipe");
     }
   }
 }

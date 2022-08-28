@@ -15,7 +15,9 @@ export class InMemoryVocabListService extends VocabListService {
     super();
   }
 
-  private seedData: VocabList[] = [{
+  //TODO: User Separability throughout and re-name property.
+
+  public readonly seedData: VocabList[] = [{
     id: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
     name: 'Kitchen',
     description: 'A collection of common kitchen items.',

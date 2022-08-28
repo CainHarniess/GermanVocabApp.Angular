@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Undefined, Vague } from '../../../core/types';
 
 import { isNullOrUndefined } from '../../../utilities';
 import { AuxiliaryVerb } from '../models/data';
@@ -7,7 +8,7 @@ import { AuxiliaryVerb } from '../models/data';
   name: 'thirdPersonAuxiliary'
 })
 export class ThirdPersonAuxiliaryPipe implements PipeTransform {
-  transform(value: AuxiliaryVerb | undefined | null): string | undefined {
+  transform(value: Vague<AuxiliaryVerb>): Undefined<string> {
     if (isNullOrUndefined(value)) {
       return undefined;
     }
