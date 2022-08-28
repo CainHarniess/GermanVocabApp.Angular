@@ -16,7 +16,7 @@ export class InMemoryVocabListService extends VocabListService {
   }
 
   //TODO: User Separability throughout and re-name property.
-
+  // Stryker disable all
   public readonly seedData: VocabList[] = [{
     id: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
     name: 'Kitchen',
@@ -289,6 +289,7 @@ export class InMemoryVocabListService extends VocabListService {
     ],
     authorName: "Cain Harniess",
   }];
+  // Stryker restore all
 
   public override get(): Observable<VocabList[]> {
     return of(this.seedData)

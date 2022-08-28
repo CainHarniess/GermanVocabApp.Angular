@@ -27,6 +27,12 @@ describe("InMemoryVocabListService", () => {
       expect(function () { service.getWithId(invalidId) })
         .toThrowError(`Vocab with ID ${invalidId} not found in in-memory array.`)
     });
+
+    it("Should not throw an error the ID is found.", () => {
+      const realId: string = service.seedData[0].id!;
+      expect(function () { service.getWithId(realId) })
+        .not.toThrowError();
+    });
   });
 
   describe("add", () => {
