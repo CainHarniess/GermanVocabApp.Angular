@@ -15,7 +15,10 @@
       </div>
       <div class="additional-info-container">
         <p *ngIf="isIrregular">
-          {{ item.thirdPersonPresent }}, {{ item.thirdPersonImperfect }}, {{ item.auxiliaryVerb }} {{ item.perfect }}
+          {{ item.thirdPersonPresent }}, {{ item.thirdPersonImperfect }}, {{ item.auxiliaryVerb | thirdPersonAuxiliary }} {{ item.perfect }}
+        </p>
+        <p>
+          {{ item.transitivity }}
         </p>
       </div>
     </div>

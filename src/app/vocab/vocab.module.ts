@@ -20,6 +20,7 @@ import { DefiniteArticlePipe } from './pipes/definite-article.pipe';
 import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
 import { GermanShortCasePipe } from './pipes/german-short-case.pipe';
 import { FixedPluralDisplayPipe } from './pipes/fixed-plural-display.pipe';
+import { ThirdPersonAuxiliaryPipe } from './pipes/third-person-auxiliary.pipe';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { FixedPluralDisplayPipe } from './pipes/fixed-plural-display.pipe';
     VerbVocabListItemComponent,
     GermanShortCasePipe,
     FixedPluralDisplayPipe,
+    ThirdPersonAuxiliaryPipe,
   ],
   providers: [
 
