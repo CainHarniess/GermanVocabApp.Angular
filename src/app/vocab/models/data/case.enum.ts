@@ -4,8 +4,3 @@ export enum Case {
   Dative = "Dative",
   Genetive = "Genetive",
 }
-
-export enum ReflexiveCase {
-  Accusative = Case.Accusative,
-  Dative = Case.Dative,
-}

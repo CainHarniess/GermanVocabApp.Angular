@@ -1,5 +1,5 @@
 import { SingleSelectOption } from "../../forms/single-select/single-select-option.interface";
-import { WordType } from "../../vocab/models/data/word-type.enum";
+import { WordType } from "../../vocab/models/data";
 
 export class DropDownOptions {
   public static readonly wordTypeOptions: SingleSelectOption<WordType>[] = [{

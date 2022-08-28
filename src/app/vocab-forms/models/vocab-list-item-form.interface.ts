@@ -1,9 +1,5 @@
 import { FormControl } from "@angular/forms";
-import { AuxiliaryVerb } from "../../vocab/models/data/auxiliary-verb.enum";
-import { Case, ReflexiveCase } from "../../vocab/models/data/case.enum";
-import { FixedPlurality } from "../../vocab/models/data/fixed-plurality.enum";
-import { Gender } from "../../vocab/models/data/gender.enum";
-import { WordType } from "../../vocab/models/data/word-type.enum";
+import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, WordType } from "../../vocab/models/data";
 
 export interface VocabListItemForm {
   wordType: FormControl<WordType | null>;

@@ -1,17 +1,12 @@
-import { AuxiliaryVerb } from "./data/auxiliary-verb.enum";
-import { Case, ReflexiveCase } from "./data/case.enum";
-import { FixedPlurality } from "./data/fixed-plurality.enum";
-import { Gender } from "./data/gender.enum";
-import { WordType } from "./data/word-type.enum";
-
 import { Entity } from "../../shared/models/entity.interface";
+import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, Transitivity, WordType } from "./data";
 
 export interface VocabListItem extends Entity {
   wordType: WordType;
   isWeakMasculineNoun?: boolean;
   reflexiveCase?: ReflexiveCase;
   isSeparable?: boolean;
-  isTransitive?: boolean;
+  transitivity?: Transitivity;
   thirdPersonPresent?: string;
   thirdPersonImperfect?: string;
   auxiliaryVerb?: AuxiliaryVerb;

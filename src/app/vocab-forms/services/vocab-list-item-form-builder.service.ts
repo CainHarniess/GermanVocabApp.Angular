@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModelFormBuilder } from '../../shared/services/model-form-builder.class';
 
-import { Case, ReflexiveCase } from '../../vocab/models/data/case.enum';
-import { FixedPlurality } from '../../vocab/models/data/fixed-plurality.enum';
-import { Gender } from '../../vocab/models/data/gender.enum';
-import { WordType } from '../../vocab/models/data/word-type.enum';
+import { ModelFormBuilder } from '../../shared/services/model-form-builder.class';
+import { Case, FixedPlurality, Gender, ReflexiveCase, WordType } from '../../vocab/models/data';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 
 @Injectable()

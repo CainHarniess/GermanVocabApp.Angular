@@ -1,8 +1,5 @@
 import { SingleSelectOption } from "../../forms/single-select/single-select-option.interface";
-import { AuxiliaryVerb } from "../../vocab/models/data/auxiliary-verb.enum";
-import { Case, ReflexiveCase } from "../../vocab/models/data/case.enum";
-import { FixedPlurality } from "../../vocab/models/data/fixed-plurality.enum";
-import { Gender } from "../../vocab/models/data/gender.enum";
+import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase } from "../../vocab/models/data";
 
 export class DropDownOptions{
   public static readonly caseOptions: SingleSelectOption<Case>[] = [{

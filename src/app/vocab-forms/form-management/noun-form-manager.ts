@@ -1,7 +1,5 @@
 import { FormControl, Validators } from "@angular/forms";
-import { FixedPlurality } from "../../vocab/models/data/fixed-plurality.enum";
-import { Gender } from "../../vocab/models/data/gender.enum";
-import { WordType } from "../../vocab/models/data/word-type.enum";
+import { FixedPlurality, Gender, WordType } from "../../vocab/models/data";
 
 import { WordTypeFormManager } from "./word-type-form-manager";
 

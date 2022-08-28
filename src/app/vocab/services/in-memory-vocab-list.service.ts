@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { AuxiliaryVerb } from '../models/data/auxiliary-verb.enum';
-import { Gender } from '../models/data/gender.enum';
-import { WordType } from '../models/data/word-type.enum';
-import { VocabList } from '../models/vocab-list.interface';
-import { FixedPlurality } from '../models/data/fixed-plurality.enum';
-
 import { GuidGeneratorService } from '../../shared/services/guid-generator.service';
 import { VocabListService } from './vocab-list.service';
 
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Case } from '../models/data/case.enum';
+import { AuxiliaryVerb, Case, FixedPlurality, Gender, Transitivity, WordType } from '../models/data';
+import { VocabList } from '../models/vocab-list.interface';
 
 @Injectable()
 export class InMemoryVocabListService extends VocabListService {
@@ -26,12 +21,34 @@ export class InMemoryVocabListService extends VocabListService {
     description: 'A collection of common kitchen items.',
     listItems: [
       {
+        id: '473573a8-86d7-4b64-8e51-96fead598a7c',
+        wordType: WordType.Verb,
+        isWeakMasculineNoun: undefined,
+        reflexiveCase: undefined,
+        isSeparable: false,
+        transitivity: Transitivity.Both,
+        thirdPersonPresent: "isst",
+        thirdPersonImperfect: "aß",
+        auxiliaryVerb: AuxiliaryVerb.Haben,
+        perfect: "gegessen",
+        gender: undefined,
+        german: 'essen',
+        plural: undefined,
+        preposition: 'auf',
+        prepositionCase: Case.Accusative,
+        comparative: undefined,
+        superlative: undefined,
+        english: 'to reply, retort',
+        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
+        fixedPlurality: undefined,
+      },
+      {
         id: 'e64d6146-93be-467b-a19e-8749a363b08b',
         wordType: WordType.Noun,
         isWeakMasculineNoun: false,
         reflexiveCase: undefined,
         isSeparable: undefined,
-        isTransitive: undefined,
+        transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
         auxiliaryVerb: undefined,
@@ -53,7 +70,7 @@ export class InMemoryVocabListService extends VocabListService {
         isWeakMasculineNoun: false,
         reflexiveCase: undefined,
         isSeparable: undefined,
-        isTransitive: undefined,
+        transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
         auxiliaryVerb: undefined,
@@ -75,7 +92,7 @@ export class InMemoryVocabListService extends VocabListService {
         isWeakMasculineNoun: false,
         reflexiveCase: undefined,
         isSeparable: undefined,
-        isTransitive: undefined,
+        transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
         auxiliaryVerb: undefined,
@@ -97,7 +114,7 @@ export class InMemoryVocabListService extends VocabListService {
         isWeakMasculineNoun: true,
         reflexiveCase: undefined,
         isSeparable: undefined,
-        isTransitive: undefined,
+        transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
         auxiliaryVerb: undefined,
@@ -119,11 +136,11 @@ export class InMemoryVocabListService extends VocabListService {
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
         isSeparable: false,
-        isTransitive: false,
+        transitivity: Transitivity.Both,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
         auxiliaryVerb: AuxiliaryVerb.Haben,
-        perfect: '',
+        perfect: undefined,
         gender: undefined,
         german: 'kochen',
         plural: undefined,
@@ -136,12 +153,34 @@ export class InMemoryVocabListService extends VocabListService {
         fixedPlurality : undefined,
       },
       {
+        id: 'e545f0d0-aa5c-4a35-8bbd-0a5222ef48f5',
+        wordType: WordType.Verb,
+        isWeakMasculineNoun: undefined,
+        reflexiveCase: undefined,
+        isSeparable: false,
+        transitivity: Transitivity.Both,
+        thirdPersonPresent: undefined,
+        thirdPersonImperfect: undefined,
+        auxiliaryVerb: AuxiliaryVerb.Haben,
+        perfect: undefined,
+        gender: undefined,
+        german: 'entgegnen',
+        plural: undefined,
+        preposition: 'auf',
+        prepositionCase: Case.Accusative,
+        comparative: undefined,
+        superlative: undefined,
+        english: 'to reply, retort',
+        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
+        fixedPlurality: undefined,
+      },
+      {
         id: '0a94e979-d8ba-45b6-a277-25e9f60de608',
         wordType: WordType.Adjective,
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
         isSeparable: undefined,
-        isTransitive: undefined,
+        transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
         auxiliaryVerb: undefined,
@@ -163,7 +202,7 @@ export class InMemoryVocabListService extends VocabListService {
         isWeakMasculineNoun: undefined,
         reflexiveCase: undefined,
         isSeparable: undefined,
-        isTransitive: undefined,
+        transitivity: undefined,
         thirdPersonPresent: undefined,
         thirdPersonImperfect: undefined,
         auxiliaryVerb: undefined,

@@ -1,5 +1,5 @@
 import { FormGroup } from "@angular/forms";
-import { WordType } from "../../vocab/models/data/word-type.enum";
+import { WordType } from "../../vocab/models/data";
 
 import { VocabListItemForm } from "../models/vocab-list-item-form.interface";
 

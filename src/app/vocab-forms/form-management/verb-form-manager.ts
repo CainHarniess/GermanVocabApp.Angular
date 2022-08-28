@@ -1,10 +1,6 @@
 import { FormControl, Validators } from "@angular/forms";
-
-import { AuxiliaryVerb } from "../../vocab/models/data/auxiliary-verb.enum";
+import { AuxiliaryVerb, ReflexiveCase, WordType } from "../../vocab/models/data";
 import { IrregularFormManager } from "./irregular-form-manager";
-import { ReflexiveCase } from "../../vocab/models/data/case.enum";
-import { WordType } from "../../vocab/models/data/word-type.enum";
-
 
 export class VerbFormManager extends IrregularFormManager {
   public get wordType(): WordType { return WordType.Verb; }

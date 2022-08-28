@@ -4,13 +4,19 @@
   </div>
   <div class="vocab-list-item-container">
     <div class="german">
-      <div class="modifier-container">
-        <div>
-          <h1>{{ item.german }}</h1>
-        </div>
-        <div *ngIf="item.comparative || item.superlative" class="irregular-parts">
-          <p>{{ item.comparative }}, {{ item.superlative }}</p>
-        </div>
+      <div class="noun-container">
+        <h1>{{ item.german }}</h1>
+        <ng-container *ngIf="item.preposition">
+          <div class="small-spacer"></div>
+          <h3>
+            ({{ item.preposition! }} + {{ item.prepositionCase! | germanShortCase: false }})
+          </h3>
+        </ng-container>
+      </div>
+      <div class="additional-info-container">
+        <p *ngIf="isIrregular">
+          {{ item.thirdPersonPresent }}, {{ item.thirdPersonImperfect }}, {{ item.auxiliaryVerb }} {{ item.perfect }}
+        </p>
       </div>
     </div>
     <mat-divider [vertical]="true"></mat-divider>
