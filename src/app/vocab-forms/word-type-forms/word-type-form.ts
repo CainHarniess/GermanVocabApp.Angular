@@ -19,15 +19,15 @@ export abstract class WordTypeForm implements OnInit {
   public readonly dropDownOptions: typeof DropDownOptions = DropDownOptions;
   public displayPrepositionCase$: Observable<boolean> = this.displayPrepositionCase.asObservable();
 
-  public isIrregular$!: Observable<boolean>;
-  public hasPreposition$!: Observable<boolean>;
-
   protected constructor(protected controlAvailabilityService: ControlAvailabilityService) {
 
   }
 
   @Input() public form!: FormGroup<VocabListItemForm>;
   @Input() public index!: number;
+
+  public isIrregular$!: Observable<boolean>;
+  public hasPreposition$!: Observable<boolean>;
 
   public get formRoot(): FormGroup { return this.form.root as FormGroup; }
 

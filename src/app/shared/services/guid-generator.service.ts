@@ -1,3 +1,4 @@
+// Stryker disable all : No coverage required.
 import { Injectable } from '@angular/core';
 
 @Injectable({

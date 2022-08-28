@@ -16,7 +16,7 @@ export class VocabListsComponent {
 
   }
 
-  private readonly showJson$ = new BehaviorSubject<boolean>(false);
+  public readonly showJson$ = new BehaviorSubject<boolean>(false);
   public readonly jsonButtonLabel$ = this.showJson$
     .pipe(
       map((val: boolean) => val ? "Hide JSON" : "Show JSON"),

@@ -61,6 +61,13 @@ describe("VocabListsComponent", () => {
       });
     }));
 
+    it("Should update the showJson$ value to true when called once.", waitForAsync(() => {
+      component.exportToJson();
+      component.showJson$.subscribe((value: boolean) => {
+        expect(value).toBeTrue();
+      });
+    }));
+
     it("JSON button label should be Show JSON after exportToJson called twice.", waitForAsync(() => {
       component.exportToJson();
       component.exportToJson();
@@ -70,10 +77,26 @@ describe("VocabListsComponent", () => {
     }));
   });
 
+  it("Should update the showJson$ value to true when called twice.", waitForAsync(() => {
+    component.exportToJson();
+    component.exportToJson();
+    component.showJson$.subscribe((value: boolean) => {
+      expect(value).toBeFalse();
+    });
+  }));
+
   describe("vocabLists$", () => {
     it("Should pass activated route data to the vocabLists$ property.", waitForAsync(() => {
       component.vocabLists$.subscribe((result: VocabList[]) => {
         expect(result).toBe(mockVocabLists);
+      });
+    }));
+  });
+
+  describe("showJson$", () => {
+    it("Should have false as initial value.", waitForAsync(() => {
+      component.showJson$.subscribe((result: boolean) => {
+        expect(result).toBeFalse();
       });
     }));
   });

@@ -46,10 +46,10 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
 
     this.validationChanges$ = this.wordType$;
     // Check subsribe is called?
-    this.validationChanges = this.validationChanges$.subscribe(wordType => this.updateNounValidation(wordType));
+    this.validationChanges = this.validationChanges$.subscribe(wordType => this.updateFormConfiguration(wordType));
   }
 
-  private updateNounValidation(wordType: WordType): void {
+  private updateFormConfiguration(wordType: WordType): void {
     if (this.currentFormManager) {
       //Check this is called?
       this.currentFormManager.removeConfiguration();

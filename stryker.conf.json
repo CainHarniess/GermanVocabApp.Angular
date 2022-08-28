@@ -5,7 +5,11 @@
     "src/**/*.ts",
     "!src/**/*.spec.ts",
     "!src/test.ts",
-    "!src/environments/*.ts"
+    "!src/environments/*.ts",
+    "!src/**/*.interface.ts",
+    "!src/**/*.enum.ts",
+    "!src/**/*-routing.module.ts",
+    "!src/**/*.module.ts",
   ],
   "testRunner": "karma",
   "karma": {
