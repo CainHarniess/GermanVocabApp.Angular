@@ -82,10 +82,11 @@
   justify-content: flex-start;
   align-content: flex-end;
   margin: 0 0 0 16px;
+  font-style: italic;
 }
 
-.additional-info-container {
-  font-style: italic;
+.additional-info-container p {
+  margin: 0;
 }
 
 .small-spacer {
