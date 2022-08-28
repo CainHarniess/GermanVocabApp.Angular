@@ -21,6 +21,7 @@ import { IndefiniteArticlePipe } from './pipes/indefinite-article.pipe';
 import { GermanShortCasePipe } from './pipes/german-short-case.pipe';
 import { FixedPluralDisplayPipe } from './pipes/fixed-plural-display.pipe';
 import { ThirdPersonAuxiliaryPipe } from './pipes/third-person-auxiliary.pipe';
+import { TransitiveDisplayPipe } from './pipes/transitive-display.pipe';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ThirdPersonAuxiliaryPipe } from './pipes/third-person-auxiliary.pipe';
     GermanShortCasePipe,
     FixedPluralDisplayPipe,
     ThirdPersonAuxiliaryPipe,
+    TransitiveDisplayPipe,
   ],
   providers: [
 
