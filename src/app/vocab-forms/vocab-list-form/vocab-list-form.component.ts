@@ -19,6 +19,7 @@ import { BehaviorSubject, debounceTime, filter, map, Observable, startWith, tap 
 })
 export class VocabListFormComponent implements OnInit {
   private readonly listItemControlCount = new BehaviorSubject<number>(0);
+  //Stryker disable StringLiteral, ObjectLiteral : Coverage not required.
   private readonly wordingDict: { [key: number]: string } = {
     0: "Why not add something, sugar?",
     1: "Ooh yeah. You like that?",
@@ -33,6 +34,7 @@ export class VocabListFormComponent implements OnInit {
     10: "You're on you're own now.",
     11: "",
   }
+  //Stryker restore StringLiteral, ObjectLiteral
 
   public readonly listItemControlCount$: Observable<number> = this.listItemControlCount.asObservable();
   public readonly placeholderWording$: Observable<string> = this.listItemControlCount$

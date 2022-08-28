@@ -1,6 +1,7 @@
 import { SingleSelectOption } from "../../forms/single-select/single-select-option.interface";
 import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase } from "../../vocab/models/data";
 
+// Stryker disable all : Coverage not required.
 export class DropDownOptions{
   public static readonly caseOptions: SingleSelectOption<Case>[] = [{
     value: Case.Nominative,
