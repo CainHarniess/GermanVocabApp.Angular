@@ -10,6 +10,7 @@
     "!src/**/*.enum.ts",
     "!src/**/*-routing.module.ts",
     "!src/**/*.module.ts",
+    "!src/**/in-memory-data-seeder.service.ts"
   ],
   "testRunner": "karma",
   "karma": {

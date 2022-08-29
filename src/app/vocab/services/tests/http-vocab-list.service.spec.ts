@@ -40,4 +40,13 @@ describe("HttpVocabListService", () => {
         .toHaveBeenCalledOnceWith(expectedUrlRoot, mockVocabList);
     });
   });
+
+  describe("add", () => {
+    it("Should call http.post with the correct value.", () => {
+      const mockListItem: any = {};
+      service.addListItem(mockListItem, testId);
+      expect(mockHttpClient.post)
+        .toHaveBeenCalledOnceWith(expectedUrlRoot + `/${testId}`, mockListItem);
+    });
+  });
 });

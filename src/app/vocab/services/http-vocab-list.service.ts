@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { VocabList } from '../models/vocab-list.interface';
+import { VocabList, VocabListItem } from '../models';
 import { VocabListService } from './vocab-list.service';
 
 @Injectable({ providedIn: "root" })
@@ -24,5 +24,9 @@ export class HttpVocabListService extends VocabListService {
 
   public override add(vocabList: VocabList): Observable<string> {
     return this.http.post<string>(this.url, vocabList);
+  }
+
+  public override addListItem(listItem: VocabListItem, listId: string): Observable<string> {
+    return this.http.post<string>(this.url + `/${listId}`, listItem);
   }
 }

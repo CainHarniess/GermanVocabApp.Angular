@@ -3,292 +3,22 @@ import { Injectable } from '@angular/core';
 import { GuidGeneratorService } from '../../shared/services/guid-generator.service';
 import { VocabListService } from './vocab-list.service';
 
-import { Observable, of } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, Separability, Transitivity, WordType } from '../models/data';
 import { VocabList } from '../models/vocab-list.interface';
+import { NotFoundError } from '../../../core/exceptions'
+import { isNullOrUndefined } from '../../../utilities';
+import { VocabListItem } from '../models';
+import { InMemoryDataSeeder } from './in-memory-data-seeder.service';
 
 @Injectable()
 export class InMemoryVocabListService extends VocabListService {
+  public readonly seedData: VocabList[]; 
 
-  constructor(private guidGenerator: GuidGeneratorService) {
+  constructor(private guidGenerator: GuidGeneratorService, inMemoryDataSeeder: InMemoryDataSeeder) {
     super();
+    this.seedData = inMemoryDataSeeder.seed();
   }
-
-  // Stryker disable all
-  public readonly seedData: VocabList[] = [{
-    id: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-    name: 'Kitchen',
-    description: 'A collection of common kitchen items.',
-    listItems: [
-      {
-        id: '473573a8-86d7-4b64-8e51-96fead598a7c',
-        wordType: WordType.Verb,
-        isWeakMasculineNoun: undefined,
-        reflexiveCase: undefined,
-        separability: Separability.None,
-        transitivity: Transitivity.Both,
-        thirdPersonPresent: "isst",
-        thirdPersonImperfect: "aß",
-        auxiliaryVerb: AuxiliaryVerb.Haben,
-        perfect: "gegessen",
-        gender: undefined,
-        german: 'essen',
-        plural: undefined,
-        preposition: undefined,
-        prepositionCase: undefined,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'to reply, retort',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality: undefined,
-      },
-      {
-        id: 'aeedd2e9-daa3-4b12-aaf0-b96dad211441',
-        wordType: WordType.Verb,
-        isWeakMasculineNoun: undefined,
-        reflexiveCase: ReflexiveCase.Accusative,
-        separability: Separability.None,
-        transitivity: Transitivity.Transitive,
-        thirdPersonPresent: undefined,
-        thirdPersonImperfect: undefined,
-        auxiliaryVerb: AuxiliaryVerb.Haben,
-        perfect: undefined,
-        gender: undefined,
-        german: 'begnügen',
-        plural: undefined,
-        preposition: "mit",
-        prepositionCase: Case.Dative,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'To content oneself with',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality: undefined,
-      },
-      {
-        id: 'c2f10b98-0c0c-4a12-a525-19e3dc64e899',
-        wordType: WordType.Verb,
-        isWeakMasculineNoun: undefined,
-        reflexiveCase: undefined,
-        separability: Separability.Separable,
-        transitivity: Transitivity.Intransitive,
-        thirdPersonPresent: "ankommt",
-        thirdPersonImperfect: "ankam",
-        auxiliaryVerb: AuxiliaryVerb.Sein,
-        perfect: "angekommen",
-        gender: undefined,
-        german: 'ankommen',
-        plural: undefined,
-        preposition: undefined,
-        prepositionCase: undefined,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'to arrive',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality: undefined,
-      },
-      {
-        id: 'dba640e1-682f-4f24-a303-1ae74fa762e0',
-        wordType: WordType.Verb,
-        isWeakMasculineNoun: undefined,
-        reflexiveCase: undefined,
-        separability: Separability.None,
-        transitivity: Transitivity.Intransitive,
-        thirdPersonPresent: "ist",
-        thirdPersonImperfect: "war",
-        auxiliaryVerb: AuxiliaryVerb.Sein,
-        perfect: "gewesen",
-        gender: undefined,
-        german: 'sein',
-        plural: undefined,
-        preposition: undefined,
-        prepositionCase: undefined,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'to be',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality: undefined,
-      },
-      {
-        id: 'e64d6146-93be-467b-a19e-8749a363b08b',
-        wordType: WordType.Noun,
-        isWeakMasculineNoun: false,
-        reflexiveCase: undefined,
-        separability: undefined,
-        transitivity: undefined,
-        thirdPersonPresent: undefined,
-        thirdPersonImperfect: undefined,
-        auxiliaryVerb: undefined,
-        perfect: undefined,
-        gender: Gender.Feminine,
-        german: 'Eifersucht',
-        plural: undefined,
-        preposition: "auf",
-        prepositionCase: Case.Accusative,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'jealousy',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality : FixedPlurality.None,
-      },
-      {
-        id: '1321a874-30d1-4be4-83bb-2c4e0f6c79da',
-        wordType: WordType.Noun,
-        isWeakMasculineNoun: false,
-        reflexiveCase: undefined,
-        separability: undefined,
-        transitivity: undefined,
-        thirdPersonPresent: undefined,
-        thirdPersonImperfect: undefined,
-        auxiliaryVerb: undefined,
-        perfect: undefined,
-        gender: Gender.Masculine,
-        german: 'Verrat',
-        plural: undefined,
-        preposition: "an",
-        prepositionCase: Case.Dative,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'betrayal',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality: FixedPlurality.Singular,
-      },
-      {
-        id: 'c020a16d-d135-4463-8b22-a7999cdd74a4',
-        wordType: WordType.Noun,
-        isWeakMasculineNoun: false,
-        reflexiveCase: undefined,
-        separability: undefined,
-        transitivity: undefined,
-        thirdPersonPresent: undefined,
-        thirdPersonImperfect: undefined,
-        auxiliaryVerb: undefined,
-        perfect: undefined,
-        gender: Gender.Masculine,
-        german: 'Wasserkocher',
-        plural: 'Wasserköcher',
-        preposition: undefined,
-        prepositionCase: undefined,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'kettle',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality: FixedPlurality.None,
-      },
-      {
-        id: '72cbb03f-b37a-4a41-ad93-0abd4dde28b7',
-        wordType: WordType.Noun,
-        isWeakMasculineNoun: true,
-        reflexiveCase: undefined,
-        separability: undefined,
-        transitivity: undefined,
-        thirdPersonPresent: undefined,
-        thirdPersonImperfect: undefined,
-        auxiliaryVerb: undefined,
-        perfect: undefined,
-        gender: Gender.Masculine,
-        german: 'Löwe',
-        plural: 'Löwen',
-        preposition: undefined,
-        prepositionCase: undefined,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'lion',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality: FixedPlurality.None,
-      },
-      {
-        id: 'e325e079-79c2-4478-9cc8-29ef80094e90',
-        wordType: WordType.Verb,
-        isWeakMasculineNoun: undefined,
-        reflexiveCase: undefined,
-        separability: Separability.None,
-        transitivity: Transitivity.Both,
-        thirdPersonPresent: undefined,
-        thirdPersonImperfect: undefined,
-        auxiliaryVerb: AuxiliaryVerb.Haben,
-        perfect: undefined,
-        gender: undefined,
-        german: 'kochen',
-        plural: undefined,
-        preposition: undefined,
-        prepositionCase: undefined,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'to cook',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality : undefined,
-      },
-      {
-        id: 'e545f0d0-aa5c-4a35-8bbd-0a5222ef48f5',
-        wordType: WordType.Verb,
-        isWeakMasculineNoun: undefined,
-        reflexiveCase: undefined,
-        separability: Separability.None,
-        transitivity: Transitivity.Both,
-        thirdPersonPresent: undefined,
-        thirdPersonImperfect: undefined,
-        auxiliaryVerb: AuxiliaryVerb.Haben,
-        perfect: undefined,
-        gender: undefined,
-        german: 'entgegnen',
-        plural: undefined,
-        preposition: 'auf',
-        prepositionCase: Case.Accusative,
-        comparative: undefined,
-        superlative: undefined,
-        english: 'to reply, retort',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality: undefined,
-      },
-      {
-        id: '0a94e979-d8ba-45b6-a277-25e9f60de608',
-        wordType: WordType.Adjective,
-        isWeakMasculineNoun: undefined,
-        reflexiveCase: undefined,
-        separability: undefined,
-        transitivity: undefined,
-        thirdPersonPresent: undefined,
-        thirdPersonImperfect: undefined,
-        auxiliaryVerb: undefined,
-        perfect: undefined,
-        gender: undefined,
-        german: 'gut',
-        plural: undefined,
-        preposition: undefined,
-        prepositionCase: undefined,
-        comparative: 'besser',
-        superlative: 'beste',
-        english: 'good',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality : undefined,
-      },
-      {
-        id: '97b053a7-35c2-4504-a649-846c1094ff12',
-        wordType: WordType.Adverb,
-        isWeakMasculineNoun: undefined,
-        reflexiveCase: undefined,
-        separability: undefined,
-        transitivity: undefined,
-        thirdPersonPresent: undefined,
-        thirdPersonImperfect: undefined,
-        auxiliaryVerb: undefined,
-        perfect: undefined,
-        gender: undefined,
-        german: 'schnell',
-        plural: undefined,
-        preposition: undefined,
-        prepositionCase: undefined,
-        comparative: 'schneller',
-        superlative: 'schnellste',
-        english: 'quickly',
-        vocabListId: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
-        fixedPlurality : undefined,
-      }
-    ],
-    authorName: "Cain Harniess",
-  }];
-  // Stryker restore all
 
   public override get(): Observable<VocabList[]> {
     return of(this.seedData)
@@ -301,7 +31,7 @@ export class InMemoryVocabListService extends VocabListService {
     const index: number = this.seedData.findIndex(vl => vl.id === vocabListId);
 
     if (index === -1) {
-      throw new Error(`Vocab with ID ${vocabListId} not found in in-memory array.`);
+      throw new NotFoundError(`Vocab list with ID ${vocabListId} not found in in-memory array.`);
     }
 
     return of(this.seedData[index])
@@ -320,6 +50,31 @@ export class InMemoryVocabListService extends VocabListService {
 
     this.seedData.push(vocabList);
     return of(vocabList.id);
+  }
+
+  public override addListItem(listItem: VocabListItem, listId: string): Observable<string> {
+    if (!isNullOrUndefined(listItem.id)) {
+      throw new Error(`Item already has ID ${listItem.id}.`);
+    }
+
+    if (!isNullOrUndefined(listItem.vocabListId)) {
+      throw new Error(`Item already belongs to list with ID ${listItem.vocabListId}.`);
+    }
+
+    let vocabList$: Observable<VocabList>;
+    try {
+      vocabList$ = this.getWithId(listId);
+    } catch (e) {
+      throw e;
+    }
+
+    listItem.id = this.guidGenerator.generate();
+
+    return vocabList$
+      .pipe(
+        tap((list: VocabList) => list.listItems.push(listItem)),
+        map((list: VocabList) => listItem.id!),
+      );
   }
 }
 

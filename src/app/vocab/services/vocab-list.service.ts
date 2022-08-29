@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { VocabList } from '../models/vocab-list.interface';
+import { VocabList, VocabListItem } from '../models';
 
 export abstract class VocabListService {
 
@@ -8,4 +8,6 @@ export abstract class VocabListService {
   public abstract getWithId(vocabListId: string): Observable<VocabList>;
 
   public abstract add(vocabList: VocabList): Observable<string>;
+
+  public abstract addListItem(listItem: VocabListItem, listId: string): Observable<string>;
 }
