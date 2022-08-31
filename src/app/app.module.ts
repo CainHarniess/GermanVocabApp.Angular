@@ -32,7 +32,7 @@ import { InMemoryDataSeeder } from './vocab/services/in-memory-data-seeder.servi
   providers: [
     //{ provide: VocabListService, useClass: HttpVocabListService },
     InMemoryDataSeeder,
-    //{ provide: VocabListService, useClass: InMemoryVocabListService },
+    { provide: VocabListService, useClass: InMemoryVocabListService },
   ],
   bootstrap: [AppComponent]
 })

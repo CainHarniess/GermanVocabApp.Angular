@@ -31,7 +31,7 @@ export class VocabListFormComponent implements OnInit {
     7: "You're scaring me.",
     8: "I can't watch you do this to yourself.",
     9: "I'm leaving.",
-    10: "You're on you're own now.",
+    10: "You're on your own now.",
     11: "",
   }
   //Stryker restore StringLiteral, ObjectLiteral
