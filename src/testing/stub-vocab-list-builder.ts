@@ -21,6 +21,16 @@ export class StubVocabListBuilder {
     return this;
   }
 
+  public withName(name: string): StubVocabListBuilder {
+    this.stub.name = name;
+    return this;
+  }
+
+  public withDescription(description: string): StubVocabListBuilder {
+    this.stub.description = description;
+    return this;
+  }
+
   public build(): VocabList {
     return this.stub;
   }

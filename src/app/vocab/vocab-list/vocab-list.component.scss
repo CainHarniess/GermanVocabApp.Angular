@@ -2,6 +2,21 @@
     width: 900px;
 }
 
+.list-items-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+}
+
+.add-item-control-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+}
+
 @media screen and (max-width: 992px) {
   .vocab-list-container {
     width: 100%;
