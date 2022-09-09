@@ -90,11 +90,25 @@ describe("VocabListItemFormBuilder", () => {
     ];
 
     tests.forEach(test => {
-      xit(`Should add ${test.controlName} control with default value`
+      it(`Should add ${test.controlName} control with default value`
         + ` ${test.expectedInitialValue}.`, () => {
           const control: AbstractControl<any> = form.get(test.controlName)!;
           expect(control.value).toBe(test.expectedInitialValue);
-        });
+      });
+
+      if (isNullOrUndefined(test.expectedValidator)) {
+        it(`Should not provide initial validator function to ${test.controlName} control.`,
+          () => {
+            const control: AbstractControl<any> = form.get(test.controlName)!;
+            expect(control.validator).toBe(null);
+          });
+      } else {
+        it(`Should set ${test.controlName} validator to be`
+          + `Validators.${test.expectedValidator!.name}.`, () => {
+            const control: AbstractControl<any> = form.get(test.controlName)!;
+            expect(control.validator).toBe(test.expectedValidator);
+          });
+      }
     });
   });
 });
