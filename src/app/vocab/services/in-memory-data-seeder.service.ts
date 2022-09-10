@@ -3,7 +3,7 @@ import { VocabList } from "../models";
 import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, Separability, Transitivity, WordType } from "../models/data";
 
 @Injectable()
-export class InMemoryDataSeeder {
+export class InMemoryDataProvider {
   public seed(): VocabList[] {
     return [{
       id: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',

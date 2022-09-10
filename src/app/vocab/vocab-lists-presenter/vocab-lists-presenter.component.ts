@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { VocabList } from '../models/vocab-list.interface';
 
 @Component({
@@ -8,5 +9,16 @@ import { VocabList } from '../models/vocab-list.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsPresenterComponent {
-  @Input() public vocabLists!: VocabList[];
+  @Input() public lists!: VocabList[];
+
+  @Output() public readonly view = new EventEmitter<string>();
+  @Output() public readonly edit = new EventEmitter<string>();
+
+  public viewList(id: string): void {
+    this.view.emit(id);
+  }
+
+  public editList(id: string): void {
+    this.edit.emit(id);
+  }
 }

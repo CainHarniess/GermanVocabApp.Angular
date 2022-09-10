@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NotImplementedError } from '../../../core/errors';
 
 import { VocabList, VocabListItem } from '../models';
 import { VocabListService } from './vocab-list.service';
@@ -29,4 +30,9 @@ export class HttpVocabListService extends VocabListService {
   public override addListItem(listItem: VocabListItem, listId: string): Observable<string> {
     return this.http.post<string>(this.url + `/${listId}`, listItem);
   }
+
+  public override update(updatedList: VocabList): Observable<VocabList> {
+    throw new NotImplementedError();
+  }
+
 }

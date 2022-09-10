@@ -6,35 +6,32 @@ import { VocabListService } from './vocab-list.service';
 import { map, Observable, of, tap } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { VocabList } from '../models/vocab-list.interface';
-import { NotFoundError } from '../../../core/exceptions'
+import { NotFoundError } from '../../../core/errors'
 import { isNullOrUndefined } from '../../../utilities';
 import { VocabListItem } from '../models';
-import { InMemoryDataSeeder } from './in-memory-data-seeder.service';
+import { InMemoryDataProvider } from './in-memory-data-seeder.service';
+import { Undefined } from '../../../core/types';
 
 @Injectable()
 export class InMemoryVocabListService extends VocabListService {
-  public readonly seedData: VocabList[]; 
+  public readonly lists: VocabList[]; 
 
-  constructor(private guidGenerator: GuidGeneratorService, inMemoryDataSeeder: InMemoryDataSeeder) {
+  constructor(private guidGenerator: GuidGeneratorService, inMemoryDataSeeder: InMemoryDataProvider) {
     super();
-    this.seedData = inMemoryDataSeeder.seed();
+    this.lists = inMemoryDataSeeder.seed();
   }
 
   public override get(): Observable<VocabList[]> {
-    return of(this.seedData)
+    return of(this.lists)
       .pipe(
         delay(500),
       );
   }
 
-  public override getWithId(vocabListId: string): Observable<VocabList> {
-    const index: number = this.seedData.findIndex(vl => vl.id === vocabListId);
+  public override getWithId(id: string): Observable<VocabList> {
+    const index: number = this.findIndex(id);
 
-    if (index === -1) {
-      throw new NotFoundError(`Vocab list with ID ${vocabListId} not found in in-memory array.`);
-    }
-
-    return of(this.seedData[index])
+    return of(this.lists[index])
       .pipe(
         delay(500),
       );
@@ -48,7 +45,7 @@ export class InMemoryVocabListService extends VocabListService {
       li.vocabListId = vocabList.id;
     });
 
-    this.seedData.push(vocabList);
+    this.lists.push(vocabList);
     return of(vocabList.id);
   }
 
@@ -76,6 +73,23 @@ export class InMemoryVocabListService extends VocabListService {
         map((list: VocabList) => listItem.id!),
       );
   }
+
+  public override update(updatedList: VocabList): Observable<VocabList> {
+    const id: Undefined<string> = updatedList.id;
+    if (!id) {
+      throw new Error("ID must be specified on the list to be updated.");
+    }
+    const index: number = this.findIndex(id)
+    this.lists[index] = updatedList;
+    return of(updatedList)
+  }
+
+  private findIndex(id: string): number {
+    const index: number = this.lists.findIndex(vl => vl.id === id);
+
+    if (index === -1) {
+      throw new NotFoundError(`Vocab list with ID ${id} not found in in-memory array.`);
+    }
+    return index;
+  }
 }
-
-

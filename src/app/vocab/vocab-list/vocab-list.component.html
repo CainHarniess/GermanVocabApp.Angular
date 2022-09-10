@@ -7,8 +7,15 @@
       </div>
     </header>
     <mat-divider></mat-divider>
-    <div *ngFor="let listItem of vocabList.listItems">
-      <vocab-list-item [item]="listItem"></vocab-list-item>
+    <div class="list-items-container">
+      <vocab-list-item *ngFor="let listItem of vocabList.listItems"
+                       [item]="listItem"></vocab-list-item>
+    </div>
+    <div class="add-item-control-panel">
+      <button mat-raised-button color="primary" type="button" class="large"
+              (click)="addVocabListItem()">
+        Add
+      </button>
     </div>
   </div>
 </main>

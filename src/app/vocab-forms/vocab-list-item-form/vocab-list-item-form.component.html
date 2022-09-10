@@ -13,7 +13,7 @@
     </div>
     <form-drop-down-control [form]="form" controlName="wordType"
                             controlId="wordType_{{ index }}" label="Word type"
-                            [options]="dropDownOptions.wordTypeOptions"></form-drop-down-control>
+                            [options]="dropDownOptions"></form-drop-down-control>
 
     <div *ngrxLet="wordType$ as wordType">
       <div [ngSwitch]="wordType">

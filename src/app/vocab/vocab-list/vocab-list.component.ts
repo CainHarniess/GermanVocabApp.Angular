@@ -19,4 +19,8 @@ export class VocabListComponent {
     .pipe(
       map((data: Data) => data[ResolvedData.ResolvedList]),
   );
+
+  public addVocabListItem(): void {
+
+  }
 }

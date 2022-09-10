@@ -6,7 +6,7 @@ import { createStubList, createStubListItem } from "../../../../utilities/testin
 import { VocabListItem } from "../../models";
 import { WordType } from "../../models/data";
 import { VocabList } from "../../models/vocab-list.interface";
-import { InMemoryDataSeeder } from "../in-memory-data-seeder.service";
+import { InMemoryDataProvider } from "../in-memory-data-seeder.service";
 
 describe("InMemoryVocabListService", () => {
   const mockListGuid: string = "9244e805-f3ea-4cad-9201-d38110c9b4fe"
@@ -24,7 +24,7 @@ describe("InMemoryVocabListService", () => {
       listItems: [],
       authorName: "Testy McTestface"
     };
-    service = new InMemoryVocabListService(mockGuidGenerator, new InMemoryDataSeeder());
+    service = new InMemoryVocabListService(mockGuidGenerator, new InMemoryDataProvider());
   });
 
   describe("getWithId", () => {
@@ -36,7 +36,7 @@ describe("InMemoryVocabListService", () => {
     });
 
     it("Should not throw an error the ID is found.", () => {
-      const realId: string = service.seedData[0].id!;
+      const realId: string = service.lists[0].id!;
       expect(function () { service.getWithId(realId) })
         .not.toThrowError();
     });
@@ -49,14 +49,14 @@ describe("InMemoryVocabListService", () => {
     });
 
     it("Should increase the number of vocab lists by one.", () => {
-      expect(service.seedData.length).toEqual(1);
+      expect(service.lists.length).toEqual(1);
       service.add(mockVocabList);
-      expect(service.seedData.length).toEqual(2);
+      expect(service.lists.length).toEqual(2);
     });
 
     it("Should add the new list to the seed data.", () => {
       service.add(mockVocabList);
-      expect(service.seedData).toContain(mockVocabList);
+      expect(service.lists).toContain(mockVocabList);
     });
 
     it("Should call the guid generator service.", () => {

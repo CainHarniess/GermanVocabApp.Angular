@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
-import { VocabList } from '.././models/vocab-list.interface';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { ResolvedData } from '../models/data/resolved-data.enum';
+
+import { VocabList } from '.././models/vocab-list.interface';
 
 @Component({
   selector: 'app-vocab-lists',
@@ -12,7 +13,7 @@ import { ResolvedData } from '../models/data/resolved-data.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsComponent {
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute) {
 
   }
 
@@ -23,12 +24,23 @@ export class VocabListsComponent {
     );
 
   public readonly vocabListsDisplay$ = new BehaviorSubject<VocabList[]>([]);
-  public readonly vocabLists$: Observable<VocabList[]> = this.activatedRoute.data
+  public readonly vocabLists$: Observable<VocabList[]> = this.route.data
     .pipe(
       map((data: Data) => data[ResolvedData.ResolvedLists]),
       tap((data: VocabList[]) => this.vocabListsDisplay$.next(data)),
-  );
+    );
 
+  public addList(): void {
+    this.router.navigate(["new"], { relativeTo: this.route });
+  }
+
+  public editList(id: string): void {
+    this.router.navigate([id, "edit"], { relativeTo: this.route });
+  }
+
+  public viewList(id: string): void {
+    this.router.navigate([id], { relativeTo: this.route });
+  }
 
   public exportToJson(): void {
     this.showJson$.next(!this.showJson$.value);

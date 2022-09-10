@@ -4,7 +4,7 @@
       <div class="vocab-lists-header">
         <h1>Your vocab lists</h1>
         <div class="vocab-lists-controls">
-          <a mat-raised-button color="primary" [routerLink]="['/vocab', 'vocab-list-form']">
+          <a mat-raised-button color="primary" (click)="addList()">
             Add new list
           </a>
           <button mat-raised-button color="accent" type="button" (click)="exportToJson()">
@@ -14,7 +14,10 @@
       </div>
     </header>
     <mat-divider></mat-divider>
-    <vocab-lists-presenter [vocabLists]="(vocabLists$ | async)!"></vocab-lists-presenter>
+    <vocab-lists-presenter [lists]="(vocabLists$ | async)!"
+                           (view)="viewList($event)"
+                           (edit)="editList($event)">
+    </vocab-lists-presenter>
     <div [ngClass]="{'hidden' : !(showJson$ | async)}" >
       <mat-divider></mat-divider>
       <div>

@@ -1,6 +1,6 @@
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { VocabListItemForm } from ".";
 
-import { VocabListItemForm } from "./vocab-list-item-form.interface";
 
 export interface VocabListForm {
   name: FormControl<string | null>;

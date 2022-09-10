@@ -11,17 +11,26 @@ mat-nav-list {
   height: 100%;
 }
 
+mat-list-item {
+  height: 80px;
+}
+
 .list-item-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.mat-line-height-guideline {
+  display: none;
 }
 
 .list-item-container a {
     display: flex;
     flex-direction: column;
-    flex: 1 0 100%;
+    flex: 1 1 100%;
+    margin: 0 16px;
 }
 
 .list-item-container a, .list-item-container button {
@@ -31,6 +40,12 @@ mat-nav-list {
 .list-item-actions {
   display: flex;
   flex-direction: column;
+  flex: 0 0 40px;
   justify-content: center;
   align-items: center;
+}
+
+.list-item-actions button {
+    justify-content: center;
+    align-items: center;
 }

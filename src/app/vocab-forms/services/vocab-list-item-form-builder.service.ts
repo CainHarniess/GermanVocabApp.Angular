@@ -5,6 +5,7 @@ import { ModelFormBuilder } from '../../shared/services/model-form-builder.class
 import { Case, FixedPlurality, Gender, ReflexiveCase, Separability, WordType } from '../../vocab/models/data';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 import { Null } from "../../../core/types";
+import { VocabListItem } from '../../vocab/models';
 
 @Injectable()
 export class VocabListItemFormBuilder extends ModelFormBuilder {
@@ -35,8 +36,10 @@ export class VocabListItemFormBuilder extends ModelFormBuilder {
       isIrregular: this.formBuilder.control<Null<boolean>>(null),
     });
   }
-}
 
-function Null<T>(arg0: null) {
-    throw new Error('Function not implemented.');
+  public buildFromModel(listItem: VocabListItem): FormGroup<VocabListItemForm> {
+    const form: FormGroup<VocabListItemForm> = this.build();
+    form.patchValue(listItem);
+    return form;
+  }
 }
