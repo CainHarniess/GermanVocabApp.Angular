@@ -8,20 +8,30 @@ import { VocabListsResolver } from './services/vocab-lists.resolver';
 import { VocabListComponent } from './vocab-list/vocab-list.component';
 import { VocabListResolver } from './services/vocab-list.resolver';
 
+export enum VocabRoutePath {
+  Root = "vocab",
+  VocabLists = "vocab-lists",
+  NewVocabList = "vocab-lists/new",
+}
+
 const routes: Routes = [
   {
-    path: "vocab-lists",
+    path: VocabRoutePath.VocabLists,
     title: "German Vocab App | Vocab | Lists",
     component: VocabListsComponent,
     resolve: { resolvedVocabLists: VocabListsResolver }
   }, {
-    path: "vocab-lists/:id",
+    path: `${VocabRoutePath.VocabLists}/:id`,
     title: "German Vocab App | Vocab | Vocab List",
     component: VocabListComponent,
     resolve: { resolvedVocabList: VocabListResolver }
   }, {
     path: "vocab-list-form",
-    title: "German Vocab App | Vocab | Vocab List Form",
+    title: "German Vocab App | Vocab | New Vocab List",
+    component: VocabListFormComponent
+  }, {
+    path: `${VocabRoutePath.VocabLists}/:id/edit`,
+    title: "German Vocab App | Vocab | Edit Vocab List",
     component: VocabListFormComponent
   },
   { path: "", redirectTo: "vocab-lists", pathMatch: "full" },
