@@ -8,7 +8,7 @@ import { VocabListForm } from '../models/vocab-list-form.interface';
 import { VocabListFormBuilder } from '../services/vocab-list-form-builder.service';
 import { VocabListItemFormBuilder } from '../services/vocab-list-item-form-builder.service';
 
-import { BehaviorSubject, debounceTime, filter, map, Observable, startWith, tap } from 'rxjs';
+import { BehaviorSubject, debounceTime, filter, map, Observable, startWith, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vocab-list-form',
@@ -18,7 +18,6 @@ import { BehaviorSubject, debounceTime, filter, map, Observable, startWith, tap 
   providers: [VocabListFormBuilder, VocabListItemFormBuilder]
 })
 export class VocabListFormComponent implements OnInit {
-  private readonly listItemControlCount = new BehaviorSubject<number>(0);
   //Stryker disable StringLiteral, ObjectLiteral : Coverage not required.
   private readonly wordingDict: { [key: number]: string } = {
     0: "Why not add something, sugar?",
@@ -36,7 +35,7 @@ export class VocabListFormComponent implements OnInit {
   }
   //Stryker restore StringLiteral, ObjectLiteral
 
-  public readonly listItemControlCount$: Observable<number> = this.listItemControlCount.asObservable();
+  public readonly listItemControlCount$ = new BehaviorSubject<number>(0);
   public readonly placeholderWording$: Observable<string> = this.listItemControlCount$
     .pipe(
       filter((val: number) => val <= 11),
@@ -47,17 +46,15 @@ export class VocabListFormComponent implements OnInit {
     private listFormBuilder: VocabListFormBuilder,
     private listItemFormBuilder: VocabListItemFormBuilder) { }
 
-  public get listItemsControl(): FormArray { return <FormArray<FormGroup>>this.vocabListForm.get("listItems")!; }
+  public get listItemsControl(): FormArray { return this.vocabListForm.controls.listItems; }
 
   public vocabListForm!: FormGroup<VocabListForm>;
-  public vocabListTitle$!: Observable<string>;
+  public listTitle$!: Observable<string>;
   public descriptionLength$!: Observable<number>;
 
   ngOnInit(): void {
-    // Check function is called
-    // Check vocabListForm property has expected value
     this.vocabListForm = this.listFormBuilder.build();
-    this.vocabListTitle$ = this.vocabListForm.controls.name.valueChanges
+    this.listTitle$ = this.vocabListForm.controls.name.valueChanges
       .pipe(
         startWith("New vocab list"),
         debounceTime(300),
@@ -67,18 +64,15 @@ export class VocabListFormComponent implements OnInit {
       .pipe(
         map((val: string | null) => val ? val.length : 0),
         filter((result: number) => result > 150),
-    )
+      );
   }
 
   public addListItemControl(): void {
-    // Check expected control is in the list?? nah, that requires testing FormArray
     this.listItemsControl.push(this.generateListItemControl());
-    // Test that the count has increase (via the observable rather than the private field).
-    this.listItemControlCount.next(this.listItemsControl.length);
+    this.listItemControlCount$.next(this.listItemsControl.length);
   }
 
   private generateListItemControl(): FormGroup {
-    //Check that the the expected function is called.
     return this.listItemFormBuilder.build();
   }
 
@@ -89,31 +83,24 @@ export class VocabListFormComponent implements OnInit {
 
   public removeListItemControl(index: number): void {
     if (index < 0) {
-      // Check an exception is thrown.
-      //Update to throw exception.
-      console.error("Index may not be negative.")
-      return;
+      throw new Error("Index may not be negative.");
     } else if (index >= this.listItemsControl.length) {
-      // Check an exception is thrown.
-      //Update to throw exception.
-      console.error("Index exceeds the size of the list items form control array.")
-      return;
+      throw new Error("Index exceeds the size of the list items form control array.")
     }
-    // Check control count has decreased.
-    // Check expected control has been removed.
     this.listItemsControl.controls.splice(index, 1);
-    this.listItemControlCount.next(this.listItemsControl.length);
+    this.listItemControlCount$.next(this.listItemsControl.length);
   }
 
-  public onFormSubmit(): void {
+  private subscriptions?: Subscription;
+  public submit(): void {
     const vocabList: VocabList = this.vocabListForm.value as VocabList;
-    // Check vocab list service method is called with correct ID.
-
-    const addVocabListSubsc = this.vocabService.add(vocabList)
+    this.subscriptions = this.vocabService.add(vocabList)
       .subscribe(newListId => {
-        // Check router navigation is done correctly?
         this.router.navigate(["/vocab", "vocab-lists"]);
-        addVocabListSubsc.unsubscribe();
       });
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions?.unsubscribe()
   }
 }
