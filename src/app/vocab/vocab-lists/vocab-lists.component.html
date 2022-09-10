@@ -14,7 +14,7 @@
       </div>
     </header>
     <mat-divider></mat-divider>
-    <vocab-lists-presenter [vocabLists]="(vocabLists$ | async)!"></vocab-lists-presenter>
+    <vocab-lists-presenter [lists]="(vocabLists$ | async)!"></vocab-lists-presenter>
     <div [ngClass]="{'hidden' : !(showJson$ | async)}" >
       <mat-divider></mat-divider>
       <div>
