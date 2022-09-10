@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { EMPTY, Observable } from 'rxjs';
-import { VocabList } from '../../vocab/models';
-import { ResolvedData } from '../../vocab/models/data';
 
+import { Undefined } from '../../../core/types';
+
+import { VocabList, VocabListItem } from '../../vocab/models';
+import { ResolvedData } from '../../vocab/models/data'
 import { VocabListService } from '../../vocab/services';
-import { VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
+import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 
 @Component({
@@ -16,16 +18,32 @@ import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditVocabListComponent extends AbstractVocabListFormComponent {
+  public readonly preEditList: VocabList;
+
   constructor(router: Router, vocabService: VocabListService,
     listFormBuilder: VocabListFormBuilder,
-    listItemFormBuilder: VocabListItemFormBuilder, private route: ActivatedRoute) {
-    super(router, vocabService, listFormBuilder, listItemFormBuilder);
+    listItemFormBuilder: VocabListItemFormBuilder, title$Builder: ListTitleObservableBuilder,
+    private route: ActivatedRoute) {
+    super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder);
+    const dataSnapshot: Data = this.route.snapshot.data;
+    this.preEditList = dataSnapshot[ResolvedData.ResolvedList];
   }
 
-  protected initialiseForm(): void {
-    const list: VocabList = this.route.snapshot.data[ResolvedData.ResolvedList];
-    this.vocabListForm = this.listFormBuilder.buildFromModel(list);
-    this.vocabListForm.updateValueAndValidity();
+  public override get preEditData(): Undefined<VocabList> { return this.preEditList; }
+
+  public override ngOnInit(): void {
+    super.ngOnInit();
+
+    const controls = this.vocabListForm.controls;
+    this.title$ = this.title$Builder.build(this.preEditList.name, controls.name);
+    this.vocabListForm.patchValue(this.preEditList);
+
+    const listItemsControl = controls.listItems;
+    const initialListItems = this.preEditList.listItems
+    initialListItems.forEach((item: VocabListItem) => {
+      const itemControl = this.listItemFormBuilder.build();
+      listItemsControl.push(itemControl);
+    });
   }
 
   public readonly placeholderWording$: Observable<string> = EMPTY;

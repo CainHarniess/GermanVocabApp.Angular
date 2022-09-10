@@ -37,9 +37,9 @@ export class VocabListItemFormBuilder extends ModelFormBuilder {
     });
   }
 
-  public buildFromModel(vocabList: VocabListItem): FormGroup<VocabListItemForm> {
+  public buildFromModel(listItem: VocabListItem): FormGroup<VocabListItemForm> {
     const form: FormGroup<VocabListItemForm> = this.build();
-    form.patchValue(vocabList);
+    form.patchValue(listItem);
     return form;
   }
 }

@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
-import { map, Observable, Subscription, tap } from 'rxjs';
+import { map, Observable, Subscription, startWith } from 'rxjs';
+import { Null, Undefined } from '../../../core/types';
 import { SingleSelectOption } from '../../forms/single-select/single-select-option.interface';
+import { VocabListItem } from '../../vocab/models';
 
 import { WordType } from '../../vocab/models/data/word-type.enum';
 import { WordTypeFormManager } from '../form-management';
@@ -31,6 +33,7 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
   @Input() public parentForm!: FormGroup<VocabListForm>;
   @Input() public form!: FormGroup<VocabListItemForm>;
   @Input() public index!: number;
+  @Input() public listItem?: VocabListItem | undefined;
 
   @Output() public removeListItem = new EventEmitter<number>();
 
@@ -40,16 +43,34 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     // Can we test this?
-    this.wordType$ = this.form.controls.wordType.valueChanges
-      .pipe(
-        map((val: any) => val as WordType),
-        tap((val: WordType) => console.log(val))
-    );
+    const controls: VocabListItemForm = this.form.controls;
+    this.wordType$ = this.constructWordType$(this.listItem, controls.wordType);
 
     this.validationChanges$ = this.wordType$;
     // Check subscribe is called?
-    this.validationChanges = this.validationChanges$.subscribe(wordType => this.updateFormConfiguration(wordType));
+    this.validationChanges = this.validationChanges$.subscribe(wordType => {
+      this.updateFormConfiguration(wordType)
+    });
+
+    if (!this.listItem) {
+      return;
+    }
+    this.form.patchValue(this.listItem);
   }
+
+  private constructWordType$(listItem: Undefined<VocabListItem>, wordTypeControl: FormControl<Null<WordType>>): Observable<WordType> {
+    if (!listItem) {
+      return wordTypeControl.valueChanges
+        .pipe(
+          map((val: any) => val as WordType),
+        );
+    }
+    return wordTypeControl.valueChanges
+      .pipe(
+        startWith(listItem.wordType),
+        map((val: any) => val as WordType),
+      );
+   }
 
   private updateFormConfiguration(wordType: WordType): void {
     if (this.currentFormManager) {

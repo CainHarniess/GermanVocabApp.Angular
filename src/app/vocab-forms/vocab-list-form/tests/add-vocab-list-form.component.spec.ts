@@ -3,17 +3,24 @@ import { FormBuilder } from "@angular/forms";
 
 import { Observable, of, Subscription } from "rxjs";
 
-import { VocabRoutePath } from "../../vocab/vocab-routing.module";
-import { VocabListFormBuilder, VocabListItemFormBuilder } from "../services";
-import { AddVocabListFormComponent } from "./add-vocab-list-form.component";
+import { VocabRoutePath } from "../../../vocab/vocab-routing.module";
+import { VocabListFormBuilder, VocabListItemFormBuilder } from "../../services";
+import { AddVocabListFormComponent } from "../add-vocab-list-form.component";
+import { contructMocks, newConstructMockListForm, VocabListFormComponentMocks } from "./vocab-list-form.spec.utilities";
 
 describe("AddVocabListComponent", () => {
+  let mocks: VocabListFormComponentMocks;
+  let newMockListForm: any;
+
   let componentWithRealBuilders: AddVocabListFormComponent;
   let componentWithMockBuilders: AddVocabListFormComponent;
   let mockRouter: any;
   let mockListService: any;
+  let mockListForm: any;
   let mockListFormBuilder: any;
   let mockListItemFormBuilder: any
+  let mockObservableBuilderForMocks: any
+  let mockObservableBuilderForReal: any
   const  fb = new FormBuilder();
 
   const mockFormValue: string = "Mock form value";
@@ -24,13 +31,18 @@ describe("AddVocabListComponent", () => {
   let addList$: Observable<string> = of("Mock list ID")
 
   beforeEach(() => {
+    mocks = contructMocks();
+    newMockListForm = newConstructMockListForm(fb);
+
+
     componentWithMockBuilders = constructComponentWithMockBuilders();
     componentWithRealBuilders = constructCompenentWithRealBuilders(fb);
 
-    const mockListForm: any = constructMockListForm();
+    mockListForm = constructMockListForm();
 
     mockListFormBuilder.build.and.returnValue(mockListForm);
     mockListService.add.and.returnValue(addList$);
+    mockObservableBuilderForReal.build.and.returnValue(of("Test title"));
 
     componentWithMockBuilders.ngOnInit();
     componentWithRealBuilders.ngOnInit();
@@ -40,14 +52,11 @@ describe("AddVocabListComponent", () => {
     it("Should build the vocab list form", () => {
       expect(mockListFormBuilder.build).toHaveBeenCalledOnceWith();
     });
-  });
 
-  describe("listTitle$", () => {
-    it("Should have correct initial title.", waitForAsync(() => {
-      componentWithRealBuilders.listTitle$.subscribe((title: string) => {
-        expect(title).toBe("New vocab list");
-      });
-    }));
+    it("Should call title observable builder with correct arguments.", () => {
+      expect(mockObservableBuilderForMocks.build)
+        .toHaveBeenCalledOnceWith("New vocab list", mockListForm.controls.name);
+    });
   });
 
   describe("descriptionLength$", () => {
@@ -154,15 +163,18 @@ describe("AddVocabListComponent", () => {
     mockListService = jasmine.createSpyObj("mockListService", ["add"]);
     mockListFormBuilder = jasmine.createSpyObj("mockListFormBuilder", ["build"]);
     mockListItemFormBuilder = jasmine.createSpyObj("mockListItemFormBuilder", ["build"]);
+    mockObservableBuilderForMocks = jasmine.createSpyObj("mockObservableBuilderForMocks", ["build"]);
+    mockObservableBuilderForReal = jasmine.createSpyObj("mockObservableBuilderForReal", ["build"]);
+
     return new AddVocabListFormComponent(mockRouter, mockListService,
-      mockListFormBuilder, mockListItemFormBuilder);
+      mockListFormBuilder, mockListItemFormBuilder, mockObservableBuilderForMocks);
   }
 
   function constructCompenentWithRealBuilders(fb: FormBuilder): AddVocabListFormComponent {
     const listItemFormBuilder = new VocabListItemFormBuilder(fb);
     const listFormBuilder = new VocabListFormBuilder(fb, listItemFormBuilder);
     return new AddVocabListFormComponent(mockRouter, mockListService,
-      listFormBuilder, listItemFormBuilder);
+      listFormBuilder, listItemFormBuilder, mockObservableBuilderForReal);
   }
 
   function constructMockListForm(): any {

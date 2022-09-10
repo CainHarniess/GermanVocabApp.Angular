@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ModelFormBuilder } from '../../shared/services/model-form-builder.class';
 import { VocabList, VocabListItem } from '../../vocab/models';

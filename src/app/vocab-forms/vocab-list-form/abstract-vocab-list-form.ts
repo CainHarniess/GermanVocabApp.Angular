@@ -1,12 +1,15 @@
-import { AfterContentInit, Directive, OnDestroy, OnInit } from "@angular/core";
+import { Directive, OnDestroy, OnInit } from "@angular/core";
 import { FormArray, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { BehaviorSubject, debounceTime, filter, map, Observable, startWith, Subscription } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, Subscription } from 'rxjs';
+
+import { Undefined } from "../../../core/types";
+import { VocabList } from "../../vocab/models";
 
 import { VocabListService } from '../../vocab/services';
 import { VocabListForm } from "../models";
-import { VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
+import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 
 @Directive()
 export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
@@ -15,30 +18,25 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   protected constructor(protected router: Router,
     protected vocabService: VocabListService,
     protected listFormBuilder: VocabListFormBuilder,
-    protected listItemFormBuilder: VocabListItemFormBuilder) {
+    protected listItemFormBuilder: VocabListItemFormBuilder, protected title$Builder: ListTitleObservableBuilder) {
 
   }
 
+  public abstract get preEditData(): Undefined<VocabList>;
+
   public vocabListForm!: FormGroup<VocabListForm>;
-  public listTitle$!: Observable<string>;
+  public title$!: Observable<string>;
   public descriptionLength$!: Observable<number>;
 
   public ngOnInit(): void {
-    this.initialiseForm();
-    this.listTitle$ = this.vocabListForm.controls.name.valueChanges
-      .pipe(
-        startWith("New vocab list"),
-        debounceTime(300),
-        map((val: string | null) => (!val || val === "") ? "New vocab list" : val),
-      );
-    this.descriptionLength$ = this.vocabListForm.controls.description.valueChanges
+    this.vocabListForm = this.listFormBuilder.build();
+    const controls = this.vocabListForm.controls;
+    this.descriptionLength$ = controls.description.valueChanges
       .pipe(
         map((val: string | null) => val ? val.length : 0),
         filter((result: number) => result > 150),
       );
   }
-
-  protected abstract initialiseForm(): void;
 
   public get listItemsControl(): FormArray {
     return this.vocabListForm.controls.listItems;

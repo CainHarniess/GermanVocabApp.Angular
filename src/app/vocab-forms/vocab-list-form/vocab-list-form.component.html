@@ -2,7 +2,7 @@
   <div>
     <header>
       <div class="main-content-header">
-        <h1>{{ listTitle$ | async }}</h1>
+        <h1>{{ title$ | async }}</h1>
       </div>
     </header>
     <mat-divider></mat-divider>
@@ -28,6 +28,7 @@
                *ngFor="let listItem of listItemsControl.controls; let i=index">
             <app-vocab-list-item-form [parentForm]="vocabListForm"
                                       [form]="getListItemControl(i)" [index]="i"
+                                      [listItem]="preEditData!.listItems[i]"
                                       (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
           </div>
           <mat-divider *ngIf="listItemsControl.controls.length > 0"></mat-divider>
