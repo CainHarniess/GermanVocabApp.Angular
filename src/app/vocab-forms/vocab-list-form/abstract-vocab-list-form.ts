@@ -1,4 +1,4 @@
-import { Directive, OnDestroy, OnInit } from "@angular/core";
+import { AfterContentInit, Directive, OnDestroy, OnInit } from "@angular/core";
 import { FormArray, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 
@@ -9,7 +9,7 @@ import { VocabListForm } from "../models";
 import { VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 
 @Directive()
-export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
+export abstract class AbstractVocabListFormComponent implements AfterContentInit, OnDestroy {
   public readonly listItemControlCount$ = new BehaviorSubject<number>(0);
 
   protected constructor(protected router: Router,
@@ -23,8 +23,8 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   public listTitle$!: Observable<string>;
   public descriptionLength$!: Observable<number>;
 
-  public ngOnInit(): void {
-    this.vocabListForm = this.listFormBuilder.build();
+  public ngAfterContentInit(): void {
+    this.initialiseForm();
     this.listTitle$ = this.vocabListForm.controls.name.valueChanges
       .pipe(
         startWith("New vocab list"),
@@ -37,6 +37,8 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
         filter((result: number) => result > 150),
       );
   }
+
+  protected abstract initialiseForm(): void;
 
   public get listItemsControl(): FormArray {
     return this.vocabListForm.controls.listItems;

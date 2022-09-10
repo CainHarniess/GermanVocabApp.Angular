@@ -12,7 +12,7 @@ import { ResolvedData } from '../models/data/resolved-data.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsComponent {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute) {
 
   }
 
@@ -23,14 +23,14 @@ export class VocabListsComponent {
     );
 
   public readonly vocabListsDisplay$ = new BehaviorSubject<VocabList[]>([]);
-  public readonly vocabLists$: Observable<VocabList[]> = this.activatedRoute.data
+  public readonly vocabLists$: Observable<VocabList[]> = this.route.data
     .pipe(
       map((data: Data) => data[ResolvedData.ResolvedLists]),
       tap((data: VocabList[]) => this.vocabListsDisplay$.next(data)),
   );
 
   public addList(): void {
-    this.router.navigate(["new"], { relativeTo: this.activatedRoute });
+    this.router.navigate(["new"], { relativeTo: this.route });
   }
 
   public exportToJson(): void {

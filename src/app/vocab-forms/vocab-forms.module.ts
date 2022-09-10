@@ -10,6 +10,7 @@ import { AdjectiveFormComponent } from './word-type-forms/adjective-form/adjecti
 import { AdverbFormComponent } from './word-type-forms/adverb-form/adverb-form.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { EditVocabListComponent } from './vocab-list-form/edit-vocab-list.component';
+import { VocabListFormBuilder, VocabListItemFormBuilder } from './services';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EditVocabListComponent } from './vocab-list-form/edit-vocab-list.compon
   ],
   exports: [
     AddVocabListFormComponent,
-  ]
+  ],
+  providers: [VocabListFormBuilder, VocabListItemFormBuilder]
 })
 export class VocabFormsModule { }

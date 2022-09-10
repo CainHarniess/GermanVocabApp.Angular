@@ -14,7 +14,6 @@ import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
   templateUrl: './vocab-list-form.component.html',
   styleUrls: ['./vocab-list-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [VocabListFormBuilder, VocabListItemFormBuilder]
 })
 export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
   //Stryker disable StringLiteral, ObjectLiteral : Coverage not required.
@@ -38,6 +37,10 @@ export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
     listFormBuilder: VocabListFormBuilder,
     listItemFormBuilder: VocabListItemFormBuilder) {
     super(router, vocabService, listFormBuilder, listItemFormBuilder);
+  }
+
+  protected override initialiseForm(): void {
+    this.vocabListForm = this.listFormBuilder.build();
   }
 
   public readonly placeholderWording$: Observable<string> = this.listItemControlCount$

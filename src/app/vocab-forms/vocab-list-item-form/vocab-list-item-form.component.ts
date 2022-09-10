@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 
-import { map, Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription, tap } from 'rxjs';
 
 import { WordType } from '../../vocab/models/data/word-type.enum';
 import { WordTypeFormManager } from '../form-management';
@@ -42,10 +42,11 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
     this.wordType$ = this.form.controls.wordType.valueChanges
       .pipe(
         map((val: any) => val as WordType),
+        tap((val: WordType) => console.log(val))
     );
 
     this.validationChanges$ = this.wordType$;
-    // Check subsribe is called?
+    // Check subscribe is called?
     this.validationChanges = this.validationChanges$.subscribe(wordType => this.updateFormConfiguration(wordType));
   }
 

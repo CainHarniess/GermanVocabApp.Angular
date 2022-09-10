@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { VocabList } from '../models/vocab-list.interface';
-import { VocabRoutePath } from '../vocab-routing.module';
 
 @Component({
   selector: 'vocab-lists-presenter',
@@ -10,13 +10,14 @@ import { VocabRoutePath } from '../vocab-routing.module';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsPresenterComponent {
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
 
   }
 
   @Input() public lists!: VocabList[];
 
+  // TODO: add test.
   public editList(id: string): void {
-    this.router.navigate([VocabRoutePath.VocabLists, id, "edit"])
+    this.router.navigate([id, "edit"], { relativeTo: this.route });
   }
 }
