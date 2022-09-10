@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { filter, map, Observable } from "rxjs";
 
 @Injectable()
-export class ListItemWordingObservableBuilder {
+export class ListItemWordingObservableProvider {
   private readonly wordingDict: { [key: number]: string } = {
     0: "Why not add something, sugar?",
     1: "Ooh yeah. You like that?",
@@ -18,7 +18,7 @@ export class ListItemWordingObservableBuilder {
     11: "",
   }
 
-  public build(source$: Observable<any>): Observable<string> {
+  public provide(source$: Observable<any>): Observable<string> {
     return source$
       .pipe(
         filter((val: number) => val <= 11),

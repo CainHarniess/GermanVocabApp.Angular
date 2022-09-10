@@ -49,6 +49,11 @@ export class EditVocabListComponent extends AbstractVocabListFormComponent {
   public readonly placeholderWording$: Observable<string> = EMPTY;
 
   public submit(): void {
-    throw new Error('Method not implemented.');
+    const vocabList: VocabList = this.form.value as VocabList;
+    vocabList.id = this.preEditList.id;
+    this.vocabService.update(vocabList)
+      .subscribe((vl: VocabList) => {
+        this.router.navigate(["/vocab", "vocab-lists"]);
+      });
   }
 }

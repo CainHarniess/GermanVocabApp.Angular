@@ -1,5 +1,5 @@
 export { HttpVocabListService } from './http-vocab-list.service'
-export { InMemoryDataSeeder } from './in-memory-data-seeder.service'
+export { InMemoryDataProvider } from './in-memory-data-seeder.service'
 export { InMemoryVocabListService } from './in-memory-vocab-list.service'
 export { VocabListResolver } from './vocab-list.resolver'
 export { VocabListService } from './vocab-list.service'

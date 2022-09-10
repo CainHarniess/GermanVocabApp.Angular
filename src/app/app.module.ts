@@ -13,7 +13,7 @@ import { VocabListService } from './vocab/services/vocab-list.service';
 import { HttpVocabListService } from './vocab/services/http-vocab-list.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InMemoryVocabListService } from './vocab/services/in-memory-vocab-list.service';
-import { InMemoryDataSeeder } from './vocab/services/in-memory-data-seeder.service';
+import { InMemoryDataProvider } from './vocab/services/in-memory-data-seeder.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { InMemoryDataSeeder } from './vocab/services/in-memory-data-seeder.servi
   ],
   providers: [
     //{ provide: VocabListService, useClass: HttpVocabListService },
-    InMemoryDataSeeder,
+    InMemoryDataProvider,
     { provide: VocabListService, useClass: InMemoryVocabListService },
   ],
   bootstrap: [AppComponent]

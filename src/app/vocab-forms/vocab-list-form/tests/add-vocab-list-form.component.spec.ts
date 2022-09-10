@@ -13,10 +13,10 @@ import { constructMockListForm, constructMockReturnValues, contructMocks } from 
 describe("AddVocabListComponent", () => {
   let mocks: VocabListFormComponentMocks;
   let mockReturnValues: MockReturnValues;
-  let newMockListForm: any;
-  let componentWithMockBuilders: AddVocabListFormComponent;
+  let component: AddVocabListFormComponent;
   let componentWithRealBuilders: AddVocabListFormComponent;
   let fb: FormBuilder;
+
 
   beforeAll(() => {
     fb = new FormBuilder();
@@ -24,20 +24,23 @@ describe("AddVocabListComponent", () => {
 
   beforeEach(() => {
     mocks = contructMocks();
-    newMockListForm = constructMockListForm(fb);
-    mockReturnValues = constructMockReturnValues(mocks, newMockListForm);
+    mocks.listItemWordingProvider = jasmine.createSpyObj("mockListItemWordingProvider",
+      ["provide"]);
 
-    componentWithMockBuilders = new AddVocabListFormComponent(mocks.router,
+    mocks.listForm = constructMockListForm(fb);
+    mockReturnValues = constructMockReturnValues(mocks, mocks.listForm);
+
+    component = new AddVocabListFormComponent(mocks.router,
       mocks.listService, mocks.listFormBuilder, mocks.listItemFormBuilder,
-      mocks.observableBuilderForMocks);
+      mocks.observableBuilderForMocks, mocks.listItemWordingProvider);
 
     const listItemFormBuilder = new VocabListItemFormBuilder(fb);
     const listFormBuilder = new VocabListFormBuilder(fb, listItemFormBuilder);
     componentWithRealBuilders = new AddVocabListFormComponent(mocks.router,
       mocks.listService, listFormBuilder, listItemFormBuilder,
-      mocks.observableBuilderForReal);
+      mocks.observableBuilderForReal, mocks.listItemWordingProvider);
 
-    componentWithMockBuilders.ngOnInit();
+    component.ngOnInit();
     componentWithRealBuilders.ngOnInit();
   });
 
@@ -48,7 +51,12 @@ describe("AddVocabListComponent", () => {
 
     it("Should call title observable builder with correct arguments.", () => {
       expect(mocks.observableBuilderForMocks.build)
-        .toHaveBeenCalledOnceWith("New vocab list", newMockListForm.controls.name);
+        .toHaveBeenCalledOnceWith("New vocab list", mocks.listForm.controls.name);
+    });
+
+    xit("Should call list item wording observable with correct argument.", () => {
+      expect(mocks.listItemWordingProvider.provide)
+        .toHaveBeenCalledOnceWith(component.listItemControlCount$);
     });
   });
 
@@ -79,7 +87,7 @@ describe("AddVocabListComponent", () => {
 
   describe("addListItemControl", () => {
     it("Should generate a new list item form.", () => {
-      componentWithMockBuilders.addListItemControl();
+      component.addListItemControl();
       expect(mocks.listItemFormBuilder.build).toHaveBeenCalledOnceWith();
     });
 
@@ -92,17 +100,17 @@ describe("AddVocabListComponent", () => {
 
   describe("removeListItemControl", () => {
     it("Should throw exception if invalid index is provided.", () => {
-      expect(function () { componentWithMockBuilders.removeListItemControl(-1) }).toThrowError("Index may not be negative.");
+      expect(function () { component.removeListItemControl(-1) }).toThrowError("Index may not be negative.");
     });
 
     it("Should not throw exception if index is valid.", () => {
-      expect(function () { componentWithMockBuilders.removeListItemControl(0) }).not.toThrow();
-      expect(function () { componentWithMockBuilders.removeListItemControl(1) }).not.toThrow();
+      expect(function () { component.removeListItemControl(0) }).not.toThrow();
+      expect(function () { component.removeListItemControl(1) }).not.toThrow();
     });
 
     it("Should throw exception if index provided is greater than the list items control length.", () => {
-      expect(function () { componentWithMockBuilders.removeListItemControl(5) }).toThrowError("Index exceeds the size of the list items form control array.");
-      expect(function () { componentWithMockBuilders.removeListItemControl(6) }).toThrowError("Index exceeds the size of the list items form control array.");
+      expect(function () { component.removeListItemControl(5) }).toThrowError("Index exceeds the size of the list items form control array.");
+      expect(function () { component.removeListItemControl(6) }).toThrowError("Index exceeds the size of the list items form control array.");
     });
 
     it("Should remove a list item form.", () => {
@@ -117,24 +125,24 @@ describe("AddVocabListComponent", () => {
       expect(listItemsControl.controls.length).toEqual(2);
     });
 
-    it("Should remove a list item form at the correct index.", () => {
-      const listItemsControl = componentWithMockBuilders.form.controls.listItems;
-      const controls = listItemsControl.controls;
-      const expected: any = [controls[0], controls[2], controls[3]];
+    it("Should call FormArray.removeAt with the correct argument.", () => {
+      //const listItemsControl = component.form.controls.listItems;
+      const listItemsControl = mocks.listForm.controls.listItems;
+      spyOn(listItemsControl, "removeAt");
 
-      componentWithMockBuilders.removeListItemControl(1);
-      expect(listItemsControl.controls).toEqual(expected);
+      component.removeListItemControl(1);
+      expect(listItemsControl.removeAt).toHaveBeenCalledOnceWith(1);
     });
   });
 
   describe("submit", () => {
     it("Should call the add method on the vocab list service with the correct argument.", () => {
-      componentWithMockBuilders.submit();
-      expect(mocks.listService.add).toHaveBeenCalledOnceWith(newMockListForm.value!);
+      component.submit();
+      expect(mocks.listService.add).toHaveBeenCalledOnceWith(mocks.listForm.value!);
     });
 
     it("Should call Router.navigate with the correct arguments.", fakeAsync(() => {
-      componentWithMockBuilders.submit();
+      component.submit();
       expect(mocks.router.navigate).toHaveBeenCalledOnceWith([`/${VocabRoutePath.Root}`, VocabRoutePath.VocabLists]);
     }));
   });
@@ -146,9 +154,9 @@ describe("AddVocabListComponent", () => {
         return mockSubscription;
       });
       spyOn(mockSubscription, "unsubscribe").and.callThrough();
-      componentWithMockBuilders.submit();
+      component.submit();
 
-      componentWithMockBuilders.ngOnDestroy();
+      component.ngOnDestroy();
 
       expect(mockSubscription.unsubscribe).toHaveBeenCalledOnceWith()
     }));

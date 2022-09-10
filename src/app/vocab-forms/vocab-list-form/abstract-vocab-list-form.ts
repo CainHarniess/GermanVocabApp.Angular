@@ -62,7 +62,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
     } else if (index >= this.listItemsControl.length) {
       throw new Error("Index exceeds the size of the list items form control array.")
     }
-    this.listItemsControl.controls.splice(index, 1);
+    this.listItemsControl.removeAt(index)
     this.listItemControlCount$.next(this.listItemsControl.length);
   }
 

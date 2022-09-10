@@ -28,8 +28,9 @@ export function constructMockListForm(fb: FormBuilder): any {
         valueChanges: of("List description"),
       },
       listItems: {
-        length: 5,
         push: function () { },
+        removeAt: function () { },
+        length: 5,
         controls: [
           fb.group('control 1'),
           fb.group('control 2'),

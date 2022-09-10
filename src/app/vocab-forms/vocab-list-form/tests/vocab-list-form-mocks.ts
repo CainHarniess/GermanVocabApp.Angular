@@ -8,5 +8,7 @@ export interface VocabListFormComponentMocks {
   observableBuilderForMocks: any;
   observableBuilderForReal: any;
   list?: VocabList;
+  listForm?: any;
   route?: any;
+  listItemWordingProvider?: any;
 }

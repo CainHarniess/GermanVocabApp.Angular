@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { filter, map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Undefined } from '../../../core/types';
 import { VocabList } from '../../vocab/models/vocab-list.interface';
 import { VocabListService } from '../../vocab/services/vocab-list.service';
 import { VocabListForm } from '../models';
-import { ListItemWordingObservableBuilder, ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
+import { ListItemWordingObservableProvider, ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 
 @Component({
@@ -15,13 +15,13 @@ import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
   templateUrl: './vocab-list-form.component.html',
   styleUrls: ['./vocab-list-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ListItemWordingObservableBuilder]
+  providers: [ListItemWordingObservableProvider]
 })
 export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
   constructor(router: Router, vocabService: VocabListService,
     listFormBuilder: VocabListFormBuilder,
     listItemFormBuilder: VocabListItemFormBuilder, title$Builder: ListTitleObservableBuilder,
-    private listItemWordingObservableBuilder: ListItemWordingObservableBuilder) {
+    private listItemWording$Provider: ListItemWordingObservableProvider) {
     super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder);
   }
 
@@ -31,7 +31,8 @@ export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
     super.ngOnInit();
     const controls: VocabListForm = this.form.controls;
     this.title$ = this.title$Builder.build("New vocab list", controls.name);
-    this.placeholderWording$ = this.listItemWordingObservableBuilder.build(this.listItemControlCount$);
+    this.placeholderWording$ = this.listItemWording$Provider
+      .provide(this.listItemControlCount$);
   }
 
   public placeholderWording$!: Observable<string>;

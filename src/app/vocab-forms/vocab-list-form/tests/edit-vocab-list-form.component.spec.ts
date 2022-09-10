@@ -48,4 +48,11 @@ describe("EditVocabListComponent", () => {
         .toHaveBeenCalledOnceWith(mocks.list!.name, mockListForm.controls.name);
     });
   });
+
+  describe("submit", () => {
+    xit("Should call vocab service update method with a list with the correct ID.", () => {
+      
+    });
+
+  });
 });
