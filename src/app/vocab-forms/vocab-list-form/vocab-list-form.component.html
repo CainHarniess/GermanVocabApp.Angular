@@ -45,8 +45,8 @@
                 <mat-icon>add</mat-icon>
               </button>
             </div>
-            <div class="placeholder list-item-form content">
-              {{ placeholderWording$ | async }}
+            <div *ngrxLet="placeholderWording$ as wording" class="placeholder list-item-form content">
+              {{ wording }}
             </div>
           </div>
         </mat-card-content>
