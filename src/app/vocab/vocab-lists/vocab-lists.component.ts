@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { VocabList } from '.././models/vocab-list.interface';
 
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
@@ -12,7 +12,7 @@ import { ResolvedData } from '../models/data/resolved-data.enum';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsComponent {
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
 
   }
 
@@ -29,6 +29,9 @@ export class VocabListsComponent {
       tap((data: VocabList[]) => this.vocabListsDisplay$.next(data)),
   );
 
+  public addList(): void {
+    this.router.navigate(["new"], { relativeTo: this.activatedRoute });
+  }
 
   public exportToJson(): void {
     this.showJson$.next(!this.showJson$.value);

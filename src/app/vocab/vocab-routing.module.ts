@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
-import { VocabListFormComponent } from '../vocab-forms/vocab-list-form/vocab-list-form.component';
+import { AddVocabListFormComponent } from '../vocab-forms/vocab-list-form/add-vocab-list-form.component';
 import { VocabListsResolver } from './services/vocab-lists.resolver';
 import { VocabListComponent } from './vocab-list/vocab-list.component';
 import { VocabListResolver } from './services/vocab-list.resolver';
@@ -11,7 +11,6 @@ import { VocabListResolver } from './services/vocab-list.resolver';
 export enum VocabRoutePath {
   Root = "vocab",
   VocabLists = "vocab-lists",
-  NewVocabList = "vocab-lists/new",
 }
 
 const routes: Routes = [
@@ -21,18 +20,18 @@ const routes: Routes = [
     component: VocabListsComponent,
     resolve: { resolvedVocabLists: VocabListsResolver }
   }, {
+    path: `${VocabRoutePath.VocabLists}/new`,
+    title: "German Vocab App | Vocab | New Vocab List",
+    component: AddVocabListFormComponent
+  }, {
     path: `${VocabRoutePath.VocabLists}/:id`,
     title: "German Vocab App | Vocab | Vocab List",
     component: VocabListComponent,
     resolve: { resolvedVocabList: VocabListResolver }
   }, {
-    path: "vocab-list-form",
-    title: "German Vocab App | Vocab | New Vocab List",
-    component: VocabListFormComponent
-  }, {
     path: `${VocabRoutePath.VocabLists}/:id/edit`,
     title: "German Vocab App | Vocab | Edit Vocab List",
-    component: VocabListFormComponent
+    component: AddVocabListFormComponent
   },
   { path: "", redirectTo: "vocab-lists", pathMatch: "full" },
 ];

@@ -1,9 +1,9 @@
 import { waitForAsync } from "@angular/core/testing";
 import { of } from "rxjs";
+
 import { ResolvedData, WordType } from "../models/data";
 import { VocabList } from "../models/vocab-list.interface";
 import { VocabListsComponent } from "./vocab-lists.component";
-
 
 describe("VocabListsComponent", () => {
   const mockVocabLists: VocabList[] = [{
@@ -19,13 +19,15 @@ describe("VocabListsComponent", () => {
     authorName: "Cain Harniess"
   }];
   let component: VocabListsComponent;
+  let mockRouter: any;
   let mockActivatedRoute: any;
 
   beforeEach(() => {
     const mockData: { [key: string]: VocabList[] } = {};
     mockData[ResolvedData.ResolvedLists] = mockVocabLists;
+    mockRouter = jasmine.createSpyObj("mockRouter", ["navigate"]);
     mockActivatedRoute = jasmine.createSpyObj("mockActivatedRoute", [], { data: of(mockData) });
-    component = new VocabListsComponent(mockActivatedRoute);
+    component = new VocabListsComponent(mockRouter, mockActivatedRoute);
   });
 
   describe("vocabListsDisplay$", () => {
@@ -101,4 +103,12 @@ describe("VocabListsComponent", () => {
     }));
   });
 
+  describe("addList", () => {
+    it("Should call Router.nagivate with correct arguments.", () => {
+      component.addList();
+      expect(mockRouter.navigate).toHaveBeenCalledOnceWith(["new"], {
+        relativeTo: mockActivatedRoute,
+      });
+    })
+  });
 });

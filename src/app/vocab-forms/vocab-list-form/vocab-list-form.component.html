@@ -6,7 +6,7 @@
       </div>
     </header>
     <mat-divider></mat-divider>
-    <form [formGroup]="vocabListForm" (ngSubmit)="onFormSubmit()" novalidate>
+    <form [formGroup]="vocabListForm" (ngSubmit)="submit()" novalidate>
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input formControlName="name" matInput>

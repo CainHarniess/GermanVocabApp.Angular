@@ -5,11 +5,11 @@ import { Observable, of, Subscription } from "rxjs";
 
 import { VocabRoutePath } from "../../vocab/vocab-routing.module";
 import { VocabListFormBuilder, VocabListItemFormBuilder } from "../services";
-import { VocabListFormComponent } from "./vocab-list-form.component";
+import { AddVocabListFormComponent } from "./add-vocab-list-form.component";
 
 describe("AddVocabListComponent", () => {
-  let componentWithRealBuilders: VocabListFormComponent;
-  let componentWithMockBuilders: VocabListFormComponent;
+  let componentWithRealBuilders: AddVocabListFormComponent;
+  let componentWithMockBuilders: AddVocabListFormComponent;
   let mockRouter: any;
   let mockListService: any;
   let mockListFormBuilder: any;
@@ -149,19 +149,19 @@ describe("AddVocabListComponent", () => {
     }));
   });
 
-  function constructComponentWithMockBuilders(): VocabListFormComponent {
+  function constructComponentWithMockBuilders(): AddVocabListFormComponent {
     mockRouter = jasmine.createSpyObj("mockRouter", ["navigate"]);
     mockListService = jasmine.createSpyObj("mockListService", ["add"]);
     mockListFormBuilder = jasmine.createSpyObj("mockListFormBuilder", ["build"]);
     mockListItemFormBuilder = jasmine.createSpyObj("mockListItemFormBuilder", ["build"]);
-    return new VocabListFormComponent(mockListService, mockRouter,
+    return new AddVocabListFormComponent(mockRouter, mockListService,
       mockListFormBuilder, mockListItemFormBuilder);
   }
 
-  function constructCompenentWithRealBuilders(fb: FormBuilder): VocabListFormComponent {
+  function constructCompenentWithRealBuilders(fb: FormBuilder): AddVocabListFormComponent {
     const listItemFormBuilder = new VocabListItemFormBuilder(fb);
     const listFormBuilder = new VocabListFormBuilder(fb, listItemFormBuilder);
-    return new VocabListFormComponent(mockListService, mockRouter,
+    return new AddVocabListFormComponent(mockRouter, mockListService,
       listFormBuilder, listItemFormBuilder);
   }
 
