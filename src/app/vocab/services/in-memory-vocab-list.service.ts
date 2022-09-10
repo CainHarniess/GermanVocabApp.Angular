@@ -6,7 +6,7 @@ import { VocabListService } from './vocab-list.service';
 import { map, Observable, of, tap } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { VocabList } from '../models/vocab-list.interface';
-import { NotFoundError } from '../../../core/exceptions'
+import { NotFoundError } from '../../../core/errors'
 import { isNullOrUndefined } from '../../../utilities';
 import { VocabListItem } from '../models';
 import { InMemoryDataSeeder } from './in-memory-data-seeder.service';

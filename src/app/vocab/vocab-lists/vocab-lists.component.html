@@ -1,4 +1,4 @@
-<main>
+#<main>
   <div class="vocab-lists-container">
     <header>
       <div class="vocab-lists-header">
@@ -14,7 +14,10 @@
       </div>
     </header>
     <mat-divider></mat-divider>
-    <vocab-lists-presenter [lists]="(vocabLists$ | async)!"></vocab-lists-presenter>
+    <vocab-lists-presenter [lists]="(vocabLists$ | async)!"
+                           (view)="viewList($event)"
+                           (edit)="editList($event)">
+    </vocab-lists-presenter>
     <div [ngClass]="{'hidden' : !(showJson$ | async)}" >
       <mat-divider></mat-divider>
       <div>

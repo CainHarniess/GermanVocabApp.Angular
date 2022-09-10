@@ -9,7 +9,7 @@ import { VocabListForm } from "../models";
 import { VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 
 @Directive()
-export abstract class AbstractVocabListFormComponent implements AfterContentInit, OnDestroy {
+export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
   public readonly listItemControlCount$ = new BehaviorSubject<number>(0);
 
   protected constructor(protected router: Router,
@@ -23,7 +23,7 @@ export abstract class AbstractVocabListFormComponent implements AfterContentInit
   public listTitle$!: Observable<string>;
   public descriptionLength$!: Observable<number>;
 
-  public ngAfterContentInit(): void {
+  public ngOnInit(): void {
     this.initialiseForm();
     this.listTitle$ = this.vocabListForm.controls.name.valueChanges
       .pipe(

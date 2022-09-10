@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { VocabList } from '../models/vocab-list.interface';
 
@@ -10,14 +9,16 @@ import { VocabList } from '../models/vocab-list.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsPresenterComponent {
-  constructor(private router: Router, private route: ActivatedRoute) {
-
-  }
-
   @Input() public lists!: VocabList[];
 
-  // TODO: add test.
+  @Output() public readonly view = new EventEmitter<string>();
+  @Output() public readonly edit = new EventEmitter<string>();
+
+  public viewList(id: string): void {
+    this.view.emit(id);
+  }
+
   public editList(id: string): void {
-    this.router.navigate([id, "edit"], { relativeTo: this.route });
+    this.edit.emit(id);
   }
 }

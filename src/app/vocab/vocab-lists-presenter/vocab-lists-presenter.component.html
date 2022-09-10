@@ -5,7 +5,7 @@
         <div matLine></div>
       </div>
       <div class="list-item-container">
-        <a [routerLink]="[list.id]" matLine>
+        <a (click)="viewList(list.id!)" matLine>
           <h2>{{ list.name }}</h2>
           <p>{{ list.description }}</p>
         </a>

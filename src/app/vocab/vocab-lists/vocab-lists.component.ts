@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
-import { VocabList } from '.././models/vocab-list.interface';
 
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { ResolvedData } from '../models/data/resolved-data.enum';
+
+import { VocabList } from '.././models/vocab-list.interface';
 
 @Component({
   selector: 'app-vocab-lists',
@@ -27,10 +28,18 @@ export class VocabListsComponent {
     .pipe(
       map((data: Data) => data[ResolvedData.ResolvedLists]),
       tap((data: VocabList[]) => this.vocabListsDisplay$.next(data)),
-  );
+    );
 
   public addList(): void {
     this.router.navigate(["new"], { relativeTo: this.route });
+  }
+
+  public editList(id: string): void {
+    this.router.navigate([id, "edit"], { relativeTo: this.route });
+  }
+
+  public viewList(id: string): void {
+    this.router.navigate([id], { relativeTo: this.route });
   }
 
   public exportToJson(): void {

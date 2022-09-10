@@ -109,6 +109,26 @@ describe("VocabListsComponent", () => {
       expect(mockRouter.navigate).toHaveBeenCalledOnceWith(["new"], {
         relativeTo: mockActivatedRoute,
       });
-    })
+    });
+  });
+
+  describe("editList", () => {
+    it("Should call Router.nagivate with correct arguments.", () => {
+      const testId: string = "1234";
+      component.editList(testId);
+      expect(mockRouter.navigate).toHaveBeenCalledOnceWith([testId, "edit"], {
+        relativeTo: mockActivatedRoute,
+      });
+    });
+  });
+
+  describe("viewList", () => {
+    it("Should call Router.nagivate with correct arguments.", () => {
+      const testId: string = "1234";
+      component.viewList(testId);
+      expect(mockRouter.navigate).toHaveBeenCalledOnceWith([testId], {
+        relativeTo: mockActivatedRoute,
+      });
+    });
   });
 });
