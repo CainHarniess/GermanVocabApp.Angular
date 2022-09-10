@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { map, Observable, Subscription, tap } from 'rxjs';
+import { SingleSelectOption } from '../../forms/single-select/single-select-option.interface';
 
 import { WordType } from '../../vocab/models/data/word-type.enum';
 import { WordTypeFormManager } from '../form-management';
 import { VocabListForm } from '../models/vocab-list-form.interface';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 import { WordTypeFormManagerFactory } from '../services/form-manager-factory';
-import { DropDownOptions } from './drop-down-options.class';
+import { wordTypeOptions } from './drop-down-options';
 
 @Component({
   selector: 'app-vocab-list-item-form',
@@ -22,7 +23,7 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
   private currentFormManager?: WordTypeFormManager;
 
   public readonly WordType: typeof WordType = WordType;
-  public readonly dropDownOptions: typeof DropDownOptions = DropDownOptions;
+  public readonly dropDownOptions: SingleSelectOption<WordType>[] = wordTypeOptions;
 
   public wordType$!: Observable<WordType>;
   public validationChanges$!: Observable<WordType>;
