@@ -6,7 +6,7 @@
       </div>
     </header>
     <mat-divider></mat-divider>
-    <form [formGroup]="vocabListForm" (ngSubmit)="submit()" novalidate>
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input formControlName="name" matInput>
@@ -26,10 +26,16 @@
         <mat-card-content>
           <div formArrayName="listItems"
                *ngFor="let listItem of listItemsControl.controls; let i=index">
-            <app-vocab-list-item-form [parentForm]="vocabListForm"
+            <app-vocab-list-item-form *ngIf="editData; else noPreData"
+                                      [parentForm]="form"
                                       [form]="getListItemControl(i)" [index]="i"
-                                      [listItem]="preEditData!.listItems[i]"
+                                      [listItem]="editData!.listItems[i]"
                                       (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
+            <ng-template #noPreData>
+              <app-vocab-list-item-form [parentForm]="form"
+                                        [form]="getListItemControl(i)" [index]="i"
+                                        (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
+            </ng-template>
           </div>
           <mat-divider *ngIf="listItemsControl.controls.length > 0"></mat-divider>
           <div class="placeholder list-item-form container">
@@ -46,8 +52,8 @@
         </mat-card-content>
       </mat-card>
       <div class="submission-controls">
-        <button mat-raised-button color="primary" type="submit" [disabled]="!vocabListForm.valid">Save</button>
-        <button mat-stroked-button type="reset">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Save</button>
+        <button mat-stroked-button type="button">Cancel</button>
       </div>
     </form>
   </div>

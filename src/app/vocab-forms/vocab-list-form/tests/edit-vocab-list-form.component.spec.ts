@@ -1,23 +1,26 @@
-
-
 import { FormBuilder } from "@angular/forms";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
 import { VocabList } from "../../../vocab/models";
 import { ResolvedData } from "../../../vocab/models/data";
 import { EditVocabListComponent } from "../edit-vocab-list.component";
-import { newConstructMockListForm, contructMocks, VocabListFormComponentMocks, mockReturnValues } from "./vocab-list-form.spec.utilities";
+import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";
+import { constructMockListForm, contructMocks, constructMockReturnValues } from "./vocab-list-form.spec.utilities";
 
 describe("EditVocabListComponent", () => {
   let mocks: VocabListFormComponentMocks;
   let mockListForm: any;
   let mockVocabList: VocabList;
   let componentWithMockBuilders: EditVocabListComponent;
-  const fb = new FormBuilder();
+  let fb: FormBuilder;
+
+  beforeAll(() => {
+    fb = new FormBuilder();
+  });
 
   beforeEach(() => {
     mocks = contructMocks();
-    mockListForm = newConstructMockListForm(fb);
-    mockReturnValues(mocks, mockListForm);
+    mockListForm = constructMockListForm(fb);
+    constructMockReturnValues(mocks, mockListForm);
 
     mockVocabList = StubVocabListBuilder.stub().build();
     mocks.list = mockVocabList

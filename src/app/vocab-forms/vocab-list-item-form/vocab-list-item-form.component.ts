@@ -33,7 +33,7 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
   @Input() public parentForm!: FormGroup<VocabListForm>;
   @Input() public form!: FormGroup<VocabListItemForm>;
   @Input() public index!: number;
-  @Input() public listItem?: VocabListItem | undefined;
+  @Input() public listItem?: VocabListItem;
 
   @Output() public removeListItem = new EventEmitter<number>();
 

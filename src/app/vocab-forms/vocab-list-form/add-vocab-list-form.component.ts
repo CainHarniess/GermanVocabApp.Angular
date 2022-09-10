@@ -6,6 +6,7 @@ import { filter, map, Observable } from 'rxjs';
 import { Undefined } from '../../../core/types';
 import { VocabList } from '../../vocab/models/vocab-list.interface';
 import { VocabListService } from '../../vocab/services/vocab-list.service';
+import { VocabListForm } from '../models';
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 
@@ -39,11 +40,11 @@ export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
     super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder);
   }
 
-  public override get preEditData(): Undefined<VocabList> { return undefined; }
+  public override get editData(): Undefined<VocabList> { return undefined; }
 
   public override ngOnInit(): void {
     super.ngOnInit();
-    const controls = this.vocabListForm.controls;
+    const controls: VocabListForm = this.form.controls;
     this.title$ = this.title$Builder.build("New vocab list", controls.name);
   }
 
@@ -54,7 +55,7 @@ export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
     );
 
   public override submit(): void {
-    const vocabList: VocabList = this.vocabListForm.value as VocabList;
+    const vocabList: VocabList = this.form.value as VocabList;
     this.subscriptions = this.vocabService.add(vocabList)
       .subscribe(newListId => {
         this.router.navigate(["/vocab", "vocab-lists"]);

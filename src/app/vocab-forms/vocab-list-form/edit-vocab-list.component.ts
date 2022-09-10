@@ -29,14 +29,14 @@ export class EditVocabListComponent extends AbstractVocabListFormComponent {
     this.preEditList = dataSnapshot[ResolvedData.ResolvedList];
   }
 
-  public override get preEditData(): Undefined<VocabList> { return this.preEditList; }
+  public override get editData(): Undefined<VocabList> { return this.preEditList; }
 
   public override ngOnInit(): void {
     super.ngOnInit();
 
-    const controls = this.vocabListForm.controls;
+    const controls = this.form.controls;
     this.title$ = this.title$Builder.build(this.preEditList.name, controls.name);
-    this.vocabListForm.patchValue(this.preEditList);
+    this.form.patchValue(this.preEditList);
 
     const listItemsControl = controls.listItems;
     const initialListItems = this.preEditList.listItems

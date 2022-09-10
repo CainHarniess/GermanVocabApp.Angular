@@ -22,15 +22,15 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
 
   }
 
-  public abstract get preEditData(): Undefined<VocabList>;
+  public abstract get editData(): Undefined<VocabList>;
 
-  public vocabListForm!: FormGroup<VocabListForm>;
+  public form!: FormGroup<VocabListForm>;
   public title$!: Observable<string>;
   public descriptionLength$!: Observable<number>;
 
   public ngOnInit(): void {
-    this.vocabListForm = this.listFormBuilder.build();
-    const controls = this.vocabListForm.controls;
+    this.form = this.listFormBuilder.build();
+    const controls = this.form.controls;
     this.descriptionLength$ = controls.description.valueChanges
       .pipe(
         map((val: string | null) => val ? val.length : 0),
@@ -39,7 +39,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   }
 
   public get listItemsControl(): FormArray {
-    return this.vocabListForm.controls.listItems;
+    return this.form.controls.listItems;
   }
 
   public addListItemControl(): void {

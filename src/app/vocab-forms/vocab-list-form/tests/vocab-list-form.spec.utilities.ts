@@ -1,18 +1,9 @@
 import { FormBuilder } from "@angular/forms";
 
-import { Observable, of } from "rxjs";
-import { VocabList } from "../../../vocab/models";
+import { of } from "rxjs";
+import { MockReturnValues } from "./mock-return-values";
 
-export interface VocabListFormComponentMocks {
-  router: any;
-  listService: any;
-  listFormBuilder: any;
-  listItemFormBuilder: any;
-  observableBuilderForMocks: any;
-  observableBuilderForReal: any;
-  list?: VocabList;
-  route?: any;
-}
+import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";
 
 export function contructMocks(): VocabListFormComponentMocks {
   return {
@@ -25,20 +16,7 @@ export function contructMocks(): VocabListFormComponentMocks {
   };
 }
 
-export interface MockVocabListForm {
-  controls: {
-    name: { valueChanges: Observable<any> };
-    description: { valueChanges: Observable<any> };
-    listItems: {
-      length: number;
-      push: () => void;
-      controls: any[];
-    },
-    value: any
-  }
-}
-
-export function newConstructMockListForm(fb: FormBuilder): any {
+export function constructMockListForm(fb: FormBuilder): any {
   return {
     patchValue: function () { },
     controls: {
@@ -64,13 +42,7 @@ export function newConstructMockListForm(fb: FormBuilder): any {
   };
 }
 
-export interface VocabListFormComponentMockReturns {
-  newListId$: Observable<string>,
-  listForm: any,
-  title$: Observable<string>
-}
-
-export function mockReturnValues(mocks: VocabListFormComponentMocks, mockListForm: any): VocabListFormComponentMockReturns {
+export function constructMockReturnValues(mocks: VocabListFormComponentMocks, mockListForm: any): MockReturnValues {
   const mockReturnValues = {
     newListId$: of("Mock list ID"),
     listForm: mockListForm,
