@@ -15,6 +15,7 @@ fdescribe("AddVocabListComponent", () => {
   let newMockObservableBuilderForMocks: any
   let newMockObservableBuilderForReal: any
   let newComponentWithMockBuilders: AddVocabListFormComponent;
+  let newComponentWithRealBuilders: AddVocabListFormComponent;
 
 
   let componentWithRealBuilders: AddVocabListFormComponent;
@@ -39,10 +40,19 @@ fdescribe("AddVocabListComponent", () => {
     mocks = contructMocks();
     newMockListForm = newConstructMockListForm(fb);
     returnValues = mockReturnValues(mocks, newMockListForm);
+
     newComponentWithMockBuilders = new AddVocabListFormComponent(mocks.router,
       mocks.listService, mocks.listFormBuilder, mocks.listItemFormBuilder,
       mocks.observableBuilderForMocks);
+
+    const listItemFormBuilder = new VocabListItemFormBuilder(fb);
+    const listFormBuilder = new VocabListFormBuilder(fb, listItemFormBuilder);
+    newComponentWithRealBuilders = new AddVocabListFormComponent(mocks.router,
+      mocks.listService, listFormBuilder, listItemFormBuilder,
+      mocks.observableBuilderForReal);
+
     newComponentWithMockBuilders.ngOnInit();
+    newComponentWithRealBuilders.ngOnInit();
 
     componentWithMockBuilders = constructComponentWithMockBuilders();
     componentWithRealBuilders = constructCompenentWithRealBuilders(fb);
@@ -53,7 +63,6 @@ fdescribe("AddVocabListComponent", () => {
     mockListService.add.and.returnValue(addList$);
     mockObservableBuilderForReal.build.and.returnValue(of("Test title"));
 
-    componentWithMockBuilders.ngOnInit();
     componentWithRealBuilders.ngOnInit();
   });
 
@@ -71,9 +80,9 @@ fdescribe("AddVocabListComponent", () => {
   describe("descriptionLength$", () => {
     it("Should emit if length is greater than the specified value", fakeAsync(() => {
       let hasEmited: boolean = false;
-      componentWithRealBuilders.descriptionLength$
+      newComponentWithRealBuilders.descriptionLength$
         .subscribe((length: number) => hasEmited = true);
-      const descriptionControl = componentWithRealBuilders.vocabListForm.controls.description;
+      const descriptionControl = newComponentWithRealBuilders.vocabListForm.controls.description;
 
       const longString: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
       descriptionControl.setValue(longString);
@@ -83,11 +92,11 @@ fdescribe("AddVocabListComponent", () => {
 
     it("Should not emit if length is smaller than or equal to the specified value", fakeAsync(() => {
       let hasEmited: boolean = false;
-      componentWithRealBuilders.ngOnInit();
-      componentWithRealBuilders.descriptionLength$
+      newComponentWithRealBuilders.ngOnInit();
+      newComponentWithRealBuilders.descriptionLength$
         .subscribe((length: number) => hasEmited = true);
 
-      componentWithRealBuilders.vocabListForm.controls.description.setValue("Hello");
+      newComponentWithRealBuilders.vocabListForm.controls.description.setValue("Hello");
 
       expect(hasEmited).toBeFalse();
     }));
@@ -100,9 +109,9 @@ fdescribe("AddVocabListComponent", () => {
     });
 
     it("Should set the list item control count subject value to the list form's value.", () => {
-      componentWithRealBuilders.addListItemControl();
-      componentWithRealBuilders.addListItemControl();
-      expect(componentWithRealBuilders.listItemControlCount$.value).toBe(2);
+      newComponentWithRealBuilders.addListItemControl();
+      newComponentWithRealBuilders.addListItemControl();
+      expect(newComponentWithRealBuilders.listItemControlCount$.value).toBe(2);
     });
   });
 
@@ -122,14 +131,14 @@ fdescribe("AddVocabListComponent", () => {
     });
 
     it("Should remove a list item form.", () => {
-      componentWithRealBuilders.addListItemControl();
-      componentWithRealBuilders.addListItemControl();
-      componentWithRealBuilders.addListItemControl();
+      newComponentWithRealBuilders.addListItemControl();
+      newComponentWithRealBuilders.addListItemControl();
+      newComponentWithRealBuilders.addListItemControl();
 
-      const listItemsControl = componentWithRealBuilders.vocabListForm.controls.listItems;
+      const listItemsControl = newComponentWithRealBuilders.vocabListForm.controls.listItems;
       expect(listItemsControl.controls.length).toEqual(3);
 
-      componentWithRealBuilders.removeListItemControl(1);
+      newComponentWithRealBuilders.removeListItemControl(1);
       expect(listItemsControl.controls.length).toEqual(2);
     });
 
