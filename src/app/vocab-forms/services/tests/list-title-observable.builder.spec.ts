@@ -3,7 +3,7 @@ import { EMPTY, Observable, of } from "rxjs";
 import { ListTitleObservableBuilder } from "..";
 import { Null } from "../../../../core/types";
 
-describe("ListTitleObservableBuilder", () => {
+describe("ListTitleObservableProvider", () => {
   let builder: ListTitleObservableBuilder;
   let mockFormControl: any;
   let result$: Observable<string>;

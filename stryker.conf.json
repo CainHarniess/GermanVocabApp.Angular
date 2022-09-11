@@ -3,6 +3,9 @@
   "_comment": "This config was generated using 'stryker init'. Please see the guide for more information: https://stryker-mutator.io/docs/stryker-js/guides/angular",
   "mutate": [
     "src/**/*.ts",
+    "!src/utilities/testing.utilities.ts",
+    "!src/app/vocab-forms/vocab-list-form/tests/vocab-list-form.spec.utilities",
+    "!src/testing/**",
     "!src/**/*.spec.ts",
     "!src/test.ts",
     "!src/environments/*.ts",
