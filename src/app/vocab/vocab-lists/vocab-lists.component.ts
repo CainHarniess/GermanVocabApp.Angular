@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
-import { ResolvedData } from '../models/data/resolved-data.enum';
 
 import { VocabList } from '.././models/vocab-list.interface';
+import { ResolvedData } from '../models/data';
 
 @Component({
   selector: 'app-vocab-lists',

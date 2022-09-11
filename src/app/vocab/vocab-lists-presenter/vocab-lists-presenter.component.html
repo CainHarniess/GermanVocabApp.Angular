@@ -1,27 +1,28 @@
-  <mat-nav-list *ngIf="lists.length > 0; else noLists">
-    <mat-list-item *ngFor="let list of lists">
-      <div class="mat-line-height-guideline">
-        <div matLine></div>
-        <div matLine></div>
+<mat-nav-list *ngIf="lists.length > 0; else noLists">
+  <mat-list-item *ngFor="let list of lists">
+    <div class="mat-line-height-guideline">
+      <div matLine></div>
+      <div matLine></div>
+    </div>
+    <div class="list-item-container">
+      <a (click)="viewList(list.id!)" matLine>
+        <h2>{{ list.name }}</h2>
+        <p>{{ list.description }}</p>
+      </a>
+      <div class="list-item-actions">
+        <button mat-icon-button>
+          <mat-icon aria-label="Edit vocab list" (click)="editList(list.id!)"
+                    aria-hidden="false" fontIcon="edit"></mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon aria-hidden="false" aria-label="Archive vocab list"
+                    fontIcon="archive"></mat-icon>
+        </button>
       </div>
-      <div class="list-item-container">
-        <a (click)="viewList(list.id!)" matLine>
-          <h2>{{ list.name }}</h2>
-          <p>{{ list.description }}</p>
-        </a>
-        <div class="list-item-actions">
-          <button mat-icon-button>
-            <mat-icon aria-label="Edit vocab list" (click)="editList(list.id!)"
-                      aria-hidden="false" fontIcon="edit"></mat-icon>
-          </button>
-          <button mat-icon-button>
-            <mat-icon aria-hidden="false" aria-label="Archive vocab list"
-                      fontIcon="archive"></mat-icon>
-          </button>
-        </div>
-      </div>
-    </mat-list-item>
-  </mat-nav-list>
+    </div>
+  </mat-list-item>
+  
+</mat-nav-list>
 <ng-template #noLists>
   <div class="no-lists">
     <p>You don't have any lists</p>

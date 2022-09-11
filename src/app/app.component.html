@@ -42,6 +42,5 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<mat-toolbar class="tool-bar footer">
-  <span>Content courtesy of Cain Harniess</span>
-</mat-toolbar>
+<app-loading-spinner [hidden]="!(isLoading$ | async)"></app-loading-spinner>
+

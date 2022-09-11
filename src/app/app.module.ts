@@ -14,11 +14,13 @@ import { HttpVocabListService } from './vocab/services/http-vocab-list.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InMemoryVocabListService } from './vocab/services/in-memory-vocab-list.service';
 import { InMemoryDataProvider } from './vocab/services/in-memory-data-seeder.service';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

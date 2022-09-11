@@ -3,4 +3,5 @@
     <h2>Home</h2>
   </header>
   <router-outlet></router-outlet>
+  <mat-spinner *ngIf="(isLoading$ | async)"></mat-spinner>
 </article>

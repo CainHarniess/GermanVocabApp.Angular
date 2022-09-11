@@ -1,14 +1,44 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { filter, map, Observable, startWith, tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  title = 'GermanVocabApp.Angular';
   constructor(private router: Router) {
 
+  }
+
+  public isLoading$!: Observable<boolean>;
+
+  public ngOnInit(): void {
+    this.isLoading$ = this.router.events
+      .pipe(
+        tap((e: Event) => console.log(e)),
+        filter((e: Event) => this.isRelevantNavigationEvent(e)),
+        map((e: Event) => {
+          if (this.isNavigationStart(e)) {
+            return true;
+          }
+          return false;
+        }),
+        startWith(false),
+        tap((result: boolean) => console.log(result)),
+      )
+  }
+
+  private isRelevantNavigationEvent(e: Event): boolean {
+    return e instanceof NavigationStart
+      || e instanceof NavigationEnd
+      || e instanceof NavigationCancel
+      || e instanceof NavigationError;
+  }
+
+  private isNavigationStart(e: Event): boolean {
+    return e instanceof NavigationStart;
   }
 }

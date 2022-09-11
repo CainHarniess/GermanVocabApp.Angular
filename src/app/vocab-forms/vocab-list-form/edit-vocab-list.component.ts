@@ -2,16 +2,15 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 
-import { EMPTY, Observable, takeUntil } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 
 import { Undefined } from '../../../core/types';
-import { StubVocabListBuilder } from '../../../testing/stub-vocab-list-builder';
 import { addOrAssign } from '../../../utilities';
+import { VocabRoutePath } from '../../shared/routing';
 
 import { VocabList, VocabListItem } from '../../vocab/models';
-import { ResolvedData } from '../../vocab/models/data'
+import { ResolvedData } from '../../vocab/models/data';
 import { VocabListService } from '../../vocab/services';
-import { VocabRoutePath } from '../../vocab/vocab-routing.module';
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 
