@@ -18,7 +18,6 @@ export class AppComponent {
   public ngOnInit(): void {
     this.isLoading$ = this.router.events
       .pipe(
-        tap((e: Event) => console.log(e)),
         filter((e: Event) => this.isRelevantNavigationEvent(e)),
         map((e: Event) => {
           if (this.isNavigationStart(e)) {

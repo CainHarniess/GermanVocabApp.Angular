@@ -90,5 +90,11 @@ mat-icon {
 }
 
 mat-sidenav-content {
-    height: 100%;
+    overflow: scroll;
+}
+
+.main-content-container {
+  display: flex;
+  height: 819px;
+  overflow: scroll;
 }
