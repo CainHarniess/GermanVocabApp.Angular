@@ -2,7 +2,7 @@ import { Directive, OnDestroy, OnInit } from "@angular/core";
 import { FormArray, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { BehaviorSubject, filter, map, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, Subject, Subscription } from 'rxjs';
 
 import { Undefined } from "../../../core/types";
 import { VocabList } from "../../vocab/models";
@@ -13,6 +13,8 @@ import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuil
 
 @Directive()
 export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
+  protected readonly destroy$ = new Subject<boolean>();
+
   public readonly listItemControlCount$ = new BehaviorSubject<number>(0);
 
   protected constructor(protected router: Router,

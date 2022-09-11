@@ -1,17 +1,24 @@
-import { FormBuilder } from "@angular/forms";
+import { fakeAsync } from "@angular/core/testing";
+import { FormArray, FormBuilder } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { NotWellDefinedError } from "../../../../core/errors";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
-import { VocabList } from "../../../vocab/models";
+import { StubVocabListItemBuilder } from "../../../../testing/stub-vocab-list-item-builder";
+import { VocabList, VocabListItem } from "../../../vocab/models";
 import { ResolvedData } from "../../../vocab/models/data";
+import { VocabRoutePath } from "../../../vocab/vocab-routing.module";
+import { VocabListItemFormBuilder } from "../../services";
 import { EditVocabListComponent } from "../edit-vocab-list.component";
+import { MockReturnValues } from "./mock-return-values";
 import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";
 import { constructMockListForm, contructMocks, constructMockReturnValues } from "./vocab-list-form.spec.utilities";
 
-describe("EditVocabListComponent", () => {
+describe(`${EditVocabListComponent.name}`, () => {
   let mocks: VocabListFormComponentMocks;
-  let mockListForm: any;
-  let mockVocabList: VocabList;
-  let componentWithMockBuilders: EditVocabListComponent;
+  let mockReturnValues: MockReturnValues;
+  let component: EditVocabListComponent;
   let fb: FormBuilder;
+  let itemBuildIncrement: number;
 
   beforeAll(() => {
     fb = new FormBuilder();
@@ -19,40 +26,105 @@ describe("EditVocabListComponent", () => {
 
   beforeEach(() => {
     mocks = contructMocks();
-    mockListForm = constructMockListForm(fb);
-    constructMockReturnValues(mocks, mockListForm);
+    mocks.listForm = constructMockListForm(fb);
+    mockReturnValues = constructMockReturnValues(mocks, mocks.listForm);
 
-    mockVocabList = StubVocabListBuilder.stub().build();
-    mocks.list = mockVocabList
+    mocks.list = StubVocabListBuilder.stub()
+      .withId("dde2794c-ae67-42a3-b0ee-2682407fad14").build();
+    for (let i: number = 0; i < 2; i++) {
+      const stubListItem: VocabListItem = StubVocabListItemBuilder.stub().withId('' + i).build();
+      mocks.list.listItems.push(stubListItem);
+    }
 
     const mockDataSnapShot: { [key: string]: VocabList } = {};
-    mockDataSnapShot[ResolvedData.ResolvedList] = mockVocabList
+    mockDataSnapShot[ResolvedData.ResolvedList] = mocks.list
     mocks.route = {
       snapshot: {
         data: mockDataSnapShot,
       }
     };
 
-    componentWithMockBuilders = new EditVocabListComponent(mocks.router,
+    itemBuildIncrement = -1;
+    mocks.listItemFormBuilder.build.and.callFake((fn: Function): any => {
+      itemBuildIncrement++;
+      return itemBuildIncrement;
+    });
+
+    const listItemsControl: any = mocks.listForm.controls.listItems;
+    spyOn(listItemsControl, "push");
+
+    component = new EditVocabListComponent(mocks.router,
       mocks.listService, mocks.listFormBuilder,
       mocks.listItemFormBuilder, mocks.observableBuilderForMocks,
       mocks.route);
 
-    componentWithMockBuilders.ngOnInit();
+    component.ngOnInit();
   })
+
+  it("Should have correct pre-edit list value", () => {
+    expect(component.preEditList).toBe(mocks.list!);
+  });
 
   describe("ngOnInit", () => {
     it("Should call title observable builder with correct arguments.", () => {
-      console.log(mocks.list!);
       expect(mocks.observableBuilderForMocks.build)
-        .toHaveBeenCalledOnceWith(mocks.list!.name, mockListForm.controls.name);
+        .toHaveBeenCalledOnceWith(mocks.list!.name, mocks.listForm.controls.name);
+    });
+
+    it(`Should call ${VocabListItemFormBuilder.name}.build the correct number of times`, () => {
+      if (!mocks.list) {
+        throw new NotWellDefinedError("Cannot run test when mock list is not well-defined.");
+      }
+
+      const listItemCount: number = mocks.list.listItems.length;
+      expect(mocks.listItemFormBuilder.build).toHaveBeenCalledTimes(listItemCount);
+    });
+
+    it(`Should call ${FormArray.name}.push the correct number of times with the correct arguments.`, () => {
+      if (!mocks.list) {
+        throw new NotWellDefinedError("Cannot run test when mock list is not well-defined.");
+      }
+
+      const listItemsControl: any = mocks.listForm.controls.listItems;
+      const expectedArgs: any[] = mocks.list.listItems;
+
+      for (let i: number = 0; i < expectedArgs.length; i++) {
+        expect(listItemsControl.push).toHaveBeenCalledWith(i);
+      }
+
+      expect(listItemsControl.push).toHaveBeenCalledTimes(expectedArgs.length);
     });
   });
 
   describe("submit", () => {
-    xit("Should call vocab service update method with a list with the correct ID.", () => {
-      
+    it("Should assign the original ID to the form value..", () => {
+      if (!mocks.list) {
+        throw new NotWellDefinedError("Cannot run test when mock list is not well-defined.");
+      }
+
+      expect(mocks.listForm.value.id).toBeUndefined();
+      component.submit();
+      expect(mocks.listForm.value.id).toBe(mocks.list.id);
     });
 
+    it("Should call Router.navigate with the correct arguments.", fakeAsync(() => {
+      component.submit();
+      expect(mocks.router.navigate).toHaveBeenCalledOnceWith([`/${VocabRoutePath.Root}`, VocabRoutePath.VocabLists]);
+    }));
+  });
+
+  describe("ngOnDestroy", () => {
+    it("Should unsubscribe from VocabListService.add subscription.", fakeAsync(() => {
+      const mockSubscription = new Subscription();
+      spyOn(mockReturnValues.updatedList$, "subscribe").and.callFake((): Subscription => {
+        return mockSubscription;
+      });
+      spyOn(mockSubscription, "unsubscribe").and.callThrough();
+      component.submit();
+
+      component.ngOnDestroy();
+
+      expect(mockSubscription.unsubscribe).toHaveBeenCalledOnceWith();
+    }));
   });
 });
