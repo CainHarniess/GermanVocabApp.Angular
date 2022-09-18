@@ -1,8 +1,11 @@
-import { Directive, Input, OnInit } from '@angular/core';
+import { Directive, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { debounceTime, filter, map, Observable, Subject, tap } from 'rxjs';
+import { debounceTime, filter, map, Observable, startWith, Subject, tap } from 'rxjs';
 import { ControlAvailabilityService } from '../../shared/services/control-availability.service';
+
+import { VocabListItem } from '../../vocab/models';
+import { isIrregular } from '../../vocab/utilities';
 
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 
@@ -11,7 +14,9 @@ import { DropDownOptions } from './drop-down-options.class';
 export type NullableString = string | null;
 
 @Directive()
-export abstract class WordTypeForm implements OnInit {
+export abstract class WordTypeForm implements OnInit, OnDestroy {
+  protected destroy$ = new Subject<boolean>();
+
   private readonly displayPrepositionCase = new Subject<boolean>();
 
   protected irregularControls: FormControl<string | null>[] = [];
@@ -25,6 +30,7 @@ export abstract class WordTypeForm implements OnInit {
 
   @Input() public form!: FormGroup<VocabListItemForm>;
   @Input() public index!: number;
+  @Input() public listItem?: VocabListItem;
 
   public isIrregular$!: Observable<boolean>;
   public hasPreposition$!: Observable<boolean>;
@@ -32,18 +38,26 @@ export abstract class WordTypeForm implements OnInit {
   public get formRoot(): FormGroup { return this.form.root as FormGroup; }
 
   public ngOnInit(): void {
-    this.isIrregular$ = this.form.controls.isIrregular!.valueChanges
+    const controls = this.form.controls;
+    this.isIrregular$ = controls.isIrregular!.valueChanges
       .pipe(
+        startWith(isIrregular(this.listItem)),
         map(val => val ?? false)
       );
 
-    this.hasPreposition$ = this.form.controls.preposition!.valueChanges
+    this.hasPreposition$ = controls.preposition!.valueChanges
       .pipe(
+        startWith(this.listItem?.preposition ?? null),
         debounceTime(250),
         filter((val: NullableString) => val !== null && val !== undefined),
         map((val: NullableString) => val as string),
         map((val: string) => val.length > 0),
         tap((result: boolean) => this.displayPrepositionCase.next(result)),
-      );
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

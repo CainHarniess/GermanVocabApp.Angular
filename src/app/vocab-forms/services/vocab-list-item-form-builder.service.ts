@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ModelFormBuilder } from '../../shared/services/model-form-builder.class';
-import { Case, FixedPlurality, Gender, ReflexiveCase, Separability, WordType } from '../../vocab/models/data';
+import { Case, FixedPlurality, Gender, ReflexiveCase, Separability, Transitivity, WordType } from '../../vocab/models/data';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 import { Null } from "../../../core/types";
 import { VocabListItem } from '../../vocab/models';
@@ -19,7 +19,7 @@ export class VocabListItemFormBuilder extends ModelFormBuilder {
       isWeakMasculineNoun: this.formBuilder.control<Null<boolean>>(null),
       reflexiveCase: this.formBuilder.control<Null<ReflexiveCase>>(null),
       separability: this.formBuilder.control<Null<Separability>>(null),
-      isTransitive: this.formBuilder.control<Null<boolean>>(null),
+      transitivity: this.formBuilder.control<Null<Transitivity>>(null),
       thirdPersonPresent: this.formBuilder.control<Null<string>>(null),
       thirdPersonImperfect: this.formBuilder.control<Null<string>>(null),
       auxiliaryVerb: this.formBuilder.control(null),

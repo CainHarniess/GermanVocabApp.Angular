@@ -4,14 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
 import { AddVocabListFormComponent, EditVocabListComponent } from '../vocab-forms/vocab-list-form';
-import { VocabListsResolver } from './services/vocab-lists.resolver';
 import { VocabListComponent } from './vocab-list/vocab-list.component';
-import { VocabListResolver } from './services/vocab-list.resolver';
-
-export enum VocabRoutePath {
-  Root = "vocab",
-  VocabLists = "vocab-lists",
-}
+import { VocabListResolver, VocabListsResolver } from './services';
+import { VocabRoutePath } from '../shared/routing';
 
 const routes: Routes = [
   {

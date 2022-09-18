@@ -1,8 +1,8 @@
 import { SingleSelectOption } from "../../forms/single-select/single-select-option.interface";
-import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase } from "../../vocab/models/data";
+import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, Separability, Transitivity } from "../../vocab/models/data";
 
 // Stryker disable all : Coverage not required.
-export class DropDownOptions{
+export class DropDownOptions {
   public static readonly caseOptions: SingleSelectOption<Case>[] = [{
     value: Case.Nominative,
     label: "Nominative",
@@ -24,6 +24,30 @@ export class DropDownOptions{
     value: ReflexiveCase.Dative,
     label: "Dative",
   }];
+
+  public static readonly separabilityOptions: SingleSelectOption<Separability>[] = [
+    {
+      value: Separability.None,
+      label: "None",
+    }, {
+      value: Separability.Separable,
+      label: "Separable",
+    }, {
+      value: Separability.Inseparable,
+      label: "Inseparable",
+    }];
+
+  public static readonly transitivityOptions: SingleSelectOption<Transitivity>[] = [
+    {
+      value: Transitivity.Transitive,
+      label: "Transitive",
+    }, {
+      value: Transitivity.Intransitive,
+      label: "Intransitive",
+    }, {
+      value: Transitivity.Both,
+      label: "Both",
+    }];
 
   public static readonly auxiliaryVerbOptions: SingleSelectOption<AuxiliaryVerb>[] = [{
     value: AuxiliaryVerb.Haben,

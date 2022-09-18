@@ -17,10 +17,14 @@
 
     <div *ngrxLet="wordType$ as wordType">
       <div [ngSwitch]="wordType">
-        <noun-form *ngSwitchCase="WordType.Noun" [form]="form" [index]="index"></noun-form>
-        <verb-form *ngSwitchCase="WordType.Verb" [form]="form" [index]="index"></verb-form>
-        <adjective-form *ngSwitchCase="WordType.Adjective" [form]="form" [index]="index"></adjective-form>
-        <adverb-form *ngSwitchCase="WordType.Adverb" [form]="form" [index]="index"></adverb-form>
+        <noun-form *ngSwitchCase="WordType.Noun" [form]="form" [index]="index"
+                   [listItem]="listItem"></noun-form>
+        <verb-form *ngSwitchCase="WordType.Verb" [form]="form" [index]="index"
+                   [listItem]="listItem"></verb-form>
+        <adjective-form *ngSwitchCase="WordType.Adjective" [form]="form" [index]="index"
+                        [listItem]="listItem"></adjective-form>
+        <adverb-form *ngSwitchCase="WordType.Adverb" [form]="form" [index]="index"
+                     [listItem]="listItem"></adverb-form>
       </div>
     </div>
   </div>

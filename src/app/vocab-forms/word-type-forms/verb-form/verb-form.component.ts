@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+
+import { takeUntil } from 'rxjs';
+
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { Case } from '../../../vocab/models/data/case.enum';
 
@@ -13,8 +15,6 @@ import { WordTypeForm } from '../word-type-form';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerbFormComponent extends WordTypeForm {
-  private destroy$ = new Subject<boolean>();
-
   constructor(controlAvailabilityService: ControlAvailabilityService) {
     super(controlAvailabilityService);
   }
@@ -39,11 +39,6 @@ export class VerbFormComponent extends WordTypeForm {
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: boolean) => {
         this.controlAvailabilityService.configure(this.irregularControls, result);
-    });
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+      });
   }
 }

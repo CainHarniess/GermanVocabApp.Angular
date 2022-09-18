@@ -1,6 +1,6 @@
 import { FormControl, Validators } from "@angular/forms";
 import { Null } from "../../../core/types";
-import { AuxiliaryVerb, ReflexiveCase, Separability, WordType } from "../../vocab/models/data";
+import { AuxiliaryVerb, ReflexiveCase, Separability, Transitivity, WordType } from "../../vocab/models/data";
 import { IrregularFormManager } from "./irregular-form-manager";
 
 export class VerbFormManager extends IrregularFormManager {
@@ -18,8 +18,8 @@ export class VerbFormManager extends IrregularFormManager {
     SeparabilityControl.addValidators([Validators.required]);
     SeparabilityControl.updateValueAndValidity();
 
-    const isTransitiveControl: FormControl<Null<boolean>> = this.controls.isTransitive;
-    isTransitiveControl.setValue(false);
+    const isTransitiveControl: FormControl<Null<Transitivity>> = this.controls.transitivity;
+    isTransitiveControl.setValue(null);
     isTransitiveControl.addValidators([Validators.required]);
     isTransitiveControl.updateValueAndValidity();
   }
@@ -43,7 +43,7 @@ export class VerbFormManager extends IrregularFormManager {
     separabilityControl.removeValidators([Validators.required]);
     separabilityControl.updateValueAndValidity();
 
-    const isTransitiveControl: FormControl<Null<boolean> | null> = this.controls.isTransitive;
+    const isTransitiveControl: FormControl<Null<Transitivity>> = this.controls.transitivity;
     isTransitiveControl.reset();
     isTransitiveControl.removeValidators([Validators.required]);
     isTransitiveControl.updateValueAndValidity();

@@ -1,13 +1,14 @@
 import { FormControl } from "@angular/forms";
-import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, WordType } from "../../vocab/models/data";
+import { Null } from "../../../core/types";
+import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, Transitivity, WordType } from "../../vocab/models/data";
 import { Separability } from "../../vocab/models/data/separability.enum";
 
 export interface VocabListItemForm {
   wordType: FormControl<WordType | null>;
-  isWeakMasculineNoun: FormControl<boolean | null>;
+  isWeakMasculineNoun: FormControl<Null<boolean>>;
   reflexiveCase: FormControl<ReflexiveCase | null>;
   separability: FormControl<Separability | null>;
-  isTransitive: FormControl<boolean | null>;
+  transitivity: FormControl<Null<Transitivity>>;
   thirdPersonPresent: FormControl<string | null>;
   thirdPersonImperfect: FormControl<string | null>;
   auxiliaryVerb: FormControl<AuxiliaryVerb | null>;
@@ -21,5 +22,5 @@ export interface VocabListItemForm {
   superlative: FormControl<string | null>;
   english: FormControl<string | null>;
   fixedPlurality: FormControl<FixedPlurality | null>
-  isIrregular: FormControl<boolean | null>;
+  isIrregular: FormControl<Null<boolean>>;
 }
