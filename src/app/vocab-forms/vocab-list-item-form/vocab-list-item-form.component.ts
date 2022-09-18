@@ -7,6 +7,7 @@ import { SingleSelectOption } from '../../forms/single-select/single-select-opti
 import { VocabListItem } from '../../vocab/models';
 
 import { WordType } from '../../vocab/models/data/word-type.enum';
+import { isIrregular } from '../../vocab/utilities';
 import { WordTypeFormManager } from '../form-management';
 import { VocabListForm } from '../models/vocab-list-form.interface';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
@@ -56,18 +57,14 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
       return;
     }
     this.form.patchValue(this.listItem);
+    controls.isIrregular.setValue(isIrregular(this.listItem));
   }
 
-  private constructWordType$(listItem: Undefined<VocabListItem>, wordTypeControl: FormControl<Null<WordType>>): Observable<WordType> {
-    if (!listItem) {
-      return wordTypeControl.valueChanges
-        .pipe(
-          map((val: any) => val as WordType),
-        );
-    }
+  private constructWordType$(listItem: Undefined<VocabListItem>,
+    wordTypeControl: FormControl<Null<WordType>>): Observable<WordType> {
     return wordTypeControl.valueChanges
       .pipe(
-        startWith(listItem.wordType),
+        startWith(listItem?.wordType ?? null),
         map((val: any) => val as WordType),
       );
    }
