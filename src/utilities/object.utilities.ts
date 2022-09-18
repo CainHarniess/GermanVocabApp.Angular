@@ -9,3 +9,7 @@ export function isNull(object: any): boolean {
 export function isUndefined(object: any): boolean {
   return object === undefined;
 }
+
+export function isWellDefined(object: any): boolean {
+  return !isNullOrUndefined(object);
+}
