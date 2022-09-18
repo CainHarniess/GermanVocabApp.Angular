@@ -26,7 +26,6 @@ export class AppComponent {
           return false;
         }),
         startWith(false),
-        tap((result: boolean) => console.log(result)),
       )
   }
 
