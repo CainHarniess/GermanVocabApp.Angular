@@ -27,13 +27,38 @@ export class StubVocabListItemBuilder {
     return this;
   }
 
-  public withEnglish(english: string): StubVocabListItemBuilder {
-    this.stub.english = english;
+  public withThirdPersonPresent(thirdPersonPresent?: string): StubVocabListItemBuilder {
+    this.stub.thirdPersonPresent = thirdPersonPresent;
+    return this;
+  }
+
+  public withThirdPersonImperfect(thirdPersonImperfect?: string): StubVocabListItemBuilder {
+    this.stub.thirdPersonImperfect = thirdPersonImperfect;
+    return this;
+  }
+
+  public withPerfect(perfect?: string): StubVocabListItemBuilder {
+    this.stub.perfect = perfect;
     return this;
   }
 
   public withGerman(german: string): StubVocabListItemBuilder {
     this.stub.german = german;
+    return this;
+  }
+
+  public withComparative(comparative?: string): StubVocabListItemBuilder {
+    this.stub.comparative = comparative;
+    return this;
+  }
+
+  public withSuperlative(superlative?: string): StubVocabListItemBuilder {
+    this.stub.superlative = superlative;
+    return this;
+  }
+
+  public withEnglish(english: string): StubVocabListItemBuilder {
+    this.stub.english = english;
     return this;
   }
 
