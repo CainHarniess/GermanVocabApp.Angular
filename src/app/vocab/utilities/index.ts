@@ -1,1 +1,1 @@
-export { isIrregularModifier, isIrregularVerb } from './vocab-list-item.utilities';
+export { isIrregular, isIrregularModifier, isIrregularVerb } from './vocab-list-item.utilities';
