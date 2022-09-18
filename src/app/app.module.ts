@@ -32,9 +32,9 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     AppRoutingModule,
   ],
   providers: [
-    //{ provide: VocabListService, useClass: HttpVocabListService },
-    InMemoryDataProvider,
-    { provide: VocabListService, useClass: InMemoryVocabListService },
+    { provide: VocabListService, useClass: HttpVocabListService },
+    //InMemoryDataProvider,
+    //{ provide: VocabListService, useClass: InMemoryVocabListService },
   ],
   bootstrap: [AppComponent]
 })
