@@ -20,10 +20,12 @@
     <form-check-box-control [form]="form" controlName="isIrregular"
                             controlId="isIrregular_{{ index }}" label="Irregular"></form-check-box-control>
     <!--TODO: Convert to drop down/radio button control-->
-    <form-check-box-control [form]="form" controlName="separability"
-                            controlId="separability_{{ index }}" label="Separable"></form-check-box-control>
-    <form-check-box-control [form]="form" controlName="isTransitive"
-                            controlId="isTransitive_{{ index }}" label="Transitive"></form-check-box-control>
+    <form-drop-down-control [form]="form" controlName="separability"
+                            controlId="separability_{{ index }}" label="Separable"
+                            [options]="dropDownOptions.separabilityOptions"></form-drop-down-control>
+    <form-drop-down-control [form]="form" controlName="isTransitive"
+                            controlId="isTransitive_{{ index }}" label="Transitive"
+                            [options]="dropDownOptions.transitivityOptions"></form-drop-down-control>
   </div>
   <div class="form-row" *ngIf="isIrregular$ | async">
     <form-text-box-control [form]="form" controlName="thirdPersonPresent"
