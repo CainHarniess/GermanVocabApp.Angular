@@ -5,6 +5,7 @@
     "src/**/*.ts",
     "!src/utilities/testing.utilities.ts",
     "!src/app/vocab-forms/vocab-list-form/tests/vocab-list-form.spec.utilities",
+    "!src/app/vocab-forms/word-type-forms/drop-down-options.class.ts",
     "!src/testing/**",
     "!src/**/*.spec.ts",
     "!src/test.ts",
