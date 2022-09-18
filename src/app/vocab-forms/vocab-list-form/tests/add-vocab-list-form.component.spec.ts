@@ -2,8 +2,8 @@ import { fakeAsync } from "@angular/core/testing";
 import { FormBuilder } from "@angular/forms";
 
 import { Subscription } from "rxjs";
+import { VocabRoutePath } from "../../../shared/routing";
 
-import { VocabRoutePath } from "../../../vocab/vocab-routing.module";
 import { VocabListFormBuilder, VocabListItemFormBuilder } from "../../services";
 import { AddVocabListFormComponent } from "../add-vocab-list-form.component";
 import { MockReturnValues } from "./mock-return-values";
