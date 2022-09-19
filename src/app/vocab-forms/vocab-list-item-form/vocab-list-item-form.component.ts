@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { map, Observable, Subscription, startWith } from 'rxjs';
+import { NotImplementedError } from '../../../core/errors';
 import { Null, Undefined } from '../../../core/types';
 import { SingleSelectOption } from '../../forms/single-select/single-select-option.interface';
 import { VocabListItem } from '../../vocab/models';
@@ -36,7 +37,8 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
   @Input() public index!: number;
   @Input() public listItem?: VocabListItem;
 
-  @Output() public removeListItem = new EventEmitter<number>();
+  @Output() public remove = new EventEmitter<number>();
+  @Output() public copy = new EventEmitter<number>();
 
   constructor(private formManagerFactory: WordTypeFormManagerFactory) {
 
@@ -84,9 +86,13 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
     return <FormArray<FormGroup>>this.parentForm.get("listItems")!;
   }
 
-  public removeListItemControl(index: number): void {
+  public copyControl(): void {
+    this.copy.emit(this.index);
+  }
+
+  public removeControl(): void {
     //Check emit is called
-    this.removeListItem.emit(index);
+    this.remove.emit(this.index);
   }
 
   public ngOnDestroy(): void {

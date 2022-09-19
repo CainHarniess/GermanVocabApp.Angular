@@ -11,7 +11,7 @@ export function contructMocks(): VocabListFormComponentMocks {
     router: jasmine.createSpyObj("mockRouter", ["navigate"]),
     listService: jasmine.createSpyObj("mockListService", ["add", "update"]),
     listFormBuilder: jasmine.createSpyObj("mockListFormBuilder", ["build"]),
-    listItemFormBuilder: jasmine.createSpyObj("mockListItemFormBuilder", ["build"]),
+    listItemFormBuilder: jasmine.createSpyObj("mockListItemFormBuilder", ["build", "buildFromFormGroup"]),
     observableBuilderForMocks: jasmine.createSpyObj("mockObservableBuilderForMocks", ["build"]),
     observableBuilderForReal: jasmine.createSpyObj("mockObservableBuilderForReal", ["build"]),
   };
@@ -31,6 +31,8 @@ export function constructMockListForm(fb: FormBuilder): any {
       listItems: {
         push: function () { },
         removeAt: function () { },
+        at: function (index: number): any { },
+        insert: function (index: number, control: any): void { },
         length: 5,
         controls: [
           fb.group('control 1'),

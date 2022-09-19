@@ -3,6 +3,7 @@ import { FormArray } from '@angular/forms';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { EMPTY, Observable } from 'rxjs';
+import { NotWellDefinedError } from '../../../core/errors';
 
 import { Undefined } from '../../../core/types';
 import { addOrAssign } from '../../../utilities';
@@ -52,10 +53,12 @@ export class EditVocabListComponent extends AbstractVocabListFormComponent {
   public readonly placeholderWording$: Observable<string> = EMPTY;
 
   public submit(): void {
+    if (!this.preEditList.id) {
+      throw new NotWellDefinedError(`Expected well-defined vocab list ID but value is ${this.preEditList.id}.`);
+    }
     const list: VocabList = this.form.value as VocabList;
-    list.id = this.preEditList.id;
-    const update = this.vocabService.update(list)
-      .subscribe((vl: VocabList) => {
+    const update = this.vocabService.update(this.preEditList.id, list)
+      .subscribe(() => {
         this.router.navigate([`/${VocabRoutePath.Root}`, VocabRoutePath.VocabLists]);
       });
 

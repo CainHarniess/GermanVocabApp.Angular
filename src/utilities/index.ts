@@ -1,3 +1,5 @@
 export { makeArray } from "./array.utilities"
-export { isNullOrUndefined, isWellDefined } from "./object.utilities"
+export { validateIndex } from "./form-array.utilities"
+export { isNull, isNullOrUndefined, isUndefined, isWellDefined } from "./object.utilities"
+export { isWellDefinedAndNonEmpty } from "./string.utilities"
 export { addOrAssign } from "./subscription.utilities"

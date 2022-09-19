@@ -1,4 +1,4 @@
-import { makeArray } from "./array.utilities";
+import { makeArray } from "..";
 
 describe("ArrayUtilities", () => {
   describe("makeArray", () => {

@@ -1,6 +1,6 @@
-import { isNull, isNullOrUndefined, isUndefined, isWellDefined } from "./object.utilities";
+import { isNull, isNullOrUndefined, isUndefined, isWellDefined } from "..";
 
-fdescribe("ObjectUtilities", () => {
+describe("ObjectUtilities", () => {
   describe("isNullOrUndefined", () => {
     it("Should return true if object is null.", () => {
       expect(isNullOrUndefined(null)).toBeTrue();

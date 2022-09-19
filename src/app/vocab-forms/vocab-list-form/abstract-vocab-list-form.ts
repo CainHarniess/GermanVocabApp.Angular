@@ -1,14 +1,15 @@
 import { Directive, OnDestroy, OnInit } from "@angular/core";
-import { FormArray, FormGroup } from "@angular/forms";
+import { AbstractControl, FormArray, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { BehaviorSubject, filter, map, Observable, Subject, Subscription } from 'rxjs';
 
 import { Undefined } from "../../../core/types";
+import { validateIndex } from "../../../utilities";
 import { VocabList } from "../../vocab/models";
 
 import { VocabListService } from '../../vocab/services';
-import { VocabListForm } from "../models";
+import { VocabListForm, VocabListItemForm } from "../models";
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 
 @Directive()
@@ -45,6 +46,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   }
 
   public addListItemControl(): void {
+    // TODO: Fix undefined reading exception when adding new form control.
     this.listItemsControl.push(this.generateListItemControl());
     this.listItemControlCount$.next(this.listItemsControl.length);
   }
@@ -58,12 +60,20 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
     return <FormGroup>this.listItemsControl.get(`${index}`);
   }
 
+  public copyListItemControl(index: number): void {
+    validateIndex(index, this.listItemsControl);
+
+    const controlToCopy: AbstractControl<VocabListItemForm> = this.listItemsControl.at(index);
+    const controlValue: VocabListItemForm = controlToCopy.value;
+
+    const newControl: FormGroup<VocabListItemForm> = this.listItemFormBuilder.buildFromFormGroup(controlValue);
+
+    this.listItemsControl.insert(index, newControl);
+    this.listItemControlCount$.next(this.listItemsControl.length);
+  }
+
   public removeListItemControl(index: number): void {
-    if (index < 0) {
-      throw new Error("Index may not be negative.");
-    } else if (index >= this.listItemsControl.length) {
-      throw new Error("Index exceeds the size of the list items form control array.")
-    }
+    validateIndex(index, this.listItemsControl);
     this.listItemsControl.removeAt(index)
     this.listItemControlCount$.next(this.listItemsControl.length);
   }

@@ -97,14 +97,15 @@ describe(`${EditVocabListComponent.name}`, () => {
   });
 
   describe("submit", () => {
-    it("Should assign the original ID to the form value..", () => {
+    it("Should call the vocab service witht the correct arguments.", () => {
       if (!mocks.list) {
         throw new NotWellDefinedError("Cannot run test when mock list is not well-defined.");
       }
 
       expect(mocks.listForm.value.id).toBeUndefined();
       component.submit();
-      expect(mocks.listForm.value.id).toBe(mocks.list.id);
+      expect(mocks.listForm.value.id).toBeUndefined();
+      expect(mocks.listService.update).toHaveBeenCalledOnceWith(mocks.list.id, mocks.listForm.value);
     });
 
     it("Should call Router.navigate with the correct arguments.", fakeAsync(() => {
