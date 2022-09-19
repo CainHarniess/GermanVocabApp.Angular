@@ -3,10 +3,10 @@ import { AbstractControl, FormArray, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { BehaviorSubject, filter, map, Observable, Subject, Subscription } from 'rxjs';
-import { NotImplementedError } from "../../../core/errors";
 
 import { Undefined } from "../../../core/types";
-import { VocabList, VocabListItem } from "../../vocab/models";
+import { validateIndex } from "../../../utilities";
+import { VocabList } from "../../vocab/models";
 
 import { VocabListService } from '../../vocab/services';
 import { VocabListForm, VocabListItemForm } from "../models";
@@ -61,12 +61,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   }
 
   public copyListItemControl(index: number): void {
-    console.log(index);
-    if (index < 0) {
-      throw new Error("Index may not be negative.");
-    } else if (index >= this.listItemsControl.length) {
-      throw new Error("Index exceeds the size of the list items form control array.")
-    }
+    validateIndex(index, this.listItemsControl);
 
     const controlToCopy: AbstractControl<VocabListItemForm> = this.listItemsControl.at(index);
     const controlValue: VocabListItemForm = controlToCopy.value;
@@ -78,11 +73,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   }
 
   public removeListItemControl(index: number): void {
-    if (index < 0) {
-      throw new Error("Index may not be negative.");
-    } else if (index >= this.listItemsControl.length) {
-      throw new Error("Index exceeds the size of the list items form control array.")
-    }
+    validateIndex(index, this.listItemsControl);
     this.listItemsControl.removeAt(index)
     this.listItemControlCount$.next(this.listItemsControl.length);
   }

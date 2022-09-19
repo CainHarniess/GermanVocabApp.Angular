@@ -98,19 +98,15 @@ describe("AddVocabListComponent", () => {
     });
   });
 
+  describe("copyListItemControl", () => {
+    it("Should throw exception if invalid index is provided.", () => {
+      expect(function () { component.copyListItemControl(-1) }).toThrowError("Index may not be negative.");
+    });
+  });
+
   describe("removeListItemControl", () => {
     it("Should throw exception if invalid index is provided.", () => {
       expect(function () { component.removeListItemControl(-1) }).toThrowError("Index may not be negative.");
-    });
-
-    it("Should not throw exception if index is valid.", () => {
-      expect(function () { component.removeListItemControl(0) }).not.toThrow();
-      expect(function () { component.removeListItemControl(1) }).not.toThrow();
-    });
-
-    it("Should throw exception if index provided is greater than the list items control length.", () => {
-      expect(function () { component.removeListItemControl(5) }).toThrowError("Index exceeds the size of the list items form control array.");
-      expect(function () { component.removeListItemControl(6) }).toThrowError("Index exceeds the size of the list items form control array.");
     });
 
     it("Should remove a list item form.", () => {
@@ -126,7 +122,6 @@ describe("AddVocabListComponent", () => {
     });
 
     it("Should call FormArray.removeAt with the correct argument.", () => {
-      //const listItemsControl = component.form.controls.listItems;
       const listItemsControl = mocks.listForm.controls.listItems;
       spyOn(listItemsControl, "removeAt");
 
