@@ -3,14 +3,13 @@ import { Injectable } from '@angular/core';
 import { GuidGeneratorService } from '../../shared/services/guid-generator.service';
 import { VocabListService } from './vocab-list.service';
 
-import { map, Observable, of, tap } from 'rxjs';
+import { EMPTY, map, Observable, of, tap } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { VocabList } from '../models/vocab-list.interface';
-import { NotFoundError } from '../../../core/errors'
+import { NotFoundError, UnexpectedIdError } from '../../../core/errors';
 import { isNullOrUndefined } from '../../../utilities';
 import { VocabListItem } from '../models';
+import { VocabList } from '../models/vocab-list.interface';
 import { InMemoryDataProvider } from './in-memory-data-seeder.service';
-import { Undefined } from '../../../core/types';
 
 @Injectable()
 export class InMemoryVocabListService extends VocabListService {
@@ -74,14 +73,14 @@ export class InMemoryVocabListService extends VocabListService {
       );
   }
 
-  public override update(updatedList: VocabList): Observable<VocabList> {
-    const id: Undefined<string> = updatedList.id;
-    if (!id) {
-      throw new Error("ID must be specified on the list to be updated.");
+  public override update(id: string, updatedList: VocabList): Observable<void> {
+    if (!updatedList.id) {
+      throw new UnexpectedIdError(`Vocab list it ID ${updatedList.id} provided when an a null or undefined value is expected.`);
     }
-    const index: number = this.findIndex(id)
+    const index: number = this.findIndex(id);
+    updatedList.id = id;
     this.lists[index] = updatedList;
-    return of(updatedList)
+    return EMPTY;
   }
 
   private findIndex(id: string): number {

@@ -11,5 +11,5 @@ export abstract class VocabListService {
 
   public abstract addListItem(listItem: VocabListItem, listId: string): Observable<string>;
 
-  public abstract update(updatedList: VocabList): Observable<VocabList>;
+  public abstract update(id: string, updatedList: VocabList): Observable<void>;
 }

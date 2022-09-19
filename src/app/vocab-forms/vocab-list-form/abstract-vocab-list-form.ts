@@ -45,6 +45,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   }
 
   public addListItemControl(): void {
+    // TODO: Fix undefined reading exception when adding new form control.
     this.listItemsControl.push(this.generateListItemControl());
     this.listItemControlCount$.next(this.listItemsControl.length);
   }
