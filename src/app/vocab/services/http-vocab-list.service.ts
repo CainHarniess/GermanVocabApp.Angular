@@ -34,5 +34,4 @@ export class HttpVocabListService extends VocabListService {
   public override update(updatedList: VocabList): Observable<VocabList> {
     throw new NotImplementedError();
   }
-
 }
