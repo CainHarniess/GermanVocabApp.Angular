@@ -30,17 +30,19 @@
                                       [parentForm]="form"
                                       [form]="getListItemControl(i)" [index]="i"
                                       [listItem]="editData!.listItems[i]"
-                                      (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
+                                      (copy)="copyListItemControl($event)"
+                                      (remove)="removeListItemControl($event)"></app-vocab-list-item-form>
             <ng-template #noPreData>
               <app-vocab-list-item-form [parentForm]="form"
                                         [form]="getListItemControl(i)" [index]="i"
-                                        (removeListItem)="removeListItemControl($event)"></app-vocab-list-item-form>
+                                        (copy)="copyListItemControl($event)"
+                                        (remove)="removeListItemControl($event)"></app-vocab-list-item-form>
             </ng-template>
           </div>
           <mat-divider *ngIf="listItemsControl.controls.length > 0"></mat-divider>
           <div class="placeholder list-item-form container">
             <div class="placeholder list-item-form action-panel">
-              <button mat-icon-button color="accent" matTooltip="Duplicate" matTooltipPosition="left"
+              <button mat-icon-button color="accent" matTooltip="Add list item" matTooltipPosition="left"
                       type="button" (click)="addListItemControl()">
                 <mat-icon>add</mat-icon>
               </button>

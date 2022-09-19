@@ -1,13 +1,13 @@
 <div [formGroup]="parentForm">
   <div [formGroup]="form" class="list-item-form container">
     <div class="list-item-form action-panel">
-      <button mat-icon-button color="accent" matTooltip="Duplicate" matTooltipPosition="left"
-              type="button">
+      <button mat-icon-button color="accent" matTooltip="Duplicate list item" matTooltipPosition="left"
+              type="button" (click)="copyControl()">
         <mat-icon>add</mat-icon>
       </button>
       <button mat-icon-button color="warn" matTooltip="Archive" matTooltipPosition="left"
               type="button"
-              (click)="removeListItemControl(index)">
+              (click)="removeControl()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
