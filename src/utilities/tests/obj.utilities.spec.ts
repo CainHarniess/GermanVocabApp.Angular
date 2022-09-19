@@ -1,4 +1,4 @@
-import { isNull, isNullOrUndefined, isUndefined, isWellDefined } from "./object.utilities";
+import { isNull, isNullOrUndefined, isUndefined, isWellDefined } from "..";
 
 describe("ObjectUtilities", () => {
   describe("isNullOrUndefined", () => {

@@ -1,4 +1,4 @@
-import { isWellDefinedAndNonEmpty } from "./string.utilities";
+import { isWellDefinedAndNonEmpty } from "..";
 
 describe("StringUtilities", () => {
   describe("isWellDefinedAndNonEmpty", () => {
