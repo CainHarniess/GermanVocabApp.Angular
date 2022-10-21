@@ -7,7 +7,7 @@ import { IrregularValidationManager } from './irregular-validation.manager';
 
 @Injectable()
 export class VerbValidationManager extends IrregularValidationManager {
-  protected addWordTypeValidation(form: FormGroup<VocabListItemForm>): void {
+  protected addValidationProtected(form: FormGroup<VocabListItemForm>): void {
     const auxiliaryVerbControl: FormControl<AuxiliaryVerb | null> = form.controls.auxiliaryVerb!;
     auxiliaryVerbControl.addValidators([Validators.required]);
     auxiliaryVerbControl.updateValueAndValidity();
@@ -21,11 +21,11 @@ export class VerbValidationManager extends IrregularValidationManager {
     isTransitiveControl.updateValueAndValidity();
   }
 
-  protected addIrregularValidation(form: FormGroup<VocabListItemForm>): void {
+  protected addIrregularFollowFieldValidation(form: FormGroup<VocabListItemForm>): void {
     return;
   }
 
-  protected removeWordTypeValidation(form: FormGroup<VocabListItemForm>): void {
+  protected removeValidationProtected(form: FormGroup<VocabListItemForm>): void {
     const auxiliaryVerbControl: FormControl<AuxiliaryVerb | null> = form.controls.auxiliaryVerb!;
     auxiliaryVerbControl.removeValidators([Validators.required]);
     auxiliaryVerbControl.updateValueAndValidity();
@@ -39,7 +39,7 @@ export class VerbValidationManager extends IrregularValidationManager {
     isTransitiveControl.updateValueAndValidity();
   }
 
-  protected override removeIrregularValidation(form: FormGroup<VocabListItemForm>): void {
+  protected override removeIrregularFollowFieldValidation(form: FormGroup<VocabListItemForm>): void {
     const thirdPersonPresentControl: FormControl<Null<string>> = form.controls.thirdPersonPresent;
     thirdPersonPresentControl.removeValidators([Validators.required]);
     thirdPersonPresentControl.updateValueAndValidity();

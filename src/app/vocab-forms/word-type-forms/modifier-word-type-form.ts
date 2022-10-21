@@ -1,5 +1,5 @@
 import { Directive, OnDestroy } from '@angular/core';
-import { Subscription, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { ControlAvailabilityService } from '../../shared/services/control-availability.service';
 import { WordTypeForm } from './word-type-form';
 

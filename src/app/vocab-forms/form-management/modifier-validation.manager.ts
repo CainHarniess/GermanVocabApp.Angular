@@ -5,19 +5,19 @@ import { IrregularValidationManager } from './irregular-validation.manager';
 
 @Injectable()
 export class ModifierValidationManager extends IrregularValidationManager {
-  protected addWordTypeValidation(form: FormGroup<VocabListItemForm>): void {
+  protected addValidationProtected(form: FormGroup<VocabListItemForm>): void {
 
   }
 
-  protected addIrregularValidation(form: FormGroup<VocabListItemForm>): void {
+  protected addIrregularFollowFieldValidation(form: FormGroup<VocabListItemForm>): void {
 
   }
 
-  protected removeWordTypeValidation(form: FormGroup<VocabListItemForm>): void {
+  protected removeValidationProtected(form: FormGroup<VocabListItemForm>): void {
 
   }
 
-  protected removeIrregularValidation(form: FormGroup<VocabListItemForm>): void {
+  protected removeIrregularFollowFieldValidation(form: FormGroup<VocabListItemForm>): void {
     const comparativeControl: FormControl<string | null> = form.controls.comparative;
     comparativeControl.removeValidators([Validators.required]);
     comparativeControl.updateValueAndValidity();

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { VocabAppFormsModule } from '../forms/vocab-app-forms.module';
 import { SharedModule } from '../shared/shared.module';
-import { AdjectiveFormManager, AdverbFormManager, ModifierValidationManager, NounFormManager, NounValidationManager, VerbFormManager, VerbValidationManager } from './form-management';
+import { AdjectiveFormManager, AdverbFormManager, ModifierValidationManager, ModifierValueController, NounFormManager, NounValidationManager, NounValueController, VerbFormManager, VerbValidationManager, VerbValueController } from './form-management';
 import { VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from './services';
 import { ListTitleObservableBuilder } from './services/list-title-observable.builder';
 import { AddVocabListFormComponent } from './vocab-list-form/add-vocab-list-form.component';
@@ -42,6 +42,9 @@ import { VerbFormComponent } from './word-type-forms/verb-form/verb-form.compone
     NounValidationManager,
     VerbValidationManager,
     ModifierValidationManager,
+    NounValueController,
+    VerbValueController,
+    ModifierValueController,
     NounFormManager,
     VerbFormManager,
     AdjectiveFormManager,
