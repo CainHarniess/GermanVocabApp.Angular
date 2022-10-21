@@ -9,7 +9,8 @@
     <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input formControlName="name" matInput>
+        <input formControlName="name" matInput [errorStateMatcher]="myMatcher">
+        <mat-error *ngIf="nameValidationMessage$ | async as message">{{ message }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>

@@ -1,70 +1,60 @@
-import { FormControl, Validators } from "@angular/forms";
+import { Injectable } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
 import { Null } from "../../../core/types";
 import { AuxiliaryVerb, ReflexiveCase, Separability, Transitivity, WordType } from "../../vocab/models/data";
+import { VocabListItemForm } from "../models";
 import { IrregularFormManager } from "./irregular-form-manager";
+import { VerbValidationManager } from "./verb-validation.manager";
 
+@Injectable()
 export class VerbFormManager extends IrregularFormManager {
   public get wordType(): WordType { return WordType.Verb; }
 
-  public override configureForm(): void {
-    super.configureForm();
-
-    const auxiliaryVerbControl: FormControl<AuxiliaryVerb | null> = this.controls.auxiliaryVerb!;
-    auxiliaryVerbControl.addValidators([Validators.required]);
-    auxiliaryVerbControl.updateValueAndValidity();
-
-    const SeparabilityControl: FormControl<Null<Separability>> = this.controls.separability;
-    SeparabilityControl.setValue(Separability.None);
-    SeparabilityControl.addValidators([Validators.required]);
-    SeparabilityControl.updateValueAndValidity();
-
-    const isTransitiveControl: FormControl<Null<Transitivity>> = this.controls.transitivity;
-    isTransitiveControl.setValue(null);
-    isTransitiveControl.addValidators([Validators.required]);
-    isTransitiveControl.updateValueAndValidity();
+  public constructor(validationManager: VerbValidationManager) {
+    super(validationManager);
   }
 
-  public override removeConfiguration(): void {
-    const reflexiveCaseControl: FormControl<Null<ReflexiveCase>> = this.controls.reflexiveCase;
+  public override configureForm(form: FormGroup<VocabListItemForm>): void {
+    this.validationManager.addValidation(form);
+    super.configureForm(form);
+
+    const SeparabilityControl: FormControl<Null<Separability>> = form.controls.separability;
+    SeparabilityControl.setValue(Separability.None);
+
+    const isTransitiveControl: FormControl<Null<Transitivity>> = form.controls.transitivity;
+    isTransitiveControl.setValue(null);
+  }
+
+  public override removeConfiguration(form: FormGroup<VocabListItemForm>): void {
+    this.validationManager.removeValidation(form);
+    const reflexiveCaseControl: FormControl<Null<ReflexiveCase>> = form.controls.reflexiveCase;
     reflexiveCaseControl.reset();
 
-    const auxiliaryVerbControl: FormControl<AuxiliaryVerb | null> = this.controls.auxiliaryVerb!;
+    const auxiliaryVerbControl: FormControl<AuxiliaryVerb | null> = form.controls.auxiliaryVerb!;
     auxiliaryVerbControl.reset();
-    auxiliaryVerbControl.removeValidators([Validators.required]);
-    auxiliaryVerbControl.updateValueAndValidity();
 
-    const perfectControl: FormControl<Null<string>> = this.controls.perfect;
+    const perfectControl: FormControl<Null<string>> = form.controls.perfect;
     perfectControl.reset();
-    perfectControl.removeValidators([Validators.required]);
-    perfectControl.updateValueAndValidity();
 
-    const separabilityControl: FormControl<Null<Separability>> = this.controls.separability;
+    const separabilityControl: FormControl<Null<Separability>> = form.controls.separability;
     separabilityControl.reset();
-    separabilityControl.removeValidators([Validators.required]);
-    separabilityControl.updateValueAndValidity();
 
-    const isTransitiveControl: FormControl<Null<Transitivity>> = this.controls.transitivity;
+    const isTransitiveControl: FormControl<Null<Transitivity>> = form.controls.transitivity;
     isTransitiveControl.reset();
-    isTransitiveControl.removeValidators([Validators.required]);
-    isTransitiveControl.updateValueAndValidity();
 
-    const wasIrregular: Null<boolean> | null = this.cacheAndRemoveIrregularControl();
+    const wasIrregular: Null<boolean> | null = this.cacheAndRemoveIrregularControl(form);
 
     if (wasIrregular !== true) {
       return;
     }
-    this.removeIrregularDependents();
+    this.removeIrregularDependents(form);
   }
 
-  protected override removeIrregularDependents(): void {
-    const thirdPersonPresentControl: FormControl<Null<string>> = this.controls.thirdPersonPresent;
+  protected override removeIrregularDependents(form: FormGroup<VocabListItemForm>): void {
+    const thirdPersonPresentControl: FormControl<Null<string>> = form.controls.thirdPersonPresent;
     thirdPersonPresentControl.reset();
-    thirdPersonPresentControl.removeValidators([Validators.required]);
-    thirdPersonPresentControl.updateValueAndValidity();
 
-    const thirdPersonImperfectControl: FormControl<Null<string>> = this.controls.thirdPersonImperfect;
+    const thirdPersonImperfectControl: FormControl<Null<string>> = form.controls.thirdPersonImperfect;
     thirdPersonImperfectControl.reset();
-    thirdPersonImperfectControl.removeValidators([Validators.required]);
-    thirdPersonImperfectControl.updateValueAndValidity();
   }
 }

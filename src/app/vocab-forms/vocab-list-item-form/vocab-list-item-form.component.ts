@@ -74,12 +74,12 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
   private updateFormConfiguration(wordType: WordType): void {
     if (this.currentFormManager) {
       //Check this is called?
-      this.currentFormManager.removeConfiguration();
+      this.currentFormManager.removeConfiguration(this.form);
     }
     // and this?
     this.currentFormManager = this.formManagerFactory.create(wordType, this.form);
     // and this?
-    this.currentFormManager.configureForm();
+    this.currentFormManager.configureForm(this.form);
   }
 
   public get listItemsControl(): FormArray<FormGroup> {

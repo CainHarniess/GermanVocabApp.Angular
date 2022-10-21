@@ -1,25 +1,26 @@
-import { FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
+import { ModifierValidationManager } from ".";
+import { VocabListItemForm } from "../models";
 import { IrregularFormManager } from "./irregular-form-manager";
 
 export abstract class ModifierFormManager extends IrregularFormManager {
-  public override removeConfiguration(): void {
-    const wasIrregular: boolean | null = this.cacheAndRemoveIrregularControl();
+  public override removeConfiguration(form: FormGroup<VocabListItemForm>): void {
+    this.validationManager.addValidation(form);
+    const wasIrregular: boolean | null = this.cacheAndRemoveIrregularControl(form);
 
     if (wasIrregular !== true) {
       return;
     }
-    this.removeIrregularDependents();
+    this.removeIrregularDependents(form);
   }
 
-  protected override removeIrregularDependents(): void {
-    const comparativeControl: FormControl<string | null> = this.controls.comparative;
-    comparativeControl.setValue(null);
-    comparativeControl.removeValidators([Validators.required]);
-    comparativeControl.updateValueAndValidity();
+  protected override removeIrregularDependents(form: FormGroup<VocabListItemForm>): void {
+    this.validationManager.removeValidation(form);
 
-    const superlativeControl: FormControl<string | null> = this.controls.superlative;
+    const comparativeControl: FormControl<string | null> = form.controls.comparative;
+    comparativeControl.setValue(null);
+
+    const superlativeControl: FormControl<string | null> = form.controls.superlative;
     superlativeControl.setValue(null);
-    superlativeControl.removeValidators([Validators.required]);
-    superlativeControl.updateValueAndValidity();
   }
 }
