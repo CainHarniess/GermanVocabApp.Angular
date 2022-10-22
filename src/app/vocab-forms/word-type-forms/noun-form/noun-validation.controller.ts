@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FixedPlurality, Gender } from '../../../vocab/models/data';
 import { VocabListItemForm } from '../../models';
+import { WordTypeValidationController } from '../core';
 
 @Injectable()
-export class NounValidationManager {
-  public addValidation(form: FormGroup<VocabListItemForm>): void {
+export class NounValidationController extends WordTypeValidationController{
+  public override addValidation(form: FormGroup<VocabListItemForm>): void {
     const genderControl: FormControl<Gender | null> = form.controls.gender;
     genderControl.addValidators([Validators.required]);
     genderControl.updateValueAndValidity();
@@ -19,7 +20,7 @@ export class NounValidationManager {
     isWeakMasculineNounControl.updateValueAndValidity();
   }
 
-  public removeValidation(form: FormGroup<VocabListItemForm>): void {
+  public override removeValidation(form: FormGroup<VocabListItemForm>): void {
     const genderControl: FormControl<Gender | null> = form.controls.gender!;
     genderControl.removeValidators([Validators.required]);
     genderControl.updateValueAndValidity();

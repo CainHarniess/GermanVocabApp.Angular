@@ -5,11 +5,17 @@ import { VocabAppFormsModule } from '../forms/vocab-app-forms.module';
 import { SharedModule } from '../shared/shared.module';
 import { VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from './services';
 import { ListTitleObservableBuilder } from './services/list-title-observable.builder';
+import { RequiredWithLengthMessageProvider, RequiredWithLengthRangeValidatorFactory } from './validation';
 import { AddVocabListFormComponent } from './vocab-list-form/add-vocab-list-form.component';
 import { EditVocabListComponent } from './vocab-list-form/edit-vocab-list.component';
-import { RequiredWithLengthRangeValidatorFactory } from './vocab-list-form/required-with-length-range-validator';
 import { VocabListItemFormComponent } from './vocab-list-item-form/vocab-list-item-form.component';
-import { AdjectiveFormComponent, AdjectiveFormManager, AdverbFormComponent, AdverbFormManager, ModifierValidationManager, ModifierValueController, NounFormComponent, NounFormManager, NounValidationManager, NounValueController, VerbFormComponent, VerbFormManager, VerbValidationManager, VerbValueController } from './word-type-forms';
+import {
+    AdjectiveFormComponent, AdjectiveFormManager, AdverbFormComponent, AdverbFormManager,
+    ModifierValidationManager, ModifierValueController, NounFormComponent, NounFormManager,
+    NounValidationController,
+    NounValueController, VerbFormComponent, VerbFormManager, VerbValidationManager,
+    VerbValueController
+} from './word-type-forms';
 
 @NgModule({
   declarations: [
@@ -30,12 +36,13 @@ import { AdjectiveFormComponent, AdjectiveFormManager, AdverbFormComponent, Adve
     AddVocabListFormComponent,
   ],
   providers: [
+    RequiredWithLengthMessageProvider,
     VocabListFormBuilder,
     VocabListItemFormBuilder,
     ListTitleObservableBuilder,
     RequiredWithLengthRangeValidatorFactory,
     VocabListFormValidationProvider,
-    NounValidationManager,
+    NounValidationController,
     VerbValidationManager,
     ModifierValidationManager,
     NounValueController,

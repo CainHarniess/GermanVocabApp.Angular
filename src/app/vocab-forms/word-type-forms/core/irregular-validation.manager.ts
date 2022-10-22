@@ -1,8 +1,8 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { VocabListItemForm } from "../../models";
-import { WordTypeValidationManager } from "./word-type-validation.manager";
+import { WordTypeValidationController } from "./word-type-validation.manager";
 
-export abstract class IrregularValidationManager extends WordTypeValidationManager {
+export abstract class IrregularValidationManager extends WordTypeValidationController {
   public addValidation(form: FormGroup<VocabListItemForm>): void {
     const isIrregularControl: FormControl<boolean | null> = form.controls.isIrregular;
     isIrregularControl.addValidators([Validators.required]);

@@ -1,12 +1,12 @@
 import { FormGroup } from "@angular/forms";
-import { WordTypeValidationManager, WordTypeValueController } from ".";
+import { WordTypeValidationController, WordTypeValueController } from ".";
 import { WordType } from "../../../vocab/models/data";
 import { VocabListItemForm } from "../../models";
 
 export abstract class WordTypeFormManager {
   public abstract get wordType(): WordType;
 
-  public constructor(protected readonly validationManager: WordTypeValidationManager,
+  public constructor(protected readonly validationManager: WordTypeValidationController,
     protected readonly valueController: WordTypeValueController) {
   }
 

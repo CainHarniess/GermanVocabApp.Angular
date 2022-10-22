@@ -9,16 +9,17 @@
     <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input formControlName="name" matInput [errorStateMatcher]="myMatcher">
+        <input formControlName="name" matInput [errorStateMatcher]="requiredIfTouched">
         <mat-error *ngIf="nameValidationMessage$ | async as message">{{ message }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>
-        <input formControlName="description" matInput>
-          <mat-hint *ngrxLet="descriptionLength$ as descriptionLength"
-                    [ngClass]="{'hidden': descriptionLength <= 150}" align="end">
-            {{descriptionLength}} / 250
-          </mat-hint>
+        <input formControlName="description" matInput [errorStateMatcher]="requiredIfTouched">
+        <mat-hint *ngrxLet="descriptionLength$ as descriptionLength"
+                  [ngClass]="{'hidden': descriptionLength <= 75}" align="end">
+          {{descriptionLength}} / 100
+        </mat-hint>
+        <mat-error *ngIf="descriptionValidationMessage$ | async as message">{{ message }}</mat-error>
       </mat-form-field>
       <mat-card>
         <mat-card-title class="list-items-header">

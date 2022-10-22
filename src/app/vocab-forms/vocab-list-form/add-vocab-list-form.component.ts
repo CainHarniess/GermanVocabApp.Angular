@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -8,6 +9,7 @@ import { VocabList } from '../../vocab/models/vocab-list.interface';
 import { VocabListService } from '../../vocab/services/vocab-list.service';
 import { VocabListForm } from '../models';
 import { ListItemWordingObservableProvider, ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
+import { RequiredWithLengthMessageProvider } from '../validation';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 
 @Component({
@@ -19,10 +21,13 @@ import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 })
 export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
   constructor(router: Router, vocabService: VocabListService,
-    listFormBuilder: VocabListFormBuilder,
-    listItemFormBuilder: VocabListItemFormBuilder, title$Builder: ListTitleObservableBuilder,
-    private listItemWording$Provider: ListItemWordingObservableProvider) {
-    super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder);
+    listFormBuilder: VocabListFormBuilder, listItemFormBuilder: VocabListItemFormBuilder,
+    title$Builder: ListTitleObservableBuilder,
+    errorMessageProvider: RequiredWithLengthMessageProvider, requiredIfTouched: ErrorStateMatcher,
+    private listItemWording$Provider: ListItemWordingObservableProvider,
+    ) {
+    super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder,
+      errorMessageProvider, requiredIfTouched);
   }
 
   public override get editData(): Undefined<VocabList> { return undefined; }

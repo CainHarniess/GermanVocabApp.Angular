@@ -1,5 +1,5 @@
 export { WordTypeFormComponent } from "./word-type-form.component";
-export { WordTypeValidationManager } from "./word-type-validation.manager";
+export { WordTypeValidationController } from "./word-type-validation.manager";
 export { WordTypeValueController } from "./word-type-value.controller";
 export { IrregularValueController } from "./irregular-value.controller";
 export { ModifierValidationManager } from "./modifier-validation.manager";

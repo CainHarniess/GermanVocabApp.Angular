@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from "@angular/material/core";
 import { Router } from "@angular/router";
 
 import { BehaviorSubject, filter, map, Observable, Subject, Subscription } from 'rxjs';
+import { AbstractFormComponent } from "../../../core";
 
 import { Undefined } from "../../../core/types";
 import { validateIndex } from "../../../utilities";
@@ -12,21 +13,28 @@ import { VocabList } from "../../vocab/models";
 import { VocabListService } from '../../vocab/services';
 import { VocabListForm, VocabListItemForm } from "../models";
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
-import { RequiredIfTouchedErrorStateMatcher } from "./required-if-touched-error-state-matcher";
+import { RequiredIfTouchedErrorStateMatcher, RequiredWithLengthMessageProvider } from "../validation";
 
-@Directive()
-export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
+@Directive({
+  providers: [
+    { provide: ErrorStateMatcher, useClass: RequiredIfTouchedErrorStateMatcher },
+  ]
+})
+export abstract class AbstractVocabListFormComponent extends AbstractFormComponent
+  implements OnInit, OnDestroy {
 
   protected readonly destroy$ = new Subject<boolean>();
 
   public readonly listItemControlCount$ = new BehaviorSubject<number>(0);
 
-  protected constructor(protected router: Router,
+  protected constructor(protected readonly router: Router,
     protected readonly vocabService: VocabListService,
     protected readonly listFormBuilder: VocabListFormBuilder,
     protected readonly listItemFormBuilder: VocabListItemFormBuilder,
-    protected readonly title$Builder: ListTitleObservableBuilder) {
-
+    protected readonly title$Builder: ListTitleObservableBuilder,
+    private readonly errorMessageProvider: RequiredWithLengthMessageProvider,
+    public readonly requiredIfTouched: ErrorStateMatcher) {
+    super();
   }
 
   public abstract get editData(): Undefined<VocabList>;
@@ -34,26 +42,24 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   public form!: FormGroup<VocabListForm>;
   public title$!: Observable<string>;
   public descriptionLength$!: Observable<number>;
-  public nameValidationMessage$!: Observable<string>;
+  public nameValidationMessage$!: Observable<string | null>;
+  public descriptionValidationMessage$!: Observable<string | null>;
 
   public ngOnInit(): void {
     this.form = this.listFormBuilder.build();
     const controls = this.form.controls;
-    this.descriptionLength$ = controls.description.valueChanges
+
+    this.nameValidationMessage$ = this.errorMessageProvider.provideFor(controls.name);
+
+    let descriptionControl: FormControl<string | null> = controls.description;
+    this.descriptionValidationMessage$ = this.errorMessageProvider.provideFor(descriptionControl);
+
+    this.descriptionLength$ = descriptionControl.valueChanges
       .pipe(
         map((val: string | null) => val ? val.length : 0),
-        filter((result: number) => result > 150),
-      );
-
-    let nameControl: FormControl<string | null> = this.form.controls.name;
-    this.nameValidationMessage$ = nameControl.valueChanges
-      .pipe(
-        filter((_: string | null) => nameControl.errors !== null),
-        map((_: string | null) => nameControl.errors!["message"])
+        filter((result: number) => result > 75),
       );
   }
-
-  public readonly myMatcher: ErrorStateMatcher = new RequiredIfTouchedErrorStateMatcher();
 
   public get listItemsControl(): FormArray {
     return this.form.controls.listItems;

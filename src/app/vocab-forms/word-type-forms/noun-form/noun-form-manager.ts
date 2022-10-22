@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { NounValidationManager, NounValueController } from ".";
+import { NounValidationController, NounValueController } from ".";
 import { WordType } from "../../../vocab/models/data";
 import { WordTypeFormManager } from "../core";
 
@@ -7,7 +7,7 @@ import { WordTypeFormManager } from "../core";
 export class NounFormManager extends WordTypeFormManager {
   public get wordType(): WordType { return WordType.Noun; }
 
-  public constructor(validationManager: NounValidationManager, valueController: NounValueController) {
+  public constructor(validationManager: NounValidationController, valueController: NounValueController) {
     super(validationManager, valueController);
   }
 }

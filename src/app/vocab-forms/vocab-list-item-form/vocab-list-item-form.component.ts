@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { map, Observable, startWith, Subscription } from 'rxjs';
+import { AbstractFormComponent } from '../../../core';
 import { Null, Undefined } from '../../../core/types';
 import { SingleSelectOption } from '../../forms/single-select/single-select-option.interface';
 import { VocabListItem } from '../../vocab/models';
@@ -21,7 +22,8 @@ import { wordTypeOptions } from './drop-down-options';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [WordTypeFormManagerFactory]
 })
-export class VocabListItemFormComponent implements OnInit, OnDestroy {
+export class VocabListItemFormComponent extends AbstractFormComponent
+  implements OnInit, OnDestroy {
   private validationChanges!: Subscription;
   private currentFormManager?: WordTypeFormManager;
 
@@ -40,7 +42,7 @@ export class VocabListItemFormComponent implements OnInit, OnDestroy {
   @Output() public copy = new EventEmitter<number>();
 
   constructor(private formManagerFactory: WordTypeFormManagerFactory) {
-
+    super();
   }
 
   public ngOnInit(): void {
