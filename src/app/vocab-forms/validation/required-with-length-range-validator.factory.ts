@@ -5,6 +5,9 @@ import { ValidationError } from ".";
 @Injectable()
 export class RequiredWithLengthRangeValidatorFactory {
   public create(minLength: number, maxLength: number): ValidatorFn {
+    if (minLength > maxLength) {
+      throw new Error(`Specified minimum length ${minLength} is greater than specified maximum length ${maxLength}.`);
+    }
     return (control: AbstractControl<any, any>): ValidationErrors | null => {
       return requiredWithLengthRange(control, minLength, maxLength);
     };
