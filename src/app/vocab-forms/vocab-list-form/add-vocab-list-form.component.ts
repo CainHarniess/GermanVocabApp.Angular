@@ -9,7 +9,7 @@ import { VocabList } from '../../vocab/models/vocab-list.interface';
 import { VocabListService } from '../../vocab/services/vocab-list.service';
 import { VocabListForm } from '../models';
 import { ListItemWordingObservableProvider, ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
-import { RequiredWithLengthMessageProvider } from '../validation';
+import { ValidationErrorMessageProvider } from '../validation';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 
 @Component({
@@ -23,7 +23,7 @@ export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
   constructor(router: Router, vocabService: VocabListService,
     listFormBuilder: VocabListFormBuilder, listItemFormBuilder: VocabListItemFormBuilder,
     title$Builder: ListTitleObservableBuilder,
-    errorMessageProvider: RequiredWithLengthMessageProvider, requiredIfTouched: ErrorStateMatcher,
+    errorMessageProvider: ValidationErrorMessageProvider, requiredIfTouched: ErrorStateMatcher,
     private listItemWording$Provider: ListItemWordingObservableProvider,
     ) {
     super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder,

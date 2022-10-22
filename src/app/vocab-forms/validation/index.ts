@@ -2,4 +2,4 @@ export { RequiredIfTouchedErrorStateMatcher } from './required-if-touched.error-
 export { RequiredWithLengthRangeValidatorFactory } from './required-with-length-range-validator.factory'
 export { LengthRangeValidatorFactory } from './length-range-validator.factory'
 export { ValidationError } from './validation-result'
-export { RequiredWithLengthMessageProvider } from './required-with-length-message.provider'
+export { ValidationErrorMessageProvider } from './validation-error-message.provider'

@@ -4,7 +4,7 @@ import { map, Observable } from "rxjs";
 import { ValidationError } from ".";
 
 @Injectable()
-export class RequiredWithLengthMessageProvider {
+export class ValidationErrorMessageProvider {
   public provideFor(control: FormControl<string | null>): Observable<string | null> {
     return control.valueChanges
       .pipe(

@@ -14,7 +14,7 @@ import { VocabList, VocabListItem } from '../../vocab/models';
 import { ResolvedData } from '../../vocab/models/data';
 import { VocabListService } from '../../vocab/services';
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
-import { RequiredWithLengthMessageProvider } from '../validation';
+import { ValidationErrorMessageProvider } from '../validation';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 
 @Component({
@@ -29,7 +29,7 @@ export class EditVocabListComponent extends AbstractVocabListFormComponent {
   constructor(router: Router, vocabService: VocabListService,
     listFormBuilder: VocabListFormBuilder,
     listItemFormBuilder: VocabListItemFormBuilder, title$Builder: ListTitleObservableBuilder,
-    errorMessageProvider: RequiredWithLengthMessageProvider, requiredIfTouched: ErrorStateMatcher,
+    errorMessageProvider: ValidationErrorMessageProvider, requiredIfTouched: ErrorStateMatcher,
     private route: ActivatedRoute) {
     super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder,
       errorMessageProvider, requiredIfTouched);

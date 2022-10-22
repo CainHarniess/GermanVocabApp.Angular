@@ -11,7 +11,7 @@ import { VocabList } from "../../vocab/models";
 import { VocabListService } from '../../vocab/services';
 import { VocabListForm, VocabListItemForm } from "../models";
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
-import { RequiredIfTouchedErrorStateMatcher, RequiredWithLengthMessageProvider } from "../validation";
+import { RequiredIfTouchedErrorStateMatcher, ValidationErrorMessageProvider } from "../validation";
 
 @Directive()
 export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
@@ -25,7 +25,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
     protected readonly listFormBuilder: VocabListFormBuilder,
     protected readonly listItemFormBuilder: VocabListItemFormBuilder,
     protected readonly title$Builder: ListTitleObservableBuilder,
-    private readonly errorMessageProvider: RequiredWithLengthMessageProvider,
+    private readonly errorMessageProvider: ValidationErrorMessageProvider,
     public readonly requiredIfTouched: RequiredIfTouchedErrorStateMatcher) {
 
   }

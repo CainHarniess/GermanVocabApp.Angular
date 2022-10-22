@@ -5,7 +5,7 @@ import { VocabAppFormsModule } from '../forms/vocab-app-forms.module';
 import { SharedModule } from '../shared/shared.module';
 import { ItemValidationProvider, VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from './services';
 import { ListTitleObservableBuilder } from './services/list-title-observable.builder';
-import { LengthRangeValidatorFactory, RequiredIfTouchedErrorStateMatcher, RequiredWithLengthMessageProvider, RequiredWithLengthRangeValidatorFactory } from './validation';
+import { LengthRangeValidatorFactory, RequiredIfTouchedErrorStateMatcher, ValidationErrorMessageProvider, RequiredWithLengthRangeValidatorFactory } from './validation';
 import { AddVocabListFormComponent } from './vocab-list-form/add-vocab-list-form.component';
 import { EditVocabListComponent } from './vocab-list-form/edit-vocab-list.component';
 import { VocabListItemFormComponent } from './vocab-list-item-form/vocab-list-item-form.component';
@@ -36,7 +36,7 @@ import {
   ],
   providers: [
     LengthRangeValidatorFactory,
-    RequiredWithLengthMessageProvider,
+    ValidationErrorMessageProvider,
     RequiredWithLengthRangeValidatorFactory,
     RequiredIfTouchedErrorStateMatcher,
 
