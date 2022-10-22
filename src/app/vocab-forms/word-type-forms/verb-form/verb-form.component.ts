@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs';
 
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { Case } from '../../../vocab/models/data/case.enum';
+import { ValidationErrorMessageProvider } from '../../validation';
 import { WordTypeFormComponent } from '../core';
 
 @Component({
@@ -14,8 +15,9 @@ import { WordTypeFormComponent } from '../core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerbFormComponent extends WordTypeFormComponent {
-  constructor(controlAvailabilityService: ControlAvailabilityService) {
-    super(controlAvailabilityService);
+  constructor(controlAvailabilityService: ControlAvailabilityService,
+    errorMessageProvider: ValidationErrorMessageProvider) {
+    super(controlAvailabilityService, errorMessageProvider);
   }
 
   public override ngOnInit(): void {

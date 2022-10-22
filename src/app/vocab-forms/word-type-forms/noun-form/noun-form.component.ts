@@ -4,6 +4,7 @@ import { filter, map, Observable, startWith, takeUntil } from 'rxjs';
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { Case } from '../../../vocab/models/data/case.enum';
 import { FixedPlurality } from '../../../vocab/models/data/fixed-plurality.enum';
+import { ValidationErrorMessageProvider } from '../../validation';
 import { WordTypeFormComponent } from '../core';
 
 
@@ -16,8 +17,9 @@ import { WordTypeFormComponent } from '../core';
 export class NounFormComponent extends WordTypeFormComponent implements OnInit {
   public hasFixedPlural$!: Observable<boolean>;
 
-  constructor(controlAvailabilityService: ControlAvailabilityService) {
-    super(controlAvailabilityService);
+  constructor(controlAvailabilityService: ControlAvailabilityService,
+    errorMessageProvider: ValidationErrorMessageProvider) {
+    super(controlAvailabilityService, errorMessageProvider);
   }
 
   public override ngOnInit(): void {

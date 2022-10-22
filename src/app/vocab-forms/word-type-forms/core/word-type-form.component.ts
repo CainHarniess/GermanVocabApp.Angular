@@ -1,11 +1,12 @@
 import { Directive, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { debounceTime, filter, map, Observable, startWith, Subject, tap } from 'rxjs';
+import { debounceTime, filter, map, Observable, of, startWith, Subject, tap } from 'rxjs';
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { VocabListItem } from '../../../vocab/models';
 import { isIrregular } from '../../../vocab/utilities';
 import { VocabListItemForm } from '../../models';
+import { ValidationErrorMessageProvider } from '../../validation';
 import { DropDownOptions } from '../drop-down-options.class';
 
 export type NullableString = string | null;
@@ -21,7 +22,8 @@ export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
   public readonly dropDownOptions: typeof DropDownOptions = DropDownOptions;
   public displayPrepositionCase$: Observable<boolean> = this.displayPrepositionCase.asObservable();
 
-  protected constructor(protected controlAvailabilityService: ControlAvailabilityService) {
+  protected constructor(protected controlAvailabilityService: ControlAvailabilityService,
+    private readonly errorMessageProvider: ValidationErrorMessageProvider) {
 
   }
 
@@ -33,6 +35,10 @@ export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
   public hasPreposition$!: Observable<boolean>;
 
   public get formRoot(): FormGroup { return this.form.root as FormGroup; }
+
+  public germanErrorMessage$: Observable<string | null> = of(null);
+  public prepositionErrorMessage$: Observable<string | null> = of(null);
+  public englishErrorMessage$: Observable<string | null> = of(null);
 
   public ngOnInit(): void {
     const controls = this.form.controls;
@@ -51,6 +57,10 @@ export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
         map((val: string) => val.length > 0),
         tap((result: boolean) => this.displayPrepositionCase.next(result)),
     );
+
+    this.germanErrorMessage$ = this.errorMessageProvider.provideFor(controls.german);
+    this.prepositionErrorMessage$ = this.errorMessageProvider.provideFor(controls.preposition);
+    this.englishErrorMessage$ = this.errorMessageProvider.provideFor(controls.english);
   }
 
   public ngOnDestroy(): void {

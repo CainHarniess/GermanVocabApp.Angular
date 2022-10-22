@@ -3,4 +3,5 @@
     {{ label }}
   </mat-label>
   <input matNativeControl id="{{ controlId }}" formControlName="{{ controlName }}" type="text" />
+  <mat-error *ngIf="errorMessage$ | async as message">{{ message }}</mat-error>
 </mat-form-field>

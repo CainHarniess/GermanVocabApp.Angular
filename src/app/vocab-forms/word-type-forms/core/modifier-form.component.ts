@@ -1,14 +1,9 @@
 import { Directive, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { WordTypeFormComponent } from './word-type-form.component';
 
 @Directive()
 export abstract class ModifierFormComponent extends WordTypeFormComponent implements OnDestroy {
-  protected constructor(controlAvailabilityService: ControlAvailabilityService) {
-    super(controlAvailabilityService);
-  }
-
   public override ngOnInit(): void {
     super.ngOnInit();
 
