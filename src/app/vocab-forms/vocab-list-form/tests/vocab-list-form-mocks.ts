@@ -11,4 +11,5 @@ export interface VocabListFormComponentMocks {
   listForm?: any;
   route?: any;
   listItemWordingProvider?: any;
+  validationProvider: any;
 }

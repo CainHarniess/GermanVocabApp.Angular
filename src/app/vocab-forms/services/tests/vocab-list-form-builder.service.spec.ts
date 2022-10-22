@@ -1,20 +1,24 @@
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { VocabListFormValidationProvider } from "..";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
 import { StubVocabListItemBuilder } from "../../../../testing/stub-vocab-list-item-builder";
 import { VocabList, VocabListItem } from "../../../vocab/models";
 import { VocabListForm } from "../../models";
+import { ListFormValidationProviderFactory } from "../../test-utilities";
 import { VocabListFormBuilder } from "../vocab-list-form-builder.service";
 import { VocabListItemFormBuilder } from "../vocab-list-item-form-builder.service";
 
 describe("VocabListFormBuilder", () => {
   let mockFb: any;
   let mockListItemFb: any;
+  let mockValidationProvider: any;
   let builder: VocabListFormBuilder;
 
   beforeEach(() => {
     mockFb = jasmine.createSpyObj("mockFormBuilder", ["group", "control", "array"]);
     mockListItemFb = jasmine.createSpyObj("mockListItemFormBuilder", ["buildFromModel"]);
-    builder = new VocabListFormBuilder(mockFb, mockListItemFb);
+    mockValidationProvider = jasmine.createSpyObj("mockValidationProvider", ["provide"]);
+    builder = new VocabListFormBuilder(mockFb, mockListItemFb, mockValidationProvider);
   });
 
   describe("build", () => {
@@ -26,7 +30,6 @@ describe("VocabListFormBuilder", () => {
     it("Should call FormBuilder.control with correct values.", () => {
       builder.build();
       expect(mockFb.control).toHaveBeenCalledTimes(2);
-      expect(mockFb.control).toHaveBeenCalledWith(null, Validators.required);
       expect(mockFb.control).toHaveBeenCalledWith(null);
     });
 
@@ -49,7 +52,11 @@ describe("VocabListFormBuilder", () => {
         .withDescription(mockDescription)
         .build();
       const fb = new FormBuilder();
-      builder = new VocabListFormBuilder(fb, new VocabListItemFormBuilder(fb));
+      const validationProvider: VocabListFormValidationProvider = new ListFormValidationProviderFactory()
+        .create();
+      spyOn(validationProvider, "provide").and.callFake((formArg: FormGroup<VocabListForm>) => formArg);
+
+      builder = new VocabListFormBuilder(fb, new VocabListItemFormBuilder(fb), validationProvider);
       form = builder.buildFromModel(stubList);
       controls = form.controls;
     });

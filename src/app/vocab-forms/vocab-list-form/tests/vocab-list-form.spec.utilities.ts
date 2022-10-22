@@ -1,19 +1,29 @@
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { of } from "rxjs";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
+import { VocabListForm } from "../../models";
+import { VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from "../../services";
+import { ListFormValidationProviderFactory } from "../../test-utilities";
 import { MockReturnValues } from "./mock-return-values";
 
 import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";
 
 export function contructMocks(): VocabListFormComponentMocks {
+  const validationProvider: VocabListFormValidationProvider = new ListFormValidationProviderFactory().create();
+  spyOn(validationProvider, "provide").and.callFake((formArg: FormGroup<VocabListForm>) => formArg);
+
+  const itemFormBuilder: VocabListItemFormBuilder = jasmine.createSpyObj("mockListItemFormBuilder", ["build", "buildFromFormGroup"]);
+  const listFormBuilder: VocabListFormBuilder = new VocabListFormBuilder(new FormBuilder(), itemFormBuilder, validationProvider);
+
   return {
     router: jasmine.createSpyObj("mockRouter", ["navigate"]),
     listService: jasmine.createSpyObj("mockListService", ["add", "update"]),
-    listFormBuilder: jasmine.createSpyObj("mockListFormBuilder", ["build"]),
-    listItemFormBuilder: jasmine.createSpyObj("mockListItemFormBuilder", ["build", "buildFromFormGroup"]),
+    listFormBuilder: listFormBuilder,
+    listItemFormBuilder: itemFormBuilder,
     observableBuilderForMocks: jasmine.createSpyObj("mockObservableBuilderForMocks", ["build"]),
     observableBuilderForReal: jasmine.createSpyObj("mockObservableBuilderForReal", ["build"]),
+    validationProvider: validationProvider,
   };
 }
 
@@ -54,7 +64,7 @@ export function constructMockReturnValues(mocks: VocabListFormComponentMocks, mo
     updatedList$: of("Mock updated vocab list")
   };
 
-  mocks.listFormBuilder.build.and.returnValue(mockReturnValues.listForm);
+  spyOn(mocks.listFormBuilder, "build").and.callFake(() => mockReturnValues.listForm);
   mocks.listService.add.and.returnValue(mockReturnValues.newListId$);
   mocks.listService.update.and.returnValue(mockReturnValues.updatedList$);
   mocks.observableBuilderForReal.build.and.returnValue(mockReturnValues.title$);

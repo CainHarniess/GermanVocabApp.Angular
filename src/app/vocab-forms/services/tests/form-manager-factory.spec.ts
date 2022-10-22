@@ -1,14 +1,15 @@
 import { FormGroup } from "@angular/forms";
 import { WordType } from "../../../vocab/models/data/word-type.enum";
+import { AdjectiveFormManager, AdverbFormManager, ModifierValidationManager, ModifierValueController, NounFormManager, NounValidationManager, NounValueController, VerbFormManager, VerbValidationManager, VerbValueController, WordTypeFormManager } from "../../form-management";
 import { VocabListItemForm } from "../../models/vocab-list-item-form.interface";
-import { WordTypeFormManagerFactory } from "../form-manager-factory";
+import { WordTypeFormManagerFactory } from "../word-type-form-manager-factory";
 
 describe("WordTypeFormManagerFactory", () => {
   let formManagerFactory: WordTypeFormManagerFactory;
   let mockForm: FormGroup<VocabListItemForm>;
 
   beforeEach(() => {
-    formManagerFactory = new WordTypeFormManagerFactory();
+    formManagerFactory = createFactory();
     mockForm = jasmine.createSpyObj([""]);
   });
 
@@ -34,14 +35,42 @@ describe("WordTypeFormManagerFactory", () => {
       it(`Should not throw an exception when word type is ${test}.`, () => {
         expect(function () { formManagerFactory.create(test, mockForm) })
           .not.toThrow();
-      })
+      });
     });
 
     tests.forEach(test => {
       it(`Should produce ${test} FormManager when word type is ${test}`, () => {
         expect(formManagerFactory.create(test, mockForm).wordType).toBe(test);
-      })
-    })
-
+      });
+    });
   });
 });
+
+function createFactory(): WordTypeFormManagerFactory {
+  return new WordTypeFormManagerFactory(createNounFormManager(), createVerbFormManager(),
+    createAdjectiveFormManager(), createAdverbFormManager());
+}
+
+function createNounFormManager(): NounFormManager {
+  const validationManager: NounValidationManager = new NounValidationManager();
+  const valueController: NounValueController = new NounValueController();
+  return new NounFormManager(validationManager, valueController);
+}
+
+function createVerbFormManager(): VerbFormManager {
+  const validationManager: VerbValidationManager = new VerbValidationManager();
+  const valueController: VerbValueController = new VerbValueController();
+  return new VerbFormManager(validationManager, valueController);
+}
+
+function createAdjectiveFormManager<T extends WordTypeFormManager>(): T {
+  const validationManager: ModifierValidationManager = new ModifierValidationManager();
+  const valueController: ModifierValueController = new ModifierValueController();
+  return new AdjectiveFormManager(validationManager, valueController) as T;
+}
+
+function createAdverbFormManager<T extends WordTypeFormManager>(): T {
+  const validationManager: ModifierValidationManager = new ModifierValidationManager();
+  const valueController: ModifierValueController = new ModifierValueController();
+  return new AdverbFormManager(validationManager, valueController) as T;
+}

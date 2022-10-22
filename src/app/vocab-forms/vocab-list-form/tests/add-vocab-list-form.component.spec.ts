@@ -1,4 +1,4 @@
-import { fakeAsync, waitForAsync } from "@angular/core/testing";
+import { fakeAsync } from "@angular/core/testing";
 import { FormBuilder } from "@angular/forms";
 
 import { Subscription } from "rxjs";
@@ -35,7 +35,7 @@ describe("AddVocabListComponent", () => {
       mocks.observableBuilderForMocks, mocks.listItemWordingProvider);
 
     const listItemFormBuilder = new VocabListItemFormBuilder(fb);
-    const listFormBuilder = new VocabListFormBuilder(fb, listItemFormBuilder);
+    const listFormBuilder = new VocabListFormBuilder(fb, listItemFormBuilder, mocks.validationProvider);
     componentWithRealBuilders = new AddVocabListFormComponent(mocks.router,
       mocks.listService, listFormBuilder, listItemFormBuilder,
       mocks.observableBuilderForReal, mocks.listItemWordingProvider);
