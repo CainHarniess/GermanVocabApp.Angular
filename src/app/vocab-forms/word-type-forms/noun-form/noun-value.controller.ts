@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { WordTypeValueController } from '.';
-import { FixedPlurality } from '../../vocab/models/data';
-import { VocabListItemForm } from '../models';
+import { FixedPlurality } from '../../../vocab/models/data';
+import { VocabListItemForm } from '../../models';
+import { WordTypeValueController } from '../core';
 
 @Injectable()
 export class NounValueController extends WordTypeValueController {

@@ -1,6 +1,6 @@
 import { FormGroup } from "@angular/forms";
 import { WordTypeValueController } from ".";
-import { VocabListItemForm } from "../models";
+import { VocabListItemForm } from "../../models";
 
 export abstract class IrregularValueController extends WordTypeValueController {
   public override setInitialValues(form: FormGroup<VocabListItemForm>): void {

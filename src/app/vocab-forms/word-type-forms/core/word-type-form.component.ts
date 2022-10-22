@@ -2,19 +2,16 @@ import { Directive, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { debounceTime, filter, map, Observable, startWith, Subject, tap } from 'rxjs';
-import { ControlAvailabilityService } from '../../shared/services/control-availability.service';
-
-import { VocabListItem } from '../../vocab/models';
-import { isIrregular } from '../../vocab/utilities';
-
-import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
-
-import { DropDownOptions } from './drop-down-options.class';
+import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
+import { VocabListItem } from '../../../vocab/models';
+import { isIrregular } from '../../../vocab/utilities';
+import { VocabListItemForm } from '../../models';
+import { DropDownOptions } from '../drop-down-options.class';
 
 export type NullableString = string | null;
 
 @Directive()
-export abstract class WordTypeForm implements OnInit, OnDestroy {
+export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
   protected destroy$ = new Subject<boolean>();
 
   private readonly displayPrepositionCase = new Subject<boolean>();

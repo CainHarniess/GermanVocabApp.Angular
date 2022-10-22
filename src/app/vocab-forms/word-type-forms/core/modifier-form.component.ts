@@ -1,10 +1,10 @@
 import { Directive, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { ControlAvailabilityService } from '../../shared/services/control-availability.service';
-import { WordTypeForm } from './word-type-form';
+import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
+import { WordTypeFormComponent } from './word-type-form.component';
 
 @Directive()
-export abstract class ModifierWordTypeForm extends WordTypeForm implements OnDestroy {
+export abstract class ModifierFormComponent extends WordTypeFormComponent implements OnDestroy {
   constructor(controlAvailabilityService: ControlAvailabilityService) {
     super(controlAvailabilityService);
   }

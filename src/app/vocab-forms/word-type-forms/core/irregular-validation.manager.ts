@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { VocabListItemForm } from "../models";
+import { VocabListItemForm } from "../../models";
 import { WordTypeValidationManager } from "./word-type-validation.manager";
 
 export abstract class IrregularValidationManager extends WordTypeValidationManager {

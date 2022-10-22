@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { VocabListItemForm } from '../models';
+import { VocabListItemForm } from '../../models';
 
 @Injectable()
 export abstract class WordTypeValidationManager {

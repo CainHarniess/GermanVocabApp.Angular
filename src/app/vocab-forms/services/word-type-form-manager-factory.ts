@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { WordType } from '../../vocab/models/data';
 
-import { AdjectiveFormManager, NounFormManager, VerbFormManager, WordTypeFormManager } from '../form-management/index';
+import { AdjectiveFormManager, NounFormManager, VerbFormManager, WordTypeFormManager } from '../word-type-forms';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 
 @Injectable()

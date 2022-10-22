@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FixedPlurality, Gender } from '../../vocab/models/data';
-import { VocabListItemForm } from '../models';
+import { FixedPlurality, Gender } from '../../../vocab/models/data';
+import { VocabListItemForm } from '../../models';
 
 @Injectable()
 export class NounValidationManager {

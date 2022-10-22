@@ -5,8 +5,7 @@ import { takeUntil } from 'rxjs';
 
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { Case } from '../../../vocab/models/data/case.enum';
-
-import { WordTypeForm } from '../word-type-form';
+import { WordTypeFormComponent } from '../core';
 
 @Component({
   selector: 'verb-form',
@@ -14,7 +13,7 @@ import { WordTypeForm } from '../word-type-form';
   styleUrls: ['../../vocab-list-item-form/vocab-list-item-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerbFormComponent extends WordTypeForm {
+export class VerbFormComponent extends WordTypeFormComponent {
   constructor(controlAvailabilityService: ControlAvailabilityService) {
     super(controlAvailabilityService);
   }

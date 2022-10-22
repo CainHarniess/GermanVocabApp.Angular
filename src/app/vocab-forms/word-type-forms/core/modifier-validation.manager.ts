@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { VocabListItemForm } from '../models';
+import { VocabListItemForm } from '../../models';
 import { IrregularValidationManager } from './irregular-validation.manager';
 
 @Injectable()

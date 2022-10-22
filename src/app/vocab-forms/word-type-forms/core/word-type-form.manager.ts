@@ -1,7 +1,7 @@
 import { FormGroup } from "@angular/forms";
 import { WordTypeValidationManager, WordTypeValueController } from ".";
-import { WordType } from "../../vocab/models/data";
-import { VocabListItemForm } from "../models";
+import { WordType } from "../../../vocab/models/data";
+import { VocabListItemForm } from "../../models";
 
 export abstract class WordTypeFormManager {
   public abstract get wordType(): WordType;

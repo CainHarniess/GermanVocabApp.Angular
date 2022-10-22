@@ -1,18 +1,17 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
-import { map, Observable, Subscription, startWith } from 'rxjs';
-import { NotImplementedError } from '../../../core/errors';
+import { map, Observable, startWith, Subscription } from 'rxjs';
 import { Null, Undefined } from '../../../core/types';
 import { SingleSelectOption } from '../../forms/single-select/single-select-option.interface';
 import { VocabListItem } from '../../vocab/models';
 
 import { WordType } from '../../vocab/models/data/word-type.enum';
 import { isIrregular } from '../../vocab/utilities';
-import { WordTypeFormManager } from '../form-management';
 import { VocabListForm } from '../models/vocab-list-form.interface';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
-import { WordTypeFormManagerFactory } from '../services/form-manager-factory';
+import { WordTypeFormManagerFactory } from '../services/word-type-form-manager-factory';
+import { WordTypeFormManager } from '../word-type-forms/core';
 import { wordTypeOptions } from './drop-down-options';
 
 @Component({

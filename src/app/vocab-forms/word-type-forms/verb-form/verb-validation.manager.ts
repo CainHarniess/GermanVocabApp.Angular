@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Null } from '../../../core/types';
-import { AuxiliaryVerb, Separability, Transitivity } from '../../vocab/models/data';
-import { VocabListItemForm } from '../models';
-import { IrregularValidationManager } from './irregular-validation.manager';
+import { Null } from '../../../../core/types';
+import { AuxiliaryVerb, Separability, Transitivity } from '../../../vocab/models/data';
+import { VocabListItemForm } from '../../models';
+import { IrregularValidationManager } from '../core';
 
 @Injectable()
 export class VerbValidationManager extends IrregularValidationManager {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IrregularValueController } from '.';
-import { VocabListItemForm } from '../models';
+import { VocabListItemForm } from '../../models';
 
 @Injectable()
 export class ModifierValueController extends IrregularValueController {

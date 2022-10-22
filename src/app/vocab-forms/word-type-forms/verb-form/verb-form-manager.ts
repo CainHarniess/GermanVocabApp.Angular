@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-import { VerbValueController, WordTypeFormManager } from ".";
-import { WordType } from "../../vocab/models/data";
+import { VerbValueController } from ".";
+import { WordType } from "../../../vocab/models/data";
+import { WordTypeFormManager } from "../core";
 import { VerbValidationManager } from "./verb-validation.manager";
 
 @Injectable()

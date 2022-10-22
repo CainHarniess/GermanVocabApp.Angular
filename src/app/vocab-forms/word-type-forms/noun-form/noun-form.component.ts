@@ -4,8 +4,8 @@ import { filter, map, Observable, startWith, takeUntil } from 'rxjs';
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { Case } from '../../../vocab/models/data/case.enum';
 import { FixedPlurality } from '../../../vocab/models/data/fixed-plurality.enum';
+import { WordTypeFormComponent } from '../core';
 
-import { WordTypeForm } from '../word-type-form';
 
 @Component({
   selector: 'noun-form',
@@ -13,7 +13,7 @@ import { WordTypeForm } from '../word-type-form';
   styleUrls: ['../../vocab-list-item-form/vocab-list-item-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NounFormComponent extends WordTypeForm implements OnInit {
+export class NounFormComponent extends WordTypeFormComponent implements OnInit {
   public hasFixedPlural$!: Observable<boolean>;
 
   constructor(controlAvailabilityService: ControlAvailabilityService) {

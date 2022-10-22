@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ModifierWordTypeForm } from '../modifier-word-type-form';
+import { ModifierFormComponent } from '../core/modifier-form.component';
 
 @Component({
   selector: 'adverb-form',
@@ -7,6 +7,6 @@ import { ModifierWordTypeForm } from '../modifier-word-type-form';
   styleUrls: ['../../vocab-list-item-form/vocab-list-item-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdverbFormComponent extends ModifierWordTypeForm {
+export class AdverbFormComponent extends ModifierFormComponent {
 
 }

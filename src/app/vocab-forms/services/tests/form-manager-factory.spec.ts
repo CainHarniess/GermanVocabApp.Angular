@@ -1,6 +1,6 @@
 import { FormGroup } from "@angular/forms";
 import { WordType } from "../../../vocab/models/data/word-type.enum";
-import { AdjectiveFormManager, AdverbFormManager, ModifierValidationManager, ModifierValueController, NounFormManager, NounValidationManager, NounValueController, VerbFormManager, VerbValidationManager, VerbValueController, WordTypeFormManager } from "../../form-management";
+import { AdjectiveFormManager, AdverbFormManager, ModifierValidationManager, ModifierValueController, NounFormManager, NounValidationManager, NounValueController, VerbFormManager, VerbValidationManager, VerbValueController, WordTypeFormManager } from "../../word-type-forms";
 import { VocabListItemForm } from "../../models/vocab-list-item-form.interface";
 import { WordTypeFormManagerFactory } from "../word-type-form-manager-factory";
 

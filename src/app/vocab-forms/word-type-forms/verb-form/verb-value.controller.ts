@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IrregularValueController } from '.';
-import { Separability } from '../../vocab/models/data';
-import { VocabListItemForm } from '../models';
+import { Separability } from '../../../vocab/models/data';
+import { VocabListItemForm } from '../../models';
+import { IrregularValueController } from '../core';
 
 @Injectable()
 export class VerbValueController extends IrregularValueController {
