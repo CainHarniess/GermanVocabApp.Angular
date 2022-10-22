@@ -64,13 +64,13 @@ function createVerbFormManager(): VerbFormManager {
 }
 
 function createAdjectiveFormManager<T extends WordTypeFormManager>(): T {
-  const validationManager: ModifierValidationManager = new ModifierValidationManager();
+  const validationManager: ModifierValidationController = new ModifierValidationController();
   const valueController: ModifierValueController = new ModifierValueController();
   return new AdjectiveFormManager(validationManager, valueController) as T;
 }
 
 function createAdverbFormManager<T extends WordTypeFormManager>(): T {
-  const validationManager: ModifierValidationManager = new ModifierValidationManager();
+  const validationManager: ModifierValidationController = new ModifierValidationController();
   const valueController: ModifierValueController = new ModifierValueController();
   return new AdverbFormManager(validationManager, valueController) as T;
 }
