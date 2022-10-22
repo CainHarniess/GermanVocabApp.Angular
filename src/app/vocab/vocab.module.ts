@@ -46,7 +46,7 @@ import { DefiniteArticlePipe, FixedPluralDisplayPipe, GermanShortCasePipe, Indef
     VocabRoutingModule,
   ],
   exports: [
-    VocabListsComponent
+    VocabListsComponent,
   ]
 })
 export class VocabModule { }

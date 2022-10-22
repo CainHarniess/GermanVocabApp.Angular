@@ -1,36 +1,39 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FixedPlurality, Gender } from '../../../vocab/models/data';
+import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { prepositionMaxLength, prepositionMinLength, wordMaxLength, wordMinLength } from '../../../vocab/models/data/constraints/item-data-constraints';
 import { VocabListItemForm } from '../../models';
+import { LengthRangeValidatorFactory, RequiredWithLengthRangeValidatorFactory } from '../../validation';
 import { WordTypeValidationController } from '../core';
 
 @Injectable()
-export class NounValidationController extends WordTypeValidationController{
+export class NounValidationController extends WordTypeValidationController {
+  private readonly prepositionValidator: ValidatorFn;
+  private readonly pluralValidator: ValidatorFn;
+
+  public constructor(requiredWithLengthValidatorFactory: RequiredWithLengthRangeValidatorFactory,
+    private readonly lengthRangeValidatorFactory: LengthRangeValidatorFactory) {
+    super(requiredWithLengthValidatorFactory);
+    this.prepositionValidator = this.lengthRangeValidatorFactory.create(prepositionMinLength, prepositionMaxLength);
+    this.pluralValidator = this.lengthRangeValidatorFactory.create(wordMinLength, wordMaxLength);
+  }
+
   public override addValidation(form: FormGroup<VocabListItemForm>): void {
-    const genderControl: FormControl<Gender | null> = form.controls.gender;
-    genderControl.addValidators([Validators.required]);
-    genderControl.updateValueAndValidity();
+    const controls: VocabListItemForm = form.controls;
 
-    const fixedPluralityControl: FormControl<FixedPlurality | null> = form.controls.fixedPlurality;
-    fixedPluralityControl.addValidators([Validators.required]);
-    fixedPluralityControl.updateValueAndValidity();
-
-    const isWeakMasculineNounControl: FormControl<boolean | null> = form.controls.isWeakMasculineNoun;
-    isWeakMasculineNounControl.addValidators([Validators.required]);
-    isWeakMasculineNounControl.updateValueAndValidity();
+    this.addValidator(Validators.required, controls.gender);
+    this.addValidator(Validators.required, controls.fixedPlurality);
+    this.addValidator(Validators.required, controls.isWeakMasculineNoun);
+    this.addValidator(this.prepositionValidator, controls.preposition);
+    this.addValidator(this.pluralValidator, controls.plural);
   }
 
   public override removeValidation(form: FormGroup<VocabListItemForm>): void {
-    const genderControl: FormControl<Gender | null> = form.controls.gender;
-    genderControl.removeValidators([Validators.required]);
-    genderControl.updateValueAndValidity();
+    const controls: VocabListItemForm = form.controls;
 
-    const fixedPluralityControl: FormControl<FixedPlurality | null> = form.controls.fixedPlurality;
-    fixedPluralityControl.removeValidators([Validators.required]);
-    fixedPluralityControl.updateValueAndValidity();
-
-    const isWeakMasculineNounControl: FormControl<boolean | null> = form.controls.isWeakMasculineNoun;
-    isWeakMasculineNounControl.removeValidators([Validators.required]);
-    isWeakMasculineNounControl.updateValueAndValidity();
+    this.removeValidator(Validators.required, controls.gender);
+    this.removeValidator(Validators.required, controls.fixedPlurality);
+    this.removeValidator(Validators.required, controls.isWeakMasculineNoun);
+    this.removeValidator(this.prepositionValidator, controls.preposition);
+    this.removeValidator(this.pluralValidator, controls.plural);
   }
 }

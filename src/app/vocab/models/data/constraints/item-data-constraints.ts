@@ -1,5 +1,5 @@
-export const englishMinLength: number = 3;
-export const englishMaxLength: number = 100;
+export const wordMinLength: number = 3;
+export const wordMaxLength: number = 100;
 
-export const germanMinLength: number = 3;
-export const germanMaxLength: number = 100;
+export const prepositionMinLength: number = 2;
+export const prepositionMaxLength: number = 25;

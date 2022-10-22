@@ -1,1 +1,1 @@
-export { AbstractFormComponent } from "./abstract-form.component";
+export { AbstractValidationProvider } from "./abstract-validation.provider";

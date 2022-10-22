@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, Validators } from '@angular/forms';
+import { AbstractValidationProvider } from '../../../core';
 import { makeArray } from '../../../utilities/array.utilities';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ControlAvailabilityService {
+export class ControlAvailabilityService extends AbstractValidationProvider {
   public configure(controls: AbstractControl<any> | AbstractControl<any>[], condition: boolean): void {
     const controlArray: AbstractControl<any>[] = makeArray(controls);
 

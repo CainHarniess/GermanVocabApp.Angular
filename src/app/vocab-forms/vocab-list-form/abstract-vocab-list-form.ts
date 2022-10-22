@@ -1,10 +1,8 @@
 import { Directive, OnDestroy, OnInit } from "@angular/core";
 import { AbstractControl, FormArray, FormControl, FormGroup } from "@angular/forms";
-import { ErrorStateMatcher } from "@angular/material/core";
 import { Router } from "@angular/router";
 
 import { BehaviorSubject, filter, map, Observable, Subject, Subscription } from 'rxjs';
-import { AbstractFormComponent } from "../../../core";
 
 import { Undefined } from "../../../core/types";
 import { validateIndex } from "../../../utilities";
@@ -15,13 +13,8 @@ import { VocabListForm, VocabListItemForm } from "../models";
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 import { RequiredIfTouchedErrorStateMatcher, RequiredWithLengthMessageProvider } from "../validation";
 
-@Directive({
-  providers: [
-    { provide: ErrorStateMatcher, useClass: RequiredIfTouchedErrorStateMatcher },
-  ]
-})
-export abstract class AbstractVocabListFormComponent extends AbstractFormComponent
-  implements OnInit, OnDestroy {
+@Directive()
+export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
 
   protected readonly destroy$ = new Subject<boolean>();
 
@@ -33,8 +26,8 @@ export abstract class AbstractVocabListFormComponent extends AbstractFormCompone
     protected readonly listItemFormBuilder: VocabListItemFormBuilder,
     protected readonly title$Builder: ListTitleObservableBuilder,
     private readonly errorMessageProvider: RequiredWithLengthMessageProvider,
-    public readonly requiredIfTouched: ErrorStateMatcher) {
-    super();
+    public readonly requiredIfTouched: RequiredIfTouchedErrorStateMatcher) {
+
   }
 
   public abstract get editData(): Undefined<VocabList>;

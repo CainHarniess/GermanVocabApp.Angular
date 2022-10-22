@@ -1,6 +1,6 @@
 import { FormGroup } from "@angular/forms";
 import { WordType } from "../../../vocab/models/data/word-type.enum";
-import { AdjectiveFormManager, AdverbFormManager, ModifierValidationManager, ModifierValueController, NounFormManager, NounValidationManager, NounValueController, VerbFormManager, VerbValidationManager, VerbValueController, WordTypeFormManager } from "../../word-type-forms";
+import { AdjectiveFormManager, AdverbFormManager, ModifierValidationController, ModifierValueController, NounFormManager, NounValidationManager, NounValueController, VerbFormManager, VerbValidationController, VerbValueController, WordTypeFormManager } from "../../word-type-forms";
 import { VocabListItemForm } from "../../models/vocab-list-item-form.interface";
 import { WordTypeFormManagerFactory } from "../word-type-form-manager-factory";
 
@@ -58,7 +58,7 @@ function createNounFormManager(): NounFormManager {
 }
 
 function createVerbFormManager(): VerbFormManager {
-  const validationManager: VerbValidationManager = new VerbValidationManager();
+  const validationManager: VerbValidationController = new VerbValidationController();
   const valueController: VerbValueController = new VerbValueController();
   return new VerbFormManager(validationManager, valueController);
 }

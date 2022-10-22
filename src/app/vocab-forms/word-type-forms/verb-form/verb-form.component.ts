@@ -22,18 +22,19 @@ export class VerbFormComponent extends WordTypeFormComponent {
     super.ngOnInit();
 
     this.irregularControls = [
-      this.form.controls.thirdPersonPresent!,
-      this.form.controls.thirdPersonImperfect!,
-      this.form.controls.perfect!,
+      this.form.controls.thirdPersonPresent,
+      this.form.controls.thirdPersonImperfect,
+      this.form.controls.perfect,
     ];
 
     this.hasPreposition$
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: boolean) => {
-        const prepositionCaseControl: FormControl<Case | null> = this.form.controls.prepositionCase!
+        const prepositionCaseControl: FormControl<Case | null> = this.form.controls.prepositionCase;
         this.controlAvailabilityService.configure(prepositionCaseControl, result);
       });
 
+    // TODO: Update to accept validators to be configured against each control.
     this.isIrregular$
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: boolean) => {

@@ -5,7 +5,7 @@ import { WordTypeFormComponent } from './word-type-form.component';
 
 @Directive()
 export abstract class ModifierFormComponent extends WordTypeFormComponent implements OnDestroy {
-  constructor(controlAvailabilityService: ControlAvailabilityService) {
+  protected constructor(controlAvailabilityService: ControlAvailabilityService) {
     super(controlAvailabilityService);
   }
 

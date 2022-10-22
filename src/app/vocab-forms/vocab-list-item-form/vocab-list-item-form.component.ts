@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { map, Observable, startWith, Subscription } from 'rxjs';
-import { AbstractFormComponent } from '../../../core';
 import { Null, Undefined } from '../../../core/types';
 import { SingleSelectOption } from '../../forms/single-select/single-select-option.interface';
 import { VocabListItem } from '../../vocab/models';
@@ -12,7 +11,6 @@ import { isIrregular } from '../../vocab/utilities';
 import { VocabListForm } from '../models/vocab-list-form.interface';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 import { WordTypeFormManagerFactory } from '../services/word-type-form-manager-factory';
-import { RequiredWithLengthMessageProvider } from '../validation';
 import { WordTypeFormManager } from '../word-type-forms/core';
 import { wordTypeOptions } from './drop-down-options';
 
@@ -23,8 +21,7 @@ import { wordTypeOptions } from './drop-down-options';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [WordTypeFormManagerFactory]
 })
-export class VocabListItemFormComponent extends AbstractFormComponent
-  implements OnInit, OnDestroy {
+export class VocabListItemFormComponent implements OnInit, OnDestroy {
   private validationChanges!: Subscription;
   private currentFormManager?: WordTypeFormManager;
 
@@ -42,9 +39,8 @@ export class VocabListItemFormComponent extends AbstractFormComponent
   @Output() public remove = new EventEmitter<number>();
   @Output() public copy = new EventEmitter<number>();
 
-  constructor(private formManagerFactory: WordTypeFormManagerFactory,
-    private readonly errorMessageProvider: RequiredWithLengthMessageProvider) {
-    super();
+  constructor(private formManagerFactory: WordTypeFormManagerFactory) {
+
   }
 
   public ngOnInit(): void {
