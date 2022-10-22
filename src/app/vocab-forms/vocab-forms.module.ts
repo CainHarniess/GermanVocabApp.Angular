@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { VocabAppFormsModule } from '../forms/vocab-app-forms.module';
 import { SharedModule } from '../shared/shared.module';
-import { VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from './services';
+import { ItemValidationProvider, VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from './services';
 import { ListTitleObservableBuilder } from './services/list-title-observable.builder';
 import { RequiredWithLengthMessageProvider, RequiredWithLengthRangeValidatorFactory } from './validation';
 import { AddVocabListFormComponent } from './vocab-list-form/add-vocab-list-form.component';
@@ -38,6 +38,7 @@ import {
   providers: [
     RequiredWithLengthMessageProvider,
     VocabListFormBuilder,
+    ItemValidationProvider,
     VocabListItemFormBuilder,
     ListTitleObservableBuilder,
     RequiredWithLengthRangeValidatorFactory,

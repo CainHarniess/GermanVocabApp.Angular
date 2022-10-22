@@ -21,15 +21,15 @@ export class NounValidationController extends WordTypeValidationController{
   }
 
   public override removeValidation(form: FormGroup<VocabListItemForm>): void {
-    const genderControl: FormControl<Gender | null> = form.controls.gender!;
+    const genderControl: FormControl<Gender | null> = form.controls.gender;
     genderControl.removeValidators([Validators.required]);
     genderControl.updateValueAndValidity();
 
-    const fixedPluralityControl: FormControl<FixedPlurality | null> = form.controls.fixedPlurality!;
+    const fixedPluralityControl: FormControl<FixedPlurality | null> = form.controls.fixedPlurality;
     fixedPluralityControl.removeValidators([Validators.required]);
     fixedPluralityControl.updateValueAndValidity();
 
-    const isWeakMasculineNounControl: FormControl<boolean | null> = form.controls.isWeakMasculineNoun!;
+    const isWeakMasculineNounControl: FormControl<boolean | null> = form.controls.isWeakMasculineNoun;
     isWeakMasculineNounControl.removeValidators([Validators.required]);
     isWeakMasculineNounControl.updateValueAndValidity();
   }

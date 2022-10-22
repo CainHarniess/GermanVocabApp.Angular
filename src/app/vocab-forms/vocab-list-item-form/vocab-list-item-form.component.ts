@@ -12,6 +12,7 @@ import { isIrregular } from '../../vocab/utilities';
 import { VocabListForm } from '../models/vocab-list-form.interface';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
 import { WordTypeFormManagerFactory } from '../services/word-type-form-manager-factory';
+import { RequiredWithLengthMessageProvider } from '../validation';
 import { WordTypeFormManager } from '../word-type-forms/core';
 import { wordTypeOptions } from './drop-down-options';
 
@@ -41,7 +42,8 @@ export class VocabListItemFormComponent extends AbstractFormComponent
   @Output() public remove = new EventEmitter<number>();
   @Output() public copy = new EventEmitter<number>();
 
-  constructor(private formManagerFactory: WordTypeFormManagerFactory) {
+  constructor(private formManagerFactory: WordTypeFormManagerFactory,
+    private readonly errorMessageProvider: RequiredWithLengthMessageProvider) {
     super();
   }
 
@@ -70,7 +72,7 @@ export class VocabListItemFormComponent extends AbstractFormComponent
         startWith(listItem?.wordType ?? null),
         map((val: any) => val as WordType),
       );
-   }
+  }
 
   private updateFormConfiguration(wordType: WordType): void {
     if (this.currentFormManager) {
