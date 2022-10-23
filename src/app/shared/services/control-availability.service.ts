@@ -14,16 +14,15 @@ export class ControlAvailabilityService extends AbstractValidationProvider {
 
     controlArray.forEach((control: AbstractControl<any>) => {
       controlAction(control);
-      control.updateValueAndValidity();
     });
   }
 
   private getControlAction(result: boolean): (control: AbstractControl<any>) => void {
     return result ? control => {
       control.markAsUntouched();
-      control.addValidators([Validators.required]);
+      this.addValidator(Validators.required, control);
     } : control => {
-      control.removeValidators([Validators.required]);
+      this.removeValidator(Validators.required, control);
       control.setValue(null);
     };
   }
