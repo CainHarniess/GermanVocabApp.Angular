@@ -1,19 +1,19 @@
 import { FormControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { LengthRangeValidatorFactory, ValidationError } from "..";
+import { StringLengthValidatorFactory, ValidationError } from "..";
 import { RandomStringGenerator } from "../../../../utilities";
 import { maxLength, minLength } from "../validator-names";
 
 fdescribe("StringLengthRangeValidatorFactory", () => {
   let stringGenerator: RandomStringGenerator;
 
-  let factory: LengthRangeValidatorFactory;
+  let factory: StringLengthValidatorFactory;
   let validator: ValidatorFn;
   let control: FormControl<string | null>;
   let result: ValidationErrors | null;
 
   beforeAll(() => {
     stringGenerator = new RandomStringGenerator();
-    factory = new LengthRangeValidatorFactory();
+    factory = new StringLengthValidatorFactory();
     validator = factory.create(3, 25);
   });
 

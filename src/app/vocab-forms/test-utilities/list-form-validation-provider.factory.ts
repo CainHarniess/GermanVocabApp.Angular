@@ -1,9 +1,9 @@
 import { VocabListFormValidationProvider } from "../services";
-import { RequiredWithLengthRangeValidatorFactory } from "../validation";
+import { RequiredStringLengthValidatorFactory } from "../validation";
 
 export class ListFormValidationProviderFactory {
   public create(): VocabListFormValidationProvider {
-    const validatorFactory: RequiredWithLengthRangeValidatorFactory = new RequiredWithLengthRangeValidatorFactory();
+    const validatorFactory: RequiredStringLengthValidatorFactory = new RequiredStringLengthValidatorFactory();
     return new VocabListFormValidationProvider(validatorFactory);
   }
 }

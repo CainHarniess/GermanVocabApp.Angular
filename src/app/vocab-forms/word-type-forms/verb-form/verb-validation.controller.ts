@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { prepositionMaxLength, prepositionMinLength } from '../../../vocab/models/data/constraints/item-data-constraints';
 import { VocabListItemForm } from '../../models';
-import { LengthRangeValidatorFactory } from '../../validation';
+import { StringLengthValidatorFactory } from '../../validation';
 import { IrregularValidationController } from '../core';
 
 @Injectable()
 export class VerbValidationController extends IrregularValidationController {
   private readonly prepositionValidator: ValidatorFn;
 
-  public constructor(lengthRangeValidatorFactory: LengthRangeValidatorFactory) {
+  public constructor(lengthRangeValidatorFactory: StringLengthValidatorFactory) {
     super();
     this.prepositionValidator = lengthRangeValidatorFactory.create(prepositionMinLength, prepositionMaxLength);
   }

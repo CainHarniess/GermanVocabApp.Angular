@@ -4,13 +4,13 @@ import { AbstractValidationProvider } from '../../../core';
 
 import { wordMaxLength, wordMinLength } from '../../vocab/models/data/constraints/item-data-constraints';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
-import { RequiredWithLengthRangeValidatorFactory } from '../validation';
+import { RequiredStringLengthValidatorFactory } from '../validation';
 
 @Injectable()
 export class ItemValidationProvider extends AbstractValidationProvider {
   private readonly englishValidator: ValidatorFn;
   private readonly germanValidator: ValidatorFn;
-  public constructor(private readonly validatorFactory: RequiredWithLengthRangeValidatorFactory) {
+  public constructor(private readonly validatorFactory: RequiredStringLengthValidatorFactory) {
     super();
     this.englishValidator = this.validatorFactory.create(wordMinLength, wordMaxLength);
     this.germanValidator = this.validatorFactory.create(wordMinLength, wordMaxLength);

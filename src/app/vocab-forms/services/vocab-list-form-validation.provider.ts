@@ -3,11 +3,11 @@ import { FormGroup } from '@angular/forms';
 
 import { descriptionMaxLength, descriptionMinLength, nameMaxLength, nameMinLength } from '../../vocab/models/data/constraints/vocab-list-data-constraints';
 import { VocabListForm } from '../models';
-import { RequiredWithLengthRangeValidatorFactory } from '../validation';
+import { RequiredStringLengthValidatorFactory } from '../validation';
 
 @Injectable()
 export class VocabListFormValidationProvider {
-  public constructor(private readonly validatorFactory: RequiredWithLengthRangeValidatorFactory) {
+  public constructor(private readonly validatorFactory: RequiredStringLengthValidatorFactory) {
 
   }
 
