@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { filter, map, Observable, startWith, takeUntil } from 'rxjs';
-import { FollowingControlValidatorOptions, FollowingControlValidatorVisitor } from '../../../forms';
+import { filter, map, Observable, of, startWith } from 'rxjs';
+import { FollowingControlValidatorVisitor } from '../../../forms';
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
-import { Case } from '../../../vocab/models/data/case.enum';
 import { FixedPlurality } from '../../../vocab/models/data/fixed-plurality.enum';
-import { VocabListItemForm } from '../../models';
 import { ValidationErrorMessageProvider } from '../../validation';
 import { WordTypeFormComponent } from '../core';
 
@@ -17,6 +14,7 @@ import { WordTypeFormComponent } from '../core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NounFormComponent extends WordTypeFormComponent implements OnInit {
+  public pluralErrorMessage$: Observable<string | null> = of(null);
   public hasFixedPlural$!: Observable<boolean>;
 
   constructor(controlAvailabilityService: ControlAvailabilityService,
@@ -36,6 +34,8 @@ export class NounFormComponent extends WordTypeFormComponent implements OnInit {
         filter((val: FixedPlurality | null) => val !== null),
         map(val => val !== FixedPlurality.None),
       );
+
+    this.pluralErrorMessage$ = this.errorMessageProvider.provideFor(controls.plural);
 
     this.configureDynamicPrepositionCaseValidation(controls);
   }

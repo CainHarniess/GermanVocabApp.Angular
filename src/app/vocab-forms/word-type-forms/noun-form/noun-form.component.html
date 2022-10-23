@@ -3,17 +3,26 @@
     <form-drop-down-control [form]="form" controlName="gender"
                             controlId="german_{{ index }}" label="Gender"
                             [options]="dropDownOptions.genderOptions"></form-drop-down-control>
+
     <form-text-box-control [form]="form" controlName="german"
-                           controlId="german_{{ index }}" label="German"></form-text-box-control>
+                           controlId="german_{{ index }}" label="German"
+                           [errorMessage$]="germanErrorMessage$"></form-text-box-control>
+
     <form-text-box-control [form]="form" controlName="preposition"
-                           controlId="preposition_{{ index }}" label="Preposition"></form-text-box-control>
+                           controlId="preposition_{{ index }}" label="Preposition"
+                           [errorMessage$]="prepositionErrorMessage$"></form-text-box-control>
+
     <form-drop-down-control *ngIf="displayPrepositionCase$ | async" [form]="form" controlName="prepositionCase"
                             controlId="prepositionCase_{{ index }}" label="Preposition case"
                             [options]="dropDownOptions.caseOptions"></form-drop-down-control>
+
     <form-text-box-control [form]="form" controlName="english"
-                           controlId="english_{{ index }}" label="English"></form-text-box-control>
+                           controlId="english_{{ index }}" label="English"
+                           [errorMessage$]="englishErrorMessage$"></form-text-box-control>
+
     <form-text-box-control *ngIf="!(hasFixedPlural$ | async)" [form]="form" controlName="plural"
-                           controlId="plural_{{ index }}" label="Plural"></form-text-box-control>
+                           controlId="plural_{{ index }}" label="Plural"
+                           [errorMessage$]="pluralErrorMessage$"></form-text-box-control>
   </div>
   </div>
   <div class="form-row">
