@@ -2,4 +2,5 @@
   <mat-checkbox id="{{ controlId }}" name="{{ controlId }}" formControlName="{{ controlName }}">
     {{ label }}
   </mat-checkbox>
+  <mat-error *ngIf="errorMessage$ | async as message">{{ message }}</mat-error>
 </ng-container>

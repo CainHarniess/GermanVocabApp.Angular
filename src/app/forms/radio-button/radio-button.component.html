@@ -7,4 +7,5 @@
       {{ option.label }}
     </mat-radio-button>
   </mat-radio-group>
+  <mat-error *ngIf="errorMessage$ | async as message">{{ message }}</mat-error>
 </ng-container>

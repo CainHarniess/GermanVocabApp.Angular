@@ -3,4 +3,5 @@
   <select matNativeControl id="{{ controlId }}" formControlName="{{ controlName }}">
     <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
   </select>
+  <mat-error *ngIf="errorMessage$ | async as message">{{ message }}</mat-error>
 </mat-form-field>
