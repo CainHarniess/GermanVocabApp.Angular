@@ -1,21 +1,20 @@
 import { Injectable } from "@angular/core";
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { AbstractStringLengthValidatorFactory } from "./abstract-string-length-validator.factory";
 import { ValidationError } from "./validation-result";
+import { maxLength, minLength } from "./validator-names";
 
 @Injectable()
-export class LengthRangeValidatorFactory {
-  public create(minLength: number, maxLength: number): ValidatorFn {
-    if (minLength > maxLength) {
-      throw new Error(`Specified minimum length ${minLength} is greater than specified maximum length ${maxLength}.`);
-    }
-    return (control: AbstractControl<string>): ValidationErrors | null => {
+export class LengthRangeValidatorFactory extends AbstractStringLengthValidatorFactory {
+  protected override createValidator(minLength: number, maxLength: number): ValidatorFn {
+    return (control: AbstractControl<string | null>): ValidationErrors | null => {
       return lengthRange(control, minLength, maxLength);
     };
   }
 }
 
-function lengthRange(control: AbstractControl<string>, minLength: number, maxLength: number): ValidationErrors | null {
-  const value: string = control?.value;
+function lengthRange(control: AbstractControl<string | null>, lower: number, upper: number): ValidationErrors | null {
+  const value: string | null = control?.value;
   if (value === null) {
     return null;
   }
@@ -23,14 +22,14 @@ function lengthRange(control: AbstractControl<string>, minLength: number, maxLen
   if (stringLength === 0) {
     return null;
   }
-  if (stringLength < minLength) {
-    return new ValidationError("minLength", `Input must contain ${minLength} character(s) or more.`,
-      minLength, stringLength);
+  if (stringLength < lower) {
+    return new ValidationError(minLength, `Input must contain ${lower} character(s) or more.`,
+      lower, stringLength);
   }
 
-  if (stringLength > maxLength) {
-    return new ValidationError("maxLength", `Input may not contain more than ${maxLength} character(s).`,
-      maxLength, stringLength);
+  if (stringLength > upper) {
+    return new ValidationError(maxLength, `Input may not contain more than ${upper} character(s).`,
+      upper, stringLength);
   }
   return null;
 }

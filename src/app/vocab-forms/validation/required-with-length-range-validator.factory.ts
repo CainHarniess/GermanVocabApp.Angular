@@ -1,13 +1,11 @@
 import { Injectable } from "@angular/core";
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { ValidationError } from ".";
+import { AbstractStringLengthValidatorFactory } from "./abstract-string-length-validator.factory";
 
 @Injectable()
-export class RequiredWithLengthRangeValidatorFactory {
-  public create(minLength: number, maxLength: number): ValidatorFn {
-    if (minLength > maxLength) {
-      throw new Error(`Specified minimum length ${minLength} is greater than specified maximum length ${maxLength}.`);
-    }
+export class RequiredWithLengthRangeValidatorFactory extends AbstractStringLengthValidatorFactory {
+  protected createValidator(minLength: number, maxLength: number): ValidatorFn {
     return (control: AbstractControl<any, any>): ValidationErrors | null => {
       return requiredWithLengthRange(control, minLength, maxLength);
     };
