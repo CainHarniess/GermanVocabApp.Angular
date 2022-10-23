@@ -15,7 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InMemoryVocabListService } from './vocab/services/in-memory-vocab-list.service';
 import { InMemoryDataProvider } from './vocab/services/in-memory-data-seeder.service';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
-import { VocabModule } from './vocab';
 
 @NgModule({
   declarations: [
@@ -30,12 +29,11 @@ import { VocabModule } from './vocab';
     BrowserAnimationsModule,
     AngularMaterialModule,
     HomeModule,
-    VocabModule,
     AppRoutingModule,
   ],
   providers: [
     { provide: VocabListService, useClass: HttpVocabListService },
-    //InMemoryDataProvider,
+    ////InMemoryDataProvider,
     //{ provide: VocabListService, useClass: InMemoryVocabListService },
   ],
   bootstrap: [AppComponent]
