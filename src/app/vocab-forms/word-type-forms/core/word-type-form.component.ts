@@ -24,7 +24,7 @@ export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
   public displayPrepositionCase$: Observable<boolean> = this.displayPrepositionCase.asObservable();
 
   protected constructor(protected readonly controlAvailabilityService: ControlAvailabilityService,
-    private readonly errorMessageProvider: ValidationErrorMessageProvider,
+    protected readonly errorMessageProvider: ValidationErrorMessageProvider,
     private readonly followingValidationVisitor: FollowingControlValidatorVisitor) {
 
   }

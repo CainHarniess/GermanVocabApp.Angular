@@ -14,5 +14,11 @@ export abstract class IrregularFormComponent extends WordTypeFormComponent {
     super(controlAvailabilityService, errorMessageProvider, followingValidationVisitor);
   }
 
+  public override ngOnInit(): void {
+    super.ngOnInit();
+    this.configureDynamicPrepositionCaseValidation(this.form.controls);
+    this.configureDynamicIrregularValidation(this.form.controls);
+  }
+
   protected abstract configureDynamicIrregularValidation(controls: VocabListItemForm): void;
 }

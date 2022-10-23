@@ -1,11 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
-import { IrregularValidationVisitor } from '..';
-import { FollowingControlValidatorVisitor } from '../../../forms';
-
-import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { VocabListItemForm } from '../../models';
-import { ValidationErrorMessageProvider } from '../../validation';
 import { IrregularFormComponent } from '../core';
 
 @Component({
@@ -15,17 +11,18 @@ import { IrregularFormComponent } from '../core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerbFormComponent extends IrregularFormComponent {
-  public override ngOnInit(): void {
-    super.ngOnInit();
-    const controls = this.form.controls;
-
-    this.configureDynamicPrepositionCaseValidation(controls);
-    this.configureDynamicIrregularValidation(controls);
-  }
+  public thirdPersonPresentErrorMessage$: Observable<string | null> = of(null);
+  public thirdPersonImperfectErrorMessage$: Observable<string | null> = of(null);
+  public perfectErrorMessage$: Observable<string | null> = of(null);
 
   protected override configureDynamicIrregularValidation(controls: VocabListItemForm): void {
     this.irregularValidationVisitor.configure(controls.thirdPersonPresent, this.isIrregular$, this.destroy$);
+    this.thirdPersonPresentErrorMessage$ = this.errorMessageProvider.provideFor(controls.thirdPersonPresent);
+
     this.irregularValidationVisitor.configure(controls.thirdPersonImperfect, this.isIrregular$, this.destroy$);
+    this.thirdPersonImperfectErrorMessage$ = this.errorMessageProvider.provideFor(controls.thirdPersonImperfect);
+
     this.irregularValidationVisitor.configure(controls.perfect, this.isIrregular$, this.destroy$);
+    this.perfectErrorMessage$ = this.errorMessageProvider.provideFor(controls.perfect);
   }
 }

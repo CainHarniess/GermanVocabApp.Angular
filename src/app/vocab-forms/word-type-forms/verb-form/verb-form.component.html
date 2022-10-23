@@ -37,10 +37,13 @@
   </div>
   <div class="form-row" *ngIf="isIrregular$ | async">
     <form-text-box-control [form]="form" controlName="thirdPersonPresent"
-                           controlId="thirdPersonPresent_{{ index }}" label="Third-person present"></form-text-box-control>
+                           controlId="thirdPersonPresent_{{ index }}" label="Third-person present"
+                           [errorMessage$]="thirdPersonPresentErrorMessage$"></form-text-box-control>
     <form-text-box-control [form]="form" controlName="thirdPersonImperfect"
-                           controlId="thirdPersonImperfect_{{ index }}" label="Third-person imperfect"></form-text-box-control>
+                           controlId="thirdPersonImperfect_{{ index }}" label="Third-person imperfect"
+                           [errorMessage$]="thirdPersonImperfectErrorMessage$"></form-text-box-control>
     <form-text-box-control [form]="form" controlName="perfect"
-                           controlId="perfect_{{ index }}" label="Perfect"></form-text-box-control>
+                           controlId="perfect_{{ index }}" label="Perfect"
+                           [errorMessage$]="perfectErrorMessage$"></form-text-box-control>
   </div>
 </div>

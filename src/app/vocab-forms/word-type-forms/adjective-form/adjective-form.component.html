@@ -9,10 +9,12 @@
     <ng-container *ngrxLet="isIrregular$ as isIrregular">
       <form-text-box-control [ngClass]="{ hidden: !isIrregular }"
                              [form]="form" controlName="comparative"
-                             controlId="comparative_{{ index }}" label="Comparative"></form-text-box-control>
+                             controlId="comparative_{{ index }}" label="Comparative"
+                             [errorMessage$]="comparativeErrorMessage$"></form-text-box-control>
       <form-text-box-control [ngClass]="{ hidden: !isIrregular }"
                              [form]="form" controlName="superlative"
-                             controlId="superlative_{{ index }}" label="Superlative"></form-text-box-control>
+                             controlId="superlative_{{ index }}" label="Superlative"
+                             [errorMessage$]="superlativeErrorMessage$"></form-text-box-control>
     </ng-container>
   </div>
 </div>
