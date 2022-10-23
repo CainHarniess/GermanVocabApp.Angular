@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { filter, map, Observable, of, startWith } from 'rxjs';
 import { FollowingControlValidatorVisitor } from '../../../forms';
-import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { FixedPlurality } from '../../../vocab/models/data/fixed-plurality.enum';
 import { ValidationErrorMessageProvider } from '../../validation';
 import { WordTypeFormComponent } from '../core';
@@ -17,10 +16,9 @@ export class NounFormComponent extends WordTypeFormComponent implements OnInit {
   public pluralErrorMessage$: Observable<string | null> = of(null);
   public hasFixedPlural$!: Observable<boolean>;
 
-  constructor(controlAvailabilityService: ControlAvailabilityService,
-    errorMessageProvider: ValidationErrorMessageProvider,
+  constructor(errorMessageProvider: ValidationErrorMessageProvider,
     followingValidationVisitor: FollowingControlValidatorVisitor) {
-    super(controlAvailabilityService, errorMessageProvider, followingValidationVisitor);
+    super(errorMessageProvider, followingValidationVisitor);
   }
 
   public override ngOnInit(): void {

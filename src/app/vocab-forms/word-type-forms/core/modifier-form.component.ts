@@ -8,7 +8,6 @@ export abstract class ModifierFormComponent extends IrregularFormComponent imple
   public comparativeErrorMessage$: Observable<string | null> = of(null);
   public superlativeErrorMessage$: Observable<string | null> = of(null);
 
-
   protected override configureDynamicIrregularValidation(controls: VocabListItemForm): void {
     this.irregularValidationVisitor.configure(controls.comparative, this.isIrregular$, this.destroy$);
     this.comparativeErrorMessage$ = this.errorMessageProvider.provideFor(controls.comparative);

@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { debounceTime, filter, map, Observable, of, startWith, Subject, tap } from 'rxjs';
 import { FollowingControlValidatorOptions, FollowingControlValidatorVisitor } from '../../../forms';
-import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { VocabListItem } from '../../../vocab/models';
 import { isIrregular } from '../../../vocab/utilities';
 import { VocabListItemForm } from '../../models';
@@ -23,8 +22,7 @@ export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
   public readonly dropDownOptions: typeof DropDownOptions = DropDownOptions;
   public displayPrepositionCase$: Observable<boolean> = this.displayPrepositionCase.asObservable();
 
-  protected constructor(protected readonly controlAvailabilityService: ControlAvailabilityService,
-    protected readonly errorMessageProvider: ValidationErrorMessageProvider,
+  protected constructor(protected readonly errorMessageProvider: ValidationErrorMessageProvider,
     private readonly followingValidationVisitor: FollowingControlValidatorVisitor) {
 
   }
@@ -50,6 +48,8 @@ export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
         map(val => val ?? false)
       );
 
+    // TODO: Fix error on update stream where change of word type displays preposition case when no preposition entered.
+    // potentially move the logic out to the containing component.z
     this.hasPreposition$ = controls.preposition!.valueChanges
       .pipe(
         startWith(this.listItem?.preposition ?? null),
