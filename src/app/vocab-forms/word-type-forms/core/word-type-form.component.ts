@@ -22,7 +22,7 @@ export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
   public readonly dropDownOptions: typeof DropDownOptions = DropDownOptions;
   public displayPrepositionCase$: Observable<boolean> = this.displayPrepositionCase.asObservable();
 
-  protected constructor(protected controlAvailabilityService: ControlAvailabilityService,
+  protected constructor(protected readonly controlAvailabilityService: ControlAvailabilityService,
     private readonly errorMessageProvider: ValidationErrorMessageProvider) {
 
   }

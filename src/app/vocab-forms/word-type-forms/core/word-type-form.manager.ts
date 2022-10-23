@@ -6,17 +6,17 @@ import { VocabListItemForm } from "../../models";
 export abstract class WordTypeFormManager {
   public abstract get wordType(): WordType;
 
-  public constructor(protected readonly validationManager: WordTypeValidationController,
+  public constructor(protected readonly validationController: WordTypeValidationController,
     protected readonly valueController: WordTypeValueController) {
   }
 
   public configureForm(form: FormGroup<VocabListItemForm>): void {
-    this.validationManager.addValidation(form);
+    this.validationController.addValidation(form);
     this.valueController.setInitialValues(form);
   }
 
   public removeConfiguration(form: FormGroup<VocabListItemForm>): void {
-    this.validationManager.removeValidation(form);
+    this.validationController.removeValidation(form);
     this.valueController.removeValues(form);
   }
 }

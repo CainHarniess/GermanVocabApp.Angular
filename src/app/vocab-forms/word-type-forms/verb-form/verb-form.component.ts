@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, Validators } from '@angular/forms';
 
 import { takeUntil } from 'rxjs';
+import { IrregularValidationVisitor } from '..';
+import { ControlValidatorVisitor, FollowingControlValidatorOptions, FollowingControlValidatorVisitor } from '../../../forms';
 
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { Case } from '../../../vocab/models/data/case.enum';
@@ -12,23 +14,18 @@ import { WordTypeFormComponent } from '../core';
   selector: 'verb-form',
   templateUrl: './verb-form.component.html',
   styleUrls: ['../../vocab-list-item-form/vocab-list-item-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [IrregularValidationVisitor],
 })
 export class VerbFormComponent extends WordTypeFormComponent {
   constructor(controlAvailabilityService: ControlAvailabilityService,
-    errorMessageProvider: ValidationErrorMessageProvider) {
+    errorMessageProvider: ValidationErrorMessageProvider, private readonly irregularValidationVisitor: IrregularValidationVisitor) {
     super(controlAvailabilityService, errorMessageProvider);
   }
 
   public override ngOnInit(): void {
     super.ngOnInit();
     const controls = this.form.controls;
-
-    this.irregularControls = [
-      controls.thirdPersonPresent,
-      controls.thirdPersonImperfect,
-      controls.perfect,
-    ];
 
     this.hasPreposition$
       .pipe(takeUntil(this.destroy$))
@@ -37,11 +34,8 @@ export class VerbFormComponent extends WordTypeFormComponent {
         this.controlAvailabilityService.configure(prepositionCaseControl, result);
       });
 
-    // TODO: Update to accept validators to be configured against each control.
-    this.isIrregular$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((result: boolean) => {
-        this.controlAvailabilityService.configure(this.irregularControls, result);
-      });
+    this.irregularValidationVisitor.configure(controls.thirdPersonPresent, this.isIrregular$, this.destroy$);
+    this.irregularValidationVisitor.configure(controls.thirdPersonImperfect, this.isIrregular$, this.destroy$);
+    this.irregularValidationVisitor.configure(controls.perfect, this.isIrregular$, this.destroy$);
   }
 }

@@ -10,6 +10,7 @@ import { RequiredStringLengthValidatorFactory } from '../validation';
 export class ItemValidationProvider extends AbstractValidationProvider {
   private readonly englishValidator: ValidatorFn;
   private readonly germanValidator: ValidatorFn;
+
   public constructor(private readonly validatorFactory: RequiredStringLengthValidatorFactory) {
     super();
     this.englishValidator = this.validatorFactory.create(wordMinLength, wordMaxLength);

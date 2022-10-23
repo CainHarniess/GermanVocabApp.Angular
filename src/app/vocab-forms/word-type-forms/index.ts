@@ -1,3 +1,5 @@
+export { IrregularValidationVisitor } from "./irregular-following-control-validation.visitor";
+
 export { AdjectiveFormComponent, AdjectiveFormManager } from "./adjective-form";
 export { AdverbFormComponent, AdverbFormManager } from "./adverb-form";
 export { ModifierValidationController, ModifierValueController, WordTypeFormComponent, WordTypeFormManager, WordTypeValidationController, WordTypeValueController } from "./core";
