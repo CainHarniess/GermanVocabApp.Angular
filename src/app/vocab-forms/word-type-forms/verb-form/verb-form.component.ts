@@ -22,17 +22,18 @@ export class VerbFormComponent extends WordTypeFormComponent {
 
   public override ngOnInit(): void {
     super.ngOnInit();
+    const controls = this.form.controls;
 
     this.irregularControls = [
-      this.form.controls.thirdPersonPresent,
-      this.form.controls.thirdPersonImperfect,
-      this.form.controls.perfect,
+      controls.thirdPersonPresent,
+      controls.thirdPersonImperfect,
+      controls.perfect,
     ];
 
     this.hasPreposition$
       .pipe(takeUntil(this.destroy$))
       .subscribe((result: boolean) => {
-        const prepositionCaseControl: FormControl<Case | null> = this.form.controls.prepositionCase;
+        const prepositionCaseControl: FormControl<Case | null> = controls.prepositionCase;
         this.controlAvailabilityService.configure(prepositionCaseControl, result);
       });
 
