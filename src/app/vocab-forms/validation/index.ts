@@ -1,5 +1,5 @@
 export { RequiredIfTouchedErrorStateMatcher } from './required-if-touched.error-state-matcher'
 export { RequiredWithLengthRangeValidatorFactory } from './required-with-length-range-validator.factory'
-export { LengthRangeValidatorFactory } from './length-range-validator.factory'
+export { LengthRangeValidatorFactory } from './string-length-range-validator.factory'
 export { ValidationError } from './validation-result'
 export { ValidationErrorMessageProvider } from './validation-error-message.provider'
