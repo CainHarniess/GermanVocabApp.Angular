@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { prepositionMaxLength, prepositionMinLength, wordMaxLength, wordMinLength } from '../../../vocab/models/data/constraints/item-data-constraints';
 import { VocabListItemForm } from '../../models';
-import { LengthRangeValidatorFactory, RequiredWithLengthRangeValidatorFactory } from '../../validation';
+import { LengthRangeValidatorFactory } from '../../validation';
 import { WordTypeValidationController } from '../core';
 
 @Injectable()
@@ -10,11 +10,10 @@ export class NounValidationController extends WordTypeValidationController {
   private readonly prepositionValidator: ValidatorFn;
   private readonly pluralValidator: ValidatorFn;
 
-  public constructor(requiredWithLengthValidatorFactory: RequiredWithLengthRangeValidatorFactory,
-    private readonly lengthRangeValidatorFactory: LengthRangeValidatorFactory) {
-    super(requiredWithLengthValidatorFactory);
-    this.prepositionValidator = this.lengthRangeValidatorFactory.create(prepositionMinLength, prepositionMaxLength);
-    this.pluralValidator = this.lengthRangeValidatorFactory.create(wordMinLength, wordMaxLength);
+  public constructor(lengthRangeValidatorFactory: LengthRangeValidatorFactory) {
+    super();
+    this.prepositionValidator = lengthRangeValidatorFactory.create(prepositionMinLength, prepositionMaxLength);
+    this.pluralValidator = lengthRangeValidatorFactory.create(wordMinLength, wordMaxLength);
   }
 
   public override addValidation(form: FormGroup<VocabListItemForm>): void {

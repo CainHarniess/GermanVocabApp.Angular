@@ -17,10 +17,12 @@ export class LengthRangeValidatorFactory {
 function lengthRange(control: AbstractControl<string>, minLength: number, maxLength: number): ValidationErrors | null {
   const value: string = control?.value;
   if (value === null) {
-    return null
+    return null;
   }
   const stringLength: number = value.length;
-
+  if (stringLength === 0) {
+    return null;
+  }
   if (stringLength < minLength) {
     return new ValidationError("minLength", `Input must contain ${minLength} character(s) or more.`,
       minLength, stringLength);
