@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { IrregularValidationVisitor } from '..';
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { ValidationErrorMessageProvider } from '../../validation';
 import { ModifierFormComponent } from '../core/modifier-form.component';
@@ -11,7 +12,8 @@ import { ModifierFormComponent } from '../core/modifier-form.component';
 })
 export class AdverbFormComponent extends ModifierFormComponent {
   public constructor(controlAvailabilityService: ControlAvailabilityService,
-    errorMessageProvider: ValidationErrorMessageProvider) {
-    super(controlAvailabilityService, errorMessageProvider);
+    errorMessageProvider: ValidationErrorMessageProvider,
+    irregularValidationVisitor: IrregularValidationVisitor) {
+    super(controlAvailabilityService, errorMessageProvider, irregularValidationVisitor);
   }
 }

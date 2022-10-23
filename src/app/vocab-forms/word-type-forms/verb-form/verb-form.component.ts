@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AbstractControl, FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { takeUntil } from 'rxjs';
 import { IrregularValidationVisitor } from '..';
-import { ControlValidatorVisitor, FollowingControlValidatorOptions, FollowingControlValidatorVisitor } from '../../../forms';
 
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { Case } from '../../../vocab/models/data/case.enum';
@@ -15,7 +14,6 @@ import { WordTypeFormComponent } from '../core';
   templateUrl: './verb-form.component.html',
   styleUrls: ['../../vocab-list-item-form/vocab-list-item-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [IrregularValidationVisitor],
 })
 export class VerbFormComponent extends WordTypeFormComponent {
   constructor(controlAvailabilityService: ControlAvailabilityService,

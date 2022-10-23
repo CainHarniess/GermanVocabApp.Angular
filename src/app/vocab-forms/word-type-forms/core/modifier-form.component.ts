@@ -1,21 +1,20 @@
 import { Directive, OnDestroy } from '@angular/core';
-import { takeUntil } from 'rxjs';
+import { IrregularValidationVisitor } from '..';
+import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
+import { ValidationErrorMessageProvider } from '../../validation';
 import { WordTypeFormComponent } from './word-type-form.component';
 
 @Directive()
 export abstract class ModifierFormComponent extends WordTypeFormComponent implements OnDestroy {
+  public constructor(controlAvailabilityService: ControlAvailabilityService,
+    errorMessageProvider: ValidationErrorMessageProvider,
+    private readonly irregularValidationVisitor: IrregularValidationVisitor) {
+    super(controlAvailabilityService, errorMessageProvider);
+  }
   public override ngOnInit(): void {
     super.ngOnInit();
-
-    this.irregularControls = [
-      this.form.controls.comparative!,
-      this.form.controls.superlative!,
-    ];
-
-    this.isIrregular$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((result: boolean) => {
-        this.controlAvailabilityService.configure(this.irregularControls, result);
-      });
+    const controls = this.form.controls;
+    this.irregularValidationVisitor.configure(controls.comparative, this.isIrregular$, this.destroy$);
+    this.irregularValidationVisitor.configure(controls.superlative, this.isIrregular$, this.destroy$);
   }
 }

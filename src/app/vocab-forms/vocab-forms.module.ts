@@ -11,6 +11,7 @@ import { EditVocabListComponent } from './vocab-list-form/edit-vocab-list.compon
 import { VocabListItemFormComponent } from './vocab-list-item-form/vocab-list-item-form.component';
 import {
   AdjectiveFormComponent, AdjectiveFormManager, AdverbFormComponent, AdverbFormManager,
+  IrregularValidationVisitor,
   ModifierValidationController, ModifierValueController, NounFormComponent, NounFormManager,
   NounValidationController, NounValueController, VerbFormComponent, VerbFormManager,
   VerbValidationController, VerbValueController
@@ -39,6 +40,7 @@ import {
     ValidationErrorMessageProvider,
     RequiredStringLengthValidatorFactory,
     RequiredIfTouchedErrorStateMatcher,
+    IrregularValidationVisitor,
 
     ListTitleObservableBuilder,
 
