@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import { VocabList, VocabListItem } from '../models';
 
 export abstract class VocabListService {
-
   public abstract get(): Observable<VocabList[]>;
 
   public abstract getWithId(vocabListId: string): Observable<VocabList>;

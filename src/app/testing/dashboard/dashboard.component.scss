@@ -1,0 +1,18 @@
+main {
+    width: 900px;
+}
+
+mat-panel-title > h2 {
+    margin: 0;
+}
+
+.action-panel-container {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 992px) {
+  main > .vocab-lists-container {
+    width: 100%;
+  }
+}

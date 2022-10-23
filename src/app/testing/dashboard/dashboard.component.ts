@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BadRequestCommand, ClientErrorCommand, UnauthorisedCommand } from '../commands';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,11 +7,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
+  public constructor(public readonly clientErrorCommand: ClientErrorCommand,
+    public readonly unathorisedCommand: UnauthorisedCommand,
+    public readonly badRequestCommand: BadRequestCommand) {
 
-  constructor() { }
-
-  ngOnInit(): void {
   }
-
 }
