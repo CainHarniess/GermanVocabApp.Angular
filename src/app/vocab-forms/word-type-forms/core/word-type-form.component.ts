@@ -1,7 +1,8 @@
 import { Directive, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { debounceTime, filter, map, Observable, of, startWith, Subject, tap } from 'rxjs';
+import { FollowingControlValidatorOptions, FollowingControlValidatorVisitor } from '../../../forms';
 import { ControlAvailabilityService } from '../../../shared/services/control-availability.service';
 import { VocabListItem } from '../../../vocab/models';
 import { isIrregular } from '../../../vocab/utilities';
@@ -23,7 +24,8 @@ export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
   public displayPrepositionCase$: Observable<boolean> = this.displayPrepositionCase.asObservable();
 
   protected constructor(protected readonly controlAvailabilityService: ControlAvailabilityService,
-    private readonly errorMessageProvider: ValidationErrorMessageProvider) {
+    private readonly errorMessageProvider: ValidationErrorMessageProvider,
+    private readonly followingValidationVisitor: FollowingControlValidatorVisitor) {
 
   }
 
@@ -61,6 +63,11 @@ export abstract class WordTypeFormComponent implements OnInit, OnDestroy {
     this.germanErrorMessage$ = this.errorMessageProvider.provideFor(controls.german);
     this.prepositionErrorMessage$ = this.errorMessageProvider.provideFor(controls.preposition);
     this.englishErrorMessage$ = this.errorMessageProvider.provideFor(controls.english);
+  }
+
+  protected configureDynamicPrepositionCaseValidation(controls: VocabListItemForm) {
+    const options = new FollowingControlValidatorOptions(controls.prepositionCase, this.hasPreposition$, this.destroy$, Validators.required);
+    this.followingValidationVisitor.configure(options);
   }
 
   public ngOnDestroy(): void {

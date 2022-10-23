@@ -1,4 +1,4 @@
-export { IrregularValidationVisitor } from "./irregular-following-control-validation.visitor";
+export { IrregularValidationVisitor } from "./irregular-validation.visitor";
 
 export { AdjectiveFormComponent, AdjectiveFormManager } from "./adjective-form";
 export { AdverbFormComponent, AdverbFormManager } from "./adverb-form";
