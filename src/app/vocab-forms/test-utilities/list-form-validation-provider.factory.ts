@@ -1,5 +1,5 @@
 import { VocabListFormValidationProvider } from "../services";
-import { RequiredWithLengthRangeValidatorFactory } from "../vocab-list-form/required-with-length-range-validator";
+import { RequiredWithLengthRangeValidatorFactory } from "../validation";
 
 export class ListFormValidationProviderFactory {
   public create(): VocabListFormValidationProvider {
