@@ -3,7 +3,7 @@ import { StringLengthValidatorFactory, ValidationError } from "..";
 import { RandomStringGenerator } from "../../../../utilities";
 import { maxLength, minLength } from "../validator-names";
 
-fdescribe("StringLengthRangeValidatorFactory", () => {
+describe("StringLengthValidatorFactory", () => {
   let stringGenerator: RandomStringGenerator;
 
   let factory: StringLengthValidatorFactory;
