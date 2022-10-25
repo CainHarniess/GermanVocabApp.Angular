@@ -18,9 +18,9 @@ export function contructMocks(): VocabListFormComponentMocks {
 
   return {
     router: jasmine.createSpyObj("mockRouter", ["navigate"]),
-    listService: jasmine.createSpyObj("mockListService", ["add", "update"]),
+    vocabService: jasmine.createSpyObj("mockListService", ["add", "update"]),
     listFormBuilder: listFormBuilder,
-    listItemFormBuilder: itemFormBuilder,
+    itemFormBuilder: itemFormBuilder,
     observableBuilderForMocks: jasmine.createSpyObj("mockObservableBuilderForMocks", ["build"]),
     observableBuilderForReal: jasmine.createSpyObj("mockObservableBuilderForReal", ["build"]),
     validationProvider: validationProvider,
@@ -65,8 +65,8 @@ export function constructMockReturnValues(mocks: VocabListFormComponentMocks, mo
   };
 
   spyOn(mocks.listFormBuilder, "build").and.callFake(() => mockReturnValues.listForm);
-  mocks.listService.add.and.returnValue(mockReturnValues.newListId$);
-  mocks.listService.update.and.returnValue(mockReturnValues.updatedList$);
+  mocks.vocabService.add.and.returnValue(mockReturnValues.newListId$);
+  mocks.vocabService.update.and.returnValue(mockReturnValues.updatedList$);
   mocks.observableBuilderForReal.build.and.returnValue(mockReturnValues.title$);
 
   return mockReturnValues;

@@ -1,21 +1,22 @@
 import { fakeAsync } from "@angular/core/testing";
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, FormControl } from "@angular/forms";
 
-import { Observable, Subscription } from "rxjs";
+import { Observable, of, Subscription } from "rxjs";
 import { VocabRoutePath } from "../../../shared/routing";
 
 import { VocabListFormBuilder, VocabListItemFormBuilder } from "../../services";
+import { ValidationErrorMessageProvider } from "../../validation";
 import { AddVocabListFormComponent } from "../add-vocab-list-form.component";
 import { MockReturnValues } from "./mock-return-values";
 import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";
 import { constructMockListForm, constructMockReturnValues, contructMocks } from "./vocab-list-form.spec.utilities";
 
-describe("AddVocabListComponent", () => {
+fdescribe("AddVocabListComponent", () => {
   let mocks: VocabListFormComponentMocks;
   let mockReturnValues: MockReturnValues;
-  let mockErrorMessageProvider: any;
-  let mockErrorStateMatcher: any = { };
-  let mockValidationProvider: any = { provideFor: () => Observable<string | null> };
+  let mockErrorStateMatcher: any = {};
+  let errorMessageProvider = new ValidationErrorMessageProvider();
+  let mockItemValidationProvider: any = {};
   let component: AddVocabListFormComponent;
   let componentWithRealBuilders: AddVocabListFormComponent;
   let fb: FormBuilder = new FormBuilder();;
@@ -28,44 +29,53 @@ describe("AddVocabListComponent", () => {
     mocks.listForm = constructMockListForm(fb);
     mockReturnValues = constructMockReturnValues(mocks, mocks.listForm);
 
-    mockErrorStateMatcher = {};
-    spyOn(mockErrorMessageProvider, mockValidationProvider.provideFor)
-
     component = new AddVocabListFormComponent(mocks.router,
-      mocks.listService, mocks.listFormBuilder, mocks.listItemFormBuilder,
-      mocks.observableBuilderForMocks, mocks.listItemWordingProvider,
-      mockErrorMessageProvider, mockErrorStateMatcher);
+      mocks.vocabService, mocks.listFormBuilder, mocks.itemFormBuilder,
+      mocks.observableBuilderForMocks, errorMessageProvider,
+      mockErrorStateMatcher, mocks.listItemWordingProvider);
 
-
-    const listItemFormBuilder = new VocabListItemFormBuilder(fb, mockValidationProvider);
+    const listItemFormBuilder = new VocabListItemFormBuilder(fb, mockItemValidationProvider);
     const listFormBuilder = new VocabListFormBuilder(fb, listItemFormBuilder, mocks.validationProvider);
     componentWithRealBuilders = new AddVocabListFormComponent(mocks.router,
-      mocks.listService, listFormBuilder, listItemFormBuilder,
-      mocks.observableBuilderForReal, mocks.listItemWordingProvider,
-      mockErrorMessageProvider, mockErrorStateMatcher);
-
-    component.ngOnInit();
-    componentWithRealBuilders.ngOnInit();
+      mocks.vocabService, listFormBuilder, listItemFormBuilder,
+      mocks.observableBuilderForReal, errorMessageProvider,
+      mockErrorStateMatcher, mocks.listItemWordingProvider);
   });
 
   describe("ngOnInit", () => {
     it("Should build the vocab list form", () => {
+      component.ngOnInit();
       expect(mocks.listFormBuilder.build).toHaveBeenCalledOnceWith();
     });
 
     it("Should call title observable builder with correct arguments.", () => {
+      component.ngOnInit();
       expect(mocks.observableBuilderForMocks.build)
         .toHaveBeenCalledOnceWith("New vocab list", mocks.listForm.controls.name);
     });
 
-    xit("Should call list item wording observable with correct argument.", () => {
+    it("Should call list item wording observable with correct argument.", () => {
+      component.ngOnInit();
       expect(mocks.listItemWordingProvider.provide)
         .toHaveBeenCalledOnceWith(component.listItemControlCount$);
+    });
+
+    it("Should call the error message provider for the relevant controls.", () => {
+      const provideForSpy = spyOn(errorMessageProvider, "provideFor");
+      provideForSpy.withArgs(mocks.listForm.controls.name);
+      provideForSpy.withArgs(mocks.listForm.controls.description);
+
+      component.ngOnInit();
+
+      expect(errorMessageProvider.provideFor).toHaveBeenCalledWith(mocks.listForm.controls.name);
+      expect(errorMessageProvider.provideFor).toHaveBeenCalledWith(mocks.listForm.controls.description);
     });
   });
 
   describe("descriptionLength$", () => {
     it("Should emit if length is greater than the specified value", fakeAsync(() => {
+      componentWithRealBuilders.ngOnInit();
+
       let hasEmited: boolean = false;
       componentWithRealBuilders.descriptionLength$
         .subscribe((length: number) => hasEmited = true);
@@ -79,7 +89,9 @@ describe("AddVocabListComponent", () => {
 
     it("Should not emit if length is smaller than or equal to the specified value", fakeAsync(() => {
       let hasEmited: boolean = false;
+
       componentWithRealBuilders.ngOnInit();
+
       componentWithRealBuilders.descriptionLength$
         .subscribe((length: number) => hasEmited = true);
 
@@ -91,11 +103,15 @@ describe("AddVocabListComponent", () => {
 
   describe("addListItemControl", () => {
     it("Should generate a new list item form.", () => {
+      component.ngOnInit();
+
       component.addListItemControl();
-      expect(mocks.listItemFormBuilder.build).toHaveBeenCalledOnceWith();
+      expect(mocks.itemFormBuilder.build).toHaveBeenCalledOnceWith();
     });
 
     it("Should set the list item control count subject value to the list form's value.", () => {
+      componentWithRealBuilders.ngOnInit();
+
       componentWithRealBuilders.addListItemControl();
       componentWithRealBuilders.addListItemControl();
       expect(componentWithRealBuilders.listItemControlCount$.value).toBe(2);
@@ -104,10 +120,14 @@ describe("AddVocabListComponent", () => {
 
   describe("copyListItemControl", () => {
     it("Should throw exception if invalid index is provided.", () => {
+      component.ngOnInit();
+
       expect(function () { component.copyListItemControl(-1) }).toThrowError("Index may not be negative.");
     });
 
     it("Should add a list item form.", () => {
+      componentWithRealBuilders.ngOnInit();
+
       componentWithRealBuilders.addListItemControl();
       componentWithRealBuilders.addListItemControl();
       componentWithRealBuilders.addListItemControl();
@@ -120,6 +140,8 @@ describe("AddVocabListComponent", () => {
     });
 
     it("Should add the form control at the specified index.", () => {
+      component.ngOnInit();
+
       const listItemsControl = mocks.listForm.controls.listItems;
       const fakeGroup = fb.group("New control");
 
@@ -129,13 +151,15 @@ describe("AddVocabListComponent", () => {
 
       spyOn(listItemsControl, "insert");
 
-      mocks.listItemFormBuilder.buildFromFormGroup.and.returnValue(fakeGroup);
+      mocks.itemFormBuilder.buildFromFormGroup.and.returnValue(fakeGroup);
 
       component.copyListItemControl(1);
       expect(listItemsControl.insert).toHaveBeenCalledOnceWith(1, fakeGroup);
     });
 
     it("Should update the list item control count observable.", () => {
+      component.ngOnInit();
+
       const listItemsControl = mocks.listForm.controls.listItems;
       const fakeGroup = fb.group("New control");
 
@@ -147,7 +171,7 @@ describe("AddVocabListComponent", () => {
 
       spyOn(component.listItemControlCount$, "next");
 
-      mocks.listItemFormBuilder.buildFromFormGroup.and.returnValue(fakeGroup);
+      mocks.itemFormBuilder.buildFromFormGroup.and.returnValue(fakeGroup);
 
       component.copyListItemControl(1);
       expect(component.listItemControlCount$.next).toHaveBeenCalledOnceWith(listItemsControl.length);
@@ -156,10 +180,14 @@ describe("AddVocabListComponent", () => {
 
   describe("removeListItemControl", () => {
     it("Should throw exception if invalid index is provided.", () => {
+      component.ngOnInit();
+
       expect(function () { component.removeListItemControl(-1) }).toThrowError("Index may not be negative.");
     });
 
     it("Should remove a list item form.", () => {
+      componentWithRealBuilders.ngOnInit();
+
       componentWithRealBuilders.addListItemControl();
       componentWithRealBuilders.addListItemControl();
       componentWithRealBuilders.addListItemControl();
@@ -172,6 +200,8 @@ describe("AddVocabListComponent", () => {
     });
 
     it("Should call FormArray.removeAt with the correct argument.", () => {
+      component.ngOnInit();
+
       const listItemsControl = mocks.listForm.controls.listItems;
       spyOn(listItemsControl, "removeAt");
 
@@ -180,6 +210,8 @@ describe("AddVocabListComponent", () => {
     });
 
     it("Should update the list item control count observable.", () => {
+      component.ngOnInit();
+
       const listItemsControl = mocks.listForm.controls.listItems;
       spyOn(component.listItemControlCount$, "next");
       component.removeListItemControl(1);
@@ -189,11 +221,15 @@ describe("AddVocabListComponent", () => {
 
   describe("submit", () => {
     it("Should call the add method on the vocab list service with the correct argument.", () => {
+      component.ngOnInit();
+
       component.submit();
-      expect(mocks.listService.add).toHaveBeenCalledOnceWith(mocks.listForm.value!);
+      expect(mocks.vocabService.add).toHaveBeenCalledOnceWith(mocks.listForm.value!);
     });
 
     it("Should call Router.navigate with the correct arguments.", fakeAsync(() => {
+      component.ngOnInit();
+
       component.submit();
       expect(mocks.router.navigate).toHaveBeenCalledOnceWith([`/${VocabRoutePath.Root}`, VocabRoutePath.VocabLists]);
     }));
@@ -201,6 +237,8 @@ describe("AddVocabListComponent", () => {
 
   describe("ngOnDestroy", () => {
     it("Should unsubscribe from VocabListService.add subscription.", fakeAsync(() => {
+      component.ngOnInit();
+
       const mockSubscription = new Subscription();
       spyOn(mockReturnValues.newListId$, "subscribe").and.callFake((): Subscription => {
         return mockSubscription;

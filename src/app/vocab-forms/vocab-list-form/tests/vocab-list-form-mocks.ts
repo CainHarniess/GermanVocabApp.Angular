@@ -2,9 +2,9 @@ import { VocabList } from "../../../vocab/models";
 
 export interface VocabListFormComponentMocks {
   router: any;
-  listService: any;
+  vocabService: any;
   listFormBuilder: any;
-  listItemFormBuilder: any;
+  itemFormBuilder: any;
   observableBuilderForMocks: any;
   observableBuilderForReal: any;
   list?: VocabList;
