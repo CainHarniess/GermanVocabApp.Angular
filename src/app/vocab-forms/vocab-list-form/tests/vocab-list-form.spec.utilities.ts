@@ -4,7 +4,9 @@ import { of } from "rxjs";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
 import { VocabListForm } from "../../models";
 import { VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from "../../services";
+import { createMockItemValidationProvider } from "../../services/tests/item-validation.provider.utilities";
 import { ListFormValidationProviderFactory } from "../../test-utilities";
+import { ValidationErrorMessageProvider } from "../../validation";
 import { MockReturnValues } from "./mock-return-values";
 
 import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";
@@ -18,12 +20,15 @@ export function contructMocks(): VocabListFormComponentMocks {
 
   return {
     router: jasmine.createSpyObj("mockRouter", ["navigate"]),
-    listService: jasmine.createSpyObj("mockListService", ["add", "update"]),
+    vocabService: jasmine.createSpyObj("mockListService", ["add", "update"]),
     listFormBuilder: listFormBuilder,
-    listItemFormBuilder: itemFormBuilder,
+    itemFormBuilder: itemFormBuilder,
     observableBuilderForMocks: jasmine.createSpyObj("mockObservableBuilderForMocks", ["build"]),
     observableBuilderForReal: jasmine.createSpyObj("mockObservableBuilderForReal", ["build"]),
     validationProvider: validationProvider,
+    errorStateMatcher: { },
+    errorMessageProvider: new ValidationErrorMessageProvider(),
+    itemValidationProvider: createMockItemValidationProvider(),
   };
 }
 
@@ -65,8 +70,8 @@ export function constructMockReturnValues(mocks: VocabListFormComponentMocks, mo
   };
 
   spyOn(mocks.listFormBuilder, "build").and.callFake(() => mockReturnValues.listForm);
-  mocks.listService.add.and.returnValue(mockReturnValues.newListId$);
-  mocks.listService.update.and.returnValue(mockReturnValues.updatedList$);
+  mocks.vocabService.add.and.returnValue(mockReturnValues.newListId$);
+  mocks.vocabService.update.and.returnValue(mockReturnValues.updatedList$);
   mocks.observableBuilderForReal.build.and.returnValue(mockReturnValues.title$);
 
   return mockReturnValues;

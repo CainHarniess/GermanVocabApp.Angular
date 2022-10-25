@@ -18,9 +18,10 @@ export class FollowingControlValidatorVisitor {
 
   private configureInternal(control: AbstractControl<any>, isVisible$: Observable<boolean>,
     notifier$: Observable<boolean>, validator: ValidatorFn): void {
-    isVisible$.pipe(takeUntil(notifier$)).subscribe((isVisible: boolean) => {
-      this.updateValidators(control, isVisible, validator);
-    });
+    isVisible$.pipe(takeUntil(notifier$))
+      .subscribe((isVisible: boolean) => {
+        this.updateValidators(control, isVisible, validator);
+      });
   }
 
   private updateValidators(control: AbstractControl<any>,

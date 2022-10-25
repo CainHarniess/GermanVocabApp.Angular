@@ -6,9 +6,9 @@ import { maxLength, minLength } from "./validator-names";
 
 @Injectable()
 export class StringLengthValidatorFactory extends AbstractStringLengthValidatorFactory {
-  protected override createValidator(minLength: number, maxLength: number): ValidatorFn {
+  protected override createValidator(lower: number, upper: number): ValidatorFn {
     return (control: AbstractControl<string | null>): ValidationErrors | null => {
-      return lengthRange(control, minLength, maxLength);
+      return lengthRange(control, lower, upper);
     };
   }
 }

@@ -1,10 +1,11 @@
 import { VocabList } from "../../../vocab/models";
+import { ValidationErrorMessageProvider } from "../../validation";
 
 export interface VocabListFormComponentMocks {
   router: any;
-  listService: any;
+  vocabService: any;
   listFormBuilder: any;
-  listItemFormBuilder: any;
+  itemFormBuilder: any;
   observableBuilderForMocks: any;
   observableBuilderForReal: any;
   list?: VocabList;
@@ -12,4 +13,7 @@ export interface VocabListFormComponentMocks {
   route?: any;
   listItemWordingProvider?: any;
   validationProvider: any;
+  errorStateMatcher: any;
+  errorMessageProvider: ValidationErrorMessageProvider;
+  itemValidationProvider: any;
 }
