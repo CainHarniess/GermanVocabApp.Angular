@@ -13,7 +13,7 @@ import { MockReturnValues } from "./mock-return-values";
 import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";
 import { constructMockListForm, contructMocks, constructMockReturnValues } from "./vocab-list-form.spec.utilities";
 
-fdescribe(`${EditVocabListComponent.name}`, () => {
+describe(`${EditVocabListComponent.name}`, () => {
   let mocks: VocabListFormComponentMocks;
   let mockReturnValues: MockReturnValues;
   let component: EditVocabListComponent;

@@ -7,8 +7,6 @@ import {
 } from "../../word-type-forms";
 import { WordTypeFormManagerFactory } from "../word-type-form-manager-factory";
 
-
-
 describe("WordTypeFormManagerFactory", () => {
   let formManagerFactory: WordTypeFormManagerFactory;
   let mockForm: FormGroup<VocabListItemForm>;
