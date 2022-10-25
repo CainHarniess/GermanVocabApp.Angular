@@ -1,8 +1,9 @@
 import { fakeAsync } from "@angular/core/testing";
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 
-import { Observable, of, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { VocabRoutePath } from "../../../shared/routing";
+import { VocabListItemForm } from "../../models";
 
 import { VocabListFormBuilder, VocabListItemFormBuilder } from "../../services";
 import { ValidationErrorMessageProvider } from "../../validation";
@@ -16,7 +17,9 @@ fdescribe("AddVocabListComponent", () => {
   let mockReturnValues: MockReturnValues;
   let mockErrorStateMatcher: any = {};
   let errorMessageProvider = new ValidationErrorMessageProvider();
-  let mockItemValidationProvider: any = {};
+  let mockItemValidationProvider: any = {
+    addValidationTo: (form: FormGroup<VocabListItemForm>) => { },
+  };
   let component: AddVocabListFormComponent;
   let componentWithRealBuilders: AddVocabListFormComponent;
   let fb: FormBuilder = new FormBuilder();;
