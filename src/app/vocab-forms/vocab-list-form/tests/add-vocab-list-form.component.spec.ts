@@ -1,25 +1,18 @@
 import { fakeAsync } from "@angular/core/testing";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
 
 import { Subscription } from "rxjs";
 import { VocabRoutePath } from "../../../shared/routing";
-import { VocabListItemForm } from "../../models";
 
 import { VocabListFormBuilder, VocabListItemFormBuilder } from "../../services";
-import { ValidationErrorMessageProvider } from "../../validation";
 import { AddVocabListFormComponent } from "../add-vocab-list-form.component";
 import { MockReturnValues } from "./mock-return-values";
 import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";
 import { constructMockListForm, constructMockReturnValues, contructMocks } from "./vocab-list-form.spec.utilities";
 
-fdescribe("AddVocabListComponent", () => {
+describe("AddVocabListComponent", () => {
   let mocks: VocabListFormComponentMocks;
   let mockReturnValues: MockReturnValues;
-  let mockErrorStateMatcher: any = {};
-  let errorMessageProvider = new ValidationErrorMessageProvider();
-  let mockItemValidationProvider: any = {
-    addValidationTo: (form: FormGroup<VocabListItemForm>) => { },
-  };
   let component: AddVocabListFormComponent;
   let componentWithRealBuilders: AddVocabListFormComponent;
   let fb: FormBuilder = new FormBuilder();;
@@ -34,15 +27,15 @@ fdescribe("AddVocabListComponent", () => {
 
     component = new AddVocabListFormComponent(mocks.router,
       mocks.vocabService, mocks.listFormBuilder, mocks.itemFormBuilder,
-      mocks.observableBuilderForMocks, errorMessageProvider,
-      mockErrorStateMatcher, mocks.listItemWordingProvider);
+      mocks.observableBuilderForMocks, mocks.errorMessageProvider,
+      mocks.errorStateMatcher, mocks.listItemWordingProvider);
 
-    const listItemFormBuilder = new VocabListItemFormBuilder(fb, mockItemValidationProvider);
+    const listItemFormBuilder = new VocabListItemFormBuilder(fb, mocks.itemValidationProvider);
     const listFormBuilder = new VocabListFormBuilder(fb, listItemFormBuilder, mocks.validationProvider);
     componentWithRealBuilders = new AddVocabListFormComponent(mocks.router,
       mocks.vocabService, listFormBuilder, listItemFormBuilder,
-      mocks.observableBuilderForReal, errorMessageProvider,
-      mockErrorStateMatcher, mocks.listItemWordingProvider);
+      mocks.observableBuilderForReal, mocks.errorMessageProvider,
+      mocks.errorStateMatcher, mocks.listItemWordingProvider);
   });
 
   describe("ngOnInit", () => {
@@ -64,14 +57,14 @@ fdescribe("AddVocabListComponent", () => {
     });
 
     it("Should call the error message provider for the relevant controls.", () => {
-      const provideForSpy = spyOn(errorMessageProvider, "provideFor");
+      const provideForSpy = spyOn(mocks.errorMessageProvider, "provideFor");
       provideForSpy.withArgs(mocks.listForm.controls.name);
       provideForSpy.withArgs(mocks.listForm.controls.description);
 
       component.ngOnInit();
 
-      expect(errorMessageProvider.provideFor).toHaveBeenCalledWith(mocks.listForm.controls.name);
-      expect(errorMessageProvider.provideFor).toHaveBeenCalledWith(mocks.listForm.controls.description);
+      expect(mocks.errorMessageProvider.provideFor).toHaveBeenCalledWith(mocks.listForm.controls.name);
+      expect(mocks.errorMessageProvider.provideFor).toHaveBeenCalledWith(mocks.listForm.controls.description);
     });
   });
 

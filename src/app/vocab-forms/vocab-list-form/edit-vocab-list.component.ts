@@ -56,7 +56,7 @@ export class EditVocabListComponent extends AbstractVocabListFormComponent {
 
   public readonly placeholderWording$: Observable<string> = EMPTY;
 
-  public submit(): void {
+  public override submit(): void {
     if (!this.preEditList.id) {
       throw new NotWellDefinedError(`Expected well-defined vocab list ID but value is ${this.preEditList.id}.`);
     }

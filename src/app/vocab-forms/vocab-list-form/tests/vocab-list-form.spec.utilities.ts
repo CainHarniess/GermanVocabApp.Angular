@@ -2,9 +2,10 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { of } from "rxjs";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
-import { VocabListForm } from "../../models";
+import { VocabListForm, VocabListItemForm } from "../../models";
 import { VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from "../../services";
 import { ListFormValidationProviderFactory } from "../../test-utilities";
+import { ValidationErrorMessageProvider } from "../../validation";
 import { MockReturnValues } from "./mock-return-values";
 
 import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";
@@ -24,6 +25,11 @@ export function contructMocks(): VocabListFormComponentMocks {
     observableBuilderForMocks: jasmine.createSpyObj("mockObservableBuilderForMocks", ["build"]),
     observableBuilderForReal: jasmine.createSpyObj("mockObservableBuilderForReal", ["build"]),
     validationProvider: validationProvider,
+    errorStateMatcher: { },
+    errorMessageProvider: new ValidationErrorMessageProvider(),
+    itemValidationProvider: {
+      addValidationTo: (form: FormGroup<VocabListItemForm>) => { },
+    },
   };
 }
 
