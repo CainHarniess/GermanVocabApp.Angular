@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { BadRequestCommand, ClientErrorCommand, UnauthorisedCommand } from '../commands';
 
 @Component({
@@ -7,10 +7,16 @@ import { BadRequestCommand, ClientErrorCommand, UnauthorisedCommand } from '../c
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnDestroy {
   public constructor(public readonly clientErrorCommand: ClientErrorCommand,
     public readonly unathorisedCommand: UnauthorisedCommand,
     public readonly badRequestCommand: BadRequestCommand) {
 
+  }
+
+  ngOnDestroy(): void {
+    this.clientErrorCommand.unsubscribe();
+    this.unathorisedCommand.unsubscribe();
+    this.badRequestCommand.unsubscribe();
   }
 }

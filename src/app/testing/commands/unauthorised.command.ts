@@ -9,6 +9,7 @@ export class UnauthorisedCommand extends AbstractErrorCommand {
   }
 
   public execute(): void {
-    this.errorService.throwUnauthorised();
+    this.subscription = this.errorService.throwUnauthorised()
+      .subscribe(() => console.log("Complete"));
   }
 }

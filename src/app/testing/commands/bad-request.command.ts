@@ -9,6 +9,7 @@ export class BadRequestCommand extends AbstractErrorCommand {
   }
 
   public execute(): void {
-    this.errorService.throwBadRequest();
+    this.subscription = this.errorService.throwBadRequest()
+      .subscribe(() => console.log("Complete"));
   }
 }

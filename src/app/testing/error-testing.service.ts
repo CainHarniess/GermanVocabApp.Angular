@@ -8,19 +8,17 @@ export class ErrorTestingService {
 
   }
 
-  private readonly urlRoot: string = "/api/v1/testing";
+  private readonly urlRoot: string = "api/v1/testing/errors";
 
   public throwClientError(): void {
     throw new Error("An unexpected client-side error occured.");
   }
 
   public throwUnauthorised(): Observable<any> {
-    //return this.http.get(`${this.urlRoot}/unauthorised`);
-    throw new Error("401 UNAUTHORIZED");
+    return this.http.get(`${this.urlRoot}/unauthorised`);
   }
 
   public throwBadRequest(): Observable<any> {
-    throw new Error("400 BAD REQUEST");
-    //return this.http.post<any>(`${this.urlRoot}/bad-request`, { });
+    return this.http.post<any>(`${this.urlRoot}/bad-request`, { });
   }
 }
