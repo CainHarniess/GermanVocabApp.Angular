@@ -10,6 +10,10 @@ export class ErrorTestingService {
 
   private readonly urlRoot: string = "api/v1/testing/errors";
 
+  public noContent(): Observable<any> {
+    return this.http.get(`${this.urlRoot}/no-content`);
+  }
+
   public throwClientError(): void {
     throw new Error("An unexpected client-side error occured.");
   }

@@ -3,16 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { ErrorTestingService } from '.';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
-import { BadRequestCommand, ClientErrorCommand, UnauthorisedCommand } from './commands';
+import { BadRequestCommand, ClientErrorCommand, NoContentCommand, UnauthorisedCommand } from './commands';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorActionRowComponent } from './error-action-row/error-action-row.component';
 import { TestingRoutingModule } from './testing-routing.module';
+import { SuccessActionRowComponent } from './success-action-row/success-action-row.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ErrorActionRowComponent,
+    SuccessActionRowComponent,
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { TestingRoutingModule } from './testing-routing.module';
   ],
   providers: [
     ErrorTestingService,
+    NoContentCommand,
     ClientErrorCommand,
     UnauthorisedCommand,
     BadRequestCommand,
