@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 
@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InMemoryVocabListService } from './vocab/services/in-memory-vocab-list.service';
 import { InMemoryDataProvider } from './vocab/services/in-memory-data-seeder.service';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { HttpErrorInterceptor } from '../core/error-handling';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     { provide: VocabListService, useClass: HttpVocabListService },
     ////InMemoryDataProvider,
     //{ provide: VocabListService, useClass: InMemoryVocabListService },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
