@@ -1,5 +1,6 @@
 import { waitForAsync } from "@angular/core/testing";
 import { of } from "rxjs";
+import { LogContent } from "../../../core/logging";
 
 import { ResolvedData, WordType } from "../models/data";
 import { VocabList } from "../models/vocab-list.interface";
@@ -13,7 +14,7 @@ describe("VocabListsComponent", () => {
         id: '473573a8-86d7-4b64-8e51-96fead598a7c',
         wordType: WordType.Verb,
         german: 'essen',
-        english: 'to reply, retort', 
+        english: 'to reply, retort',
       }
     ],
     authorName: "Cain Harniess"
@@ -21,13 +22,17 @@ describe("VocabListsComponent", () => {
   let component: VocabListsComponent;
   let mockRouter: any;
   let mockActivatedRoute: any;
+  let mockLogService: any = {
+    trace: (content: LogContent) => { },
+    debug: (content: LogContent) => { },
+  };
 
   beforeEach(() => {
     const mockData: { [key: string]: VocabList[] } = {};
     mockData[ResolvedData.ResolvedLists] = mockVocabLists;
     mockRouter = jasmine.createSpyObj("mockRouter", ["navigate"]);
     mockActivatedRoute = jasmine.createSpyObj("mockActivatedRoute", [], { data: of(mockData) });
-    component = new VocabListsComponent(mockRouter, mockActivatedRoute);
+    component = new VocabListsComponent(mockLogService, mockRouter, mockActivatedRoute);
   });
 
   describe("vocabListsDisplay$", () => {
