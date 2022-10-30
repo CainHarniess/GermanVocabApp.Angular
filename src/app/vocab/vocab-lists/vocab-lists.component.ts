@@ -3,6 +3,7 @@ import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { LogService } from '../../../core/logging';
+import { MatSnackBarService } from '../../angular-material/snack-bar.service';
 
 import { VocabList } from '.././models/vocab-list.interface';
 import { ResolvedData } from '../models/data';
@@ -15,7 +16,8 @@ import { ResolvedData } from '../models/data';
 })
 export class VocabListsComponent {
   constructor(private readonly logger: LogService,
-    private router: Router, private route: ActivatedRoute) {
+    private router: Router, private route: ActivatedRoute,
+    private readonly notificationService: MatSnackBarService) {
 
   }
 
@@ -55,5 +57,6 @@ export class VocabListsComponent {
   public exportToJson(): void {
     this.logger.trace({ message: `${VocabListsComponent.name} - exportToJson` });
     this.showJson$.next(!this.showJson$.value);
+    this.notificationService.error("Hi there.");
   }
 }

@@ -17,6 +17,8 @@ import { ModifierVocabListItemComponent } from './vocab-list-items/modifier-voca
 import { NounVocabListItemComponent } from './vocab-list-items/noun-vocab-list-item/noun-vocab-list-item.component';
 import { VerbVocabListItemComponent } from './vocab-list-items/verb-vocab-list-item/verb-vocab-list-item.component';
 import { DefiniteArticlePipe, FixedPluralDisplayPipe, GermanShortCasePipe, IndefiniteArticlePipe, SeparableDisplayPipe, ThirdPersonAuxiliaryPipe, TransitiveDisplayPipe } from './pipes';
+import { MatSnackBarService } from '../angular-material/snack-bar.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { DefiniteArticlePipe, FixedPluralDisplayPipe, GermanShortCasePipe, Indef
     { provide: Logger, useClass: ConsoleLogger },
     LogService,
     { provide: "minLevel", useValue: Severity.Debug },
+    MatSnackBar,
+    MatSnackBarService,
   ],
   imports: [
     CommonModule,
