@@ -8,17 +8,18 @@ import { SharedModule } from '../shared/shared.module';
 import { VocabFormsModule } from '../vocab-forms/vocab-forms.module';
 import { VocabRoutingModule } from './vocab-routing.module';
 
-import { Severity, SeverityStringConverter, ConsoleLogWriter, LogService, ConsoleLogger, Logger } from '../../core/logging';
-import { VocabListComponent } from './vocab-list/vocab-list.component';
-import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
-import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-lists-presenter.component';
-import { VocabListItemComponent } from './vocab-list-items/vocab-list-item.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../../core';
+import { ConsoleLogger, ConsoleLogWriter, Logger, LogService, Severity, SeverityStringConverter } from '../../core/logging';
+import { MatSnackBarService } from '../angular-material';
+import { DefiniteArticlePipe, FixedPluralDisplayPipe, GermanShortCasePipe, IndefiniteArticlePipe, SeparableDisplayPipe, ThirdPersonAuxiliaryPipe, TransitiveDisplayPipe } from './pipes';
 import { ModifierVocabListItemComponent } from './vocab-list-items/modifier-vocab-list-item/modifier-vocab-list-item.component';
 import { NounVocabListItemComponent } from './vocab-list-items/noun-vocab-list-item/noun-vocab-list-item.component';
 import { VerbVocabListItemComponent } from './vocab-list-items/verb-vocab-list-item/verb-vocab-list-item.component';
-import { DefiniteArticlePipe, FixedPluralDisplayPipe, GermanShortCasePipe, IndefiniteArticlePipe, SeparableDisplayPipe, ThirdPersonAuxiliaryPipe, TransitiveDisplayPipe } from './pipes';
-import { MatSnackBarService } from '../angular-material/snack-bar.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { VocabListItemComponent } from './vocab-list-items/vocab-list-item.component';
+import { VocabListComponent } from './vocab-list/vocab-list.component';
+import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-lists-presenter.component';
+import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
 
 @NgModule({
   declarations: [
@@ -42,10 +43,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     ConsoleLogWriter,
     ConsoleLogger,
     { provide: Logger, useClass: ConsoleLogger },
-    LogService,
     { provide: "minLevel", useValue: Severity.Debug },
+    LogService,
     MatSnackBar,
-    MatSnackBarService,
+    { provide: NotificationService, useClass: MatSnackBarService },
   ],
   imports: [
     CommonModule,

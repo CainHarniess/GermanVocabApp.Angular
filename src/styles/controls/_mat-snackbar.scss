@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+
+$my-primary: mat.define-palette(mat.$indigo-palette);
+$my-secondary: mat.define-palette(mat.$green-palette);
+$my-warning: mat.define-palette(mat.$amber-palette);
+$my-error: mat.define-palette(mat.$red-palette);
+
+.info-snackbar {
+  background-color: mat.get-color-from-palette($my-primary, 500);
+  color: white;
+}
+
+.success-snackbar {
+  background: mat.get-color-from-palette($my-secondary, 500);
+  color: white;
+}
+
+.warning-snackbar {
+  background: mat.get-color-from-palette($my-warning, 800);
+  color: white;
+}
+
+.error-snackbar {
+  background-color: mat.get-color-from-palette($my-error, 900);
+  color: white !important;
+  border: none;
+}
