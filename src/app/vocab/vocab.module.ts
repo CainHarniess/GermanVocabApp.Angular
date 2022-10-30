@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { VocabFormsModule } from '../vocab-forms/vocab-forms.module';
 import { VocabRoutingModule } from './vocab-routing.module';
 
+import { Severity, SeverityStringConverter, ConsoleLogWriter, LogService, ConsoleLogger, Logger } from '../../core/logging';
 import { VocabListComponent } from './vocab-list/vocab-list.component';
 import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
 import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-lists-presenter.component';
@@ -35,7 +36,12 @@ import { DefiniteArticlePipe, FixedPluralDisplayPipe, GermanShortCasePipe, Indef
     SeparableDisplayPipe,
   ],
   providers: [
-
+    SeverityStringConverter,
+    ConsoleLogWriter,
+    ConsoleLogger,
+    { provide: Logger, useClass: ConsoleLogger },
+    LogService,
+    { provide: "minLevel", useValue: Severity.Debug },
   ],
   imports: [
     CommonModule,

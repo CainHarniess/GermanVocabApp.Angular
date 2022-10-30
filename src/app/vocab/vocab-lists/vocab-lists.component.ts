@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { LogService } from '../../../core/logging';
 
 import { VocabList } from '.././models/vocab-list.interface';
 import { ResolvedData } from '../models/data';
@@ -13,7 +14,8 @@ import { ResolvedData } from '../models/data';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocabListsComponent {
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private readonly logger: LogService,
+    private router: Router, private route: ActivatedRoute) {
 
   }
 
@@ -28,21 +30,30 @@ export class VocabListsComponent {
     .pipe(
       map((data: Data) => data[ResolvedData.ResolvedLists]),
       tap((data: VocabList[]) => this.vocabListsDisplay$.next(data)),
-    );
+      tap(() => this.logger.debug({ message: "Resolved Data", data: [this.vocabListsDisplay$.value] })),
+  );
+
+  public ngOnInit(): void {
+    this.logger.trace({ message: `${VocabListsComponent.name} ngOnInit` });
+  }
 
   public addList(): void {
+    this.logger.trace({ message: `${VocabListsComponent.name} - addList` });
     this.router.navigate(["new"], { relativeTo: this.route });
   }
 
   public editList(id: string): void {
+    this.logger.trace({ message: `${VocabListsComponent.name} - editList` });
     this.router.navigate([id, "edit"], { relativeTo: this.route });
   }
 
   public viewList(id: string): void {
+    this.logger.trace({ message: `${VocabListsComponent.name} - viewList` });
     this.router.navigate([id], { relativeTo: this.route });
   }
 
   public exportToJson(): void {
+    this.logger.trace({ message: `${VocabListsComponent.name} - exportToJson` });
     this.showJson$.next(!this.showJson$.value);
   }
 }
