@@ -1,0 +1,13 @@
+<mat-expansion-panel [expanded]="isExpanded">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <ng-content select="[title]"></ng-content>
+    </mat-panel-title>
+    <mat-panel-description>
+      <ng-content select="[description]"></ng-content>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <ng-content select="[panel]"></ng-content>
+  </ng-template>
+</mat-expansion-panel>

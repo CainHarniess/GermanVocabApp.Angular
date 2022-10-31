@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { NotificationService } from '../../../core';
 import { LogService } from '../../../core/logging';
 
 import { VocabList } from '.././models/vocab-list.interface';
@@ -15,7 +16,8 @@ import { ResolvedData } from '../models/data';
 })
 export class VocabListsComponent {
   constructor(private readonly logger: LogService,
-    private router: Router, private route: ActivatedRoute) {
+    private router: Router, private route: ActivatedRoute,
+    private readonly notificationService: NotificationService) {
 
   }
 
@@ -55,5 +57,6 @@ export class VocabListsComponent {
   public exportToJson(): void {
     this.logger.trace({ message: `${VocabListsComponent.name} - exportToJson` });
     this.showJson$.next(!this.showJson$.value);
+    this.notificationService.warn("Hi there.");
   }
 }

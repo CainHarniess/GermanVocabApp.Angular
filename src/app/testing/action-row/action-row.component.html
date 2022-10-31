@@ -1,0 +1,9 @@
+<div class="action-row">
+  <h3>{{ title }}</h3>
+  <p>{{ description }}</p>
+  <button mat-raised-button [color]="buttonColour" type="button"
+          [ngClass]="{ 'warning-snackbar' : isWarning }"
+          (click)="act()">
+    {{ buttonText }}
+  </button>
+</div>
