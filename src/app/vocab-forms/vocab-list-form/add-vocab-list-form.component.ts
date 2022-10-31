@@ -24,8 +24,7 @@ export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
     listFormBuilder: VocabListFormBuilder, listItemFormBuilder: VocabListItemFormBuilder,
     title$Builder: ListTitleObservableBuilder,
     errorMessageProvider: ValidationErrorMessageProvider, requiredIfTouched: ErrorStateMatcher,
-    private listItemWording$Provider: ListItemWordingObservableProvider,
-    ) {
+    private listItemWording$Provider: ListItemWordingObservableProvider) {
     super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder,
       errorMessageProvider, requiredIfTouched);
   }
@@ -45,7 +44,7 @@ export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
   public override submit(): void {
     const vocabList: VocabList = this.form.value as VocabList;
     this.subscriptions = this.vocabService.add(vocabList)
-      .subscribe(newListId => {
+      .subscribe(() => {
         this.router.navigate(["/vocab", "vocab-lists"]);
       });
   }

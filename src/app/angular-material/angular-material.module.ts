@@ -16,6 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCheckboxModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
   ],
   exports: [
     MatSidenavModule,
@@ -54,9 +56,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCheckboxModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-  ],
-  providers: [
-
-  ],
+    MatExpansionModule,
+  ]
 })           
 export class AngularMaterialModule { }

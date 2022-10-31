@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { NotificationService } from '../../../core';
 import { LogService } from '../../../core/logging';
-import { MatSnackBarService } from '../../angular-material';
 
 import { VocabList } from '.././models/vocab-list.interface';
 import { ResolvedData } from '../models/data';
@@ -17,7 +17,7 @@ import { ResolvedData } from '../models/data';
 export class VocabListsComponent {
   constructor(private readonly logger: LogService,
     private router: Router, private route: ActivatedRoute,
-    private readonly notificationService: MatSnackBarService) {
+    private readonly notificationService: NotificationService) {
 
   }
 

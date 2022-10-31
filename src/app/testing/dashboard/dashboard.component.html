@@ -15,16 +15,16 @@
       <div class="action-panel-container">
         <testing-success-action-row title="No Content"
                                     description="Returns a successful, no-content response from the server."
-                                    [command]="noContentCommand"></testing-success-action-row>
+                                    (action)="noContent()"></testing-success-action-row>
         <testing-error-action-row title="Client Error"
                                   description="Throws a JavaScript error in the browser"
-                                  [command]="clientErrorCommand"></testing-error-action-row>
+                                  (action)="clientError()"></testing-error-action-row>
         <testing-error-action-row title="Bad Request"
                                   description="Throws a 400 Bad Request error from the server"
-                                  [command]="badRequestCommand"></testing-error-action-row>
+                                  (action)="badRequest()"></testing-error-action-row>
         <testing-error-action-row title="Unauthorised"
                                   description="Throws a 401 Unauthorized error from the server"
-                                  [command]="unathorisedCommand"></testing-error-action-row>
+                                  (action)="unauthorised()"></testing-error-action-row>
       </div>
     </ng-template>
   </mat-expansion-panel>

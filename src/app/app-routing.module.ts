@@ -2,15 +2,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { VocabListComponent } from './vocab/vocab-list/vocab-list.component';
+import { TestingRoutePath, VocabRoutePath } from './shared/routing';
 
 const routes: Routes = [
   { path: "home", title: "German Vocab App | Home", component: HomeComponent },
   //{ path: "vocab", title: "German Vocab App | Vocab", component: VocabListComponent },
   {
-    path: "vocab",
+    path: VocabRoutePath.Root,
     title: "German Vocab App | Vocab", 
     loadChildren: () => import('./vocab/vocab.module').then(m => m.VocabModule)
+  },
+  {
+    path: TestingRoutePath.Root,
+    title: "German Vocab App | Vocab",
+    loadChildren: () => import('./testing/testing.module').then(m => m.TestingModule)
   },
   { path: "", redirectTo: "home", pathMatch: "full" },
 ];

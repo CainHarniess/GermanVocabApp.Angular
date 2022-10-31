@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { takeUntil } from 'rxjs';
+import { OsirisComponent } from '../../../core';
 import { ErrorTestingService } from '../error-testing.service';
 
 @Component({
@@ -8,24 +9,36 @@ import { ErrorTestingService } from '../error-testing.service';
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardComponent {
+export class DashboardComponent extends OsirisComponent implements OnDestroy {
   public constructor(private readonly errorService: ErrorTestingService) {
-
+    super();
   }
 
-  public throwClientError(): any {
-    return this.errorService.throwClientError();
+  public clientError(): void {
+    this.errorService.throwClientError();
   }
 
-  public noContent(): Observable<any> {
-    return this.errorService.noContent();
+  public noContent(): void {
+    this.errorService.noContent()
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => { });
   }
 
-  public badRequest(): Observable<any> {
-    return this.errorService.throwBadRequest();
+  public badRequest(): void {
+    this.errorService.throwBadRequest()
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => { });
   }
 
-  public throwUnauthorised(): Observable<any> {
-    return this.errorService.throwUnauthorised();
+  public unauthorised(): void {
+    this.errorService.throwUnauthorised()
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => { });
   }
 }
