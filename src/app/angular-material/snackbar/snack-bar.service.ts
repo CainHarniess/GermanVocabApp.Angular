@@ -12,7 +12,6 @@ export class MatSnackBarService extends NotificationService {
     @Inject(MAT_SNACK_BAR_DEFAULT_OPTIONS) public readonly config: MatSnackBarConfig) {
     super();
     this.config = {
-      "duration": 2000,
       data: undefined,
       panelClass: undefined,
     }

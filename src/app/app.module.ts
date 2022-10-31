@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationService } from '../core';
 import { MatSnackBarService } from './angular-material';
 import { ConsoleLogger, ConsoleLogWriter, Logger, LogService, Severity, SeverityStringConverter } from '../core/logging';
+import { GlobalErrorHandler } from '../core/error-handling/global-error-handler';
 
 @NgModule({
   declarations: [
@@ -42,9 +43,10 @@ import { ConsoleLogger, ConsoleLogWriter, Logger, LogService, Severity, Severity
     { provide: Logger, useClass: ConsoleLogger },
     LogService,
     { provide: VocabListService, useClass: HttpVocabListService },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler},
     ////InMemoryDataProvider,
     //{ provide: VocabListService, useClass: InMemoryVocabListService },
-    { provide: "minLevel", useValue: Severity.Debug },
+    { provide: "minLevel", useValue: Severity.Information },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: NotificationService, useClass: MatSnackBarService },
     MatSnackBar,
