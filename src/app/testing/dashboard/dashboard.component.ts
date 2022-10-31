@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { OsirisComponent } from '../../../core';
+import { NotificationService, OsirisComponent } from '../../../core';
 import { ErrorTestingService } from '../error-testing.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { ErrorTestingService } from '../error-testing.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent extends OsirisComponent implements OnDestroy {
-  public constructor(private readonly errorService: ErrorTestingService) {
+  public constructor(private readonly errorService: ErrorTestingService,
+    private readonly notificationService: NotificationService) {
     super();
   }
 
@@ -40,5 +41,21 @@ export class DashboardComponent extends OsirisComponent implements OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe(() => { });
+  }
+
+  public showInformation(): void {
+    this.notificationService.info("Here is some relevant information.");
+  }
+
+  public showSuccess(): void {
+    this.notificationService.info("The operation was successful.");
+  }
+
+  public showWarning(): void {
+    this.notificationService.info("Careful now.");
+  }
+
+  public showError(): void {
+    this.notificationService.info("That wasn't supposed to happen.");
   }
 }

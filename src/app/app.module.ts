@@ -16,6 +16,10 @@ import { InMemoryVocabListService } from './vocab/services/in-memory-vocab-list.
 import { InMemoryDataProvider } from './vocab/services/in-memory-data-seeder.service';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { HttpErrorInterceptor } from '../core/error-handling';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../core';
+import { MatSnackBarService } from './angular-material';
+import { ConsoleLogger, ConsoleLogWriter, Logger, LogService, Severity, SeverityStringConverter } from '../core/logging';
 
 @NgModule({
   declarations: [
@@ -33,10 +37,17 @@ import { HttpErrorInterceptor } from '../core/error-handling';
     AppRoutingModule,
   ],
   providers: [
+    SeverityStringConverter,
+    ConsoleLogWriter,
+    { provide: Logger, useClass: ConsoleLogger },
+    LogService,
     { provide: VocabListService, useClass: HttpVocabListService },
     ////InMemoryDataProvider,
     //{ provide: VocabListService, useClass: InMemoryVocabListService },
+    { provide: "minLevel", useValue: Severity.Debug },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: NotificationService, useClass: MatSnackBarService },
+    MatSnackBar,
   ],
   bootstrap: [AppComponent]
 })

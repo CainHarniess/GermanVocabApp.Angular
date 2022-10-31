@@ -2,30 +2,66 @@
   <header>
     <h1>Dashboard</h1>
   </header>
-  <mat-expansion-panel [expanded]="true">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <h2>Error Handling</h2>
-      </mat-panel-title>
-      <mat-panel-description>
-        Test the website's handling of client- and server-side errors
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <ng-template matExpansionPanelContent>
-      <div class="action-panel-container">
-        <testing-success-action-row title="No Content"
-                                    description="Returns a successful, no-content response from the server."
-                                    (action)="noContent()"></testing-success-action-row>
-        <testing-error-action-row title="Client Error"
-                                  description="Throws a JavaScript error in the browser"
-                                  (action)="clientError()"></testing-error-action-row>
-        <testing-error-action-row title="Bad Request"
-                                  description="Throws a 400 Bad Request error from the server"
-                                  (action)="badRequest()"></testing-error-action-row>
-        <testing-error-action-row title="Unauthorised"
-                                  description="Throws a 401 Unauthorized error from the server"
-                                  (action)="unauthorised()"></testing-error-action-row>
-      </div>
-    </ng-template>
-  </mat-expansion-panel>
+  <mat-accordion>
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Error Handling</h2>
+        </mat-panel-title>
+        <mat-panel-description>
+          Test the website's handling of client- and server-side errors.
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <div class="action-panel-container">
+          <testing-action-row title="No Content"
+                                      description="Returns a successful, no-content response from the server."
+                                      buttonColour="accent" buttonText="Go"
+                                      (action)="noContent()"></testing-action-row>
+          <testing-action-row title="Client Error"
+                                    description="Throws a JavaScript error in the browser"
+                                    buttonColour="warn" buttonText="Throw"
+                                    (action)="clientError()"></testing-action-row>
+          <testing-action-row title="Bad Request"
+                                    description="Throws a 400 Bad Request error from the server"
+                                    buttonColour="warn" buttonText="Throw"
+                                    (action)="badRequest()"></testing-action-row>
+          <testing-action-row title="Unauthorised"
+                                    description="Throws a 401 Unauthorized error from the server"
+                                    buttonColour="warn" buttonText="Throw"
+                                    (action)="unauthorised()"></testing-action-row>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Notifications</h2>
+        </mat-panel-title>
+        <mat-panel-description>
+          Test the website's pop-up notification system.
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <div class="action-panel-container">
+          <testing-action-row title="Information"
+                              description="Displays an information-level notification."
+                              buttonColour="primary" buttonText="Inform"
+                              (action)="showInformation()"></testing-action-row>
+          <testing-action-row title="Success"
+                              description="Displays an success notification."
+                              buttonColour="accent" buttonText="Celebrate"
+                              (action)="showSuccess()"></testing-action-row>
+          <testing-action-row title="Warn"
+                              description="Displays an warning-level notification."
+                              buttonColour="warning" buttonText="Warn"
+                              (action)="showWarning()"></testing-action-row>
+          <testing-action-row title="Error"
+                              description="Displays an error-level notification."
+                              buttonColour="warn" buttonText="Throw"
+                              (action)="showError()"></testing-action-row>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
 </main>
