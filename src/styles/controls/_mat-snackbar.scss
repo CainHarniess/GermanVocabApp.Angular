@@ -11,8 +11,8 @@ $my-error: mat.define-palette(mat.$red-palette);
 }
 
 .success-snackbar {
-  background: mat.get-color-from-palette($my-secondary, 500);
-  color: white;
+  background: mat.get-color-from-palette($my-secondary, A200);
+  color: black;
 }
 
 .warning-snackbar {

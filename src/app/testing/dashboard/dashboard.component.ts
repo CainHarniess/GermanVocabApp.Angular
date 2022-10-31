@@ -48,14 +48,14 @@ export class DashboardComponent extends OsirisComponent implements OnDestroy {
   }
 
   public showSuccess(): void {
-    this.notificationService.info("The operation was successful.");
+    this.notificationService.success("The operation was successful.");
   }
 
   public showWarning(): void {
-    this.notificationService.info("Careful now.");
+    this.notificationService.warn("Careful now.");
   }
 
   public showError(): void {
-    this.notificationService.info("That wasn't supposed to happen.");
+    this.notificationService.error("That wasn't supposed to happen.");
   }
 }
