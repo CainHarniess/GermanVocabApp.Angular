@@ -8,7 +8,7 @@ import { VocabListService } from './vocab-list.service';
 @Injectable({ providedIn: "root" })
 export class HttpVocabListService extends VocabListService {
 
-  constructor(private http: HttpClient) {
+  constructor(private readonly http: HttpClient) {
     super();
   }
 

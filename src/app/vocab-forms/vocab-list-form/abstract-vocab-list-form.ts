@@ -15,7 +15,6 @@ import { RequiredIfTouchedErrorStateMatcher, ValidationErrorMessageProvider } fr
 
 @Directive()
 export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
-
   protected readonly destroy$ = new Subject<boolean>();
 
   public readonly listItemControlCount$ = new BehaviorSubject<number>(0);

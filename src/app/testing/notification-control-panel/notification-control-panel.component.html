@@ -1,0 +1,22 @@
+<testing-control-panel>
+  <h2 title>Notifications</h2>
+  <p description>Test the site's pop-up notification system.</p>
+  <div panel class="action-panel-container">
+    <testing-action-row title="Information"
+                        description="Displays an information-level notification."
+                        buttonColour="primary" buttonText="Inform"
+                        (action)="showInformation()"></testing-action-row>
+    <testing-action-row title="Success"
+                        description="Displays an success notification."
+                        buttonColour="accent" buttonText="Celebrate"
+                        (action)="showSuccess()"></testing-action-row>
+    <testing-action-row title="Warn"
+                        description="Displays an warning-level notification."
+                        buttonColour="warning" buttonText="Warn"
+                        (action)="showWarning()"></testing-action-row>
+    <testing-action-row title="Error"
+                        description="Displays an error-level notification."
+                        buttonColour="warn" buttonText="Throw"
+                        (action)="showError()"></testing-action-row>
+  </div>
+</testing-control-panel>

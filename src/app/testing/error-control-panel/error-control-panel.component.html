@@ -1,0 +1,22 @@
+<testing-control-panel>
+  <h2 title>Error handling</h2>
+  <p description>Force the website to throw erros of the specified type.</p>
+  <div panel class="action-panel-container">
+    <testing-action-row title="No Content"
+                        description="Returns a successful, no-content response from the server."
+                        buttonColour="accent" buttonText="Go"
+                        (action)="noContent()"></testing-action-row>
+    <testing-action-row title="Client Error"
+                        description="Throws a JavaScript error in the browser"
+                        buttonColour="warn" buttonText="Throw"
+                        (action)="clientError()"></testing-action-row>
+    <testing-action-row title="Bad Request"
+                        description="Throws a 400 Bad Request error from the server"
+                        buttonColour="warn" buttonText="Throw"
+                        (action)="badRequest()"></testing-action-row>
+    <testing-action-row title="Unauthorised"
+                        description="Throws a 401 Unauthorized error from the server"
+                        buttonColour="warn" buttonText="Throw"
+                        (action)="unauthorised()"></testing-action-row>
+  </div>
+</testing-control-panel>

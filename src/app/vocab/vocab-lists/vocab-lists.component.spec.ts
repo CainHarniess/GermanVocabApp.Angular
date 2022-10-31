@@ -1,5 +1,6 @@
 import { waitForAsync } from "@angular/core/testing";
 import { of } from "rxjs";
+import { NotificationService } from "../../../core";
 import { LogContent } from "../../../core/logging";
 
 import { ResolvedData, WordType } from "../models/data";
@@ -26,13 +27,20 @@ describe("VocabListsComponent", () => {
     trace: (content: LogContent) => { },
     debug: (content: LogContent) => { },
   };
+  let mockNotificationService: NotificationService = {
+    info: (message: string) => { },
+    success: (message: string) => { },
+    warn: (message: string) => { },
+    error: (message: string) => { },
+  }
 
   beforeEach(() => {
     const mockData: { [key: string]: VocabList[] } = {};
     mockData[ResolvedData.ResolvedLists] = mockVocabLists;
     mockRouter = jasmine.createSpyObj("mockRouter", ["navigate"]);
     mockActivatedRoute = jasmine.createSpyObj("mockActivatedRoute", [], { data: of(mockData) });
-    component = new VocabListsComponent(mockLogService, mockRouter, mockActivatedRoute);
+    component = new VocabListsComponent(mockLogService, mockRouter, mockActivatedRoute,
+      mockNotificationService);
   });
 
   describe("vocabListsDisplay$", () => {
