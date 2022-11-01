@@ -8,11 +8,12 @@ import { VocabList } from '../models/vocab-list.interface';
   providedIn: 'root'
 })
 export class VocabListResolver implements Resolve<VocabList> {
+  constructor(private vocabListService: VocabListService) {
 
-  constructor(private vocabListService: VocabListService) { }
+  }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VocabList> {
-      const vocabListId: string = route.paramMap.get("id")!;
-      return this.vocabListService.getWithId(vocabListId);
-    }
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VocabList> {
+    const vocabListId: string = route.paramMap.get("id")!;
+    return this.vocabListService.getWithId(vocabListId);
+  }
 }
