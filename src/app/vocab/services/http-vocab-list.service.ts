@@ -22,14 +22,9 @@ export class HttpVocabListService extends VocabListService {
     return this.http.get<VocabList[]>(this.url)
       .pipe(
         catchError((e: any, caught: Observable<VocabList[]>) => {
-          const message: string = "Unable to retrieve vocab lists.";
-
-          if (!(e instanceof HttpErrorResponse)) {
-            return this.handleNonHttpError(e, "Unable to retrieve vocab lists due to non-HTPP error");
-          }
-          const notification: string = `${e.status} ${e.statusText}. ${message}`;
-          this.notificationService.error(notification);
-          return throwError(() => new Error(notification));
+          return this.handleError(e, (e: any) => {
+            return "Unable to retrieve vocab lists.";
+          });
         }),
       );
   }
@@ -38,20 +33,13 @@ export class HttpVocabListService extends VocabListService {
     return this.http.get<VocabList>(this.url + `/${vocabListId}`)
       .pipe(
         catchError((e: any, caught: Observable<VocabList>) => {
-          if (!(e instanceof HttpErrorResponse)) {
-            return this.handleNonHttpError(e, "Unable to retrieve vocab list due to non-HTTP error.");
-          }
-
-          let message: string;
-          if (e.status === HttpStatusCode.NotFound) {
-            message = `Unable to find list with ID ${vocabListId}`;
-          } else {
-            message = `Error occured retrieving list with ID ${vocabListId}.`;
-          }
-
-          const notification: string = `${e.status} ${e.statusText}. ${message}`;
-          this.notificationService.error(notification);
-          return throwError(() => new Error(notification));
+          return this.handleError(e, (e: any) => {
+            if (e.status === HttpStatusCode.NotFound) {
+              return `Unable to find list with ID ${vocabListId}`;
+            } else {
+              return `Error occured retrieving list with ID ${vocabListId}.`;
+            }
+          });
         }),
       );
   }
@@ -60,20 +48,13 @@ export class HttpVocabListService extends VocabListService {
     return this.http.post<string>(this.url, vocabList)
       .pipe(
         catchError((e: any, caught: Observable<string>) => {
-          if (!(e instanceof HttpErrorResponse)) {
-            return this.handleNonHttpError(e, "Unable to retrieve vocab list due to non-HTTP error.");
-          }
-
-          let message: string;
-          if (e.status === HttpStatusCode.BadRequest) {
-            message = "Invalid list data provided";
-          } else {
-            message = "Error occured when creating list";
-          }
-
-          const notification: string = `${e.status} ${e.statusText}. ${message}.`;
-          this.notificationService.error(notification);
-          return throwError(() => new Error(notification));
+          return this.handleError(e, (e: any) => {
+            if (e.status === HttpStatusCode.BadRequest) {
+              return "Invalid list data provided";
+            } else {
+              return "Error occured when creating list";
+            }
+          });
         }),
       );
   }
@@ -87,27 +68,32 @@ export class HttpVocabListService extends VocabListService {
     return this.http.put<void>(`${this.url}/${id!}`, updatedList)
       .pipe(
         catchError((e: any, caught: Observable<void>) => {
-          if (!(e instanceof HttpErrorResponse)) {
-            return this.handleNonHttpError(e, "Unable to retrieve vocab list due to non-HTTP error.");
-          }
-
-          let message: string;
-          if (e.status === HttpStatusCode.BadRequest) {
-            message = "Invalid list data provided";
-          } else if (e.status === HttpStatusCode.NotFound) {
-            message = `Unable to find list with ID ${id}`;
-          } else {
-            message = "Error occured when creating list";
-          }
-
-          const notification: string = `${e.status} ${e.statusText}. ${message}.`;
-          this.notificationService.error(notification);
-          return throwError(() => new Error(notification));
+          return this.handleError(e, (e: any) => {
+            if (e.status === HttpStatusCode.BadRequest) {
+              return "Invalid list data provided";
+            } else if (e.status === HttpStatusCode.NotFound) {
+              return `Unable to find list with ID ${id}`;
+            } else {
+              return "Error occured when creating list";
+            }
+          });
         }),
       );
   }
 
-  private handleNonHttpError(e: any, userMessage: string) {
+  private handleError(e: any, messageGenerator: (e: any) => string): Observable<never> {
+    if (!(e instanceof HttpErrorResponse)) {
+      return this.handleNonHttpError(e, "Unable to retrieve vocab list due to non-HTTP error.");
+    }
+
+    let message: string = messageGenerator(e);
+
+    const notification: string = `${e.status} ${e.statusText}. ${message}.`;
+    this.notificationService.error(notification);
+    return throwError(() => new Error(notification));
+  }
+
+  private handleNonHttpError(e: any, userMessage: string): Observable<never> {
     this.notificationService.error(userMessage);
     const error: Error = new Error(userMessage)
     return throwError(() => error);
