@@ -27,7 +27,7 @@ export class HttpVocabListService extends VocabListService {
           if (!(e instanceof HttpErrorResponse)) {
             return this.handleNonHttpError(e, "Unable to retrieve vocab lists due to non-HTPP error");
           }
-          const notification: string = `${message}. ${e.status} ${e.statusText}.`;
+          const notification: string = `${e.status} ${e.statusText}. ${message}`;
           this.notificationService.error(notification);
           return throwError(() => new Error(notification));
         }),
@@ -50,7 +50,7 @@ export class HttpVocabListService extends VocabListService {
             message = `Error occured retrieving list with ID ${vocabListId}.`;
           }
 
-          const notification: string = `${message}. ${e.status} ${e.statusText}`;
+          const notification: string = `${e.status} ${e.statusText}. ${message}`;
           this.notificationService.error(notification);
           return throwError(() => new Error(notification));
         }),
@@ -58,9 +58,26 @@ export class HttpVocabListService extends VocabListService {
   }
 
   public override add(vocabList: VocabList): Observable<string> {
-    return this.http.post<string>(this.url, vocabList);
-    // TODO: handle bad request
-    // TODO: Handle 500 error with no primary key
+    return this.http.post<string>(this.url, vocabList)
+      .pipe(
+        catchError((e: any, caught: Observable<string>) => {
+
+          if (!(e instanceof HttpErrorResponse)) {
+            return this.handleNonHttpError(e, "Unable to retrieve vocab list due to non-HTTP error.");
+          }
+
+          let message: string;
+          if (e.status === HttpStatusCode.BadRequest) {
+            message = "Invalid list data provided";
+          } else {
+            message = "Error occured when creating list";
+          }
+
+          const notification: string = `${e.status} ${e.statusText}. ${message}.`;
+          this.notificationService.error(notification);
+          return throwError(() => new Error(notification));
+        }),
+      );
   }
 
   // TODO: remove because not used?
