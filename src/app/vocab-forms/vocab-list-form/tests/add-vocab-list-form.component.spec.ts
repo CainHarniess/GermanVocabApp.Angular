@@ -2,6 +2,7 @@ import { fakeAsync } from "@angular/core/testing";
 import { FormBuilder } from "@angular/forms";
 
 import { Subscription } from "rxjs";
+import { createMockNotificationService } from "../../../../core/test-utilities";
 import { VocabRoutePath } from "../../../shared/routing";
 
 import { VocabListFormBuilder, VocabListItemFormBuilder } from "../../services";
@@ -15,7 +16,8 @@ describe("AddVocabListComponent", () => {
   let mockReturnValues: MockReturnValues;
   let component: AddVocabListFormComponent;
   let componentWithRealBuilders: AddVocabListFormComponent;
-  let fb: FormBuilder = new FormBuilder();;
+  let fb: FormBuilder = new FormBuilder();
+  const mockNotificationService: any = createMockNotificationService();
 
   beforeEach(() => {
     mocks = contructMocks();
@@ -28,14 +30,14 @@ describe("AddVocabListComponent", () => {
     component = new AddVocabListFormComponent(mocks.router,
       mocks.vocabService, mocks.listFormBuilder, mocks.itemFormBuilder,
       mocks.observableBuilderForMocks, mocks.errorMessageProvider,
-      mocks.errorStateMatcher, mocks.listItemWordingProvider);
+      mocks.errorStateMatcher, mockNotificationService, mocks.listItemWordingProvider);
 
     const listItemFormBuilder = new VocabListItemFormBuilder(fb, mocks.itemValidationProvider);
     const listFormBuilder = new VocabListFormBuilder(fb, listItemFormBuilder, mocks.validationProvider);
     componentWithRealBuilders = new AddVocabListFormComponent(mocks.router,
       mocks.vocabService, listFormBuilder, listItemFormBuilder,
       mocks.observableBuilderForReal, mocks.errorMessageProvider,
-      mocks.errorStateMatcher, mocks.listItemWordingProvider);
+      mocks.errorStateMatcher, mockNotificationService, mocks.listItemWordingProvider);
   });
 
   describe("ngOnInit", () => {
