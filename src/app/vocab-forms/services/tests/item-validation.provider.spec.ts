@@ -1,7 +1,7 @@
 import { ValidatorFn, Validators } from "@angular/forms";
 import { wordMaxLength, wordMinLength } from "../../../vocab/models/data/constraints/item-data-constraints";
 import { ItemValidationProvider } from "../item-validation.provider";
-import { createMockListForm, createMockvalidatorVisitor } from "./testing.utilities";
+import { createMockItemForm, createMockvalidatorVisitor } from "./testing.utilities";
 
 describe(ItemValidationProvider.name, () => {
   let provider: ItemValidationProvider;
@@ -9,7 +9,7 @@ describe(ItemValidationProvider.name, () => {
     create: {}
   };
   let factoryCreateSpy: any;
-  let form: any = createMockListForm();
+  let form: any = createMockItemForm();
   let factoryValidator: (minLength: number) => ValidatorFn = Validators.minLength;
   let validatorVisitor: any;
 
