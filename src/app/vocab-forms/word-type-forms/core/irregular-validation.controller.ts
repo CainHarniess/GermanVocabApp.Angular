@@ -6,7 +6,7 @@ export abstract class IrregularValidationController extends WordTypeValidationCo
   public addValidation(form: FormGroup<VocabListItemForm>): void {
     const controls: VocabListItemForm = form.controls;
 
-    this.addValidator(Validators.required, controls.isIrregular);
+    this.validationVisitor.addValidator(Validators.required, controls.isIrregular);
 
     this.addValidationProtected(controls);
     this.addIrregularFollowFieldValidation(controls);
@@ -15,7 +15,7 @@ export abstract class IrregularValidationController extends WordTypeValidationCo
   public removeValidation(form: FormGroup<VocabListItemForm>): void {
     const controls: VocabListItemForm = form.controls;
 
-    this.removeValidator(Validators.required, controls.isIrregular);
+    this.validationVisitor.removeValidator(Validators.required, controls.isIrregular);
 
     this.removeValidationProtected(controls);
     this.removeIrregularFollowFieldValidation(controls);

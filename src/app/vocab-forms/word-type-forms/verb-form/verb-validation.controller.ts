@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
+import { ControlValidatorVisitor } from '../../../forms';
 import { prepositionMaxLength, prepositionMinLength } from '../../../vocab/models/data/constraints/item-data-constraints';
 import { VocabListItemForm } from '../../models';
 import { StringLengthValidatorFactory } from '../../validation';
@@ -9,16 +10,16 @@ import { IrregularValidationController } from '../core';
 export class VerbValidationController extends IrregularValidationController {
   private readonly prepositionValidator: ValidatorFn;
 
-  public constructor(lengthRangeValidatorFactory: StringLengthValidatorFactory) {
-    super();
+  public constructor(validationVisitor: ControlValidatorVisitor, lengthRangeValidatorFactory: StringLengthValidatorFactory) {
+    super(validationVisitor);
     this.prepositionValidator = lengthRangeValidatorFactory.create(prepositionMinLength, prepositionMaxLength);
   }
 
   protected addValidationProtected(controls: VocabListItemForm): void {
-    this.addValidator(Validators.required, controls.auxiliaryVerb)
-    this.addValidator(Validators.required, controls.separability)
-    this.addValidator(Validators.required, controls.transitivity)
-    this.addValidator(this.prepositionValidator, controls.preposition);
+    this.validationVisitor.addValidator(Validators.required, controls.auxiliaryVerb)
+    this.validationVisitor.addValidator(Validators.required, controls.separability)
+    this.validationVisitor.addValidator(Validators.required, controls.transitivity)
+    this.validationVisitor.addValidator(this.prepositionValidator, controls.preposition);
   }
 
   protected addIrregularFollowFieldValidation(form: VocabListItemForm): void {
@@ -26,15 +27,15 @@ export class VerbValidationController extends IrregularValidationController {
   }
 
   protected removeValidationProtected(controls: VocabListItemForm): void {
-    this.removeValidator(Validators.required, controls.auxiliaryVerb)
-    this.removeValidator(Validators.required, controls.separability)
-    this.removeValidator(Validators.required, controls.transitivity)
-    this.removeValidator(this.prepositionValidator, controls.preposition);
+    this.validationVisitor.removeValidator(Validators.required, controls.auxiliaryVerb)
+    this.validationVisitor.removeValidator(Validators.required, controls.separability)
+    this.validationVisitor.removeValidator(Validators.required, controls.transitivity)
+    this.validationVisitor.removeValidator(this.prepositionValidator, controls.preposition);
   }
 
   protected removeIrregularFollowFieldValidation(controls: VocabListItemForm): void {
-    this.removeValidator(Validators.required, controls.thirdPersonPresent)
-    this.removeValidator(Validators.required, controls.thirdPersonImperfect)
-    this.removeValidator(Validators.required, controls.perfect)
+    this.validationVisitor.removeValidator(Validators.required, controls.thirdPersonPresent)
+    this.validationVisitor.removeValidator(Validators.required, controls.thirdPersonImperfect)
+    this.validationVisitor.removeValidator(Validators.required, controls.perfect)
   }
 }

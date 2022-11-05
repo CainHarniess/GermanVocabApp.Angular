@@ -6,6 +6,7 @@ import {
     NounFormManager, NounValidationController, NounValueController, VerbFormManager, VerbValidationController, VerbValueController, WordTypeFormManager
 } from "../../word-type-forms";
 import { WordTypeFormManagerFactory } from "../word-type-form-manager-factory";
+import { createMockvalidatorVisitor } from "./testing.utilities";
 
 describe("WordTypeFormManagerFactory", () => {
   let formManagerFactory: WordTypeFormManagerFactory;
@@ -55,29 +56,36 @@ function createFactory(): WordTypeFormManagerFactory {
 }
 
 function createNounFormManager(): NounFormManager {
-  const validationManager: NounValidationController = new NounValidationController(createMockValidatorFactory());
-  const valueController: NounValueController = new NounValueController();
+  const validatorVisitor: any = createMockvalidatorVisitor();
+  const validatorFactory: any = createMockValidatorFactory();
+  const validationManager = new NounValidationController(validatorVisitor, validatorFactory);
+  const valueController = new NounValueController();
   return new NounFormManager(validationManager, valueController);
 }
 
 function createVerbFormManager(): VerbFormManager {
-  const validationManager: VerbValidationController = new VerbValidationController(createMockValidatorFactory());
-  const valueController: VerbValueController = new VerbValueController();
+  const validatorVisitor: any = createMockvalidatorVisitor();
+  const validatorFactory: any = createMockValidatorFactory();
+  const validationManager = new VerbValidationController(validatorVisitor, validatorFactory);
+  const valueController = new VerbValueController();
   return new VerbFormManager(validationManager, valueController);
 }
 
 function createAdjectiveFormManager<T extends WordTypeFormManager>(): T {
-  const validationManager: ModifierValidationController = new ModifierValidationController();
-  const valueController: ModifierValueController = new ModifierValueController();
+  const validatorVisitor: any = createMockvalidatorVisitor();
+  const validationManager = new ModifierValidationController(validatorVisitor);
+  const valueController = new ModifierValueController();
   return new AdjectiveFormManager(validationManager, valueController) as T;
 }
 
 function createAdverbFormManager<T extends WordTypeFormManager>(): T {
-  const validationManager: ModifierValidationController = new ModifierValidationController();
-  const valueController: ModifierValueController = new ModifierValueController();
+  const validatorVisitor: any = createMockvalidatorVisitor();
+  const validationManager = new ModifierValidationController(validatorVisitor);
+  const valueController = new ModifierValueController();
   return new AdverbFormManager(validationManager, valueController) as T;
 }
 
+// TODO: Move to utilities file.
 function createMockValidatorFactory(): any {
   return {
     create: (lower: number, upper: number) => { return Validators.required },

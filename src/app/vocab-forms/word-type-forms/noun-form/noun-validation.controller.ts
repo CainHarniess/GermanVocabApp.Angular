@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ControlValidatorVisitor } from '../../../forms';
 import { prepositionMaxLength, prepositionMinLength, wordMaxLength, wordMinLength } from '../../../vocab/models/data/constraints/item-data-constraints';
 import { VocabListItemForm } from '../../models';
 import { StringLengthValidatorFactory } from '../../validation';
@@ -10,8 +11,9 @@ export class NounValidationController extends WordTypeValidationController {
   private readonly prepositionValidator: ValidatorFn;
   private readonly pluralValidator: ValidatorFn;
 
-  public constructor(lengthRangeValidatorFactory: StringLengthValidatorFactory) {
-    super();
+  public constructor(validationVisitor: ControlValidatorVisitor,
+    lengthRangeValidatorFactory: StringLengthValidatorFactory) {
+    super(validationVisitor);
     this.prepositionValidator = lengthRangeValidatorFactory.create(prepositionMinLength, prepositionMaxLength);
     this.pluralValidator = lengthRangeValidatorFactory.create(wordMinLength, wordMaxLength);
   }
@@ -19,20 +21,20 @@ export class NounValidationController extends WordTypeValidationController {
   public override addValidation(form: FormGroup<VocabListItemForm>): void {
     const controls: VocabListItemForm = form.controls;
 
-    this.addValidator(Validators.required, controls.gender);
-    this.addValidator(Validators.required, controls.fixedPlurality);
-    this.addValidator(Validators.required, controls.isWeakMasculineNoun);
-    this.addValidator(this.prepositionValidator, controls.preposition);
-    this.addValidator(this.pluralValidator, controls.plural);
+    this.validationVisitor.addValidator(Validators.required, controls.gender);
+    this.validationVisitor.addValidator(Validators.required, controls.fixedPlurality);
+    this.validationVisitor.addValidator(Validators.required, controls.isWeakMasculineNoun);
+    this.validationVisitor.addValidator(this.prepositionValidator, controls.preposition);
+    this.validationVisitor.addValidator(this.pluralValidator, controls.plural);
   }
 
   public override removeValidation(form: FormGroup<VocabListItemForm>): void {
     const controls: VocabListItemForm = form.controls;
 
-    this.removeValidator(Validators.required, controls.gender);
-    this.removeValidator(Validators.required, controls.fixedPlurality);
-    this.removeValidator(Validators.required, controls.isWeakMasculineNoun);
-    this.removeValidator(this.prepositionValidator, controls.preposition);
-    this.removeValidator(this.pluralValidator, controls.plural);
+    this.validationVisitor.removeValidator(Validators.required, controls.gender);
+    this.validationVisitor.removeValidator(Validators.required, controls.fixedPlurality);
+    this.validationVisitor.removeValidator(Validators.required, controls.isWeakMasculineNoun);
+    this.validationVisitor.removeValidator(this.prepositionValidator, controls.preposition);
+    this.validationVisitor.removeValidator(this.pluralValidator, controls.plural);
   }
 }

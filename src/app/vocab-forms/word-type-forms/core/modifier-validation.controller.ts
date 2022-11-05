@@ -18,7 +18,7 @@ export class ModifierValidationController extends IrregularValidationController 
   }
 
   protected removeIrregularFollowFieldValidation(controls: VocabListItemForm): void {
-    this.removeValidator(Validators.required, controls.comparative);
-    this.removeValidator(Validators.required, controls.superlative);
+    this.validationVisitor.removeValidator(Validators.required, controls.comparative);
+    this.validationVisitor.removeValidator(Validators.required, controls.superlative);
   }
 }
