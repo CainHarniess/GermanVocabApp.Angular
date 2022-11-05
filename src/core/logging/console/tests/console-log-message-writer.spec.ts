@@ -1,4 +1,4 @@
-import { ConsoleLogFactory, ConsoleLogWriter, Log, LogContent, Severity } from "../..";
+import { ConsoleLogWriter, Log, Severity } from "../..";
 
 describe(`${ConsoleLogWriter.name}`, () => {
   let writer: ConsoleLogWriter;
