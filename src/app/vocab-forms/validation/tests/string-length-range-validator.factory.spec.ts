@@ -3,6 +3,8 @@ import { StringLengthValidatorFactory, ValidationError } from "..";
 import { RandomStringGenerator } from "../../../../utilities";
 import { maxLength, minLength } from "../validator-names";
 
+// TODO: Update to use class name
+// TODO: Remove "range" from file name.
 describe("StringLengthValidatorFactory", () => {
   let stringGenerator: RandomStringGenerator;
 
