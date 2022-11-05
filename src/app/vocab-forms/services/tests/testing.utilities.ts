@@ -8,6 +8,21 @@ export function createMockvalidatorVisitor(): any {
   };
 }
 
+export function createMockListForm(): any {
+  return {
+    controls: {
+      name: {
+        addValidators: function () { },
+        updateValueAndValidity: function () { },
+      },
+      description: {
+        addValidators: function () { },
+        updateValueAndValidity: function () { },
+      },
+    }
+  };
+}
+
 export function createMockItemForm(): any {
   return {
     controls: {

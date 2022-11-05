@@ -1,6 +1,7 @@
 import { ValidatorFn, Validators } from "@angular/forms";
 import { VocabListFormValidationProvider } from "..";
 import { descriptionMaxLength, descriptionMinLength, nameMaxLength, nameMinLength } from "../../../vocab/models/data/constraints/vocab-list-data-constraints";
+import { createMockListForm } from "./testing.utilities";
 
 describe(VocabListFormValidationProvider.name, () => {
   let provider: VocabListFormValidationProvider;
@@ -12,19 +13,7 @@ describe(VocabListFormValidationProvider.name, () => {
   };
   let requiredFactoryCreateSpy: any;
   let optionalFactoryCreateSpy: any;
-  // TODO: Refactor declaration shared with item validation provider into a shared builder or something.
-  let form: any = {
-    controls: {
-      name: {
-        addValidators: function () { },
-        updateValueAndValidity: function () { },
-      },
-      description: {
-        addValidators: function () { },
-        updateValueAndValidity: function () { },
-      },
-    }
-  };
+  let form: any = createMockListForm();
   let requiredValidator: (minLength: number) => ValidatorFn = Validators.minLength;
   let optionalValidator: (minLength: number) => ValidatorFn = Validators.maxLength;
 
