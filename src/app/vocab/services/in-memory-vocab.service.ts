@@ -14,9 +14,9 @@ export class InMemoryVocabService extends VocabService {
   public readonly lists: VocabList[]; 
 
   constructor(private guidGenerator: GuidGeneratorService,
-    inMemoryDataSeeder: InMemoryDataProvider) {
+    inMemoryDataProvider: InMemoryDataProvider) {
     super();
-    this.lists = inMemoryDataSeeder.seed();
+    this.lists = inMemoryDataProvider.seed();
   }
 
   public override get(): Observable<VocabList[]> {
