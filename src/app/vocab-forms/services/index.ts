@@ -1,4 +1,4 @@
-export { VocabListFormBuilder } from './vocab-list-form-builder.service';
+export { VocabListFormBuilder } from './vocab-list-form.builder';
 export { VocabListFormValidationProvider } from './vocab-list-form-validation.provider';
 export { ItemValidationProvider } from './item-validation.provider';
 export { VocabListItemFormBuilder } from './vocab-list-item-form-builder.service';

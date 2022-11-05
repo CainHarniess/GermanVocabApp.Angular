@@ -1,9 +1,9 @@
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { VocabListFormBuilder } from "..";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
 import { StubVocabListItemBuilder } from "../../../../testing/stub-vocab-list-item-builder";
 import { VocabList, VocabListItem } from "../../../vocab/models";
 import { VocabListForm } from "../../models";
-import { VocabListFormBuilder } from "../vocab-list-form-builder.service";
 import { VocabListItemFormBuilder } from "../vocab-list-item-form-builder.service";
 import { createMockItemValidationProvider } from "./testing.utilities";
 
