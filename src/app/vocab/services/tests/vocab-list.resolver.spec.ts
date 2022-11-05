@@ -1,7 +1,7 @@
 import { EMPTY } from "rxjs";
 import { VocabListResolver } from "../vocab-list.resolver";
 
-describe("VocabListResolver", () => {
+describe(VocabListResolver.name, () => {
   let resolver: VocabListResolver;
   let mockVocabListService: any;
   let mockParamMap: any;

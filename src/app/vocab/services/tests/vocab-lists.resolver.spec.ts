@@ -1,6 +1,6 @@
 import { VocabListsResolver } from "../vocab-lists.resolver";
 
-describe("VocabListsResolver", () => {
+describe(VocabListsResolver.name, () => {
   let resolver: VocabListsResolver;
   let mockVocabListService: any;
   let mockActivatedRouteSnapshot: any;
