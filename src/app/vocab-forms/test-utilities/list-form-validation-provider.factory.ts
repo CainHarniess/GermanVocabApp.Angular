@@ -1,9 +1,10 @@
 import { VocabListFormValidationProvider } from "../services";
-import { RequiredStringLengthValidatorFactory } from "../validation";
+import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory } from "../validation";
 
 export class ListFormValidationProviderFactory {
   public create(): VocabListFormValidationProvider {
-    const validatorFactory: RequiredStringLengthValidatorFactory = new RequiredStringLengthValidatorFactory();
-    return new VocabListFormValidationProvider(validatorFactory);
+    const requiredValidatorFactory: RequiredStringLengthValidatorFactory = new RequiredStringLengthValidatorFactory();
+    const optionalValidatorFactory: StringLengthValidatorFactory = new StringLengthValidatorFactory();
+    return new VocabListFormValidationProvider(requiredValidatorFactory, optionalValidatorFactory);
   }
 }
