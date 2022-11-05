@@ -15,8 +15,6 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeModule } from './home/home.module';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
-import { HttpVocabListService } from './vocab/services/http-vocab-list.service';
-import { VocabListService } from './vocab/services/vocab-list.service';
 
 @NgModule({
   declarations: [
@@ -38,9 +36,6 @@ import { VocabListService } from './vocab/services/vocab-list.service';
     ConsoleLogWriter,
     { provide: Logger, useClass: ConsoleLogger },
     LogService,
-    { provide: VocabListService, useClass: HttpVocabListService },
-    ////InMemoryDataProvider,
-    //{ provide: VocabListService, useClass: InMemoryVocabListService },
     { provide: "minLevel", useValue: Severity.Information },
     { provide: NotificationService, useClass: MatSnackBarService },
     MatSnackBar,

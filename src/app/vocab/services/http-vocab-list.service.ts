@@ -8,7 +8,7 @@ import { VocabListService } from './vocab-list.service';
 
 // TODO: Provide this in the vocab module only.
 // TODO: Rename this (and base) to "VocabService".
-@Injectable({ providedIn: "root" })
+@Injectable()
 export class HttpVocabListService extends VocabListService {
 
   constructor(private readonly http: HttpClient,

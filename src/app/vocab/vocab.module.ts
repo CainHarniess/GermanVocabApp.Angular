@@ -16,6 +16,7 @@ import { VocabListItemComponent } from './vocab-list-items/vocab-list-item.compo
 import { VocabListComponent } from './vocab-list/vocab-list.component';
 import { VocabListsPresenterComponent } from './vocab-lists-presenter/vocab-lists-presenter.component';
 import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
+import { HttpVocabListService, VocabListResolver, VocabListService, VocabListsResolver } from './services';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { VocabListsComponent } from './vocab-lists/vocab-lists.component';
     SeparableDisplayPipe,
   ],
   providers: [
-
+    { provide: VocabListService, useClass: HttpVocabListService },
+    VocabListsResolver,
+    VocabListResolver,
   ],
   imports: [
     CommonModule,

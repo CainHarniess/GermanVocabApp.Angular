@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { VocabListService } from '.';
 import { VocabList } from '../models/vocab-list.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class VocabListResolver implements Resolve<VocabList> {
   constructor(private vocabListService: VocabListService) {
 
