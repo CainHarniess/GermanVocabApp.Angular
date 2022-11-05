@@ -1,19 +1,19 @@
 import { waitForAsync } from "@angular/core/testing";
 import { Observable } from "rxjs";
-import { InMemoryVocabListService } from "..";
+import { InMemoryVocabService } from "..";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
-import { createStubList, createStubListItem } from "../../../../utilities/testing.utilities";
+import { createStubListItem } from "../../../../utilities/testing.utilities";
 import { VocabListItem } from "../../models";
 import { WordType } from "../../models/data";
 import { VocabList } from "../../models/vocab-list.interface";
 import { InMemoryDataProvider } from "../in-memory-data-seeder.service";
 
-describe("InMemoryVocabListService", () => {
+describe(InMemoryVocabService.name, () => {
   const mockListGuid: string = "9244e805-f3ea-4cad-9201-d38110c9b4fe"
   const invalidListId: string = "2333a7b8-e2d1-434a-9195-87abe3dde29e";
   let mockVocabList: VocabList;
 
-  let service: InMemoryVocabListService;
+  let service: InMemoryVocabService;
   let mockGuidGenerator: any
 
   beforeEach(() => {
@@ -24,7 +24,7 @@ describe("InMemoryVocabListService", () => {
       listItems: [],
       authorName: "Testy McTestface"
     };
-    service = new InMemoryVocabListService(mockGuidGenerator, new InMemoryDataProvider());
+    service = new InMemoryVocabService(mockGuidGenerator, new InMemoryDataProvider());
   });
 
   describe("getWithId", () => {
@@ -134,11 +134,11 @@ describe("InMemoryVocabListService", () => {
     }));
   });
 
-  function createServiceWithMockData(): InMemoryVocabListService {
+  function createServiceWithMockData(): InMemoryVocabService {
     const mockDataSeeder: any = jasmine.createSpyObj("mockDataSeeder", ["seed"]);
     const listStub: VocabList = StubVocabListBuilder.stub().withId(mockListGuid).build();
     const mockSeedData: VocabList[] = [listStub];
     mockDataSeeder.seed.and.returnValue(mockSeedData);
-    return new InMemoryVocabListService(mockGuidGenerator, mockDataSeeder);
+    return new InMemoryVocabService(mockGuidGenerator, mockDataSeeder);
   }
 });

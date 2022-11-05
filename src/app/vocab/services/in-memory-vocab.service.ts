@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 
 import { GuidGeneratorService } from '../../shared/services/guid-generator.service';
-import { VocabListService } from './vocab-list.service';
 
 import { EMPTY, map, Observable, of, tap } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { NotFoundError, UnexpectedIdError } from '../../../core/errors';
 import { isNullOrUndefined } from '../../../utilities';
-import { VocabListItem } from '../models';
-import { VocabList } from '../models/vocab-list.interface';
-import { InMemoryDataProvider } from './in-memory-data-seeder.service';
+import { VocabList, VocabListItem } from '../models';
+import { InMemoryDataProvider, VocabService } from '.';
 
 @Injectable()
-export class InMemoryVocabListService extends VocabListService {
+export class InMemoryVocabService extends VocabService {
   public readonly lists: VocabList[]; 
 
   constructor(private guidGenerator: GuidGeneratorService, inMemoryDataSeeder: InMemoryDataProvider) {

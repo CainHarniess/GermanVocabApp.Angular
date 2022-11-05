@@ -1,9 +1,9 @@
 import { of } from "rxjs";
-import { HttpVocabListService } from "..";
+import { HttpVocabService } from "..";
 import { VocabList } from "../../models/vocab-list.interface";
 
 // TODO: Update to use Angular HTTP testing framework https://angular.io/guide/http#testing-http-requests
-describe("HttpVocabListService", () => {
+describe(HttpVocabService.name, () => {
   const expectedUrlRoot: string = "/api/vocab-lists";
   const testId: string = "3b41900b-5df8-4589-b157-fb1c2df8d31e";
   const mockVocabList: VocabList = {
@@ -15,7 +15,7 @@ describe("HttpVocabListService", () => {
     handle: (e: any) => "Mock Error Message",
   };
 
-  let service: HttpVocabListService;
+  let service: HttpVocabService;
   let mockHttpClient: any;
 
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe("HttpVocabListService", () => {
     mockHttpClient.get.and.returnValue(of([]));
     mockHttpClient.post.and.returnValue(of("Mock"));
 
-    service = new HttpVocabListService(mockHttpClient,
+    service = new HttpVocabService(mockHttpClient,
       mockErrorHandler);
   });
 

@@ -9,7 +9,7 @@ import { Undefined } from "../../../core/types";
 import { validateIndex } from "../../../utilities";
 import { VocabList } from "../../vocab/models";
 
-import { VocabListService } from '../../vocab/services';
+import { VocabService } from '../../vocab/services';
 import { VocabListForm, VocabListItemForm } from "../models";
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 import { RequiredIfTouchedErrorStateMatcher, ValidationErrorMessageProvider } from "../validation";
@@ -21,7 +21,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   public readonly listItemControlCount$ = new BehaviorSubject<number>(0);
 
   protected constructor(protected readonly router: Router,
-    protected readonly vocabService: VocabListService,
+    protected readonly vocabService: VocabService,
     protected readonly listFormBuilder: VocabListFormBuilder,
     protected readonly listItemFormBuilder: VocabListItemFormBuilder,
     protected readonly title$Builder: ListTitleObservableBuilder,

@@ -13,7 +13,7 @@ import { VocabRoutePath } from '../../shared/routing';
 
 import { VocabList, VocabListItem } from '../../vocab/models';
 import { ResolvedData } from '../../vocab/models/data';
-import { VocabListService } from '../../vocab/services';
+import { VocabService } from '../../vocab/services';
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 import { ValidationErrorMessageProvider } from '../validation';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
@@ -27,7 +27,7 @@ import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 export class EditVocabListComponent extends AbstractVocabListFormComponent {
   public readonly preEditList: VocabList;
 
-  constructor(router: Router, vocabService: VocabListService,
+  constructor(router: Router, vocabService: VocabService,
     listFormBuilder: VocabListFormBuilder,
     listItemFormBuilder: VocabListItemFormBuilder, title$Builder: ListTitleObservableBuilder,
     errorMessageProvider: ValidationErrorMessageProvider, requiredIfTouched: ErrorStateMatcher,

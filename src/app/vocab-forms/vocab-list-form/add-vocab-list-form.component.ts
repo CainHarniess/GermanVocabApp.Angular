@@ -7,7 +7,7 @@ import { NotificationService } from '../../../core';
 
 import { Undefined } from '../../../core/types';
 import { VocabList } from '../../vocab/models/vocab-list.interface';
-import { VocabListService } from '../../vocab/services/vocab-list.service';
+import { VocabService } from '../../vocab/services/vocab-list.service';
 import { VocabListForm } from '../models';
 import { ListItemWordingObservableProvider, ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 import { ValidationErrorMessageProvider } from '../validation';
@@ -21,7 +21,7 @@ import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
   providers: [ListItemWordingObservableProvider]
 })
 export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
-  constructor(router: Router, vocabService: VocabListService,
+  constructor(router: Router, vocabService: VocabService,
     listFormBuilder: VocabListFormBuilder, listItemFormBuilder: VocabListItemFormBuilder,
     title$Builder: ListTitleObservableBuilder,
     errorMessageProvider: ValidationErrorMessageProvider, requiredIfTouched: ErrorStateMatcher,

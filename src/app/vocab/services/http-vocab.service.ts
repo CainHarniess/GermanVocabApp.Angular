@@ -4,12 +4,10 @@ import { catchError, Observable } from 'rxjs';
 
 import { VocabList, VocabListItem } from '../models';
 import { HttpErrorHandler } from './http-error-handler';
-import { VocabListService } from './vocab-list.service';
+import { VocabService } from '.';
 
-// TODO: Provide this in the vocab module only.
-// TODO: Rename this (and base) to "VocabService".
 @Injectable()
-export class HttpVocabListService extends VocabListService {
+export class HttpVocabService extends VocabService {
 
   constructor(private readonly http: HttpClient,
     private readonly errorHandler: HttpErrorHandler) {
