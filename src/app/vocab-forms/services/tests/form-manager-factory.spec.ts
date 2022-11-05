@@ -1,4 +1,4 @@
-import { FormGroup, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { WordType } from "../../../vocab/models/data/word-type.enum";
 import { VocabListItemForm } from "../../models/vocab-list-item-form.interface";
 import {
@@ -6,7 +6,7 @@ import {
     NounFormManager, NounValidationController, NounValueController, VerbFormManager, VerbValidationController, VerbValueController, WordTypeFormManager
 } from "../../word-type-forms";
 import { WordTypeFormManagerFactory } from "../word-type-form-manager-factory";
-import { createMockvalidatorVisitor } from "./testing.utilities";
+import { createMockValidatorFactory, createMockvalidatorVisitor } from "./testing.utilities";
 
 describe("WordTypeFormManagerFactory", () => {
   let formManagerFactory: WordTypeFormManagerFactory;
@@ -85,9 +85,3 @@ function createAdverbFormManager<T extends WordTypeFormManager>(): T {
   return new AdverbFormManager(validationManager, valueController) as T;
 }
 
-// TODO: Move to utilities file.
-function createMockValidatorFactory(): any {
-  return {
-    create: (lower: number, upper: number) => { return Validators.required },
-  }
-}
