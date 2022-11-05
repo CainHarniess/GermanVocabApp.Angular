@@ -38,7 +38,6 @@ export class HttpVocabListService extends VocabListService {
     return this.http.get<VocabList>(this.url + `/${vocabListId}`)
       .pipe(
         catchError((e: any, caught: Observable<VocabList>) => {
-
           if (!(e instanceof HttpErrorResponse)) {
             return this.handleNonHttpError(e, "Unable to retrieve vocab list due to non-HTTP error.");
           }
@@ -61,7 +60,6 @@ export class HttpVocabListService extends VocabListService {
     return this.http.post<string>(this.url, vocabList)
       .pipe(
         catchError((e: any, caught: Observable<string>) => {
-
           if (!(e instanceof HttpErrorResponse)) {
             return this.handleNonHttpError(e, "Unable to retrieve vocab list due to non-HTTP error.");
           }
@@ -86,10 +84,27 @@ export class HttpVocabListService extends VocabListService {
   }
 
   public override update(id: string, updatedList: VocabList): Observable<void> {
-    return this.http.put<void>(`${this.url}/${id!}`, updatedList);
-    // TODO: handle bad request
-    // TODO: handle not found
-    // TODO: Handle 500 error execpected primary key
+    return this.http.put<void>(`${this.url}/${id!}`, updatedList)
+      .pipe(
+        catchError((e: any, caught: Observable<void>) => {
+          if (!(e instanceof HttpErrorResponse)) {
+            return this.handleNonHttpError(e, "Unable to retrieve vocab list due to non-HTTP error.");
+          }
+
+          let message: string;
+          if (e.status === HttpStatusCode.BadRequest) {
+            message = "Invalid list data provided";
+          } else if (e.status === HttpStatusCode.NotFound) {
+            message = `Unable to find list with ID ${id}`;
+          } else {
+            message = "Error occured when creating list";
+          }
+
+          const notification: string = `${e.status} ${e.statusText}. ${message}.`;
+          this.notificationService.error(notification);
+          return throwError(() => new Error(notification));
+        }),
+      );
   }
 
   private handleNonHttpError(e: any, userMessage: string) {
