@@ -32,8 +32,7 @@ export class EditVocabListComponent extends AbstractVocabListFormComponent {
     listItemFormBuilder: VocabListItemFormBuilder, title$Builder: ListTitleObservableBuilder,
     errorMessageProvider: ValidationErrorMessageProvider, requiredIfTouched: ErrorStateMatcher,
     notificationService: NotificationService,
-    // TODO: Make readonly.
-    private route: ActivatedRoute) {
+    private readonly route: ActivatedRoute) {
     super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder,
       errorMessageProvider, requiredIfTouched, notificationService);
     const dataSnapshot: Data = this.route.snapshot.data;
