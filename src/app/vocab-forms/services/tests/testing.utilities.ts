@@ -1,4 +1,5 @@
-import { AbstractControl, ValidatorFn } from "@angular/forms";
+import { AbstractControl, FormGroup, ValidatorFn } from "@angular/forms";
+import { VocabListItemForm } from "../../models";
 
 export function createMockvalidatorVisitor(): any {
   return {
@@ -23,5 +24,11 @@ export function createMockListForm(): any {
         updateValueAndValidity: function () { },
       },
     }
-  };;
+  };
+}
+
+export function createMockItemValidationProvider(): any {
+  return {
+    addValidationTo: (form: FormGroup<VocabListItemForm>) => { },
+  }
 }

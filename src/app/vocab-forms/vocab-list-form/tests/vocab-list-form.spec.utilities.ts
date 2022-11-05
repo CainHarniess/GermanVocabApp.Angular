@@ -4,7 +4,7 @@ import { of } from "rxjs";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
 import { VocabListForm } from "../../models";
 import { VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from "../../services";
-import { createMockItemValidationProvider } from "../../services/tests/item-validation.provider.utilities";
+import { createMockItemValidationProvider } from "../../services/tests/testing.utilities";
 import { ListFormValidationProviderFactory } from "../../test-utilities";
 import { ValidationErrorMessageProvider } from "../../validation";
 import { MockReturnValues } from "./mock-return-values";

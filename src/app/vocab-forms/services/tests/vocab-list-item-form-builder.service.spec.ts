@@ -1,6 +1,5 @@
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup } from "@angular/forms";
 import { VocabListItemFormBuilder } from "..";
-import { isNullOrUndefined } from "../../../../utilities";
 import { VocabListForm, VocabListItemForm } from "../../models";
 
 type TestCase = {
