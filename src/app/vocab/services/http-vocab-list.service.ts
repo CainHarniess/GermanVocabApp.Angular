@@ -1,7 +1,6 @@
 import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { NotificationService } from '../../../core';
 
 import { VocabList, VocabListItem } from '../models';
 import { HttpErrorHandler } from './http-error-handler';
@@ -13,7 +12,6 @@ import { VocabListService } from './vocab-list.service';
 export class HttpVocabListService extends VocabListService {
 
   constructor(private readonly http: HttpClient,
-    private readonly notificationService: NotificationService,
     private readonly errorHandler: HttpErrorHandler) {
     super();
   }

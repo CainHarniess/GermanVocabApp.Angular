@@ -1,7 +1,6 @@
-import { VocabList } from "../../models/vocab-list.interface";
-import { HttpVocabListService } from "..";
 import { of } from "rxjs";
-import { createMockNotificationService } from "../../../../core/test-utilities";
+import { HttpVocabListService } from "..";
+import { VocabList } from "../../models/vocab-list.interface";
 
 // TODO: Update to use Angular HTTP testing framework https://angular.io/guide/http#testing-http-requests
 describe("HttpVocabListService", () => {
@@ -12,8 +11,6 @@ describe("HttpVocabListService", () => {
       listItems: [],
       authorName: "Testy McTestface"
   };
-  const mockNotificationService: any = createMockNotificationService();
-
   const mockErrorHandler: any = {
     handle: (e: any) => "Mock Error Message",
   };
@@ -26,7 +23,7 @@ describe("HttpVocabListService", () => {
     mockHttpClient.get.and.returnValue(of([]));
     mockHttpClient.post.and.returnValue(of("Mock"));
 
-    service = new HttpVocabListService(mockHttpClient, mockNotificationService,
+    service = new HttpVocabListService(mockHttpClient,
       mockErrorHandler);
   });
 
