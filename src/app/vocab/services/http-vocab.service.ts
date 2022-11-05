@@ -8,8 +8,7 @@ import { VocabService } from '.';
 
 @Injectable()
 export class HttpVocabService extends VocabService {
-
-  constructor(private readonly http: HttpClient,
+  public constructor(private readonly http: HttpClient,
     private readonly errorHandler: HttpErrorHandler) {
     super();
   }

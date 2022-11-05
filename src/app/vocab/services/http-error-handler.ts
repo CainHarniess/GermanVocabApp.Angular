@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { NotificationService } from '../../../core';
 
-// TODO: Provide this in the vocab module only.
 // TODO: Add tests.
-@Injectable({ providedIn: "root" })
+@Injectable()
 export class HttpErrorHandler {
   constructor(private readonly notificationService: NotificationService) {
 

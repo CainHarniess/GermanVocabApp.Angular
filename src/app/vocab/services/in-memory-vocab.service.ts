@@ -13,7 +13,8 @@ import { InMemoryDataProvider, VocabService } from '.';
 export class InMemoryVocabService extends VocabService {
   public readonly lists: VocabList[]; 
 
-  constructor(private guidGenerator: GuidGeneratorService, inMemoryDataSeeder: InMemoryDataProvider) {
+  constructor(private guidGenerator: GuidGeneratorService,
+    inMemoryDataSeeder: InMemoryDataProvider) {
     super();
     this.lists = inMemoryDataSeeder.seed();
   }

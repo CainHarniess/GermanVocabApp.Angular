@@ -7,7 +7,7 @@ import { NotificationService } from '../../../core';
 
 import { Undefined } from '../../../core/types';
 import { VocabList } from '../../vocab/models/vocab-list.interface';
-import { VocabService } from '../../vocab/services/vocab-list.service';
+import { VocabService } from '../../vocab/services';
 import { VocabListForm } from '../models';
 import { ListItemWordingObservableProvider, ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
 import { ValidationErrorMessageProvider } from '../validation';
