@@ -14,6 +14,7 @@ export class MatSnackBarService extends NotificationService {
     this.config = {
       data: undefined,
       panelClass: undefined,
+      duration: 2500,
     }
     this.logService.debug({ message: "Snack Bar Config", data: [this.config] });
 
