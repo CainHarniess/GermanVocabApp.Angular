@@ -5,5 +5,7 @@ export function createMockControl(): any {
     addValidators: (validator: ValidatorFn | ValidatorFn[]) => { },
     removeValidators: (validator: ValidatorFn | ValidatorFn[]) => { },
     updateValueAndValidity: () => { },
+    setValue: (value: any) => { },
+    markAsUntouched: () => { },
   };
 }
