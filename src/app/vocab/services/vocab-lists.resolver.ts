@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { VocabListService } from '.';
 import { VocabList } from '../models/vocab-list.interface';
 
+// TODO: Provide this in the vocab module only.
 @Injectable({
   providedIn: 'root'
 })

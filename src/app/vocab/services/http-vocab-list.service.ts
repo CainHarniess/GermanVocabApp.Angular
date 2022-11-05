@@ -43,6 +43,7 @@ export class HttpVocabListService extends VocabListService {
       );
   }
 
+  // TODO: Update to return Observable<VocabList> because this is what the API returns.
   public override add(vocabList: VocabList): Observable<string> {
     return this.http.post<string>(this.url, vocabList)
       .pipe(
@@ -59,6 +60,7 @@ export class HttpVocabListService extends VocabListService {
   }
 
   // TODO: remove because not used?
+  // Looks like there are just tests for this. Need to ensure it's not actually a helper function for tests or something.
   public override addListItem(listItem: VocabListItem, listId: string): Observable<string> {
     return this.http.post<string>(this.url + `/${listId}`, listItem);
   }
