@@ -1,7 +1,8 @@
 import { VocabList } from "../../models/vocab-list.interface";
 import { HttpVocabListService } from "..";
+import { of } from "rxjs";
 
-describe("HttpVocabListService", () => {
+fdescribe("HttpVocabListService", () => {
   const expectedUrlRoot: string = "/api/vocab-lists";
   const testId: string = "3b41900b-5df8-4589-b157-fb1c2df8d31e";
   const mockVocabList: VocabList = {
@@ -9,13 +10,19 @@ describe("HttpVocabListService", () => {
       listItems: [],
       authorName: "Testy McTestface"
   };
+  const mockNotificationService: any = {
+    error: (message: string) => { },
+  }
 
   let service: HttpVocabListService;
   let mockHttpClient: any;
 
   beforeEach(() => {
     mockHttpClient = jasmine.createSpyObj("mockHttpClient", ["get", "post"]);
-    service = new HttpVocabListService(mockHttpClient);
+    mockHttpClient.get.and.returnValue(of([]));
+    mockHttpClient.post.and.returnValue(of("Mock"));
+
+    service = new HttpVocabListService(mockHttpClient, mockNotificationService);
   });
 
   describe("get", () => {
