@@ -3,6 +3,7 @@ import { AbstractControl, FormArray, FormControl, FormGroup } from "@angular/for
 import { Router } from "@angular/router";
 
 import { BehaviorSubject, filter, map, Observable, Subject, Subscription } from 'rxjs';
+import { NotificationService } from "../../../core";
 
 import { Undefined } from "../../../core/types";
 import { validateIndex } from "../../../utilities";
@@ -25,7 +26,8 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
     protected readonly listItemFormBuilder: VocabListItemFormBuilder,
     protected readonly title$Builder: ListTitleObservableBuilder,
     private readonly errorMessageProvider: ValidationErrorMessageProvider,
-    public readonly requiredIfTouched: RequiredIfTouchedErrorStateMatcher) {
+    public readonly requiredIfTouched: RequiredIfTouchedErrorStateMatcher,
+    protected readonly notificationService: NotificationService) {
 
   }
 
@@ -91,6 +93,13 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
   }
 
   public abstract submit(): void;
+
+  protected displaySuccessMessage(isEdit: boolean): void {
+    const listName: string = this.form.controls.name.value!;
+    const editMode: string = isEdit ? "updated" : "added";
+    const message: string = `${listName} ${editMode} successfully.`;
+    this.notificationService.success(message);
+  }
 
   protected subscriptions?: Subscription;
 

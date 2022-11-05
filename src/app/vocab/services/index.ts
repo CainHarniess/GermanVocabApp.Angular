@@ -1,3 +1,4 @@
+export { HttpErrorHandler } from './http-error-handler'
 export { HttpVocabListService } from './http-vocab-list.service'
 export { InMemoryDataProvider } from './in-memory-data-seeder.service'
 export { InMemoryVocabListService } from './in-memory-vocab-list.service'

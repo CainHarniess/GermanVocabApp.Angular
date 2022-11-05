@@ -3,6 +3,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
+import { NotificationService } from '../../../core';
 
 import { Undefined } from '../../../core/types';
 import { VocabList } from '../../vocab/models/vocab-list.interface';
@@ -24,9 +25,10 @@ export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
     listFormBuilder: VocabListFormBuilder, listItemFormBuilder: VocabListItemFormBuilder,
     title$Builder: ListTitleObservableBuilder,
     errorMessageProvider: ValidationErrorMessageProvider, requiredIfTouched: ErrorStateMatcher,
+    notificationService: NotificationService,
     private listItemWording$Provider: ListItemWordingObservableProvider) {
     super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder,
-      errorMessageProvider, requiredIfTouched);
+      errorMessageProvider, requiredIfTouched, notificationService);
   }
 
   public override get editData(): Undefined<VocabList> { return undefined; }
@@ -44,7 +46,8 @@ export class AddVocabListFormComponent extends AbstractVocabListFormComponent {
   public override submit(): void {
     const vocabList: VocabList = this.form.value as VocabList;
     this.subscriptions = this.vocabService.add(vocabList)
-      .subscribe(() => {
+      .subscribe((data: string) => {
+        this.displaySuccessMessage(false);
         this.router.navigate(["/vocab", "vocab-lists"]);
       });
   }

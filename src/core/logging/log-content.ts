@@ -1,4 +1,3 @@
-
 export interface LogContent {
   message: string;
   reason?: string;

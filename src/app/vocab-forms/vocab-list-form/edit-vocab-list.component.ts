@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 
 import { EMPTY, Observable } from 'rxjs';
+import { NotificationService } from '../../../core';
 import { NotWellDefinedError } from '../../../core/errors';
 
 import { Undefined } from '../../../core/types';
@@ -30,9 +31,11 @@ export class EditVocabListComponent extends AbstractVocabListFormComponent {
     listFormBuilder: VocabListFormBuilder,
     listItemFormBuilder: VocabListItemFormBuilder, title$Builder: ListTitleObservableBuilder,
     errorMessageProvider: ValidationErrorMessageProvider, requiredIfTouched: ErrorStateMatcher,
+    notificationService: NotificationService,
+    // TODO: Make readonly.
     private route: ActivatedRoute) {
     super(router, vocabService, listFormBuilder, listItemFormBuilder, title$Builder,
-      errorMessageProvider, requiredIfTouched);
+      errorMessageProvider, requiredIfTouched, notificationService);
     const dataSnapshot: Data = this.route.snapshot.data;
     this.preEditList = dataSnapshot[ResolvedData.ResolvedList];
   }
@@ -63,6 +66,7 @@ export class EditVocabListComponent extends AbstractVocabListFormComponent {
     const list: VocabList = this.form.value as VocabList;
     const update = this.vocabService.update(this.preEditList.id, list)
       .subscribe(() => {
+        this.displaySuccessMessage(true);
         this.router.navigate([`/${VocabRoutePath.Root}`, VocabRoutePath.VocabLists]);
       });
 

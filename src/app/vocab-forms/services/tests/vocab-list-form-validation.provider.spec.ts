@@ -1,14 +1,17 @@
 import { ValidatorFn, Validators } from "@angular/forms";
 import { VocabListFormValidationProvider } from "..";
 import { descriptionMaxLength, descriptionMinLength, nameMaxLength, nameMinLength } from "../../../vocab/models/data/constraints/vocab-list-data-constraints";
-import { ItemValidationProvider } from "../item-validation.provider";
 
-describe(ItemValidationProvider.name, () => {
+describe(VocabListFormValidationProvider.name, () => {
   let provider: VocabListFormValidationProvider;
-  let validatorFactory: any = {
+  let mockRequiredFactory: any = {
     create: {},
   };
-  let factoryCreateSpy: any;
+  let mockOptionalFactory: any = {
+    create: {},
+  };
+  let requiredFactoryCreateSpy: any;
+  let optionalFactoryCreateSpy: any;
   // TODO: Refactor declaration shared with item validation provider into a shared builder or something.
   let form: any = {
     controls: {
@@ -22,31 +25,32 @@ describe(ItemValidationProvider.name, () => {
       },
     }
   };
-  let factoryValidator: (minLength: number) => ValidatorFn = Validators.minLength;
+  let requiredValidator: (minLength: number) => ValidatorFn = Validators.minLength;
+  let optionalValidator: (minLength: number) => ValidatorFn = Validators.maxLength;
 
   beforeEach(() => {
-    factoryCreateSpy = spyOn(validatorFactory, "create").and.returnValue(factoryValidator);
-    provider = new VocabListFormValidationProvider(validatorFactory);
+    requiredFactoryCreateSpy = spyOn(mockRequiredFactory, "create").and.returnValue(requiredValidator);
+    optionalFactoryCreateSpy = spyOn(mockOptionalFactory, "create").and.returnValue(optionalValidator);
+    provider = new VocabListFormValidationProvider(mockRequiredFactory, mockOptionalFactory);
   });
 
   describe("provide", () => {
     it("Should add factory validator to name control", () => {
       spyOn(form.controls.name, "addValidators")
       provider.provide(form);
-      expect(form.controls.name.addValidators).toHaveBeenCalledOnceWith(factoryValidator);
+      expect(form.controls.name.addValidators).toHaveBeenCalledOnceWith(requiredValidator);
     });
 
     it("Should add factory validator to description control", () => {
       spyOn(form.controls.description, "addValidators")
       provider.provide(form);
-      expect(form.controls.description.addValidators).toHaveBeenCalledOnceWith(factoryValidator);
+      expect(form.controls.description.addValidators).toHaveBeenCalledOnceWith(optionalValidator);
     });
 
     it("Build the validators with the correct values", () => {
       provider.provide(form);
-      expect(factoryCreateSpy).toHaveBeenCalledTimes(2);
-      expect(factoryCreateSpy).toHaveBeenCalledWith(nameMinLength, nameMaxLength);
-      expect(factoryCreateSpy).toHaveBeenCalledWith(descriptionMinLength, descriptionMaxLength);
+      expect(requiredFactoryCreateSpy).toHaveBeenCalledOnceWith(nameMinLength, nameMaxLength);
+      expect(optionalFactoryCreateSpy).toHaveBeenCalledOnceWith(descriptionMinLength, descriptionMaxLength);
     });
   });
 });

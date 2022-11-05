@@ -1,6 +1,6 @@
-import { ConsoleLogFactory, ConsoleLogWriter, Log, LogContent, Severity } from "../..";
+import { ConsoleLogWriter, Log, Severity } from "../..";
 
-fdescribe(`${ConsoleLogWriter.name}`, () => {
+describe(`${ConsoleLogWriter.name}`, () => {
   let writer: ConsoleLogWriter;
   let severityConverter: any;
   let log: Log;

@@ -2,6 +2,7 @@ import { fakeAsync } from "@angular/core/testing";
 import { FormArray, FormBuilder } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { NotWellDefinedError } from "../../../../core/errors";
+import { createMockNotificationService } from "../../../../core/test-utilities";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
 import { StubVocabListItemBuilder } from "../../../../testing/stub-vocab-list-item-builder";
 import { VocabRoutePath } from "../../../shared/routing";
@@ -19,6 +20,7 @@ describe(`${EditVocabListComponent.name}`, () => {
   let component: EditVocabListComponent;
   let fb: FormBuilder;
   let itemBuildIncrement: number;
+  const mockNotificationService: any = createMockNotificationService();
 
   beforeAll(() => {
     fb = new FormBuilder();
@@ -56,7 +58,7 @@ describe(`${EditVocabListComponent.name}`, () => {
     component = new EditVocabListComponent(mocks.router,
       mocks.vocabService, mocks.listFormBuilder,
       mocks.itemFormBuilder, mocks.observableBuilderForMocks,
-      mocks.errorMessageProvider, mocks.errorStateMatcher,
+      mocks.errorMessageProvider, mocks.errorStateMatcher, mockNotificationService,
       mocks.route);
 
   })

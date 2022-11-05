@@ -20,7 +20,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
-
+  
   ],
   imports: [
     CommonModule,
@@ -28,6 +28,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
     MatToolbarModule,
     MatDividerModule,
     MatListModule,
