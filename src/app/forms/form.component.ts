@@ -1,15 +1,17 @@
 import { Directive, OnInit } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FormModel } from '.';
 import { OsirisComponent } from '../../core';
 import { LogService } from '../../core/logging';
+import { ValidationErrorMessageProvider } from '../vocab-forms/validation';
 
 @Directive()
 export abstract class FormComponent<TFormModel extends FormModel<TFormModel> = any> extends OsirisComponent
   implements OnInit {
   private _form!: FormGroup<TFormModel>;
 
-  protected constructor(private readonly logService: LogService) {
+  protected constructor(protected readonly logService: LogService,
+    protected readonly errorMessageProvider: ValidationErrorMessageProvider,) {
     super();
   }
 

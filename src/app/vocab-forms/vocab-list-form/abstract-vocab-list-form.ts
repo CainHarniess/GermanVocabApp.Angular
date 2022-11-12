@@ -42,7 +42,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
 
   public ngOnInit(): void {
     this.form = this.listFormBuilder.build();
-    const controls = this.form.controls;
+    const controls: VocabListForm = this.form.controls;
 
     this.nameValidationMessage$ = this.errorMessageProvider.provideFor(controls.name);
 

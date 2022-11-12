@@ -5,6 +5,7 @@ import { LogInForm, LogInFormBuilder } from '.';
 import { NotificationService } from '../../../core';
 import { LogService } from '../../../core/logging';
 import { FormComponent } from '../../forms';
+import { ValidationErrorMessageProvider } from '../../vocab-forms/validation';
 
 @Component({
   selector: 'landing-log-in-form',
@@ -14,15 +15,22 @@ import { FormComponent } from '../../forms';
 })
 export class LogInFormComponent extends FormComponent<LogInForm>  {
   
-  constructor(logService: LogService,
+  constructor(logService: LogService, errorMessageProvider: ValidationErrorMessageProvider,
     private readonly router: Router,
-    private readonly logInFormBuilder: LogInFormBuilder,
-    private readonly notificationService: NotificationService) {
-    super(logService);
+    private readonly notificationService: NotificationService,
+    private readonly logInFormBuilder: LogInFormBuilder) {
+    super(logService, errorMessageProvider);
   }
 
-  public usernameValidationMessage$!: Observable<string | null>;
-  public passwordValidationMessage$!: Observable<string | null>;
+  public usernameMessage$!: Observable<string | null>;
+  public passwordMessage$!: Observable<string | null>;
+
+  public override ngOnInit(): void {
+    super.ngOnInit();
+    const controls: LogInForm = this.form.controls;
+    this.usernameMessage$ = this.errorMessageProvider.provideFor(controls.username);
+    this.passwordMessage$ = this.errorMessageProvider.provideFor(controls.password);
+  }
 
   protected buildForm(): void {
     this.form = this.logInFormBuilder.build();

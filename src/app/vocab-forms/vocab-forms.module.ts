@@ -37,7 +37,6 @@ import {
     AddVocabListFormComponent,
   ],
   providers: [
-    ValidationErrorMessageProvider,
     RequiredIfTouchedErrorStateMatcher,
     IrregularValidationVisitor,
 
