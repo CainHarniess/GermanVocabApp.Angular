@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LogInForm, LogInFormBuilder } from '.';
 import { NotificationService } from '../../../core';
 import { LogService } from '../../../core/logging';
+import { FormComponent } from '../../forms';
 
 @Component({
   selector: 'landing-log-in-form',
@@ -12,19 +12,19 @@ import { LogService } from '../../../core/logging';
   styleUrls: ['./log-in-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LogInFormComponent implements OnInit {
-  constructor(private readonly logService: LogService,
+export class LogInFormComponent extends FormComponent<LogInForm>  {
+  
+  constructor(logService: LogService,
     private readonly router: Router,
     private readonly logInFormBuilder: LogInFormBuilder,
     private readonly notificationService: NotificationService) {
-
+    super(logService);
   }
 
-  public form!: FormGroup<LogInForm>;
   public usernameValidationMessage$!: Observable<string | null>;
   public passwordValidationMessage$!: Observable<string | null>;
 
-  ngOnInit(): void {
+  protected buildForm(): void {
     this.form = this.logInFormBuilder.build();
   }
 

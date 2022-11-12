@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from '../shared/shared.module';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { CheckBoxComponent } from './check-box/check-box.component';
 import { DropDownComponent } from './drop-down/drop-down.component';
