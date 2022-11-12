@@ -19,6 +19,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { LoggedInAppComponent } from './logged-in-app/logged-in-app.component';
 import { LandingComponent } from './landing/landing.component';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory } from './vocab-forms/validation';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
     AppRoutingModule,
   ],
   providers: [
+    StringLengthValidatorFactory,
+    RequiredStringLengthValidatorFactory,
     SeverityStringConverter,
     ConsoleLogWriter,
     { provide: Logger, useClass: ConsoleLogger },

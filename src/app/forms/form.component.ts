@@ -1,11 +1,8 @@
 import { Directive, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
-import { OsirisComponent } from '../../../core';
-import { LogService } from '../../../core/logging';
-
-type FormModel<TFormModel> = {
-  [K in keyof TFormModel]: AbstractControl<any>;
-};
+import { FormModel } from '.';
+import { OsirisComponent } from '../../core';
+import { LogService } from '../../core/logging';
 
 @Directive()
 export abstract class FormComponent<TFormModel extends FormModel<TFormModel> = any> extends OsirisComponent
