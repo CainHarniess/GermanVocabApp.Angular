@@ -3,7 +3,7 @@ import { VocabListItem } from "./vocab-list-item.interface";
 
 export interface VocabList extends Entity {
   name: string,
-  description?: string,
+  description?: string | null,
   listItems: VocabListItem[],
   authorName: string,
 }

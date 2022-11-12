@@ -4,22 +4,22 @@ import { Separability } from "./data/separability.enum";
 
 export interface VocabListItem extends Entity {
   wordType: WordType;
-  isWeakMasculineNoun?: boolean;
-  reflexiveCase?: ReflexiveCase;
-  separability?: Separability;
-  transitivity?: Transitivity;
-  thirdPersonPresent?: string;
-  thirdPersonImperfect?: string;
-  auxiliaryVerb?: AuxiliaryVerb;
-  perfect?: string;
-  gender?: Gender;
+  isWeakMasculineNoun?: boolean | null;
+  reflexiveCase?: ReflexiveCase | null;
+  separability?: Separability | null;
+  transitivity?: Transitivity | null;
+  thirdPersonPresent?: string | null;
+  thirdPersonImperfect?: string | null;
+  auxiliaryVerb?: AuxiliaryVerb | null;
+  perfect?: string | null;
+  gender?: Gender | null;
   german: string;
-  plural?: string;
-  preposition?: string;
-  prepositionCase?: Case;
-  comparative?: string;
-  superlative?: string;
+  plural?: string | null;
+  preposition?: string | null;
+  prepositionCase?: Case | null;
+  comparative?: string | null;
+  superlative?: string | null;
   english: string;
-  vocabListId?: string;
-  fixedPlurality?: FixedPlurality
+  vocabListId?: string | null;
+  fixedPlurality?: FixedPlurality | null;
 }
