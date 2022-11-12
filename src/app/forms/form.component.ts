@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { FormModel } from '.';
 import { OsirisComponent } from '../../core';
 import { LogService } from '../../core/logging';
-import { ValidationErrorMessageProvider } from '../vocab-forms/validation';
+import { ValidationErrorMessageProvider } from '../../core/validation';
 
 @Directive()
 export abstract class FormComponent<TFormModel extends FormModel<TFormModel> = any> extends OsirisComponent

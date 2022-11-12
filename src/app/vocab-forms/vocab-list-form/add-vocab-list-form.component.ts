@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
 import { NotificationService } from '../../../core';
 
 import { Undefined } from '../../../core/types';
+import { ValidationErrorMessageProvider } from '../../../core/validation';
 import { VocabList } from '../../vocab/models/vocab-list.interface';
 import { VocabService } from '../../vocab/services';
 import { VocabListForm } from '../models';
 import { ListItemWordingObservableProvider, ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
-import { ValidationErrorMessageProvider } from '../validation';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 
 @Component({

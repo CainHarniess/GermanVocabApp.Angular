@@ -1,6 +1,6 @@
 import { inject, InjectionToken } from '@angular/core';
+import { RequiredStringLengthValidatorFactory } from '../../../core/validation';
 import { FormValidationProvider } from '../../forms';
-import { RequiredStringLengthValidatorFactory } from '../../vocab-forms/validation';
 import { LogInFormValidationProvider } from './log-in-form-validation.provider';
 import { LogInForm } from './log-in.form';
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { StringLengthValidatorFactory } from '../../../../core/validation';
 import { ControlValidatorVisitor } from '../../../forms';
 import { prepositionMaxLength, prepositionMinLength, wordMaxLength, wordMinLength } from '../../../vocab/models/data/constraints/item-data-constraints';
 import { VocabListItemForm } from '../../models';
-import { StringLengthValidatorFactory } from '../../validation';
 import { WordTypeValidationController } from '../core';
 
 @Injectable()

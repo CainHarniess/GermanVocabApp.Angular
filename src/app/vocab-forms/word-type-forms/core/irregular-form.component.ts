@@ -1,9 +1,9 @@
 import { Directive } from '@angular/core';
 import { WordTypeFormComponent } from '.';
 import { IrregularValidationVisitor } from '..';
+import { ValidationErrorMessageProvider } from '../../../../core/validation';
 import { FollowingControlValidatorVisitor } from '../../../forms';
 import { VocabListItemForm } from '../../models';
-import { ValidationErrorMessageProvider } from '../../validation';
 
 @Directive()
 export abstract class IrregularFormComponent extends WordTypeFormComponent {

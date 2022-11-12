@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { RequiredStringLengthValidatorFactory } from '../../../core/validation';
 import { FormValidationProvider } from '../../forms';
-import { RequiredStringLengthValidatorFactory } from '../../vocab-forms/validation';
 import { LogInForm } from './log-in.form';
 
 @Injectable()

@@ -19,7 +19,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { LoggedInAppComponent } from './logged-in-app/logged-in-app.component';
 import { LandingComponent } from './landing/landing.component';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory, ValidationErrorMessageProvider } from './vocab-forms/validation';
+import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory, ValidationErrorMessageProvider } from '../core/validation';
 
 @NgModule({
   declarations: [

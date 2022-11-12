@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
+import { StringLengthValidatorFactory } from '../../../../core/validation';
 import { ControlValidatorVisitor } from '../../../forms';
 import { prepositionMaxLength, prepositionMinLength } from '../../../vocab/models/data/constraints/item-data-constraints';
 import { VocabListItemForm } from '../../models';
-import { StringLengthValidatorFactory } from '../../validation';
 import { IrregularValidationController } from '../core';
 
 @Injectable()

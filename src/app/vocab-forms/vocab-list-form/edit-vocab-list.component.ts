@@ -8,6 +8,7 @@ import { NotificationService } from '../../../core';
 import { NotWellDefinedError } from '../../../core/errors';
 
 import { Undefined } from '../../../core/types';
+import { ValidationErrorMessageProvider } from '../../../core/validation';
 import { addOrAssign } from '../../../utilities';
 import { VocabRoutePath } from '../../shared/routing';
 
@@ -15,7 +16,6 @@ import { VocabList, VocabListItem } from '../../vocab/models';
 import { ResolvedData } from '../../vocab/models/data';
 import { VocabService } from '../../vocab/services';
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
-import { ValidationErrorMessageProvider } from '../validation';
 import { AbstractVocabListFormComponent } from './abstract-vocab-list-form';
 
 @Component({

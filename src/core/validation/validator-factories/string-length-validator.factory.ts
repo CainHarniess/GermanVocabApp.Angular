@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { AbstractStringLengthValidatorFactory } from "./abstract-string-length-validator.factory";
-import { ValidationError } from "./validation-result";
-import { maxLength, minLength } from "./validator-names";
+import { AbstractStringLengthValidatorFactory } from ".";
+import { ValidationError } from "../";
+import { maxLength, minLength } from "../validator-names";
 
 @Injectable()
 export class StringLengthValidatorFactory extends AbstractStringLengthValidatorFactory {

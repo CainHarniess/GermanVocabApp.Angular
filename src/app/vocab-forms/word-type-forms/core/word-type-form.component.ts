@@ -6,7 +6,7 @@ import { FollowingControlValidatorOptions, FollowingControlValidatorVisitor } fr
 import { VocabListItem } from '../../../vocab/models';
 import { isIrregular } from '../../../vocab/utilities';
 import { VocabListItemForm } from '../../models';
-import { ValidationErrorMessageProvider } from '../../validation';
+import { ValidationErrorMessageProvider } from '../../../../core/validation';
 import { DropDownOptions } from '../drop-down-options.class';
 
 export type NullableString = string | null;

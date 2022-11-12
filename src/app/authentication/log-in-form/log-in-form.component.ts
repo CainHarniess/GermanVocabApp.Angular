@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { LogInForm, LogInFormBuilder } from '.';
 import { NotificationService } from '../../../core';
 import { LogService } from '../../../core/logging';
+import { ValidationErrorMessageProvider } from '../../../core/validation';
 import { FormComponent } from '../../forms';
-import { ValidationErrorMessageProvider } from '../../vocab-forms/validation';
 
 @Component({
   selector: 'landing-log-in-form',

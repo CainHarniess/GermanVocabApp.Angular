@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { RequiredStringLengthValidatorFactory } from '../../../core/validation';
 import { ControlValidatorVisitor } from '../../forms';
 
 import { wordMaxLength, wordMinLength } from '../../vocab/models/data/constraints/item-data-constraints';
 import { VocabListItemForm } from '../models/vocab-list-item-form.interface';
-import { RequiredStringLengthValidatorFactory } from '../validation';
 
 @Injectable()
 export class ItemValidationProvider {
