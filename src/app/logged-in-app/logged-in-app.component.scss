@@ -1,0 +1,70 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.side-nav.left {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+div.nav-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: flex;
+  width: 100%;
+  height: 75px;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 16px;
+}
+
+mat-icon {
+  margin: 0 20px 0 0;
+}
+
+.tool-bar.header mat-icon {
+  margin: 0;
+}
+
+.nav-item-title-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-item-title-content mat-icon {
+  display: flex;
+  margin: 0;
+}
+
+.nav-item-title-content button {
+  display: flex;
+  min-width: 44px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item-title-content > h1 {
+  display: flex;
+  margin: 0;
+}
+
+.main-content-container {
+  display: flex;
+  height: 819px;
+}

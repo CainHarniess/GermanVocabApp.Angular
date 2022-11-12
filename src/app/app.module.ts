@@ -11,16 +11,22 @@ import { NotificationService } from '../core';
 import { ConsoleLogger, ConsoleLogWriter, Logger, LogService, Severity, SeverityStringConverter } from '../core/logging';
 import { MatSnackBarService } from './angular-material';
 import { AppRoutingModule } from './app-routing.module';
+import { ApplicationContainerComponent } from './application-container/application-container.component';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeModule } from './home/home.module';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { LoggedInAppComponent } from './logged-in-app/logged-in-app.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
+    ApplicationContainerComponent,
     AppComponent,
     FooterComponent,
     LoadingSpinnerComponent,
+    LoggedInAppComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,

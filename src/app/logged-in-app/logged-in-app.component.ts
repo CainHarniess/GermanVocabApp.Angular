@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { filter, map, Observable, startWith } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'logged-in-app',
+  templateUrl: './logged-in-app.component.html',
+  styleUrls: ['./logged-in-app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class LoggedInAppComponent implements OnInit {
   constructor(private readonly router: Router) {
 
   }
@@ -28,6 +28,7 @@ export class AppComponent {
         startWith(false),
       )
   }
+
 
   private isRelevantNavigationEvent(e: Event): boolean {
     return e instanceof NavigationStart
