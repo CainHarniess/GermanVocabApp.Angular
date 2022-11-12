@@ -15,6 +15,7 @@ import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuil
 import { RequiredIfTouchedErrorStateMatcher, ValidationErrorMessageProvider } from "../validation";
 
 @Directive()
+  //TODO: Update to inherit destroy$ from base component.
 export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
   protected readonly destroy$ = new Subject<boolean>();
 
