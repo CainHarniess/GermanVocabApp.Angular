@@ -2,18 +2,21 @@ import { Injectable } from '@angular/core';
 
 import { GuidGeneratorService } from '../../shared/services/guid-generator.service';
 
-import { EMPTY, map, Observable, of, tap } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { NotFoundError, UnexpectedIdError } from '../../../core/errors';
+import { map, Observable, of, tap, throwError } from 'rxjs';
+import { catchError, delay } from 'rxjs/operators';
+import { InMemoryDataProvider, VocabService } from '.';
+import { NotFoundError } from '../../../core/errors';
 import { isNullOrUndefined } from '../../../utilities';
 import { VocabList, VocabListItem } from '../models';
-import { InMemoryDataProvider, VocabService } from '.';
+import { NotificationService } from '../../../core';
 
 @Injectable()
 export class InMemoryVocabService extends VocabService {
-  public readonly lists: VocabList[]; 
+  private readonly delayMs: number = 500;
+  public readonly lists: VocabList[];
 
-  constructor(private guidGenerator: GuidGeneratorService,
+  constructor(private readonly guidGenerator: GuidGeneratorService,
+    private readonly notificationService: NotificationService,
     inMemoryDataProvider: InMemoryDataProvider) {
     super();
     this.lists = inMemoryDataProvider.seed();
@@ -22,29 +25,43 @@ export class InMemoryVocabService extends VocabService {
   public override get(): Observable<VocabList[]> {
     return of(this.lists)
       .pipe(
-        delay(500),
+        delay(this.delayMs),
+        catchError((e: any, caught: Observable<VocabList[]>) => {
+          this.notificationService.error("Unable to retrieve vocab lists.");
+          return throwError(() => e);
+        }),
       );
   }
 
   public override getWithId(id: string): Observable<VocabList> {
-    const index: number = this.findIndex(id);
-
-    return of(this.lists[index])
+    return of(id)
       .pipe(
-        delay(500),
+        delay(this.delayMs),
+        map((id: string) => this.findIndex(id)),
+        map((index: number) => this.lists[index]),
+        catchError((e: any, caught: Observable<VocabList>) => {
+          this.notificationService.error(`Unable to find list with ID ${id}`);
+          return throwError(() => e);
+        }),
       );
   }
 
   public override add(vocabList: VocabList): Observable<string> {
-    vocabList.id = this.guidGenerator.generate();
-
-    vocabList.listItems.forEach(li => {
-      li.id = this.guidGenerator.generate();
-      li.vocabListId = vocabList.id;
-    });
-
-    this.lists.push(vocabList);
-    return of(vocabList.id);
+    return of(vocabList)
+      .pipe(
+        delay(this.delayMs),
+        tap((vl: VocabList) => vl.id = this.guidGenerator.generate()),
+        tap((vl: VocabList) => vl.listItems.forEach(li => {
+          li.id = this.guidGenerator.generate();
+          li.vocabListId = vl.id;
+        })),
+        tap((vl: VocabList) => this.lists.push(vl)),
+        map((vl: VocabList) => vl.id!),
+        catchError((e: any, caught: Observable<string>) => {
+          this.notificationService.error(`Error occured when creating list ${vocabList.name}`);
+          return throwError(() => e);
+        }),
+      );
   }
 
   public override addListItem(listItem: VocabListItem, listId: string): Observable<string> {
@@ -72,14 +89,19 @@ export class InMemoryVocabService extends VocabService {
       );
   }
 
-  public override update(id: string, updatedList: VocabList): Observable<void> {
-    if (!updatedList.id) {
-      throw new UnexpectedIdError(`Vocab list it ID ${updatedList.id} provided when an a null or undefined value is expected.`);
-    }
-    const index: number = this.findIndex(id);
-    updatedList.id = id;
-    this.lists[index] = updatedList;
-    return EMPTY;
+  public override update(listId: string, updatedList: VocabList): Observable<void> {
+    return of(listId)
+      .pipe(
+        delay(this.delayMs),
+        tap((id: string) => updatedList.id = id),
+        map((id: string) => this.findIndex(id)),
+        tap((index: number) => this.lists[index] = updatedList),
+        map((index: number) => void 0),
+        catchError((e: any, caught: Observable<void>) => {
+          this.notificationService.error(`Error occured when updating list ${updatedList.name}`);
+          return throwError(() => e);
+        }),
+    );
   }
 
   private findIndex(id: string): number {
