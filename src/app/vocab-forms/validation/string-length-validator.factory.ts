@@ -14,7 +14,7 @@ export class StringLengthValidatorFactory extends AbstractStringLengthValidatorF
 }
 
 function lengthRange(control: AbstractControl<string | null>, lower: number, upper: number): ValidationErrors | null {
-  const value: string | null = control?.value;
+  const value: string | null = control.value;
   if (value === null) {
     return null;
   }

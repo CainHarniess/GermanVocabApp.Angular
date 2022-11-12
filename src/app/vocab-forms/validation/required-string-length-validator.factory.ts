@@ -13,7 +13,7 @@ export class RequiredStringLengthValidatorFactory extends AbstractStringLengthVa
 }
 
 function requiredWithLengthRange(control: AbstractControl<any, any>, minLength: number, maxLength: number): ValidationErrors | null {
-  const value: any = control?.value;
+  const value: any = control.value;
   if (value === null) {
     return new ValidationError("required", "Input must be provided.");
   }
