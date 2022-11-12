@@ -3,7 +3,7 @@ import { ControlValidatorVisitor } from '../../../forms';
 import { VocabListItemForm } from '../../models';
 
 export abstract class WordTypeValidationController {
-  public constructor(protected readonly validationVisitor: ControlValidatorVisitor) {
+  protected constructor(protected readonly validationVisitor: ControlValidatorVisitor) {
 
   }
 
