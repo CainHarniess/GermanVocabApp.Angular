@@ -1,0 +1,16 @@
+<form class="sign-in">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <!--<input formControlName="username" matInput [errorStateMatcher]="requiredIfTouched">-->
+    <input formControlName="username" matInput>
+    <!--<mat-error *ngIf="nameValidationMessage$ | async as message">{{ message }}</mat-error>-->
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Passwordab</mat-label>
+    <!--<input formControlName="username" matInput [errorStateMatcher]="requiredIfTouched">-->
+    <input formControlName="password" matInput>
+    <!--<mat-error *ngIf="nameValidationMessage$ | async as message">{{ message }}</mat-error>-->
+  </mat-form-field>
+  <!--<button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Sign in</button>-->
+  <button class="sign-in-button" mat-raised-button color="primary" type="submit">Sign in</button>
+</form>

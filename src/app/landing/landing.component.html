@@ -5,26 +5,11 @@
     </div>
     <mat-divider class="log-in-header-divider"></mat-divider>
     <div class="log-in-form">
-      <form class="sign-in">
-        <mat-form-field appearance="fill">
-          <mat-label>Username</mat-label>
-          <!--<input formControlName="username" matInput [errorStateMatcher]="requiredIfTouched">-->
-          <input formControlName="username" matInput>
-          <!--<mat-error *ngIf="nameValidationMessage$ | async as message">{{ message }}</mat-error>-->
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Passwordab</mat-label>
-          <!--<input formControlName="username" matInput [errorStateMatcher]="requiredIfTouched">-->
-          <input formControlName="password" matInput>
-          <!--<mat-error *ngIf="nameValidationMessage$ | async as message">{{ message }}</mat-error>-->
-        </mat-form-field>
-        <!--<button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Sign in</button>-->
-        <button class="sign-in-button" mat-raised-button color="primary" type="submit">Sign in</button>
-      </form>
+      <landing-log-in-form></landing-log-in-form>
     </div>
     <mat-divider></mat-divider>
     <div class="auth-actions-container">
-      <a >Forgotten password?</a>
+      <a>Forgotten password?</a>
     </div>
     <mat-divider></mat-divider>
     <button mat-stroked-button type="button">Create account</button>

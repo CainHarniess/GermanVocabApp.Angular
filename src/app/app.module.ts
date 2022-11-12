@@ -18,6 +18,7 @@ import { HomeModule } from './home/home.module';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { LoggedInAppComponent } from './logged-in-app/logged-in-app.component';
 import { LandingComponent } from './landing/landing.component';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { LandingComponent } from './landing/landing.component';
     HttpClientModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    AuthenticationModule,
     HomeModule,
     AppRoutingModule,
   ],
