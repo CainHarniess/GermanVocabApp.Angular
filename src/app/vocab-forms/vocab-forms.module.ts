@@ -33,6 +33,7 @@ import {
     VocabAppFormsModule,
   ],
   exports: [
+    // TODO: Review why this is exported but the edit component is not.
     AddVocabListFormComponent,
   ],
   providers: [
