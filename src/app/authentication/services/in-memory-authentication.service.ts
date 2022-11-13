@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
 import { AuthenticationService, InMemoryUserDataProvider } from '.';
 import { InMemoryService } from '../../../core';
-import { Undefined } from '../../../core/types';
 import { User } from '../../shared/models';
 import { UserCredentials } from '../models';
 
@@ -16,20 +15,18 @@ export class InMemoryAuthenticationService extends InMemoryService
     this.users = dataProvider.provide();
   }
 
-  public authenticate(credentials: UserCredentials): Observable<boolean> {
-    const result: boolean = this.authenticateInternal(credentials);
-    return of(result).pipe(delay(this.delayMs));
+  private _currentUser?: User;
+  public get currentUser(): User | undefined {
+    return this._currentUser;
   }
 
-  private authenticateInternal(credentials: UserCredentials): boolean {
-    const user: Undefined<User> = this.users.find(u => u.username === credentials.username);
-    if (!user) {
-      return false;
-    }
+  public get isAuthenticated(): boolean {
+    return this.currentUser !== undefined;
+  }
 
-    if (user.password !== credentials.password) {
-      return false;
-    }
-    return true;
+  public authenticate(credentials: UserCredentials): Observable<User | undefined> {
+    const user: User | undefined = this.users.find(u => u.username === credentials.username
+                                                     && u.password === credentials.password);
+    return of(user).pipe(delay(this.delayMs));
   }
 }

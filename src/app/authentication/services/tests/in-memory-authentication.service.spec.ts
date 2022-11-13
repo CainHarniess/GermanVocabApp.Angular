@@ -28,8 +28,8 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
         username: "ChrisAllen",
         password: "password1",
       };
-      service.authenticate(credentials).subscribe((result: boolean) => {
-        expect(result).toBeFalse();
+      service.authenticate(credentials).subscribe((result: User | undefined) => {
+        expect(result).toBeUndefined();
       });
     }));
 
@@ -38,8 +38,8 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
         username: validUser.username,
         password: "nigel",
       };
-      service.authenticate(credentials).subscribe((result: boolean) => {
-        expect(result).toBeFalse();
+      service.authenticate(credentials).subscribe((result: User | undefined) => {
+        expect(result).toBeUndefined();
       });
     }));
 
@@ -48,8 +48,8 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
         username: validUser.username,
         password: validUser.password,
       };
-      service.authenticate(credentials).subscribe((result: boolean) => {
-        expect(result).toBeTrue();
+      service.authenticate(credentials).subscribe((result: User | undefined) => {
+        expect(result).toBeDefined();
       });
     }));
   });

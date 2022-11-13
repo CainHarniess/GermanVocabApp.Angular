@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, takeUntil } from 'rxjs';
 import { LogInForm, LogInFormBuilder } from '.';
-import { NotificationService } from '../../../core';
 import { LogService } from '../../../core/logging';
 import { ValidationErrorMessageProvider } from '../../../core/validation';
 import { FormComponent } from '../../forms';
+import { User } from '../../shared/models';
 import { UserCredentials } from '../models';
 import { AuthenticationService } from '../services';
 
@@ -37,14 +36,14 @@ export class LogInFormComponent extends FormComponent<LogInForm>  {
     this.form = this.logInFormBuilder.build();
   }
 
-  @Output() public readonly submitted = new EventEmitter<boolean>();
+  @Output() public readonly submitted = new EventEmitter<User | undefined>();
   public submit(): void {
     const userCredentials: UserCredentials = this.form.value as UserCredentials;
     this.authService.authenticate(userCredentials)
       .pipe(
         takeUntil(this.destroy$),
-    ).subscribe((result: boolean) => {
-        this.submitted.emit(result);
+    ).subscribe((user: User | undefined) => {
+        this.submitted.emit(user);
       });
   }
 }

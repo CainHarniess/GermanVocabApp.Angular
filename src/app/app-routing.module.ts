@@ -1,6 +1,7 @@
 //Stryker disable all
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserAuthorisationGuard } from './authentication/route-guards';
 import { HomeComponent } from './home/home.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoggedInAppComponent } from './logged-in-app/logged-in-app.component';
@@ -28,7 +29,8 @@ const routes: Routes = [
         loadChildren: () => import('./testing/testing.module').then(m => m.TestingModule)
       },
       { path: "", redirectTo: "home", pathMatch: "full" },
-    ]
+    ],
+    canActivate: [UserAuthorisationGuard],
   },
   { path: "", redirectTo: "landing", pathMatch: "full" },
 ];

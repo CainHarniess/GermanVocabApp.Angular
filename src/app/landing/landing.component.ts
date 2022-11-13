@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../core';
+import { User } from '../shared/models';
+import { ApplicationRoutePath } from '../shared/routing';
 
 @Component({
   selector: 'app-landing',
@@ -8,22 +10,18 @@ import { NotificationService } from '../../core';
   styleUrls: ['./landing.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LandingComponent implements OnInit {
-
+export class LandingComponent {
   constructor(private readonly router: Router,
     private readonly notificationService: NotificationService) {
 
   }
 
-  ngOnInit(): void {
-  }
-
-  public onLogIn(result: boolean): void {
-    if (!result) {
+  public onLogIn(user: User | undefined): void {
+    if (!user) {
       this.notificationService.error("Unable to log you in, bro.");
       return;
     }
     this.notificationService.success("Log-in successful.");
-    this.router.navigate(['logged-in']);
+    this.router.navigate([ApplicationRoutePath.Root]);
   }
 }
