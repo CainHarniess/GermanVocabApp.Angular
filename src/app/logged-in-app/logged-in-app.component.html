@@ -3,11 +3,11 @@
                [fixedInViewport]="true" [fixedTopGap]="64" [fixedBottomGap]="64">
     <div class="nav-container">
       <div class="nav-group">
-        <a mat-button class="nav-item" [routerLink]="['/vocab']">
+        <a mat-button class="nav-item" [routerLink]="['/logged-in', 'vocab']">
           <mat-icon aria-hidden="false" aria-label="Vocab" fontIcon="translate"></mat-icon>
           Vocab
         </a>
-        <a mat-button class="nav-item" [routerLink]="['/testing', 'dashboard']">
+        <a mat-button class="nav-item" [routerLink]="['/logged-in', 'testing', 'dashboard']">
           <mat-icon aria-hidden="false" aria-label="Tests" fontIcon="quiz"></mat-icon>
           Testing
         </a>

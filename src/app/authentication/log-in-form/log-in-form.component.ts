@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 import { LogInForm, LogInFormBuilder } from '.';
 import { NotificationService } from '../../../core';
 import { LogService } from '../../../core/logging';
 import { ValidationErrorMessageProvider } from '../../../core/validation';
 import { FormComponent } from '../../forms';
+import { UserCredentials } from '../models';
 import { AuthenticationService } from '../services';
 
 @Component({
@@ -18,7 +19,6 @@ export class LogInFormComponent extends FormComponent<LogInForm>  {
 
   constructor(logService: LogService, errorMessageProvider: ValidationErrorMessageProvider,
     private readonly router: Router,
-    private readonly notificationService: NotificationService,
     private readonly logInFormBuilder: LogInFormBuilder,
     private readonly authService: AuthenticationService) {
     super(logService, errorMessageProvider);
@@ -39,6 +39,18 @@ export class LogInFormComponent extends FormComponent<LogInForm>  {
   }
 
   public submit(): void {
-    console.log("Submitted.");
+    const userCredentials: UserCredentials = this.form.value as UserCredentials;
+    this.authService.authenticate(userCredentials)
+      .pipe(
+        takeUntil(this.destroy$),
+      ).subscribe((result: boolean) => {
+        console.log((result) ? "Success" : "Failure");
+
+        if (!result) {
+          return;
+        }
+
+        this.router.navigate(['logged-in']);
+      });
   }
 }
