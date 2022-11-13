@@ -10,36 +10,3 @@
   flex-direction: column;
   width: 300px;
 }
-
-.tool-bar.header mat-icon {
-  margin: 0;
-}
-
-.nav-item-title-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.nav-item-title-content mat-icon {
-  display: flex;
-  margin: 0;
-}
-
-.nav-item-title-content button {
-  display: flex;
-  min-width: 44px;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-item-title-content > h1 {
-  display: flex;
-  margin: 0;
-}
-
-.main-content-container {
-  display: flex;
-  height: 819px;
-}

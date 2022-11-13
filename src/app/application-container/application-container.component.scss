@@ -11,6 +11,10 @@
   left: 0;
 }
 
+.tool-bar.header mat-icon {
+  margin: 0;
+}
+
 .tool-bar.footer {
   display: flex;
   position: fixed;
