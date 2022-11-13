@@ -1,5 +1,5 @@
+import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory } from "../../../core/validation";
 import { VocabListFormValidationProvider } from "../services";
-import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory } from "../validation";
 
 export class ListFormValidationProviderFactory {
   public create(): VocabListFormValidationProvider {

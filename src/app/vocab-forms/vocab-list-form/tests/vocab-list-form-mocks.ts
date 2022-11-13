@@ -1,5 +1,5 @@
+import { ValidationErrorMessageProvider } from "../../../../core/validation";
 import { VocabList } from "../../../vocab/models";
-import { ValidationErrorMessageProvider } from "../../validation";
 
 export interface VocabListFormComponentMocks {
   router: any;
