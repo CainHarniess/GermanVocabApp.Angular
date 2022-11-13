@@ -1,4 +1,4 @@
-import { waitForAsync } from "@angular/core/testing";
+import { fakeAsync, tick, waitForAsync } from "@angular/core/testing";
 import { User } from "../../../shared/models";
 import { UserCredentials } from "../../models";
 import { InMemoryAuthenticationService } from "../in-memory-authentication.service";
@@ -23,7 +23,7 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
   });
 
   describe("authenticate", () => {
-    it("Should return false if there is no user with the given username.", waitForAsync(() => {
+    it("Should return undefined if there is no user with the given username.", fakeAsync(() => {
       const credentials: UserCredentials = {
         username: "ChrisAllen",
         password: "password1",
@@ -31,9 +31,10 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
       service.authenticate(credentials).subscribe((result: User | undefined) => {
         expect(result).toBeUndefined();
       });
+      tick(500);
     }));
 
-    it("Should return false if the password is incorrect.", waitForAsync(() => {
+    it("Should return undefined if the password is incorrect.", fakeAsync(() => {
       const credentials: UserCredentials = {
         username: validUser.username,
         password: "nigel",
@@ -41,9 +42,10 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
       service.authenticate(credentials).subscribe((result: User | undefined) => {
         expect(result).toBeUndefined();
       });
+      tick(500);
     }));
 
-    it("Should return true if the credentials match.", waitForAsync(() => {
+    it("Should return the user if the credentials match.", fakeAsync(() => {
       const credentials: UserCredentials = {
         username: validUser.username,
         password: validUser.password,
@@ -51,6 +53,18 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
       service.authenticate(credentials).subscribe((result: User | undefined) => {
         expect(result).toBeDefined();
       });
+      tick(500);
+    }));
+
+    it("Should set the current user property if the credentials match.", fakeAsync(() => {
+      const credentials: UserCredentials = {
+        username: validUser.username,
+        password: validUser.password,
+      };
+      service.authenticate(credentials).subscribe((result: User | undefined) => {
+        expect(service.currentUser).toBe(validUser);
+      });
+      tick(500);
     }));
   });
 });

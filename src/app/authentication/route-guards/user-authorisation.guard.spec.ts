@@ -6,7 +6,7 @@ import { AuthenticationService } from '../services';
 import { UserAuthorisationGuard } from './user-authorisation.guard';
 
 
-fdescribe('UserAuthorisationGuard', () => {
+describe('UserAuthorisationGuard', () => {
   let guard: UserAuthorisationGuard;
   let mockAuthenticationService: any;
   let mockNotificationService: any;
