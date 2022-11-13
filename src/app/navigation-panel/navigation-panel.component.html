@@ -18,9 +18,14 @@
     <mat-icon aria-hidden="false" aria-label="Settings" fontIcon="settings"></mat-icon>
     Settings
   </a>
-  <a mat-button class="nav-item">
-    <mat-icon aria-hidden="false" aria-label="Log in" fontIcon="login"></mat-icon>
-    <mat-icon aria-hidden="false" aria-label="Log out" fontIcon="logout"></mat-icon>
-    Log in/out
-  </a>
+  <ng-container *ngrxLet="isLoggedIn$ as isLoggedIn" [ngSwitch]="isLoggedIn">
+      <a *ngSwitchCase="true" mat-button class="nav-item">
+        <mat-icon aria-hidden="false" aria-label="Log out" fontIcon="logout"></mat-icon>
+        Log out
+      </a>
+      <a *ngSwitchCase="false" mat-button class="nav-item">
+        <mat-icon aria-hidden="false" aria-label="Log in" fontIcon="login"></mat-icon>
+        Log in
+      </a>
+  </ng-container>
 </div>

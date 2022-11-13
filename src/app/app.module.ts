@@ -21,6 +21,7 @@ import { LandingComponent } from './landing/landing.component';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory, ValidationErrorMessageProvider } from '../core/validation';
 import { NavigationPanelComponent } from './navigation-panel/navigation-panel.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { NavigationPanelComponent } from './navigation-panel/navigation-panel.co
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SharedModule,
     AngularMaterialModule,
     AuthenticationModule,
     HomeModule,
