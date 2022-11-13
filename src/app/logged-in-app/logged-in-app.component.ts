@@ -10,10 +10,6 @@ import { ApplicationRoutePath, TestingRoutePath, VocabRoutePath } from '../share
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoggedInAppComponent implements OnInit {
-  public readonly AppRoutePath: typeof ApplicationRoutePath = ApplicationRoutePath;
-  public readonly VocabRoutePath: typeof VocabRoutePath = VocabRoutePath;
-  public readonly TestingRoutePath: typeof TestingRoutePath = TestingRoutePath;
-
   constructor(private readonly router: Router) {
 
   }

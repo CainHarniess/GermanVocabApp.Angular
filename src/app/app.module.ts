@@ -20,6 +20,7 @@ import { LoggedInAppComponent } from './logged-in-app/logged-in-app.component';
 import { LandingComponent } from './landing/landing.component';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory, ValidationErrorMessageProvider } from '../core/validation';
+import { NavigationPanelComponent } from './navigation-panel/navigation-panel.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory, Val
     LoadingSpinnerComponent,
     LandingComponent,
     LoggedInAppComponent,
+    NavigationPanelComponent,
   ],
   imports: [
     BrowserModule,
