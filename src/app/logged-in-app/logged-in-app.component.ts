@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { filter, map, Observable, startWith } from 'rxjs';
+import { ApplicationRoutePath, TestingRoutePath, VocabRoutePath } from '../shared/routing';
 
 @Component({
   selector: 'logged-in-app',
@@ -9,6 +10,10 @@ import { filter, map, Observable, startWith } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoggedInAppComponent implements OnInit {
+  public readonly AppRoutePath: typeof ApplicationRoutePath = ApplicationRoutePath;
+  public readonly VocabRoutePath: typeof VocabRoutePath = VocabRoutePath;
+  public readonly TestingRoutePath: typeof TestingRoutePath = TestingRoutePath;
+
   constructor(private readonly router: Router) {
 
   }

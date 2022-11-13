@@ -4,12 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoggedInAppComponent } from './logged-in-app/logged-in-app.component';
-import { TestingRoutePath, VocabRoutePath } from './shared/routing';
+import { ApplicationRoutePath, TestingRoutePath, VocabRoutePath } from './shared/routing';
 
 const routes: Routes = [
-  { path: "landing", title: "German Vocab App | Landing", component: LandingComponent },
   {
-    path: "logged-in",
+    path: ApplicationRoutePath.Landing,
+    title: "German Vocab App | Landing",
+    component: LandingComponent
+  },
+  {
+    path: ApplicationRoutePath.Root,
     component: LoggedInAppComponent,
     children: [
       { path: "home", title: "German Vocab App | Home", component: HomeComponent },
