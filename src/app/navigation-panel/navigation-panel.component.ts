@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthenticationService } from '../authentication/services';
 import { ApplicationRoutePath, TestingRoutePath, VocabRoutePath } from '../shared/routing';
 

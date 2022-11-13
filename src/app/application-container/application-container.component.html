@@ -1,5 +1,6 @@
 <mat-toolbar class="tool-bar header">
-  <button mat-icon-button type="button" aria-label="Menu">
+  <button mat-icon-button type="button" aria-label="Menu"
+          (click)="toggleSideNav()">
     <mat-icon>menu</mat-icon>
   </button>
   <a mat-button [routerLink]="['/home']">

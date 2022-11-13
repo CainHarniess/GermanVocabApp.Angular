@@ -1,12 +1,10 @@
 <mat-sidenav-container class="main-container">
-  <mat-sidenav #sidenav class="side-nav left" opened mode="side"
+  <mat-sidenav #sidenav class="side-nav left" [opened]="isSideNavOpen$ | async" mode="side"
                [fixedInViewport]="true" [fixedTopGap]="64" [fixedBottomGap]="64">
     <app-navigation-panel (loggedOut)="onLogOut()"></app-navigation-panel>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="main-content-container">
-      <router-outlet></router-outlet>
-      <app-loading-spinner *ngIf="(isLoading$ | async)"></app-loading-spinner>
-    </div>
+    <router-outlet></router-outlet>
+    <app-loading-spinner *ngIf="(isLoading$ | async)"></app-loading-spinner>
   </mat-sidenav-content>
 </mat-sidenav-container>

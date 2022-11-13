@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
-import { filter, map, Observable, startWith } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, startWith, Subscription } from 'rxjs';
 import { NotificationService } from '../../core';
+import { EventName, EventService } from '../../core/events';
 import { AuthenticationService } from '../authentication/services';
 import { User } from '../shared/models';
 import { ApplicationRoutePath } from '../shared/routing';
@@ -12,11 +14,13 @@ import { ApplicationRoutePath } from '../shared/routing';
   styleUrls: ['./logged-in-app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoggedInAppComponent implements OnInit {
+export class LoggedInAppComponent implements OnInit, OnDestroy {
+  private readonly eventBusSub: Subscription;
+
   constructor(private readonly router: Router,
     private readonly authenticationService: AuthenticationService,
-    private readonly notificationService: NotificationService) {
-
+    private readonly notificationService: NotificationService, private eventService: EventService) {
+    this.eventBusSub = this.eventService.on(EventName.SideNavToggle, () => this.onToggleSideNav());
   }
 
   public isLoading$!: Observable<boolean>;
@@ -35,6 +39,11 @@ export class LoggedInAppComponent implements OnInit {
       )
   }
 
+  public isSideNavOpen$ = new BehaviorSubject<boolean>(true);
+  public onToggleSideNav(): void {
+    this.isSideNavOpen$.next(!this.isSideNavOpen$.value);
+  }
+
   public onLogOut(): void {
     this.authenticationService.logOut()
       .subscribe((loggedOutUser: User | undefined) => {
@@ -47,6 +56,10 @@ export class LoggedInAppComponent implements OnInit {
         this.router.navigate([ApplicationRoutePath.Landing]);
         this.notificationService.success(`See you later,${salutationWithLeadingSpace}!`);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.eventBusSub.unsubscribe();
   }
 
   private isRelevantNavigationEvent(e: Event): boolean {

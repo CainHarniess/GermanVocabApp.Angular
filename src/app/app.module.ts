@@ -22,6 +22,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory, ValidationErrorMessageProvider } from '../core/validation';
 import { NavigationPanelComponent } from './navigation-panel/navigation-panel.component';
 import { SharedModule } from './shared/shared.module';
+import { EventService } from '../core/events';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { SharedModule } from './shared/shared.module';
     { provide: "minLevel", useValue: Severity.Information },
     { provide: NotificationService, useClass: MatSnackBarService },
     MatSnackBar,
+    EventService,
   ],
   bootstrap: [AppComponent]
 })
