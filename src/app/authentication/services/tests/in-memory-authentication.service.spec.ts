@@ -3,7 +3,7 @@ import { User } from "../../../shared/models";
 import { UserCredentials } from "../../models";
 import { InMemoryAuthenticationService } from "../in-memory-authentication.service";
 
-describe(`${InMemoryAuthenticationService.name}`, () => {
+fdescribe(`${InMemoryAuthenticationService.name}`, () => {
   let service: InMemoryAuthenticationService;
   let dataProvider: any;
   const validUser: User = {
@@ -13,6 +13,10 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
     username: "CainHarniess",
     password: "password",
   };
+  const validCredentials: UserCredentials = {
+    username: validUser.username,
+    password: validUser.password,
+  };
 
   beforeEach(() => {
     dataProvider = {
@@ -20,6 +24,18 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
     };
 
     service = new InMemoryAuthenticationService(dataProvider);
+  });
+
+  describe("isAuthenticated", () => {
+    it("Should return false if the current user is undefined.", () => {
+      expect(service.isAuthenticated).toBeFalse();
+    });
+
+    it("Should return true if the current user is defined.", fakeAsync(() => {
+      service.authenticate(validCredentials).subscribe((result: User | undefined) => { });
+      tick(service.delayMs);
+      expect(service.isAuthenticated).toBeTrue();
+    }));
   });
 
   describe("authenticate", () => {
@@ -31,7 +47,7 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
       service.authenticate(credentials).subscribe((result: User | undefined) => {
         expect(result).toBeUndefined();
       });
-      tick(500);
+      tick(service.delayMs);
     }));
 
     it("Should return undefined if the password is incorrect.", fakeAsync(() => {
@@ -42,7 +58,7 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
       service.authenticate(credentials).subscribe((result: User | undefined) => {
         expect(result).toBeUndefined();
       });
-      tick(500);
+      tick(service.delayMs);
     }));
 
     it("Should return the user if the credentials match.", fakeAsync(() => {
@@ -53,18 +69,29 @@ describe(`${InMemoryAuthenticationService.name}`, () => {
       service.authenticate(credentials).subscribe((result: User | undefined) => {
         expect(result).toBeDefined();
       });
-      tick(500);
+      tick(service.delayMs);
     }));
 
     it("Should set the current user property if the credentials match.", fakeAsync(() => {
-      const credentials: UserCredentials = {
-        username: validUser.username,
-        password: validUser.password,
-      };
-      service.authenticate(credentials).subscribe((result: User | undefined) => {
+      service.authenticate(validCredentials).subscribe((result: User | undefined) => {
         expect(service.currentUser).toBe(validUser);
       });
-      tick(500);
+      tick(service.delayMs);
+    }));
+  });
+
+  describe("logOut", () => {
+    it("Should return undefined if the current user is undefined.", fakeAsync(() => {
+      service.logOut().subscribe((loggedOutUser: User | undefined) => {
+        expect(loggedOutUser).toBeUndefined();
+      });
+    }));
+
+    it("Should return the current user if it is defined.", fakeAsync(() => {
+      service.authenticate(validCredentials);
+      service.logOut().subscribe((loggedOutUser: User | undefined) => {
+        expect(loggedOutUser).toBe(validUser);
+      });
     }));
   });
 });

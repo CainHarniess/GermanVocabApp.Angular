@@ -1,7 +1,7 @@
 <mat-sidenav-container class="main-container">
   <mat-sidenav #sidenav class="side-nav left" opened mode="side"
                [fixedInViewport]="true" [fixedTopGap]="64" [fixedBottomGap]="64">
-    <app-navigation-panel></app-navigation-panel>
+    <app-navigation-panel (loggedOut)="onLogOut()"></app-navigation-panel>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="main-content-container">

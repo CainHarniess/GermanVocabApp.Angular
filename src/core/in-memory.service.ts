@@ -1,3 +1,3 @@
 export abstract class InMemoryService {
-  protected readonly delayMs: number = 500;
+  public readonly delayMs: number = 500;
 }

@@ -15,7 +15,6 @@ import { AuthenticationService } from '../services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogInFormComponent extends FormComponent<LogInForm>  {
-
   constructor(logService: LogService, errorMessageProvider: ValidationErrorMessageProvider,
     private readonly logInFormBuilder: LogInFormBuilder,
     private readonly authService: AuthenticationService) {

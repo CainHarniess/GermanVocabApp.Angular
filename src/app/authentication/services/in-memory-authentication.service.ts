@@ -27,11 +27,19 @@ export class InMemoryAuthenticationService extends InMemoryService
   public authenticate(credentials: UserCredentials): Observable<User | undefined> {
     const user: User | undefined = this.users.find(u => u.username === credentials.username
                                                      && u.password === credentials.password);
-
     if (user) {
       this._currentUser = user;
     }
-
     return of(user).pipe(delay(this.delayMs));
+  }
+
+  public logOut(): Observable<User | undefined> {
+    if (!this.currentUser) {
+      console.error("Unable to log out user that is already logged out.");
+      return of(undefined);
+    }
+    const cachedUser: User = this.currentUser;
+    this._currentUser = undefined;
+    return of(cachedUser);
   }
 }

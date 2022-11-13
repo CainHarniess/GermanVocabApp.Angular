@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { AuthenticationService } from '../authentication/services';
 import { ApplicationRoutePath, TestingRoutePath, VocabRoutePath } from '../shared/routing';
@@ -25,5 +25,10 @@ export class NavigationPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this._isLoggedIn$ = of(this.authenticationService.isAuthenticated);
+  }
+
+  @Output() public readonly loggedOut = new EventEmitter<void>();
+  public logOut(): void {
+    this.loggedOut.emit();
   }
 }

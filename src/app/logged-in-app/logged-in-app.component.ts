@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { filter, map, Observable, startWith } from 'rxjs';
-import { ApplicationRoutePath, TestingRoutePath, VocabRoutePath } from '../shared/routing';
+import { NotificationService } from '../../core';
+import { AuthenticationService } from '../authentication/services';
+import { User } from '../shared/models';
+import { ApplicationRoutePath } from '../shared/routing';
 
 @Component({
   selector: 'logged-in-app',
@@ -10,7 +13,9 @@ import { ApplicationRoutePath, TestingRoutePath, VocabRoutePath } from '../share
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoggedInAppComponent implements OnInit {
-  constructor(private readonly router: Router) {
+  constructor(private readonly router: Router,
+    private readonly authenticationService: AuthenticationService,
+    private readonly notificationService: NotificationService) {
 
   }
 
@@ -30,6 +35,19 @@ export class LoggedInAppComponent implements OnInit {
       )
   }
 
+  public onLogOut(): void {
+    this.authenticationService.logOut()
+      .subscribe((loggedOutUser: User | undefined) => {
+        const salutationWithLeadingSpace: string = (loggedOutUser) ? ` ${loggedOutUser.firstName}` : "";
+
+        if (!loggedOutUser) {
+          this.notificationService.error(`Sorry${salutationWithLeadingSpace}, unable to log you out.`);
+          return;
+        }
+        this.router.navigate([ApplicationRoutePath.Landing]);
+        this.notificationService.success(`See you later,${salutationWithLeadingSpace}!`);
+      });
+  }
 
   private isRelevantNavigationEvent(e: Event): boolean {
     return e instanceof NavigationStart
