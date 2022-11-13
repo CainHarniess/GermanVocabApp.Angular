@@ -27,8 +27,8 @@ import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory, Val
     AppComponent,
     FooterComponent,
     LoadingSpinnerComponent,
-    LoggedInAppComponent,
     LandingComponent,
+    LoggedInAppComponent,
   ],
   imports: [
     BrowserModule,

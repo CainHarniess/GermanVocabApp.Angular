@@ -6,6 +6,7 @@ import { NotificationService } from '../../../core';
 import { LogService } from '../../../core/logging';
 import { ValidationErrorMessageProvider } from '../../../core/validation';
 import { FormComponent } from '../../forms';
+import { AuthenticationService } from '../services';
 
 @Component({
   selector: 'landing-log-in-form',
@@ -14,11 +15,12 @@ import { FormComponent } from '../../forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogInFormComponent extends FormComponent<LogInForm>  {
-  
+
   constructor(logService: LogService, errorMessageProvider: ValidationErrorMessageProvider,
     private readonly router: Router,
     private readonly notificationService: NotificationService,
-    private readonly logInFormBuilder: LogInFormBuilder) {
+    private readonly logInFormBuilder: LogInFormBuilder,
+    private readonly authService: AuthenticationService) {
     super(logService, errorMessageProvider);
   }
 

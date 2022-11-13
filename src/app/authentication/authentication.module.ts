@@ -6,8 +6,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { SharedModule } from '../shared/shared.module';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LogInFormBuilder, LogInFormComponent, LogInFormValidationProvider, LOG_IN_FORM_VALIDATION_PROVIDER } from './log-in-form';
-
-
+import { AuthenticationService, InMemoryAuthenticationService, InMemoryUserDataProvider } from './services';
 
 @NgModule({
   declarations: [
@@ -24,7 +23,9 @@ import { LogInFormBuilder, LogInFormComponent, LogInFormValidationProvider, LOG_
     LogInFormComponent
   ],
   providers: [
-    { provide: LOG_IN_FORM_VALIDATION_PROVIDER, useClass: LogInFormValidationProvider},
+    InMemoryUserDataProvider,
+    { provide: AuthenticationService, useClass: InMemoryAuthenticationService },
+    { provide: LOG_IN_FORM_VALIDATION_PROVIDER, useClass: LogInFormValidationProvider },
     LogInFormBuilder
   ]
 })
