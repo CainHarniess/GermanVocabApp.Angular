@@ -5,7 +5,7 @@
     </div>
     <mat-divider class="log-in-header-divider"></mat-divider>
     <div class="log-in-form">
-      <landing-log-in-form></landing-log-in-form>
+      <landing-log-in-form (submitted)="onLogIn($event)"></landing-log-in-form>
     </div>
     <mat-divider></mat-divider>
     <div class="auth-actions-container">
