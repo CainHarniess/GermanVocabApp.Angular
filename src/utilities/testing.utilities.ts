@@ -11,6 +11,7 @@ export function createStubListItem(wordType?: WordType): VocabListItem {
 
 export function createStubList(): VocabList {
   return {
+    userId: "6c878b8a-dc26-478c-8425-d518a499baaa",
     name: "Stub List",
     listItems: [] as VocabListItem[],
     authorName: "Stubby McStubface",

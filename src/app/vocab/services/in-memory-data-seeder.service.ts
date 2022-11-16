@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { cainUserId, ilkaUserId } from "../../shared/data/users";
 import { VocabList } from "../models";
 import { AuxiliaryVerb, Case, FixedPlurality, Gender, ReflexiveCase, Separability, Transitivity, WordType } from "../models/data";
 
@@ -7,6 +8,7 @@ export class InMemoryDataProvider {
   public seed(): VocabList[] {
     return [{
       id: '83d1b66e-d2e9-9db8-d1f1-3f9027dd5aed',
+      userId: cainUserId,
       name: 'Kitchen',
       description: 'A collection of common kitchen items.',
       listItems: [
@@ -276,6 +278,68 @@ export class InMemoryDataProvider {
         }
       ],
       authorName: "Cain Harniess",
-    }];
+    },
+    {
+      id: '70d61107-380c-45b3-a5e4-6e021e4c2986',
+      userId: cainUserId,
+      name: 'Bedroom',
+      description: 'Things in the room where you sleep.',
+      listItems: [
+        {
+          id: '473573a8-86d7-4b64-8e51-96fead598a7c',
+          wordType: WordType.Noun,
+          isWeakMasculineNoun: false,
+          reflexiveCase: null,
+          separability: null,
+          transitivity: null,
+          thirdPersonPresent: null,
+          thirdPersonImperfect: null,
+          auxiliaryVerb: null,
+          perfect: null,
+          gender: Gender.Neuter,
+          german: 'Bett',
+          plural: "Betten",
+          preposition: null,
+          prepositionCase: null,
+          comparative: null,
+          superlative: null,
+          english: 'bed',
+          vocabListId: '70d61107-380c-45b3-a5e4-6e021e4c2986',
+          fixedPlurality: FixedPlurality.None,
+        },
+      ],
+      authorName: "Cain Harniess",
+      },
+      {
+        id: '658fbe68-faf1-4490-9d12-6bce164e436a',
+        userId: ilkaUserId,
+        name: 'Bathroom',
+        description: 'The cleanest room in the house.',
+        listItems: [
+          {
+            id: 'e8885251-099c-4570-85f2-7da2ab093cad',
+            wordType: WordType.Noun,
+            isWeakMasculineNoun: false,
+            reflexiveCase: null,
+            separability: null,
+            transitivity: null,
+            thirdPersonPresent: null,
+            thirdPersonImperfect: null,
+            auxiliaryVerb: null,
+            perfect: null,
+            gender: Gender.Neuter,
+            german: 'Bad',
+            plural: "Bäder",
+            preposition: null,
+            prepositionCase: null,
+            comparative: null,
+            superlative: null,
+            english: 'bath',
+            vocabListId: '658fbe68-faf1-4490-9d12-6bce164e436a',
+            fixedPlurality: FixedPlurality.None,
+          },
+        ],
+        authorName: "Cain Harniess",
+      }];
   }
 }

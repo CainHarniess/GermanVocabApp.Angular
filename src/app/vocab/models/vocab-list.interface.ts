@@ -1,7 +1,7 @@
-import { Entity } from "../../shared/models/entity.interface";
+import { UserEntity } from "../../shared/models";
 import { VocabListItem } from "./vocab-list-item.interface";
 
-export interface VocabList extends Entity {
+export interface VocabList extends UserEntity {
   name: string,
   description?: string | null,
   listItems: VocabListItem[],

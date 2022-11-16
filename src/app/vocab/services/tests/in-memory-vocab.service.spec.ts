@@ -73,6 +73,7 @@ describe(InMemoryVocabService.name, () => {
 
     xit("Should call the guid generator for the list and each list item.", () => {
       mockVocabList = {
+        userId: "2ceba66a-eb56-4e70-b9a2-8ed03c4c5262",
         name: "Test List",
         listItems: [
           { wordType: WordType.Noun, german: "x", english: "y" },

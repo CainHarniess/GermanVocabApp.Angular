@@ -6,6 +6,7 @@ export class StubVocabListBuilder {
 
   private constructor() {
     this.stub = {
+      userId: "2ceba66a-eb56-4e70-b9a2-8ed03c4c5262",
       name: "Stub Vocab List",
       listItems: [] as VocabListItem[],
       authorName: "Stubby McGee"

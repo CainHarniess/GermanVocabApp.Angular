@@ -6,7 +6,9 @@ import { VocabListComponent } from "./vocab-list.component";
 
 
 describe("VocabListComponent", () => {
+  // TODO: Refactor mock list data creation into shared service
   const mockVocabList: VocabList = {
+    userId: "bce111e3-19c0-43d7-9418-0e52a9236195",
     name: 'Kitchen',
     listItems: [
       {
