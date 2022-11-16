@@ -7,7 +7,7 @@ import { ResolvedData } from "../models/data";
 import { VocabList } from "../models/vocab-list.interface";
 import { VocabListsComponent } from "./vocab-lists.component";
 
-fdescribe("VocabListsComponent", () => {
+describe(`${VocabListsComponent.name}`, () => {
   const stubList: VocabList = StubVocabListBuilder.stub().build();
   const mockVocabLists: VocabList[] = [stubList];
 

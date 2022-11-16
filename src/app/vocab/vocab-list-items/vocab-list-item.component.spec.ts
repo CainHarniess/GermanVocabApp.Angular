@@ -2,7 +2,7 @@ import { WordType } from "../models/data";
 import { VocabListItem } from "../models/vocab-list-item.interface";
 import { VocabListItemComponent } from "./vocab-list-item.component";
 
-describe("VocabListItemComponent", () => {
+describe(`${VocabListItemComponent.name}`, () => {
   let component: VocabListItemComponent;
   let mockItem: VocabListItem;
 
