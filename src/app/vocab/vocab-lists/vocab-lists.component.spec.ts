@@ -1,27 +1,17 @@
 import { waitForAsync } from "@angular/core/testing";
 import { of } from "rxjs";
-import { NotificationService } from "../../../core";
 import { LogContent } from "../../../core/logging";
+import { StubVocabListBuilder } from "../../../testing";
 
-import { ResolvedData, WordType } from "../models/data";
+import { ResolvedData } from "../models/data";
 import { VocabList } from "../models/vocab-list.interface";
 import { VocabListsComponent } from "./vocab-lists.component";
 
-describe("VocabListsComponent", () => {
+fdescribe("VocabListsComponent", () => {
   // TODO: Refactor mock list data creation into shared service
-  const mockVocabLists: VocabList[] = [{
-    userId: "bce111e3-19c0-43d7-9418-0e52a9236195",
-    name: 'Kitchen',
-    listItems: [
-      {
-        id: '473573a8-86d7-4b64-8e51-96fead598a7c',
-        wordType: WordType.Verb,
-        german: 'essen',
-        english: 'to reply, retort',
-      }
-    ],
-    authorName: "Cain Harniess"
-  }];
+  const stubList: VocabList = StubVocabListBuilder.stub().build();
+  const mockVocabLists: VocabList[] = [stubList];
+
   let component: VocabListsComponent;
   let mockRouter: any;
   let mockActivatedRoute: any;

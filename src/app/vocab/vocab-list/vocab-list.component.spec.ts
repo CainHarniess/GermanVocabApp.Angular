@@ -1,10 +1,9 @@
 import { waitForAsync } from "@angular/core/testing";
 import { of } from "rxjs";
 import { StubVocabListBuilder } from "../../../testing";
-import { ResolvedData, WordType } from "../models/data";
+import { ResolvedData } from "../models/data";
 import { VocabList } from "../models/vocab-list.interface";
 import { VocabListComponent } from "./vocab-list.component";
-
 
 describe(`${VocabListComponent.name}`, () => {
   const mockVocabList: VocabList = StubVocabListBuilder.stub().build();
