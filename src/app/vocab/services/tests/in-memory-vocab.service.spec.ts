@@ -2,8 +2,8 @@ import { waitForAsync } from "@angular/core/testing";
 import { Observable } from "rxjs";
 import { InMemoryVocabService } from "..";
 import { createMockNotificationService } from "../../../../core/test-utilities";
+import { StubVocabListItemBuilder } from "../../../../testing";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
-import { createStubListItem } from "../../../../utilities/testing.utilities";
 import { createMockAuthenticationService } from "../../../authentication/test-utilities";
 import { VocabListItem } from "../../models";
 import { WordType } from "../../models/data";
@@ -91,7 +91,7 @@ describe(InMemoryVocabService.name, () => {
     let mockListItemId: string = "a71da95c-5b9f-43ea-acd7-35d1f9fcce29";
 
     beforeEach(() => {
-      stubListItem = createStubListItem();
+      stubListItem =StubVocabListItemBuilder.stub().build();
     });
 
     it("Should throw an error with the correct message"
