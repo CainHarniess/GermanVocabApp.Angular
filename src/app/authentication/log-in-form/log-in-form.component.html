@@ -1,0 +1,17 @@
+<form class="sign-in" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input formControlName="username" matInput>
+    <mat-error *ngIf="usernameMessage$ | async as message">{{ message }}</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input formControlName="password" type="password" matInput>
+    <mat-error *ngIf="passwordMessage$ | async as message">{{ message }}</mat-error>
+  </mat-form-field>
+
+  <button [disabled]="!form.valid" class="sign-in-button" color="primary"
+          type="submit" mat-raised-button>
+    Sign in
+  </button>
+</form>

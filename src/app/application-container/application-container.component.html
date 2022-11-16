@@ -1,0 +1,16 @@
+<mat-toolbar class="tool-bar header">
+  <button mat-icon-button type="button" aria-label="Menu"
+          (click)="toggleSideNav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a mat-button [routerLink]="['/home']">
+    <h1>German Vocab App</h1>
+  </a>
+</mat-toolbar>
+<div class="app-content-container">
+  <ng-content></ng-content>
+</div>
+<mat-toolbar class="tool-bar footer">
+  <span>Content courtesy of Cain Harniess</span>
+</mat-toolbar>
+

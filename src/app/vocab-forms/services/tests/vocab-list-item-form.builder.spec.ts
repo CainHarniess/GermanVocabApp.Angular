@@ -54,7 +54,7 @@ describe("VocabListItemFormBuilder", () => {
     });
   });
 
-  describe("buildFromModel", () => {
+  xdescribe("buildFromModel", () => {
     let tests: TestCase[] = [
       { controlName: "wordType", expectedInitialValue: null },
       { controlName: "isWeakMasculineNoun", expectedInitialValue: null },

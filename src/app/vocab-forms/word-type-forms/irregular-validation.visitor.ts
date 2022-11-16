@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
 import { Observable } from "rxjs";
+import { StringLengthValidatorFactory } from "../../../core/validation";
 import { FollowingControlValidatorOptions, FollowingControlValidatorVisitor } from "../../forms";
 import { wordMaxLength, wordMinLength } from "../../vocab/models/data/constraints/item-data-constraints";
-import { StringLengthValidatorFactory } from "../validation";
 
 @Injectable()
 export class IrregularValidationVisitor {

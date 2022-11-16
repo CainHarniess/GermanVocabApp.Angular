@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-bar.header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.tool-bar.header mat-icon {
+  margin: 0;
+}
+
+.tool-bar.footer {
+  display: flex;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.app-content-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  margin: 64px 0;
+}

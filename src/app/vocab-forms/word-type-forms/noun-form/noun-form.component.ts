@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { filter, map, Observable, of, startWith } from 'rxjs';
 import { FollowingControlValidatorVisitor } from '../../../forms';
 import { FixedPlurality } from '../../../vocab/models/data/fixed-plurality.enum';
-import { ValidationErrorMessageProvider } from '../../validation';
+import { ValidationErrorMessageProvider } from '../../../../core/validation';
 import { WordTypeFormComponent } from '../core';
 
 

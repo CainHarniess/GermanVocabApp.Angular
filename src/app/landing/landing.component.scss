@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  height: 100%;
+}
+
+.log-in-container {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 30%;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 100%;
+  min-width: 500px;
+  background-color: #212121;
+}
+
+.log-in-content-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.log-in-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+mat-divider {
+  height: 100%;
+  margin: 0 0 2vh 0;
+}
+
+.log-in-header-divider {
+  margin-bottom: 10vh;
+}
+
+.auth-actions-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 2vh 0;
+}

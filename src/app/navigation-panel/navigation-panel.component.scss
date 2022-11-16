@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+div.nav-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: flex;
+  width: 100%;
+  height: 75px;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 16px;
+}
+
+mat-icon {
+  margin: 0 20px 0 0;
+}

@@ -57,6 +57,5 @@ export class VocabListsComponent {
   public exportToJson(): void {
     this.logger.trace({ message: `${VocabListsComponent.name} - exportToJson` });
     this.showJson$.next(!this.showJson$.value);
-    this.notificationService.warn("Hi there.");
   }
 }

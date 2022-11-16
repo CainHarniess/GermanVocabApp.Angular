@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
-import { filter, map, Observable, startWith, tap } from 'rxjs';
+import { filter, map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { filter, map, Observable, startWith, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  constructor(private router: Router) {
+  constructor(private readonly router: Router) {
 
   }
 

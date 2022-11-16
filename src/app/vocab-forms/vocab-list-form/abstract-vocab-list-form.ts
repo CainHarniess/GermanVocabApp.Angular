@@ -6,15 +6,16 @@ import { BehaviorSubject, filter, map, Observable, Subject, Subscription } from 
 import { NotificationService } from "../../../core";
 
 import { Undefined } from "../../../core/types";
+import { RequiredIfTouchedErrorStateMatcher, ValidationErrorMessageProvider } from "../../../core/validation";
 import { validateIndex } from "../../../utilities";
 import { VocabList } from "../../vocab/models";
 
 import { VocabService } from '../../vocab/services';
 import { VocabListForm, VocabListItemForm } from "../models";
 import { ListTitleObservableBuilder, VocabListFormBuilder, VocabListItemFormBuilder } from '../services';
-import { RequiredIfTouchedErrorStateMatcher, ValidationErrorMessageProvider } from "../validation";
 
 @Directive()
+  //TODO: Update to inherit destroy$ from base component.
 export abstract class AbstractVocabListFormComponent implements OnInit, OnDestroy {
   protected readonly destroy$ = new Subject<boolean>();
 
@@ -41,7 +42,7 @@ export abstract class AbstractVocabListFormComponent implements OnInit, OnDestro
 
   public ngOnInit(): void {
     this.form = this.listFormBuilder.build();
-    const controls = this.form.controls;
+    const controls: VocabListForm = this.form.controls;
 
     this.nameValidationMessage$ = this.errorMessageProvider.provideFor(controls.name);
 

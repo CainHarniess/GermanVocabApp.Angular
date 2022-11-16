@@ -1,6 +1,6 @@
 import { FormControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { StringLengthValidatorFactory, ValidationError } from "..";
-import { RandomStringGenerator } from "../../../../utilities";
+import { RandomStringGenerator } from "../../../utilities";
 import { maxLength, minLength } from "../validator-names";
 
 // TODO: Update to use class name

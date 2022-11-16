@@ -1,12 +1,12 @@
 import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { of } from "rxjs";
+import { ValidationErrorMessageProvider } from "../../../../core/validation";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
 import { VocabListForm } from "../../models";
 import { VocabListFormBuilder, VocabListFormValidationProvider, VocabListItemFormBuilder } from "../../services";
 import { createMockItemValidationProvider } from "../../services/tests/testing.utilities";
 import { ListFormValidationProviderFactory } from "../../test-utilities";
-import { ValidationErrorMessageProvider } from "../../validation";
 import { MockReturnValues } from "./mock-return-values";
 
 import { VocabListFormComponentMocks } from "./vocab-list-form-mocks";

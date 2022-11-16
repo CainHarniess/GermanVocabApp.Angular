@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory } from '../../../core/validation';
 
 import { descriptionMaxLength, descriptionMinLength, nameMaxLength, nameMinLength } from '../../vocab/models/data/constraints/vocab-list-data-constraints';
 import { VocabListForm } from '../models';
-import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory } from '../validation';
 
 @Injectable()
 export class VocabListFormValidationProvider {
