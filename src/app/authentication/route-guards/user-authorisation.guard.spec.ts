@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { NavigationExtras, Router } from '@angular/router';
 import { NotificationService } from '../../../core';
+import { createMockNotificationService } from '../../../core/test-utilities';
 import { AuthenticationService } from '../services';
+import { createMockAuthenticationService } from '../test-utilities';
 
 import { UserAuthorisationGuard } from './user-authorisation.guard';
-
 
 describe('UserAuthorisationGuard', () => {
   let guard: UserAuthorisationGuard;
@@ -15,15 +16,8 @@ describe('UserAuthorisationGuard', () => {
   let stub: any = { };
 
   beforeEach(() => {
-    mockAuthenticationService = {};
-    Object.defineProperty(mockAuthenticationService, "isAuthenticated", {
-      configurable: true,
-      get: () => true,
-    });
-
-    mockNotificationService = {
-      error: (message: string) => "Hi",
-    };
+    mockAuthenticationService = createMockAuthenticationService();
+    mockNotificationService = createMockNotificationService();
 
     mockRouter = {
       navigate: (commands: any[], extras?: NavigationExtras) => { },
@@ -33,7 +27,7 @@ describe('UserAuthorisationGuard', () => {
       providers: [
         { provide: Router, useValue: mockRouter },
         { provide: AuthenticationService, useValue: mockAuthenticationService as AuthenticationService },
-        { provide: NotificationService, useValue: mockNotificationService },
+        { provide: NotificationService, useValue: mockNotificationService as NotificationService },
       ],
     });
     guard = TestBed.inject(UserAuthorisationGuard);

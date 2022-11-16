@@ -1,6 +1,8 @@
 export function createMockNotificationService(): any {
   return {
-    error: (message: string) => { },
+    info: (message: string) => { },
     success: (message: string) => { },
+    warn: (message: string) => { },
+    error: (message: string) => { },
   }
 }

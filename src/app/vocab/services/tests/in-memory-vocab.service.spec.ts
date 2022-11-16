@@ -147,6 +147,7 @@ describe(InMemoryVocabService.name, () => {
     const listStub: VocabList = StubVocabListBuilder.stub().withId(mockListGuid).build();
     const mockSeedData: VocabList[] = [listStub];
     mockDataSeeder.seed.and.returnValue(mockSeedData);
-    return new InMemoryVocabService(mockGuidGenerator, createMockNotificationService(), mockDataSeeder);
+    return new InMemoryVocabService(mockGuidGenerator, createMockNotificationService(),
+      createMockAuthenticationService(), mockDataSeeder);
   }
 });
