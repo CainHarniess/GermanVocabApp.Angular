@@ -16,8 +16,7 @@ import { ResolvedData } from '../models/data';
 })
 export class VocabListsComponent {
   constructor(private readonly logger: LogService,
-    private router: Router, private route: ActivatedRoute,
-    private readonly notificationService: NotificationService) {
+    private router: Router, private route: ActivatedRoute) {
 
   }
 
