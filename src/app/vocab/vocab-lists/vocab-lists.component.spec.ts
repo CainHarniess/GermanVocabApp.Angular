@@ -29,20 +29,13 @@ describe("VocabListsComponent", () => {
     trace: (content: LogContent) => { },
     debug: (content: LogContent) => { },
   };
-  let mockNotificationService: NotificationService = {
-    info: (message: string) => { },
-    success: (message: string) => { },
-    warn: (message: string) => { },
-    error: (message: string) => { },
-  }
 
   beforeEach(() => {
     const mockData: { [key: string]: VocabList[] } = {};
     mockData[ResolvedData.ResolvedLists] = mockVocabLists;
     mockRouter = jasmine.createSpyObj("mockRouter", ["navigate"]);
     mockActivatedRoute = jasmine.createSpyObj("mockActivatedRoute", [], { data: of(mockData) });
-    component = new VocabListsComponent(mockLogService, mockRouter, mockActivatedRoute,
-      mockNotificationService);
+    component = new VocabListsComponent(mockLogService, mockRouter, mockActivatedRoute);
   });
 
   describe("vocabListsDisplay$", () => {

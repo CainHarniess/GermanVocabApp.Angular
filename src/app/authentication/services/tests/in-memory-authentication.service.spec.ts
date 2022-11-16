@@ -3,7 +3,7 @@ import { User } from "../../../shared/models";
 import { UserCredentials } from "../../models";
 import { InMemoryAuthenticationService } from "../in-memory-authentication.service";
 
-fdescribe(`${InMemoryAuthenticationService.name}`, () => {
+describe(`${InMemoryAuthenticationService.name}`, () => {
   let service: InMemoryAuthenticationService;
   let dataProvider: any;
   const validUser: User = {

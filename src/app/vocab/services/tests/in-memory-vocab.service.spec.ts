@@ -4,6 +4,7 @@ import { InMemoryVocabService } from "..";
 import { createMockNotificationService } from "../../../../core/test-utilities";
 import { StubVocabListBuilder } from "../../../../testing/stub-vocab-list-builder";
 import { createStubListItem } from "../../../../utilities/testing.utilities";
+import { createMockAuthenticationService } from "../../../authentication/test-utilities";
 import { VocabListItem } from "../../models";
 import { WordType } from "../../models/data";
 import { VocabList } from "../../models/vocab-list.interface";
@@ -16,6 +17,7 @@ describe(InMemoryVocabService.name, () => {
   const invalidListId: string = "2333a7b8-e2d1-434a-9195-87abe3dde29e";
   let mockVocabList: VocabList;
   let mockNotificationService: any;
+  let mockAuthenticationService: any;
 
   let service: InMemoryVocabService;
   let mockGuidGenerator: any
@@ -24,13 +26,16 @@ describe(InMemoryVocabService.name, () => {
     mockGuidGenerator = jasmine.createSpyObj("mockGuidGenerator", ["generate"]);
     mockGuidGenerator.generate.and.returnValue(mockListGuid);
     mockVocabList = {
+      userId: "2ceba66a-eb56-4e70-b9a2-8ed03c4c5262",
       name: "Test List",
       listItems: [],
       authorName: "Testy McTestface"
     };
     mockNotificationService = createMockNotificationService();
+    mockAuthenticationService = createMockAuthenticationService();
+
     service = new InMemoryVocabService(mockGuidGenerator, mockNotificationService,
-      new InMemoryDataProvider());
+      mockAuthenticationService, new InMemoryDataProvider());
   });
 
   describe("getWithId", () => {
@@ -99,19 +104,19 @@ describe(InMemoryVocabService.name, () => {
 
     it("Should throw an error with the correct message"
       + "if the list item already has an ID value.", () => {
-      stubListItem.id = mockListItemId;
+        stubListItem.id = mockListItemId;
 
-      expect(function () { service.addListItem(stubListItem, mockListGuid) })
-        .toThrowError(`Item already has ID ${stubListItem.id}.`)
-    });
+        expect(function () { service.addListItem(stubListItem, mockListGuid) })
+          .toThrowError(`Item already has ID ${stubListItem.id}.`)
+      });
 
     it("Should throw an error with the correct message"
       + "if the list item already has a vocab list ID value.", () => {
-      stubListItem.vocabListId = mockListGuid;
+        stubListItem.vocabListId = mockListGuid;
 
-      expect(function () { service.addListItem(stubListItem, mockListGuid) })
-        .toThrowError(`Item already belongs to list with ID ${mockListGuid}.`)
-    });
+        expect(function () { service.addListItem(stubListItem, mockListGuid) })
+          .toThrowError(`Item already belongs to list with ID ${mockListGuid}.`)
+      });
 
     xit("Should throw an error with the correct message if the vocab list ID is not found.", () => {
       service = createServiceWithMockData();
