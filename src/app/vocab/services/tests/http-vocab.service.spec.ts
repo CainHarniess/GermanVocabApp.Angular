@@ -1,17 +1,13 @@
 import { of } from "rxjs";
 import { HttpVocabService } from "..";
+import { StubVocabListBuilder } from "../../../../testing";
 import { VocabList } from "../../models/vocab-list.interface";
 
 // TODO: Update to use Angular HTTP testing framework https://angular.io/guide/http#testing-http-requests
 describe(HttpVocabService.name, () => {
   const expectedUrlRoot: string = "/api/vocab-lists";
   const testId: string = "3b41900b-5df8-4589-b157-fb1c2df8d31e";
-  const mockVocabList: VocabList = {
-    userId: "2ceba66a-eb56-4e70-b9a2-8ed03c4c5262",
-    name: "Test List",
-    listItems: [],
-    authorName: "Testy McTestface"
-  };
+  const mockVocabList: VocabList = StubVocabListBuilder.stub().build();
   const mockErrorHandler: any = {
     handle: (e: any) => "Mock Error Message",
   };

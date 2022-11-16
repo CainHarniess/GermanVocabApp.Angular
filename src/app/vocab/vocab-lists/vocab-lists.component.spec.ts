@@ -8,7 +8,6 @@ import { VocabList } from "../models/vocab-list.interface";
 import { VocabListsComponent } from "./vocab-lists.component";
 
 fdescribe("VocabListsComponent", () => {
-  // TODO: Refactor mock list data creation into shared service
   const stubList: VocabList = StubVocabListBuilder.stub().build();
   const mockVocabLists: VocabList[] = [stubList];
 

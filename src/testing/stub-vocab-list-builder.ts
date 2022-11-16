@@ -32,6 +32,11 @@ export class StubVocabListBuilder {
     return this;
   }
 
+  public withItems(items: VocabListItem[]): StubVocabListBuilder {
+    this.stub.listItems = items;
+    return this;
+  }
+
   public build(): VocabList {
     return this.stub;
   }

@@ -25,12 +25,7 @@ describe(InMemoryVocabService.name, () => {
   beforeEach(() => {
     mockGuidGenerator = jasmine.createSpyObj("mockGuidGenerator", ["generate"]);
     mockGuidGenerator.generate.and.returnValue(mockListGuid);
-    mockVocabList = {
-      userId: "2ceba66a-eb56-4e70-b9a2-8ed03c4c5262",
-      name: "Test List",
-      listItems: [],
-      authorName: "Testy McTestface"
-    };
+    mockVocabList = StubVocabListBuilder.stub().build();
     mockNotificationService = createMockNotificationService();
     mockAuthenticationService = createMockAuthenticationService();
 
@@ -53,6 +48,7 @@ describe(InMemoryVocabService.name, () => {
     });
   });
 
+  // TODO: reintegrate pending tests.
   describe("add", () => {
     xit("Should call the guid generator service once when there are no list items in the list.", () => {
       service.add(mockVocabList);
@@ -77,16 +73,12 @@ describe(InMemoryVocabService.name, () => {
     });
 
     xit("Should call the guid generator for the list and each list item.", () => {
-      mockVocabList = {
-        userId: "2ceba66a-eb56-4e70-b9a2-8ed03c4c5262",
-        name: "Test List",
-        listItems: [
-          { wordType: WordType.Noun, german: "x", english: "y" },
-          { wordType: WordType.Noun, german: "x", english: "y" },
-          { wordType: WordType.Noun, german: "x", english: "y" },
-        ],
-        authorName: "Testy McTestface"
-      };
+      const items: VocabListItem[] = [
+        { wordType: WordType.Noun, german: "x", english: "y" },
+        { wordType: WordType.Noun, german: "x", english: "y" },
+        { wordType: WordType.Noun, german: "x", english: "y" },
+      ];
+      mockVocabList = StubVocabListBuilder.stub().withItems(items).build();
 
       service.add(mockVocabList);
       expect(mockGuidGenerator.generate)
