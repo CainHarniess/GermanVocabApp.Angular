@@ -1,4 +1,4 @@
-import { waitForAsync } from "@angular/core/testing";
+import { fakeAsync, tick, waitForAsync } from "@angular/core/testing";
 import { Observable } from "rxjs";
 import { InMemoryVocabService } from "..";
 import { createMockNotificationService } from "../../../../core/test-utilities";
@@ -22,6 +22,8 @@ describe(InMemoryVocabService.name, () => {
   let service: InMemoryVocabService;
   let mockGuidGenerator: any
 
+  const listBuilder = new StubVocabListBuilder();
+
   beforeEach(() => {
     mockGuidGenerator = jasmine.createSpyObj("mockGuidGenerator", ["generate"]);
     mockGuidGenerator.generate.and.returnValue(mockListGuid);
@@ -33,8 +35,45 @@ describe(InMemoryVocabService.name, () => {
       mockAuthenticationService, new InMemoryDataProvider());
   });
 
+  describe("get", () => {
+    it("Should return user's lists.", fakeAsync(() => {
+      const mockData: VocabList[] = createMockData();
+      const testService = createService(mockData);
+
+      const userAList: VocabList = mockData[0];
+
+      testService.get(userAList.userId).subscribe((lists: VocabList[]) => {
+        expect(lists).toEqual([userAList]);
+      });
+      tick(500);
+    }));
+
+    it("Should not return other user's lists.", fakeAsync(() => {
+      const mockData: VocabList[] = createMockData();
+      const testService = createService(mockData);
+
+      const userAList: VocabList = mockData[0];
+      const userBList: VocabList = mockData[1];
+
+      testService.get(userAList.userId).subscribe((lists: VocabList[]) => {
+        expect(lists).not.toContain(userBList);
+      });
+      tick(500);
+    }));
+
+    it("Should return no lists if userId not found.", fakeAsync(() => {
+      const mockData: VocabList[] = createMockData();
+      const testService = createService(mockData);
+
+      testService.get("a1e16487-a002-4991-b562-6485ba66bc95").subscribe((lists: VocabList[]) => {
+        expect(lists.length).toBe(0);
+      });
+      tick(500);
+    }));
+  });
+
   describe("getWithId", () => {
-    xit("Should throw an error with the correct message if the ID is not found.", () => {
+    it("Should throw an error with the correct message if the ID is not found.", () => {
       service = createServiceWithMockData();
 
       expect(function () { service.getWithId(invalidListId) })
@@ -47,6 +86,8 @@ describe(InMemoryVocabService.name, () => {
         .not.toThrowError();
     });
   });
+
+
 
   // TODO: reintegrate pending tests.
   describe("add", () => {
@@ -139,6 +180,25 @@ describe(InMemoryVocabService.name, () => {
   });
 
   // TODO: Add update tests.
+
+  function createMockData(): VocabList[] {
+    const userAId: string = "a6d56e9e-1fe1-49f0-9c27-8c485c1fa644";
+    const userAListId: string = "85db3064-9612-48e0-9389-99d10663a5ae";
+    const userBId: string = "8efb075b-5713-4e3c-ab06-c6aa92c2b80e";
+    const userBListId: string = "7149c68f-d437-4d4d-b435-d15cf062a66e";
+
+    const userAList = listBuilder.create().withId(userAListId).withUserId(userAId).build();
+    const userBList = listBuilder.create().withId(userBListId).withUserId(userBId).build();
+
+    return [userAList, userBList];
+  }
+
+  function createService(data: VocabList[]): InMemoryVocabService {
+    const mockDataSeeder: any = jasmine.createSpyObj("mockDataSeeder", ["seed"]);
+    mockDataSeeder.seed.and.returnValue(data);
+    return new InMemoryVocabService(mockGuidGenerator, createMockNotificationService(),
+      createMockAuthenticationService(), mockDataSeeder);
+  }
 
   function createServiceWithMockData(): InMemoryVocabService {
     const mockDataSeeder: any = jasmine.createSpyObj("mockDataSeeder", ["seed"]);

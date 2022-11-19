@@ -8,21 +8,22 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationService } from '../core';
+import { EventService } from '../core/events';
 import { ConsoleLogger, ConsoleLogWriter, Logger, LogService, Severity, SeverityStringConverter } from '../core/logging';
+import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory, ValidationErrorMessageProvider } from '../core/validation';
 import { MatSnackBarService } from './angular-material';
 import { AppRoutingModule } from './app-routing.module';
-import { ApplicationContainerComponent } from './application-container/application-container.component';
 import { AppComponent } from './app.component';
+import { ApplicationContainerComponent } from './application-container/application-container.component';
+import { AuthenticationModule } from './authentication/authentication.module';
 import { FooterComponent } from './footer/footer.component';
 import { HomeModule } from './home/home.module';
+import { LandingComponent } from './landing/landing.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { LoggedInAppComponent } from './logged-in-app/logged-in-app.component';
-import { LandingComponent } from './landing/landing.component';
-import { AuthenticationModule } from './authentication/authentication.module';
-import { RequiredStringLengthValidatorFactory, StringLengthValidatorFactory, ValidationErrorMessageProvider } from '../core/validation';
 import { NavigationPanelComponent } from './navigation-panel/navigation-panel.component';
 import { SharedModule } from './shared/shared.module';
-import { EventService } from '../core/events';
+import { AuthenticationService, InMemoryAuthenticationService, InMemoryUserDataProvider } from './authentication/services';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { EventService } from '../core/events';
     AppRoutingModule,
   ],
   providers: [
+    InMemoryUserDataProvider,
+    { provide: AuthenticationService, useClass: InMemoryAuthenticationService },
     ValidationErrorMessageProvider,
     StringLengthValidatorFactory,
     RequiredStringLengthValidatorFactory,

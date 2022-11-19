@@ -339,7 +339,7 @@ export class InMemoryDataProvider {
             fixedPlurality: FixedPlurality.None,
           },
         ],
-        authorName: "Cain Harniess",
+        authorName: "Ilka Barenscheer",
       }];
   }
 }

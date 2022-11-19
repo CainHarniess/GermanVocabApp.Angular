@@ -5,12 +5,11 @@ import { GuidGeneratorService } from '../../shared/services/guid-generator.servi
 import { map, Observable, of, tap, throwError } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
 import { InMemoryDataProvider, VocabService } from '.';
+import { NotificationService } from '../../../core';
 import { NotFoundError } from '../../../core/errors';
 import { isNullOrUndefined } from '../../../utilities';
-import { VocabList, VocabListItem } from '../models';
-import { NotificationService } from '../../../core';
 import { AuthenticationService } from '../../authentication/services';
-import { User } from '../../shared/models';
+import { VocabList, VocabListItem } from '../models';
 
 @Injectable()
 export class InMemoryVocabService extends VocabService {
@@ -39,14 +38,29 @@ export class InMemoryVocabService extends VocabService {
       );
   }
 
-  public override getWithId(id: string): Observable<VocabList> {
-    return of(id)
+  public override getWithId(listId: string, userId: string): Observable<VocabList> {
+    return of(listId)
       .pipe(
         delay(this.delayMs),
-        map((id: string) => this.findIndex(id)),
-        map((index: number) => this.lists[index]),
+        map((id: string) => this.lists.find((vl: VocabList) => vl.id === id)),
+        map((vl: VocabList | undefined) => {
+          if (!vl) {
+            throw new Error(`NOT FOUND Vocab list with ID ${listId} not found.`);
+          }
+          return vl;
+        }),
+        map((vl: VocabList) => {
+          if (vl.userId !== userId) {
+            throw new Error(`NOT AUTHORISED - User is not permitted to access this vocab list.`)
+          }
+          return vl;
+        }),
         catchError((e: any, caught: Observable<VocabList>) => {
-          this.notificationService.error(`Unable to find list with ID ${id}`);
+          if (!(e instanceof Error)) {
+            this.notificationService.error("Unhandled exception occurred.");
+          } else {
+            this.notificationService.error(e.message);
+          }
           return throwError(() => e);
         }),
       );
@@ -81,7 +95,7 @@ export class InMemoryVocabService extends VocabService {
 
     let vocabList$: Observable<VocabList>;
     try {
-      vocabList$ = this.getWithId(listId);
+      vocabList$ = this.getWithIdInternal(listId);
     } catch (e) {
       throw e;
     }
@@ -117,5 +131,18 @@ export class InMemoryVocabService extends VocabService {
       throw new NotFoundError(`Vocab list with ID ${id} not found in in-memory array.`);
     }
     return index;
+  }
+
+  private getWithIdInternal(id: string): Observable<VocabList> {
+    return of(id)
+      .pipe(
+        delay(this.delayMs),
+        map((id: string) => this.findIndex(id)),
+        map((index: number) => this.lists[index]),
+        catchError((e: any, caught: Observable<VocabList>) => {
+          this.notificationService.error(`Unable to find list with ID ${id}`);
+          return throwError(() => e);
+        }),
+      );
   }
 }

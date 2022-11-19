@@ -15,6 +15,7 @@ export class InMemoryAuthenticationService extends InMemoryService
     this.users = dataProvider.provide();
   }
 
+  // TODO: Store this info in session storage or something.
   private _currentUser?: User;
   public get currentUser(): User | undefined {
     return this._currentUser;

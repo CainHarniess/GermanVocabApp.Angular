@@ -10,7 +10,9 @@ import { VocabList } from '../models/vocab-list.interface';
 export class VocabListsResolver implements Resolve<VocabList[]> {
   public constructor(private readonly vocabListService: VocabService,
     private readonly authenticationService: AuthenticationService,
-    private readonly notificationService: NotificationService) { }
+    private readonly notificationService: NotificationService) {
+
+  }
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<VocabList[]> {
     const userId: string | undefined = this.authenticationService.currentUser?.id;
